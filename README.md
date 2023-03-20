@@ -1,9 +1,5 @@
 # cubes-and-clouds
-This is th official repository for the online course 'Cubes &amp; Clouds'
-
-Link to eo-college
-
-
+This is the official content repository for the online course ['Cubes &amp; Clouds'](https://eo-college.org/courses/cubes-and-clouds) hosted on EO College.
 
 ## Description
 Abstract
