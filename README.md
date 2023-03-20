@@ -1,5 +1,5 @@
 # cubes-and-clouds
-This is the official content repository for the online course ['Cubes &amp; Clouds'](https://eo-college.org/courses/cubes-and-clouds) hosted on EO College.
+This is the official content repository for the online course ['Cubes &amp; Clouds - Cloud Native Open Data Sciences for Earth Observation'](https://eo-college.org/courses/cubes-and-clouds) hosted on EO College.
 
 ## Description
 The Massive Open Online Course **'Cubes &amp; Clouds - Cloud Native Open Data Sciences for Earth Observation'** teaches the concepts of data cubes, cloud platforms and open science in the context of earth observation. 
