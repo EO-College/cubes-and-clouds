@@ -10,7 +10,7 @@ The course explains the concepts of data cubes, EO cloud platforms and open scie
 
 After finishing the participant will understand the theoretical concepts of cloud native EO processing and have gained practical experience by conducting an end-to-end EO workflow. The participant will be capable of independently using cloud platforms to approach EO related research questions and be confident in how to share research by adhering to the concepts of open science.
 
-**Trailer**
+https://user-images.githubusercontent.com/51962348/234564489-98a56dd2-1359-4972-ad3c-0f0f2d4b450e.mp4
 
 ## Sign-On Guide
 
