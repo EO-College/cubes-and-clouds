@@ -1,4 +1,9 @@
+# obsidian
 .obsidian/appearence.json
 .obsidian/hotkeys.json
 .obsidian/workspace.json
 .obsidain/themes
+
+# jupyter notebooks
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
