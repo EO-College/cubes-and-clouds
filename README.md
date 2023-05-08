@@ -34,6 +34,7 @@ https://user-images.githubusercontent.com/51962348/234564489-98a56dd2-1359-4972-
 - LIAScript: Use the link to the .md files and copy them into [LIAscript](https://liascript.github.io/)
 
 ## License
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Authors and Acknowledgement
 
