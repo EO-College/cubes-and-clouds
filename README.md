@@ -20,16 +20,16 @@ https://user-images.githubusercontent.com/51962348/234564489-98a56dd2-1359-4972-
 
 ### Exercises
 
-## Obsidian and Bookdown
-Add obsidian file toplevel
-
-use bookdown or similar to have rendered version of markdown files in the repo as well
+## Alternative Rendering of the Course
+- Obsidian: Add obsidian file toplevel
+- Bookdown: Use bookdown or similar to have rendered version of markdown files in the repo as well
+- LIAScript: Use the link to the .md files and copy them into [LIAscript](https://liascript.github.io/)
 
 ## License
 
 ## Authors and Acknowledgement
 
 ## Project Status
-
+The project is currently work in progress.
 
 
