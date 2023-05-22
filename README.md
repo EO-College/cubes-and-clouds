@@ -10,21 +10,21 @@ The course explains the concepts of data cubes, EO cloud platforms and open scie
 
 ```mermaid
 flowchart LR
-      subgraph one
+      subgraph Concepts
       A[1.1 What is a Cloud Platform]-->B[1.2 What is a Data Cube];
       B-->C[1.3 What is Open Science];
       end
-      subgraph two
+      subgraph Discovery
       D[2.1 Data Discovery]-->E[2.2 Data Access];
       E-->F[2.3 Data Properties];
       end
-      subgraph three
+      subgraph Process&Share
       G[3.1 Processing]-->H[3.2 Scaling];
       H-->I[3.3 Validation];
       I-->J[3.4 Sharing];
       end
-      one --> two
-      two --> three
+      Concepts --> Discovery
+      Discovery --> Process&Share
       
 ```
 
