@@ -9,7 +9,7 @@ It targets Earth Science students and researchers who want to increase their tec
 The course explains the concepts of data cubes, EO cloud platforms and open science by applying them to a typical EO workflow from data discovery, data processing up to sharing the results in an open and FAIR (Findable, Accessible, Interoperable, Reusable) way. An engaging mixture of videos, animated content, lectures, hands-on exercises and quizzes transmits the content.
 
 ```mermaid
-graph TD
+flowchart LR
       subgraph one
       A[1.1 What is a Cloud Platform]-->B[1.2 What is a Data Cube];
       B-->C[1.3 What is Open Science];
