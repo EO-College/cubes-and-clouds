@@ -29,9 +29,9 @@ https://user-images.githubusercontent.com/51962348/234564489-98a56dd2-1359-4972-
 ### Exercises
 
 ## Alternative Rendering of the Course
-- Obsidian: Add obsidian file toplevel
-- Bookdown: Use bookdown or similar to have rendered version of markdown files in the repo as well
-- LIAScript: Use the link to the .md files and copy them into [LIAscript](https://liascript.github.io/)
+- LIAScript: Use the link to the .md files and copy them into [LIAscript](https://liascript.github.io/). It will give you an online lecture directly.
+- Obsidian: Add obsidian file toplevel to create your void, or add the course to an existing one.
+- Bookdown: You can render the course usin bookdown or similar to have a rendered version of the markdown files in the repo. Some work needed to do that.
 
 ## License
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />Where not stated explicitly otherwise this work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
