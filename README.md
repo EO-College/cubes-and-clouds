@@ -8,12 +8,26 @@ It targets Earth Science students and researchers who want to increase their tec
 ### Content
 The course explains the concepts of data cubes, EO cloud platforms and open science by applying them to a typical EO workflow from data discovery, data processing up to sharing the results in an open and FAIR (Findable, Accessible, Interoperable, Reusable) way. An engaging mixture of videos, animated content, lectures, hands-on exercises and quizzes transmits the content.
 
-| 1. Concepts | 2. Discovery | 3. Process and Share |
-| ----------- | ------------ | -------------------- |
-| What is a Cloud Platform | Data Discovery | Processing
-| What is a Data Cube | Data Access | Scaling
-| What is Open Science | Data Properties | Validation
-| | | Sharing |
+```mermaid
+graph TD
+      subgraph one
+      A[1.1 What is a Cloud Platform]-->B[1.2 What is a Data Cube];
+      B-->C[1.3 What is Open Science];
+      end
+      subgraph two
+      D[2.1 Data Discovery]-->E[2.2 Data Access];
+      E-->F[2.3 Data Properties];
+      end
+      subgraph three
+      G[3.1 Processing]-->H[3.2 Scaling];
+      H-->I[3.3 Validation];
+      I-->J[3.4 Sharing];
+      end
+      one --> two
+      two --> three
+      
+```
+
 
 ### Learning Objectives
 After finishing the participant will understand the theoretical concepts of cloud native EO processing and have gained practical experience by conducting an end-to-end EO workflow. The participant will be capable of independently using cloud platforms to approach EO related research questions and be confident in how to share research by adhering to the concepts of open science.
