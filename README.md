@@ -34,9 +34,16 @@ https://user-images.githubusercontent.com/51962348/234564489-98a56dd2-1359-4972-
 - LIAScript: Use the link to the .md files and copy them into [LIAscript](https://liascript.github.io/)
 
 ## License
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />Where not stated explicitly otherwise this work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
 
 ## Authors and Acknowledgement
+### Advisory Board
+
+### Authors
+<img src="https://brand.esa.int/files/2020/05/ESA_logo_2020_Deep-scaled.jpg" width="100"> <img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Eurac_Research_-_logo.png" width="100"> <img src="http://ignite-education.io/assets/images/ignite_logo-scaled.jpg" width="100"> <img src="https://eox.at/EOX_Logo.svg" width="100"> <img src="https://jonaseberle.de/images/logo_jonas-eberle.png" width="100"> 
+
+### Funding
+This project is funded by the European Space Agency through the program EXPRO+ with the contract number 4000138850/22/I-DT
 
 ## Project Status
 The project is currently work in progress.
