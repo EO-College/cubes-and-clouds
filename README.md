@@ -40,7 +40,7 @@ https://user-images.githubusercontent.com/51962348/234564489-98a56dd2-1359-4972-
 ### Advisory Board
 
 ### Authors
-<img src="https://brand.esa.int/files/2020/05/ESA_logo_2020_Deep-scaled.jpg" width="100"> <img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Eurac_Research_-_logo.png" width="100"> <img src="http://ignite-education.io/assets/images/ignite_logo-scaled.jpg" width="100"> <img src="https://eox.at/EOX_Logo.svg" width="100"> <img src="https://jonaseberle.de/images/logo_jonas-eberle.png" width="100"> 
+<a href="https://www.esa.int/"><img src="https://brand.esa.int/files/2020/05/ESA_logo_2020_Deep-scaled.jpg" width="100"></a> <a href="https://www.eurac.edu/en"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Eurac_Research_-_logo.png" width="100"></a> <a href="http://ignite-education.io"><img src="http://ignite-education.io/assets/images/ignite_logo-scaled.jpg" width="100"></a> <a href="https://eox.at/"><img src="https://eox.at/EOX_Logo.svg" width="100"></a> <a href="https://jonaseberle.de"><img src="https://jonaseberle.de/images/logo_jonas-eberle.png" width="100"></a> 
 
 ### Funding
 This project is funded by the European Space Agency through the program EXPRO+ with the contract number 4000138850/22/I-DT
