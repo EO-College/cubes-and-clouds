@@ -24,10 +24,10 @@ Consider a cloud provider, that should decide if compressing the data on its sto
 
 If the compression process of a COG takes 0.05 CPU hour every 1 GB of data, the total amount of COGs on the storage takes 1200 TB and one CPU hour costs 0.05€ for the first 10000 CPU hour and then 0.03€ for the rest, how much would the compression process cost?
 
-- 3000€
-- 1200€
-- 2000€
-- 2043€
+    [( )] 3000€
+    [( )] 1200€
+    [(X)] 2000€
+    [( )] 2043€
 
 Solution:
 - 1 TB = 1000 GB following the international standard, see https://en.wikipedia.org/wiki/Gigabyte.
@@ -39,10 +39,10 @@ Solution:
 
 In the same scenario, now we also consider the storage maintanance cost. If each TB of storage has a maintenance cost of 0.5 € every month, how much time would it take before the compression would let the cloud provider spare money? Consider a compression rate of 70%.
 
-- ~ 9 months
-- ~ 10 months
-- ~ 11 months
-- ~ 12 months
+    [( )] ~ 9 months
+    [( )] ~ 10 months
+    [(X)] ~ 11 months
+    [( )] ~ 12 months
 
 Solution:
 - Without compression, every month the storage would cost: 1200 TB * 0.5 €/TB = 600 €
@@ -57,6 +57,5 @@ Prepare some questions like:
 
 - Is important to store the data in a compressed format?
 - What is the role of data chunking in the overall back-end efficiency?
-
 
 ### openEO example on data access
