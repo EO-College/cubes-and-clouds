@@ -15,8 +15,8 @@ flowchart LR
       B-->C[1.3 What is Open Science];
       end
       subgraph Discovery
-      D[2.1 Data Discovery]-->E[2.2 Data Access];
-      E-->F[2.3 Data Properties];
+      D[2.1 Data Discovery]-->E[2.2 Data Properties];
+      E-->F[2.3 Data Access];
       F-->G[2.4 Formats and Performance]
       end
       subgraph Process&Share
