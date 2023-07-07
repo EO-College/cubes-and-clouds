@@ -17,11 +17,12 @@ flowchart LR
       subgraph Discovery
       D[2.1 Data Discovery]-->E[2.2 Data Access];
       E-->F[2.3 Data Properties];
+      F-->G[2.4 Formats and Performance]
       end
       subgraph Process&Share
-      G[3.1 Processing]-->H[3.2 Scaling];
-      H-->I[3.3 Validation];
-      I-->J[3.4 Sharing];
+      H[3.1 Processing]-->I[3.2 Validation];
+      I-->J[3.3 Sharing];
+
       end
       Concepts --> Discovery
       Discovery --> Process&Share
