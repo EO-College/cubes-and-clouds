@@ -38,10 +38,9 @@ https://user-images.githubusercontent.com/51962348/234564489-98a56dd2-1359-4972-
 ## Sign-On Guide
 
 ## Contributing
-
-### Lectures
-
-### Exercises
+We're happy to receive your contributions to lessons, exercises, bug reports etc.
+- Check out the [CONTRIBUTING.md](CONTRIBUTING.md) contributing guide to learn how you can contribute! 
+- The full list of all contributors is in the [CONTRIBUTORS.md](CONTRIBUTORS.md)
 
 ## Alternative Rendering of the Course
 - LIAScript: Use the link to the .md files and copy them into [LIAscript](https://liascript.github.io/). It will give you an online lecture directly.
@@ -56,10 +55,6 @@ https://user-images.githubusercontent.com/51962348/234564489-98a56dd2-1359-4972-
 
 ### Authors
 <a href="https://www.esa.int/"><img src="https://eo-college.org/wp-content/uploads/2023/03/ESA_logo_2020_Deep_cropped-300x113.png" width="100"></a>   <a href="https://www.eurac.edu/en"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Eurac_Research_-_logo.png" width="100"></a>   <a href="http://ignite-education.io"><img src="http://ignite-education.io/assets/images/ignite_logo-scaled.jpg" width="100"></a>   <a href="https://eox.at/"><img src="https://eox.at/EOX_Logo.svg" width="100"></a>   <a href="https://jonaseberle.de"><img src="https://eo-college.org/wp-content/uploads/2023/03/logo_jonas-eberle.png" width="100"></a> 
-
-## All Contributors
-The full list of all contributors is in the [CONTRIBUTORS.md](CONTRIBUTORS.md)
-Check out the [CONTRIBUTING.md](CONTRIBUTING.md) contributing guide to learn how you can contribute! 
 
 ## Funding
 This project is funded by the European Space Agency through the program EXPRO+ with the contract number 4000138850/22/I-DT
