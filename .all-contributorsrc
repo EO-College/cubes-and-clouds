@@ -13,7 +13,11 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/51962348?v=4",
       "profile": "https://www.bolzanor.eu/",
       "contributions": [
-        "content"
+        "content",
+        "bug",
+        "code",
+        "doc",
+        "projectManagement"
       ]
     }
   ],
