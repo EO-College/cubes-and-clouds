@@ -1,4 +1,6 @@
 # How to contribute
+This is a online course about Open Science on EO Cloud Platforms. By it's nature, the topic is fast paced and keeping up with the development of cloud technologies, standards and concepts isn't easy. To keep up to date and to maintain a functioning exercises we would really appreciate your contributions!
+
 ## Types of contributions
 We're happy to receive contributions to improve the quality of the course. Here are some potential areas where help would be greatly appreciated
 - **Review the content:** Read through the material. If you find anything is wrong or unclear. Open a pull request to fix it. Don't add too much new information though. The lessons have a certain length.
@@ -7,8 +9,7 @@ We're happy to receive contributions to improve the quality of the course. Here 
 - **Fix Bugs:** Make a pull request with your fix.
 
 ## Acknowledgement 
-We have the all-contributors bot installed, so that every contribution is acknowledged. If you want your contribution to be acknowledged
-**Comment on your Issue or Pull Request, asking the @all-contributors bot to add a contributor (likely yourself)**:
+We want every conrtibution to be acknwoledged. That's why we have the all-contributors bot installed. It allows you to acknowledge your own contributions and to appear in the CONTRIBUTORS.md. If you want your contribution to be acknowledged **Comment on your Issue or Pull Request, asking the @all-contributors bot to add a contributor (likely yourself)**:
 ```
 @all-contributors please add @<username> for <contributions>
 ```
