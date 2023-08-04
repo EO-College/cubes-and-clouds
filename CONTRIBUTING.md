@@ -9,7 +9,7 @@ We're happy to receive contributions to improve the quality of the course. Here 
 - **Fix Bugs:** Make a pull request with your fix.
 
 ## Acknowledgement 
-We want every conrtibution to be acknwoledged. That's why we have the all-contributors bot installed. It allows you to acknowledge your own contributions and to appear in the CONTRIBUTORS.md. If you want your contribution to be acknowledged **Comment on your Issue or Pull Request, asking the @all-contributors bot to add a contributor (likely yourself)**:
+We want every conrtibution to be acknwoledged. That's why we have the [all-contributors](https://allcontributors.org/) bot installed. It allows you to acknowledge your own contributions and to appear in the [CONTRIBUTORS.md](CONTRIBUTORS.md). If you want your contribution to be acknowledged **Comment on your Issue or Pull Request, asking the @all-contributors bot to add a contributor (likely yourself)**:
 ```
 @all-contributors please add @<username> for <contributions>
 ```
