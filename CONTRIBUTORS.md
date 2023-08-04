@@ -1,4 +1,5 @@
 ## Contributors
+[![All Contributors](https://img.shields.io/github/all-contributors/EO-College/cubes-and-clouds?color=ee8449&style=flat-square)](#contributors-)
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
