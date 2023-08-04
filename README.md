@@ -42,6 +42,17 @@ We're happy to receive your contributions to lessons, exercises, bug reports etc
 - Check out the [CONTRIBUTING.md](CONTRIBUTING.md) contributing guide to learn how you can contribute! 
 - The full list of all contributors is in the [CONTRIBUTORS.md](CONTRIBUTORS.md)
 
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
 ## Alternative Rendering of the Course
 - LIAScript: Use the link to the .md files and copy them into [LIAscript](https://liascript.github.io/). It will give you an online lecture directly.
 - Obsidian: Add obsidian file toplevel to create your void, or add the course to an existing one.
