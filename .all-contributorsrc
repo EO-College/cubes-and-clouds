@@ -20,5 +20,20 @@
   },
   "linkToUsage": true,
   "skipCi": true,
-  "contributors": []
+  "contributors": [
+{
+      "login": "przell",
+      "name": "Peter Zellner",
+      "avatar_url": "https://avatars.githubusercontent.com/u/51962348?v=4",
+      "profile": "https://github.com/tbenning",
+      "contributions": [
+        "doc",
+        "tool",
+        "infra",
+        "maintenance",
+        "review",
+        "question"
+      ]
+    }
+  ]
 }
