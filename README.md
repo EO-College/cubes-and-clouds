@@ -53,7 +53,7 @@ We're happy to receive your contributions to lessons, exercises, bug reports etc
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://www.bolzanor.eu/"><img src="https://avatars.githubusercontent.com/u/51962348?v=4?s=100" width="100px;" alt="przell"/><br /><sub><b>przell</b></sub></a><br /><a href="#content-przell" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.bolzanor.eu/"><img src="https://avatars.githubusercontent.com/u/51962348?v=4?s=100" width="100px;" alt="przell"/><br /><sub><b>przell</b></sub></a><br /><a href="#content-przell" title="Content">🖋</a> <a href="https://github.com/EO-College/cubes-and-clouds/issues?q=author%3Aprzell" title="Bug reports">🐛</a> <a href="https://github.com/EO-College/cubes-and-clouds/commits?author=przell" title="Code">💻</a> <a href="https://github.com/EO-College/cubes-and-clouds/commits?author=przell" title="Documentation">📖</a> <a href="#projectManagement-przell" title="Project Management">📆</a></td>
     </tr>
   </tbody>
 </table>
