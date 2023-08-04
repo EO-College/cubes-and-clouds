@@ -57,7 +57,18 @@ https://user-images.githubusercontent.com/51962348/234564489-98a56dd2-1359-4972-
 ### Authors
 <a href="https://www.esa.int/"><img src="https://eo-college.org/wp-content/uploads/2023/03/ESA_logo_2020_Deep_cropped-300x113.png" width="100"></a>   <a href="https://www.eurac.edu/en"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Eurac_Research_-_logo.png" width="100"></a>   <a href="http://ignite-education.io"><img src="http://ignite-education.io/assets/images/ignite_logo-scaled.jpg" width="100"></a>   <a href="https://eox.at/"><img src="https://eox.at/EOX_Logo.svg" width="100"></a>   <a href="https://jonaseberle.de"><img src="https://eo-college.org/wp-content/uploads/2023/03/logo_jonas-eberle.png" width="100"></a> 
 
-### Funding
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+## Funding
 This project is funded by the European Space Agency through the program EXPRO+ with the contract number 4000138850/22/I-DT
 
 ## Project Status
