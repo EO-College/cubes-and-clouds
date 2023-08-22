@@ -52,6 +52,13 @@ We're happy to receive your contributions to lessons, exercises, bug reports etc
 
 ## Authors and Acknowledgement
 ### Reviewers
+- 1.1 What is a Platform
+  - TBD  
+- 1.2 What is Open Science
+  - TBD
+- 1.3 Open Science
+  - Kristina Vrouwenvelder, AGU
+  - Shelley Stall, AGU
 
 ### Authors
 <a href="https://www.esa.int/"><img src="https://eo-college.org/wp-content/uploads/2023/03/ESA_logo_2020_Deep_cropped-300x113.png" width="100"></a>   <a href="https://www.eurac.edu/en"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Eurac_Research_-_logo.png" width="100"></a>   <a href="http://ignite-education.io"><img src="http://ignite-education.io/assets/images/ignite_logo-scaled.jpg" width="100"></a>   <a href="https://eox.at/"><img src="https://eox.at/EOX_Logo.svg" width="100"></a>   <a href="https://jonaseberle.de"><img src="https://eo-college.org/wp-content/uploads/2023/03/logo_jonas-eberle.png" width="100"></a> 
