@@ -25,6 +25,16 @@
         "content",
         "code"
       ]
+    },
+    {
+      "login": "aapopescu",
+      "name": "Anca Anghelea",
+      "avatar_url": "https://avatars.githubusercontent.com/u/35488732?v=4",
+      "profile": "https://eo4society.esa.int",
+      "contributions": [
+        "review",
+        "content"
+      ]
     }
   ],
   "contributorsPerLine": 7,
