@@ -35,6 +35,15 @@
         "review",
         "content"
       ]
+    },
+    {
+      "login": "kvrouwenvelder",
+      "name": "kvrouwenvelder",
+      "avatar_url": "https://avatars.githubusercontent.com/u/113625013?v=4",
+      "profile": "https://github.com/kvrouwenvelder",
+      "contributions": [
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 7,
