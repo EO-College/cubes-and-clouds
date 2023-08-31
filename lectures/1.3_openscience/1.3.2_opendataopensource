@@ -1,0 +1,108 @@
+# Open Data and Open Source Software
+
+## Learning Objectives
+- Understand what Open Data is
+- Understand what Open Source Software is
+
+## What is Open Data?
+
+### Open Data
+Open data is data that **anyone can access, use and share**. Open data becomes usable when made available in a common, machine-readable format. **Open data must be licensed**. Its licence must permit people to use the data in any way they want, including transforming, combining and sharing it with others, even commercially. Any restrictions imposed on the use of open data will limit its potential for creating new value.
+
+- **Limitations:** For data to be open, it should have no limitations that prevent it from being used in any particular way. Anyone should be free to use, modify, combine and share the data, even commercially
+- **Cost:** Open data must be free to use, but this does not mean that it must be free to access. There is often a cost to creating, maintaining and publishing usable data. Ideally, any fee for accessing open data should be no more than the reasonable reproduction cost of the unit of data that is requested. This reproduction cost tends to be negligible for many datasets. Live data and big data can incur ongoing costs related to reliable service provision.
+- **Reuse:** Once the user has the data, they are free to use, reuse and redistribute it – even commercially. Open data is measured by what it can be used for, not by how it is made available. Aspects like format, structure and machine readability all make data more usable, and should all be carefully considered. However, these do not make the data more open.
+- **FAIR vs Open Data:** FAIR data is not the same as open data. For example, it is not always possible to grant free access to data for economic and legal reasons. Restrictions on access are compatible with FAIR principles, as long as the conditions and ways of access are evident.
+
+[![Discovering open data – in 2 minutes](https://img.youtube.com/vi/ULJSlXuk0FU/0.jpg)](https://www.youtube.com/watch?v=ULJSlXuk0FU)
+
+### Open Data in this course
+The creation of this course would not be possible without Open Data. Here are just a few examples: 
+
+- [This course](https://github.com/EO-College/cubes-and-clouds#license) itself 
+- Most of the referenced learning resources e.g. [Open Science: A Practical Guide for Early-Career Researchers](https://zenodo.org/record/7716153) that we based the first part of this lesson on.
+- [ESA Sentinel Satellite Data](https://open.esa.int/copernicus-sentinel-satellite-imagery-under-open-licence/)
+
+### References
+- [European Commission (2022). What is open data?. https://data.europa.eu/elearning/en/module1/#/id/co-01](https://data.europa.eu/elearning/en/module1/#/id/co-01) - <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+- [Open Knowledge Foundation (2022). Open Data Handbook.](https://opendatahandbook.org/guide/en/what-is-open-data/)
+- [[Fürst, Elena, Gänsdorfer, Nikos, Kalová, Tereza, Macher, Therese, Schranzhofer, Hermann, Stork, Christiane, & Thöricht, Heike (2022). Open Educational Resources Research Data Management. DOI: 10.5281/zenodo.6923397](https://github.com/schranzhofer/OER_for_RDM/blob/master/OER_for_RDM_English.md#fair-data-vs-open-data)
+
+> Since we use material from the European Commissions [data.europa.eu e-learning programme], which is published under the *Creative Commons Attribution-ShareAlike 4.0 International License*  we have to publish this section **What is Open Data** under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+
+## What is Open Source?
+### Open Source
+Open Source does not simply mean that the source code of a project is available, which is only one element of an Open Source project. The Open Source Initiative (OSI) provides a commonly accepted [definition](https://opensource.org/osd/) of what constitutes Open Source. To summarize that, in order to be considered Open Source: 
+
+- Open Source Software needs a license, 
+- a work has to allow free redistribution, 
+- the source code needs to be made available, 
+- it must be possible to create further works based on it, 
+- there must be no limitations of who may use the work or for what purpose (so something like "no commercial use" or "no military use" won't work with Open Source),
+- the work must not require an additional license on top of the one it comes with,
+- and finally, the license must not depend on a specific distribution format, technology or presence of other works.
+
+![OSI's Open Source Definition](https://images.ctfassets.net/s5uo95nf6njh/ZKAG4bUVsMBQalassQyg8/8efbbe929562b2a06c16b6ab154b5335/Frame_599.png?w=1280&fm=webp "OSI's Open Source Definition")
+
+[![What is Open Source Software](https://img.youtube.com/vi/1ehpgbb3XD0/0.jpg)](https://www.youtube.com/watch?v=1ehpgbb3XD0)
+
+### Open Source Software used in this course
+The creation of this course would not be possible without Open Source Software. Here are just a few examples of Open Source Software used in this course: 
+
+- [Python](https://docs.python.org/3/license.html), used in the coding exercises
+- [Wordpress](https://wordpress.org/about/license/), powering EOCollege's content 
+- [git](https://git-scm.com/about/free-and-open-source), for versioning the content of this course and collaborating with colleagues
+- [openEO](https://openeo.org/about.html#openeo), used in the coding exercises for standarized interaction with cloud platforms
+- [STAC Spec](https://stacspec.org/en), for standardizing metadata, so that we can find the data we need and create
+- [leaflet](https://github.com/Leaflet/Leaflet/blob/main/LICENSE) for the interactive visualization of results
+- [GDAL](https://gdal.org/license.html), powering most geospatial software and is the backbone of many EO cloud platforms
+
+
+### Further Reading
+Help for understanding licenses and choosing the right Open Source license
+
+- [tl;drLegal (FOSSA) (2023). Software Licencses In Plain English.](https://www.tldrlegal.com/)
+- [GitHub Inc. (2023) Choose an open source license.](https://choosealicense.com/)
+
+And plentiful resources on open source projects, how to contribute and incorporate them into your work
+
+- [opensource.com (2023). Open Source resources.](https://opensource.com/resources)
+
+### References
+- [Open Source Initiative (2007). The Open Source Definition (v1.9).](https://opensource.org/osd/)
+- [Gina Häußge (2022). A dev’s guide to open source software licensing. The ReadME Project.](https://github.com/readme/guides/open-source-licensing)
+
+
+## Exam
+
+Which statement about Open Data is correct?
+
+    [(X)] Open Data means information that is freely accessible.
+    [( )] With Open Data, only data that is related to a scientific interpretation can be considered.
+    [( )] With Open Data, the availability and usability of data on the web is limited.
+
+FAIR data is always open data.
+
+    [( )] True
+    [(X)] False
+
+What is true about Open Source Softwarte projects
+
+    [[X]] The source code is completely available to the public.
+    [[ ]] You cannot contribute to Open Source Software Projects.
+    [[X]] Open Source Software Projects are community driven.
+    [[X]] You can never use Open Source Software for commercial purposes.
+    [[ ]] If software is published under a license, it is not open source.
+
+What is GitHub?
+
+    [( )] GitHub is a cloud storage system specialized in storing big earth observation data sets.
+    [(X)] GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
+
+Find the following GitHub repositories and copy their link into the text box.
+
+| Project                                                    | Link                                                | 
+|------------------------------------------------------------|-----------------------------------------------------|
+| openEO python client                                       | [[https://github.com/Open-EO/openeo-python-client]] |
+| Spatio Temporal Asset Catalogue Specification (STAC Spec)  | [[https://github.com/radiantearth/stac-spec]]       |
+| Geographic Data Abstraction Library (GDAL)                 | [[https://github.com/OSGeo/gdal]]                   |
