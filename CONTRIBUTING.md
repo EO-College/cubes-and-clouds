@@ -3,7 +3,12 @@ This is a online course about Open Science on EO Cloud Platforms. By it's nature
 
 ## Types of contributions
 We're happy to receive contributions to improve the quality of the course. Here are some potential areas where help would be greatly appreciated
-- **Review the content:** Read through the material. If you find anything is wrong or unclear. Open a pull request to fix it. Don't add too much new information though. The lessons have a certain length.
+### Review
+- Read through the material. 
+- If you want to **fix something directly**: Open a pull request to fix it. Don't add too much new information though. The lessons have a certain length.
+- If you have **comments**: Open an issue for your review. Name it for example "Review Section 1.3 Open Science". Add all comments you have in that issue with links to the file where they apply.
+
+### Other
 - **Adding new content:** If you have an idea for new content, please open an issue to discuss this.
 - **Report Bugs:** If any of the exercises are not working. Please report a bug here by opening an issue.
 - **Fix Bugs:** Make a pull request with your fix.
