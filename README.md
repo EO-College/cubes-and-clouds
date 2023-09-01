@@ -54,11 +54,25 @@ We're happy to receive your contributions to lessons, exercises, bug reports etc
 ### Reviewers
 - 1.1 What is a Platform
   - TBD  
-- 1.2 What is Open Science
+- 1.2 What is a Data Cube
   - TBD
-- 1.3 Open Science
-  - Kristina Vrouwenvelder, AGU
-  - Shelley Stall, AGU
+- 1.3 What is Open Science (1.3.1, 1.3.2, 1.3.3)
+  - Kristina Vrouwenvelder, American Geoscience Union
+  - Shelley Stall, American Geoscience Union
+- 2.1 Data Discovery
+  - TBD
+- 2.2 Data Properties
+  - TBD 
+- 2.3 Data Access and Basic Processing
+  - TBD
+- 2.4 Formats and Performance
+  - TBD
+- 3.1 Processing
+  - TBD
+- 3.2 Validation
+  - Hannah Meyer, Universtiy of Münster
+- 3.3 Sharing
+  - Leandro Parente, Open Geo Hub Foundation
 
 ### Authors
 <a href="https://www.esa.int/"><img src="https://eo-college.org/wp-content/uploads/2023/03/ESA_logo_2020_Deep_cropped-300x113.png" width="100"></a>   <a href="https://www.eurac.edu/en"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Eurac_Research_-_logo.png" width="100"></a>   <a href="http://ignite-education.io"><img src="http://ignite-education.io/assets/images/ignite_logo-scaled.jpg" width="100"></a>   <a href="https://eox.at/"><img src="https://eox.at/EOX_Logo.svg" width="100"></a>   <a href="https://jonaseberle.de"><img src="https://eo-college.org/wp-content/uploads/2023/03/logo_jonas-eberle.png" width="100"></a> 
