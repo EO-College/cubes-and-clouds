@@ -6,10 +6,11 @@ This is the official content repository for the online course ['Cubes &amp; Clou
 ## Description
 The Massive Open Online Course **'Cubes &amp; Clouds - Cloud Native Open Data Sciences for Earth Observation'** teaches the concepts of data cubes, cloud platforms and open science in the context of earth observation. 
 
-<video width="400" controls="controls" preload="metadata">
-      <source src="https://user-images.githubusercontent.com/51962348/234564489-98a56dd2-1359-4972-ad3c-0f0f2d4b450e.mp4" type="video/mp4">
-</video>
-      
+https://user-images.githubusercontent.com/51962348/234564489-98a56dd2-1359-4972-ad3c-0f0f2d4b450e.mp4
+
+[![Cubes and Clouds Trailer](https://img.youtube.com/vi/lCC0o6kNFt0?si=C8D4NdjfodqzJFYm/hqdefault.jpg)](https://www.youtube.com/embed/lCC0o6kNFt0?si=C8D4NdjfodqzJFYm)
+
+
 ### Target Group
 It targets Earth Science students and researchers who want to increase their technical capabilities onto the newest standards in EO computing, as well as Data Scientists who want to dive into the world of EO and apply their technical background to a new field.  Before starting, prerequisites are a general knowledge of EO and python programming.
 
