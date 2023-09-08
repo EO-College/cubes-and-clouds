@@ -44,6 +44,15 @@
       "contributions": [
         "review"
       ]
+    },
+    {
+      "login": "m-mohr",
+      "name": "Matthias Mohr",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8262166?v=4",
+      "profile": "https://mohr.ws",
+      "contributions": [
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 7,
