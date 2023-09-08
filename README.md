@@ -65,7 +65,7 @@ We're happy to receive your contributions to lessons, exercises, bug reports etc
   - Kristina Vrouwenvelder, American Geoscience Union
   - Shelley Stall, American Geoscience Union
 - 2.1 Data Discovery
-  - TBD
+  - Matthias Mohr, https://mohr.ws/
 - 2.2 Data Properties
   - TBD 
 - 2.3 Data Access and Basic Processing
