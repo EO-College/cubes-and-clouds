@@ -9,4 +9,4 @@
 */.ipynb_checkpoints/*
 
 # data
-lectures/*/data/*
+lectures/*/*/data/*
