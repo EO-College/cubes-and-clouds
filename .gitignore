@@ -10,3 +10,6 @@
 
 # data
 lectures/*/*/data/*
+
+
+lectures/3.1_data_processing/exercises/__pycache__/
