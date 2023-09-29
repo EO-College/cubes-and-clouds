@@ -1,0 +1,261 @@
+---
+title: "openEO tutorial OEMC 2023"
+author: "peterjames.zellner@eurac.edu, michele.claus@eurac.edu"
+date: "2023-09-27"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+In this exercise we will build a complete EO workflow on a cloud platform; from data access to obtaining the result. In this example we will analyse snow cover in the Alps.
+
+We are going to follow these steps in our analysis:
+
+-   Load satellite collections
+-   Specify the spatial, temporal extents and the features we are interested in
+-   Process the satellite data to retreive snow cover information
+-   aggregate information in data cubes
+-   Visualize and analyse the results
+
+More information on the R-Client: <https://open-eo.github.io/openeo-r-client/>
+
+# Libraries
+
+```{r libraries, echo=TRUE, message=FALSE, warning=FALSE}
+library(openeo)
+library(stars)
+library(sf)
+library(lubridate)
+library(mapview)
+library(ggplot2)
+library(scales)
+library(plotly)
+library(jsonlite)
+library(dplyr)
+library(knitr)
+```
+
+# Login
+
+Connect to the copernicus dataspace ecosystem.
+
+```{r login, echo=FALSE}
+host = "https://openeo.dataspace.copernicus.eu/"
+conn = connect(host)
+```
+
+And login.
+
+```{r login, echo=FALSE, eval=FALSE}
+login()
+```
+
+Check if the login worked.
+
+```{r check_login, eval = FALSE}
+conn$isConnected()
+conn$isLoggedIn()
+```
+
+# Region of Interest
+
+Load the catchment area.
+
+```{r load_catch}
+catchment = sf::st_read("data/catchment_outline.geojson")
+mapview(catchment)
+```
+
+# Inspect Metadata
+
+We need to set the following configurations to define the content of the data cube we want to access:
+
+-   dataset name
+-   band names
+-   time range
+-   the area of interest specifed via bounding box coordinates
+-   spatial resolution
+
+To select the correct dataset we can first list all the available datasets.
+
+```{r collections}
+openeo::list_collections()
+```
+
+We want to use the Sentinel-2 L2A product. It's name is `SENTINEL2_L2A`.
+
+We get the metadata for this collection as follows.
+
+```{r desc_coll}
+openeo::describe_collection("SENTINEL2_L2A")
+```
+
+# Define a workflow
+
+We will define our workflow now. And chain all the processes together we need for analyzing the snow cover in the catchment.
+
+## Define the data cube
+
+We define all extents of our data cube. We use the catchment as spatial extent. As a time range we will focus on the snow melting season 2018, in particular from Febraury to June 2018.
+
+```{r bbox}
+bbox = sf::st_bbox(obj = catchment)
+bbox
+```
+
+```{r dc_defs}
+collection = "SENTINEL2_L2A"
+spatial_extent = bbox
+temporal_extent = list("2018-02-01", "2018-06-30")
+bands = list('B03', 'B11', 'SCL') 
+```
+
+## Load the data cube
+
+We have defined the extents we are interested in. Now we use these definitions to load the data cube. First we need to load the openEO processes that are available at the backend. The object p holds all the processes available on the backend now! You can adress them via `p$...`. Auto completion is also available for getting the arguments.
+
+```{r load_processes, eval=FALSE}
+p = processes()
+head(names(p))
+```
+
+Then we load our data cube.
+
+```{r load_col, eval=FALSE}
+s2 = p$load_collection(id = collection, 
+                       spatial_extent = spatial_extent,
+                       temporal_extent = temporal_extent, 
+                       bands = bands)
+```
+
+```{r load_pg, eval=FALSE}
+openeo::as.Process.Graph(s2)
+```
+
+## NDSI - Normalized Difference Snow Index
+
+The Normalized Difference Snow Index (NDSI) is computed as:
+
+$$ NDSI = {GREEN - SWIR \over GREEN + SWIR} $$
+
+We have created a Sentinel-2 data cube with bands B03 (green), B11 (SWIR) and the cloud mask (CLM). We will use the green and SWIR band to calculate a the NDSI. This process is reducing the band dimension of the data cube to generate new information, the NDSI.
+
+We define the function. The input x will be our Sentinel 2 data cube `s2` and we index the first and second band we have chosen in `load_collection`, the green and swir band.
+
+```{r ndsi_function}
+ndsi_function = function(x, context) {
+  green = x[1]
+  swir = x[2]
+  (green - swir) / (green + swir)
+}
+```
+
+And apply it along the bands dimension.
+
+```{r ndsi_reduce, eval=FALSE}
+ndsi = p$reduce_dimension(data = s2, reducer = ndsi_function, dimension = "bands")
+```
+
+```{r ndsi_pg, eval=FALSE}
+openeo::as.Process.Graph(ndsi)
+```
+
+## Creating the snow map
+
+So far we have a timeseries of NDSI values. We are intereseted in the presence of snow though. Ideally in a binary classification: snow and no snow. To achieve this we are setting a threshold of 0.4 on the NDSI. This gives us a binary snow map.
+
+```{r thresh_function}
+thresh_function = function(x, context){
+  ndsi = x[1]
+  (ndsi > 0.4)*1 
+}
+```
+
+```{r snowmap, eval=FALSE}
+snowmap = p$apply(data = ndsi, process = thresh_function)
+```
+
+```{r snowmap_pg, eval=FALSE}
+openeo::as.Process.Graph(snowmap)
+```
+
+## Creating a cloud mask
+
+We are going to use "SCL" band for creating a cloud mask and then applying it to the NDSI. Here is more information on the [Scene Classification](https://sentinels.copernicus.eu/web/sentinel/technical-guides/sentinel-2-msi/level-2a/algorithm-overview). `8 cloud medium probability`, `9 cloud high probability`, `3 cloud shadow`
+
+```{r mask_function}
+mask_function = function(x, context){
+  scl = x[3]
+  (scl == 8 | scl == 9 | scl == 3) * 1 
+}
+```
+
+```{r cloudmask, eval=FALSE}
+cloudmask = p$apply(data = s2, process = mask_function)
+```
+
+```{r cloudmask_pg, eval=FALSE}
+openeo::as.Process.Graph(cloudmask)
+```
+
+## Applying the cloud mask to the snow map
+
+We will mask out all pixels that are covered by clouds. This will result in: 0 = no_snow, 1 = snow, NA = cloud
+
+```{r snowmap_cloudfree, eval=FALSE}
+snowmap_cloudfree = p$mask(data = snowmap, mask = cloudmask)
+```
+
+```{r cloudmask_pg, eval=FALSE}
+openeo::as.Process.Graph(snowmap_cloudfree)
+```
+
+## From bounding box to catchment
+
+So far we have been working on a rectangular bounding box. But we are interested in the processes within a catchment. So we clip to that cachment (setting all values outside of the catchment to NA).
+
+```{r crop_catchment, eval=FALSE}
+snowmap_cloudfree_catchment = p$mask_polygon(data = snowmap_cloudfree, mask = catchment)
+```
+
+```{r crop_catchment_pg, eval=FALSE}
+openeo::as.Process.Graph(snowmap_cloudfree_catchment)
+```
+
+## Download and visualize a time slice of the snow cube
+
+Let's donwload the whole image time series as a netcdf file to have a look how our first results look like.
+
+First we filter one timestep to reduce the processing time.
+
+```{r filter_temp, eval=FALSE}
+snowmap_cloudfree_catchment_1d = p$filter_temporal(data = snowmap_cloudfree_catchment, 
+                                                   extent = list("2018-02-10", "2018-02-12"))
+```
+
+Then we add a final node to the process graph. Telling it that we're done: `save_result`
+
+```{r save_result, eval=FALSE}
+result_map = p$save_result(data = snowmap_cloudfree_catchment_1d, format = "netCDF")
+```
+
+Finally we tell the backend that we want to execute our process graph directly and download it.
+
+```{r download_1d, eval=FALSE}
+f = compute_result(graph = result_map, output_file = "data/snowmap_cloudfree_1d_r.nc")
+```
+
+### MAYBE USE GET_SAMPLE() HERE!!!!!!
+
+Load and plot.
+
+```{r filter_temp, eval=FALSE}
+ras = read_stars(f)
+mapview(ras)
+```
+
+## Cloud Percentage
