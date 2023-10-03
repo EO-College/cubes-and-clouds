@@ -36,6 +36,7 @@ library(scales)
 library(plotly)
 library(jsonlite)
 library(dplyr)
+library(tidyr)
 library(knitr)
 ```
 
@@ -181,6 +182,11 @@ snowmap = p$apply(data = ndsi, process = thresh_function)
 
 ```{r snowmap_pg, eval=FALSE}
 openeo::as.Process.Graph(snowmap)
+ras = get_sample(graph = snowmap, spatial_extent = bbox_sample, format = "netCDF", as_stars = TRUE)
+```
+
+```{r snowmap_smpl, eval=FALSE}
+ras = get_sample(graph = snowmap, spatial_extent = bbox_sample, format = "netCDF", as_stars = TRUE)
 ```
 
 ## Creating a cloud mask
@@ -195,11 +201,16 @@ mask_function = function(x, context){
 ```
 
 ```{r cloudmask, eval=FALSE}
-cloudmask = p$apply(data = s2, process = mask_function)
+#cloudmask = p$apply(data = s2, process = mask_function)
+cloudmask = p$reduce_dimension(data = s2, reducer = mask_function, dimension = "bands")
 ```
 
 ```{r cloudmask_pg, eval=FALSE}
 openeo::as.Process.Graph(cloudmask)
+```
+
+```{r cloudmask_smpl, eval=FALSE}
+ras = get_sample(graph = cloudmask, spatial_extent = bbox_sample, format = "netCDF", as_stars = TRUE)
 ```
 
 ## Applying the cloud mask to the snow map
@@ -228,34 +239,152 @@ openeo::as.Process.Graph(snowmap_cloudfree_catchment)
 
 ## Download and visualize a time slice of the snow cube
 
-Let's donwload the whole image time series as a netcdf file to have a look how our first results look like.
+Let's download the whole image time series as a netcdf file to have a look how our first results look like. \`get_sample()\` is the ideal function in the R-Client to investigate intermediate results quickly.
 
-First we filter one timestep to reduce the processing time.
-
-```{r filter_temp, eval=FALSE}
-snowmap_cloudfree_catchment_1d = p$filter_temporal(data = snowmap_cloudfree_catchment, 
-                                                   extent = list("2018-02-10", "2018-02-12"))
+```{r get_sample, eval=FALSE}
+bbox_sample = catchment %>% st_transform(crs = 3035) %>%  st_centroid() %>% st_buffer(50) %>% st_transform(crs = 4326) %>% st_bbox()
+ras = get_sample(graph = snowmap_cloudfree_catchment_1d, spatial_extent = bbox_sample, format = "netCDF", as_stars = TRUE)
 ```
 
-Then we add a final node to the process graph. Telling it that we're done: `save_result`
-
-```{r save_result, eval=FALSE}
-result_map = p$save_result(data = snowmap_cloudfree_catchment_1d, format = "netCDF")
+```{r plot_sample, eval=FALSE}
+mapview(ras) + mapview(catchment)
 ```
 
-Finally we tell the backend that we want to execute our process graph directly and download it.
+## Calculate Catchment Statistics
 
-```{r download_1d, eval=FALSE}
-f = compute_result(graph = result_map, output_file = "data/snowmap_cloudfree_1d_r.nc")
+We are looking at a region over time. We need to make sure that the information content meets our expected quality. Therefore, we calculate the **cloud percentage** for the catchment for each timestep. We use this information to filter the timeseries. All timesteps that have a cloud coverage of over 25% will be discarded.
+
+Ultimately we are interested in the **snow covered area (SCA)** within the catchment. We count all snow covered pixels within the catchment for each time step. Multiplied by the pixel size that would be the snow covered area. Divided the pixel count by the total number of pixels in the catchment is the percentage of pixels covered with snow. We will use this number.
+
+Get number of pixels in catchment.
+
+```{r percentages, eval=FALSE}
+
+# number of all pixels
+n_catch_fun = function(x, context){(x > -1) * 1} # p$gt(y = -1)
+n_catch = p$apply(data = snowmap, process = n_catch_fun) %>% p$add_dimension(name = "bands", type = "bands", label = "n_catch")
+
+# number of cloud pixels (no function needed, mask already created before)
+n_cloud = p$add_dimension(data = cloudmask, name = "bands", type = "bands", label = "n_cloud")
+
+# number of snow pixels
+n_snow_fun = function(x, context){(x == 1) * 1} # p$eq(y = 1)
+n_snow = p$apply(snowmap_cloudfree, process = n_snow_fun) %>% p$add_dimension(name = "bands", type = "bands", label = "n_snow")
+
+# combine the binary data cubes into one data cube
+n_cc = p$merge_cubes(cube1 = n_catch, cube2 = n_cloud)
+n_ccs = p$merge_cubes(cube1 = n_cc, cube2 = n_snow)
+
+# aggregate to catchment
+n_ccs_catch = p$aggregate_spatial(data = n_ccs, geometries = catchment, reducer = p$sum)
 ```
 
-### MAYBE USE GET_SAMPLE() HERE!!!!!!
+Get a sample of the 3 band binary data cube we have created before the aggregation.
 
-Load and plot.
-
-```{r filter_temp, eval=FALSE}
-ras = read_stars(f)
-mapview(ras)
+```{r n_ccs, eval=FALSE}
+ras = get_sample(graph = n_ccs, spatial_extent = bbox_sample, format = "netCDF", as_stars = TRUE)
 ```
 
-## Cloud Percentage
+Create batch job to start processing on the backend.
+
+```{r n_ccs_job, eval=FALSE}
+n_ccs_catch_json = p$save_result(data = n_ccs_catch, format = "JSON")
+job = create_job(graph = n_ccs_catch_json, title = "n_ccs_catch_json")
+
+start_job(job = job)
+
+list_jobs() %>% as.data.frame() %>%  filter(id == job$id)
+
+pth = download_results(job = job, folder = "data/")
+pth
+```
+
+Load the result. It contains the number of pixels in the catchment, clouds and snow. We can calculate the percentages of cloud and snow pixels in the catchment.
+
+```{r percentages, eval=TRUE}
+
+# load result
+perc = jsonlite::read_json(pth[[1]], simplifyVector = TRUE)
+
+# clean
+perc = lapply(X = perc, FUN = as.data.frame) %>% 
+  bind_rows(.id = "time") %>% 
+  rename(n_catch = V1, n_cloud = V2, n_snow = V3) %>% 
+  mutate(time = as.Date(time), 
+         perc_cloud = round(n_cloud / n_catch, 2), 
+         perc_snow = round(n_snow / n_catch, 2))
+
+# peak
+perc # careful unsorted dates!
+```
+
+Add some filters for the cases where there are not enough pixels in the catchment (catchment crossing s2 tiles and where cloud cover is higher than 25%.
+
+```{r percentages_filter, eval=TRUE}
+perc = perc %>% mutate(filter_catch = if_else(n_catch < max(n_catch), FALSE, TRUE), 
+                       filter_cloud = if_else(perc_cloud > 0.25, FALSE, TRUE))
+```
+
+Plot the timeseries and the cloud threshold of 25%. If the cloud cover is higher the timestep will be excluded later on.
+
+Check the filters.
+
+```{r cloud_perc_tbl, eval=TRUE}
+ftable(perc$filter_cloud, perc$filter_catch, dnn = c("filter_cloud", "filter_catch"))
+
+```
+
+Plot the cloud percentage with the threshold.
+
+```{r cloud_perc_plt, eval=TRUE}
+ggplot(data = perc, mapping = aes(x=time, y=perc_cloud)) + 
+  geom_point() + geom_line() + geom_hline(yintercept = 0.25)
+```
+
+Plot the unfiltered snow percentage
+
+```{r snow_perc_plt1, eval=TRUE}
+# no filter - mess
+ggplot(data = perc, mapping = aes(x=time, y=perc_snow)) + 
+  geom_point() + geom_line()
+```
+
+Plot the cloud filtered snow percentage
+
+```{r snow_perc_plt2, eval=TRUE}
+# filter clouds > 25%
+ggplot(data = perc %>% filter(filter_cloud == TRUE), mapping = aes(x=time, y=perc_snow)) + geom_point() + geom_line()
+```
+
+Plot the cloud and catchment size filtered snow percentage
+
+```{r snow_perc_plt3, eval=TRUE}
+# filter clouds and small tile
+ggplot(data = perc %>% filter(filter_cloud == TRUE & filter_catch == TRUE), mapping = aes(x=time, y=perc_snow)) + geom_point() + geom_line()
+
+```
+
+## Compare to discharge data
+
+Load the discharge data at Meran. The main outlet of the catchment.
+
+```{r discharge_load, eval=TRUE}
+disch = readr::read_csv("data/ADO_DSC_ITH1_0025.csv") %>% rename(time = Time) %>% filter(between(time, as.Date("2018-02-01"), as.Date("2018-06-30"))) %>%  mutate(time = as.Date(time))
+head(disch)
+```
+
+Compare the discharge data to the snow covered area.
+
+```{r discharge_plot, eval=TRUE}
+# data cleaning
+snow = perc %>% filter(filter_cloud == TRUE) %>% mutate(index = "perc_snow") %>% select(time, index, val = perc_snow) %>% mutate(val = val/0.015) # for scaling
+disch = disch %>% mutate(index = "disch_m3_s") %>% select(time, index, val = discharge_m3_s)
+snow_disch = rbind(snow, disch)
+
+# plot
+ggplot(data = snow_disch, mapping = aes(x = time, y = val, color = index)) + 
+  geom_point() + 
+  geom_line() +
+  scale_y_continuous(name = "discharge_m3_s", sec.axis = sec_axis(~.*0.015, name = "perc_snow"))
+
+```
