@@ -17,7 +17,7 @@ We are going to follow these steps in our analysis:
 
 -   Load satellite collections
 -   Specify the spatial, temporal extents and the features we are interested in
--   Process the satellite data to retreive snow cover information
+-   Process the satellite data to retrieve snow cover information
 -   aggregate information in data cubes
 -   Visualize and analyse the results
 
@@ -37,6 +37,7 @@ library(plotly)
 library(jsonlite)
 library(dplyr)
 library(tidyr)
+library(readr)
 library(knitr)
 ```
 
@@ -67,7 +68,7 @@ conn$isLoggedIn()
 Load the catchment area.
 
 ```{r load_catch}
-catchment = sf::st_read("data/catchment_outline.geojson")
+catchment = sf::st_read("data/catchment_outline.geojson", quiet = TRUE)
 mapview(catchment)
 ```
 
@@ -120,7 +121,7 @@ bands = list('B03', 'B11', 'SCL')
 We have defined the extents we are interested in. Now we use these definitions to load the data cube. First we need to load the openEO processes that are available at the backend. The object p holds all the processes available on the backend now! You can adress them via `p$...`. Auto completion is also available for getting the arguments.
 
 ```{r load_processes, eval=FALSE}
-p = processes()
+p = openeo::processes()
 head(names(p))
 ```
 
@@ -162,7 +163,7 @@ ndsi = p$reduce_dimension(data = s2, reducer = ndsi_function, dimension = "bands
 ```
 
 ```{r ndsi_pg, eval=FALSE}
-openeo::as.Process.Graph(ndsi)
+as.Process.Graph(ndsi)
 ```
 
 ## Creating the snow map
@@ -182,16 +183,24 @@ snowmap = p$apply(data = ndsi, process = thresh_function)
 
 ```{r snowmap_pg, eval=FALSE}
 openeo::as.Process.Graph(snowmap)
-ras = get_sample(graph = snowmap, spatial_extent = bbox_sample, format = "netCDF", as_stars = TRUE)
 ```
 
+The `get_sample()` function lets you investigate the state of your data cube at any processing step. It returns a subset of the data cube that can be calculated quickly by the backend. It is great for debugging.
+
 ```{r snowmap_smpl, eval=FALSE}
+# create a small bbox manually, 50m around the centroid of the catchment, should be done by get_sample(), open issue.
+bbox_sample = catchment %>% st_transform(crs = 3035) %>%  st_centroid() %>% st_buffer(50) %>% st_transform(crs = 4326) %>% st_bbox()
+
+# get sample
 ras = get_sample(graph = snowmap, spatial_extent = bbox_sample, format = "netCDF", as_stars = TRUE)
+
+# peak
+plot(ras)
 ```
 
 ## Creating a cloud mask
 
-We are going to use "SCL" band for creating a cloud mask and then applying it to the NDSI. Here is more information on the [Scene Classification](https://sentinels.copernicus.eu/web/sentinel/technical-guides/sentinel-2-msi/level-2a/algorithm-overview). `8 cloud medium probability`, `9 cloud high probability`, `3 cloud shadow`
+We are going to use "SCL" band for creating a cloud mask and then applying it to the NDSI. Here is more information on the [Scene Classification](https://sentinels.copernicus.eu/web/sentinel/technical-guides/sentinel-2-msi/level-2a/algorithm-overview). `8 = cloud medium probability`, `9 = cloud high probability`, `3 = cloud shadow`
 
 ```{r mask_function}
 mask_function = function(x, context){
@@ -206,48 +215,44 @@ cloudmask = p$reduce_dimension(data = s2, reducer = mask_function, dimension = "
 ```
 
 ```{r cloudmask_pg, eval=FALSE}
-openeo::as.Process.Graph(cloudmask)
+as.Process.Graph(cloudmask)
 ```
 
 ```{r cloudmask_smpl, eval=FALSE}
 ras = get_sample(graph = cloudmask, spatial_extent = bbox_sample, format = "netCDF", as_stars = TRUE)
+
+plot(ras)
 ```
 
 ## Applying the cloud mask to the snow map
 
-We will mask out all pixels that are covered by clouds. This will result in: 0 = no_snow, 1 = snow, NA = cloud
+We will mask out all pixels that are covered by clouds. This will result in: `0 = no_snow`, `1 = snow`, `NA = cloud`
 
 ```{r snowmap_cloudfree, eval=FALSE}
 snowmap_cloudfree = p$mask(data = snowmap, mask = cloudmask)
 ```
 
 ```{r cloudmask_pg, eval=FALSE}
-openeo::as.Process.Graph(snowmap_cloudfree)
-```
-
-## From bounding box to catchment
-
-So far we have been working on a rectangular bounding box. But we are interested in the processes within a catchment. So we clip to that cachment (setting all values outside of the catchment to NA).
-
-```{r crop_catchment, eval=FALSE}
-snowmap_cloudfree_catchment = p$mask_polygon(data = snowmap_cloudfree, mask = catchment)
-```
-
-```{r crop_catchment_pg, eval=FALSE}
-openeo::as.Process.Graph(snowmap_cloudfree_catchment)
+as.Process.Graph(snowmap_cloudfree)
 ```
 
 ## Download and visualize a time slice of the snow cube
 
-Let's download the whole image time series as a netcdf file to have a look how our first results look like. \`get_sample()\` is the ideal function in the R-Client to investigate intermediate results quickly.
+Let's download one time slice of our data cube and have a look at the whole catchment. `compute_result()` executes the processing graph directly. This is only advisable for smaller processings - it blocks your console. For larger processings batch jobs are adviasble, we'll do that later.
 
-```{r get_sample, eval=FALSE}
-bbox_sample = catchment %>% st_transform(crs = 3035) %>%  st_centroid() %>% st_buffer(50) %>% st_transform(crs = 4326) %>% st_bbox()
-ras = get_sample(graph = snowmap_cloudfree_catchment_1d, spatial_extent = bbox_sample, format = "netCDF", as_stars = TRUE)
+```{r snowmap_cloudfree_1d, eval=FALSE}
+# filter to one date
+snowmap_cloudfree_1d = p$filter_temporal(data = snowmap_cloudfree, extent = list("2018-02-10", "2018-02-12"), dimension = "time")
+
+# increase the bbox size
+bbox_sample2 = catchment %>% st_transform(crs = 3035) %>%  st_centroid() %>% st_buffer(500) %>% st_transform(crs = 4326) %>% st_bbox()
+
+# get the sample 
+ras = get_sample(graph = snowmap_cloudfree_1d, spatial_extent = bbox_sample2, format = "netCDF", as_stars = TRUE)
 ```
 
 ```{r plot_sample, eval=FALSE}
-mapview(ras) + mapview(catchment)
+mapview(ras) + mapview(catchment, alpha.regions = 0.25, col.regions = NA)
 ```
 
 ## Calculate Catchment Statistics
@@ -256,7 +261,7 @@ We are looking at a region over time. We need to make sure that the information 
 
 Ultimately we are interested in the **snow covered area (SCA)** within the catchment. We count all snow covered pixels within the catchment for each time step. Multiplied by the pixel size that would be the snow covered area. Divided the pixel count by the total number of pixels in the catchment is the percentage of pixels covered with snow. We will use this number.
 
-Get number of pixels in catchment.
+Get number of pixels in catchment: total, clouds, snow.
 
 ```{r percentages, eval=FALSE}
 
@@ -283,6 +288,8 @@ Get a sample of the 3 band binary data cube we have created before the aggregati
 
 ```{r n_ccs, eval=FALSE}
 ras = get_sample(graph = n_ccs, spatial_extent = bbox_sample, format = "netCDF", as_stars = TRUE)
+
+ras
 ```
 
 Create batch job to start processing on the backend.
@@ -325,23 +332,23 @@ perc = perc %>% mutate(filter_catch = if_else(n_catch < max(n_catch), FALSE, TRU
                        filter_cloud = if_else(perc_cloud > 0.25, FALSE, TRUE))
 ```
 
-Plot the timeseries and the cloud threshold of 25%. If the cloud cover is higher the timestep will be excluded later on.
-
 Check the filters.
 
-```{r cloud_perc_tbl, eval=TRUE}
-ftable(perc$filter_cloud, perc$filter_catch, dnn = c("filter_cloud", "filter_catch"))
-
+```{r filter_tbl, eval=TRUE}
+#ftable(perc$filter_cloud, perc$filter_catch, dnn = c("filter_cloud", "filter_catch"))
+list(filter_cloud = ftable(perc$filter_cloud), filter_catch = ftable(perc$filter_catch))
 ```
 
-Plot the cloud percentage with the threshold.
+Plot the timeseries and the cloud threshold of 25%. If the cloud cover is higher the timestep will be excluded later on.
+
+Plot the **cloud percentage** with the threshold.
 
 ```{r cloud_perc_plt, eval=TRUE}
 ggplot(data = perc, mapping = aes(x=time, y=perc_cloud)) + 
   geom_point() + geom_line() + geom_hline(yintercept = 0.25)
 ```
 
-Plot the unfiltered snow percentage
+Plot the **unfiltered snow percentage**
 
 ```{r snow_perc_plt1, eval=TRUE}
 # no filter - mess
@@ -349,14 +356,14 @@ ggplot(data = perc, mapping = aes(x=time, y=perc_snow)) +
   geom_point() + geom_line()
 ```
 
-Plot the cloud filtered snow percentage
+Plot the **cloud filtered snow percentage**
 
 ```{r snow_perc_plt2, eval=TRUE}
 # filter clouds > 25%
 ggplot(data = perc %>% filter(filter_cloud == TRUE), mapping = aes(x=time, y=perc_snow)) + geom_point() + geom_line()
 ```
 
-Plot the cloud and catchment size filtered snow percentage
+Plot the **cloud and catchment size filtered snow percentage**
 
 ```{r snow_perc_plt3, eval=TRUE}
 # filter clouds and small tile
