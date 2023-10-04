@@ -45,7 +45,7 @@ library(knitr)
 
 Connect to the copernicus dataspace ecosystem.
 
-```{r login, echo=FALSE}
+```{r connect, echo=FALSE}
 host = "https://openeo.dataspace.copernicus.eu/"
 conn = connect(host)
 ```
@@ -58,7 +58,7 @@ login()
 
 Check if the login worked.
 
-```{r check_login, eval = FALSE}
+```{r check_login, eval = TRUE}
 conn$isConnected()
 conn$isLoggedIn()
 ```
@@ -120,14 +120,14 @@ bands = list('B03', 'B11', 'SCL')
 
 We have defined the extents we are interested in. Now we use these definitions to load the data cube. First we need to load the openEO processes that are available at the backend. The object p holds all the processes available on the backend now! You can adress them via `p$...`. Auto completion is also available for getting the arguments.
 
-```{r load_processes, eval=FALSE}
+```{r load_processes, eval=TRUE}
 p = openeo::processes()
 head(names(p))
 ```
 
 Then we load our data cube.
 
-```{r load_col, eval=FALSE}
+```{r load_col, eval=TRUE}
 s2 = p$load_collection(id = collection, 
                        spatial_extent = spatial_extent,
                        temporal_extent = temporal_extent, 
@@ -158,7 +158,7 @@ ndsi_function = function(x, context) {
 
 And apply it along the bands dimension.
 
-```{r ndsi_reduce, eval=FALSE}
+```{r ndsi_reduce, eval=TRUE}
 ndsi = p$reduce_dimension(data = s2, reducer = ndsi_function, dimension = "bands")
 ```
 
@@ -177,7 +177,7 @@ thresh_function = function(x, context){
 }
 ```
 
-```{r snowmap, eval=FALSE}
+```{r snowmap, eval=TRUE}
 snowmap = p$apply(data = ndsi, process = thresh_function)
 ```
 
@@ -209,7 +209,7 @@ mask_function = function(x, context){
 }
 ```
 
-```{r cloudmask, eval=FALSE}
+```{r cloudmask, eval=TRUE}
 #cloudmask = p$apply(data = s2, process = mask_function)
 cloudmask = p$reduce_dimension(data = s2, reducer = mask_function, dimension = "bands")
 ```
@@ -228,11 +228,11 @@ plot(ras)
 
 We will mask out all pixels that are covered by clouds. This will result in: `0 = no_snow`, `1 = snow`, `NA = cloud`
 
-```{r snowmap_cloudfree, eval=FALSE}
+```{r snowmap_cloudfree, eval=TRUE}
 snowmap_cloudfree = p$mask(data = snowmap, mask = cloudmask)
 ```
 
-```{r cloudmask_pg, eval=FALSE}
+```{r snowmap_cloudfree_pg, eval=TRUE}
 as.Process.Graph(snowmap_cloudfree)
 ```
 
@@ -263,7 +263,7 @@ Ultimately we are interested in the **snow covered area (SCA)** within the catch
 
 Get number of pixels in catchment: total, clouds, snow.
 
-```{r percentages, eval=FALSE}
+```{r n_ccs, eval=TRUE}
 
 # number of all pixels
 n_catch_fun = function(x, context){(x > -1) * 1} # p$gt(y = -1)
@@ -284,9 +284,13 @@ n_ccs = p$merge_cubes(cube1 = n_cc, cube2 = n_snow)
 n_ccs_catch = p$aggregate_spatial(data = n_ccs, geometries = catchment, reducer = p$sum)
 ```
 
+```{r n_ccs_pg, eval=TRUE}
+as.Process.Graph(n_ccs_catch)
+```
+
 Get a sample of the 3 band binary data cube we have created before the aggregation.
 
-```{r n_ccs, eval=FALSE}
+```{r n_ccs_smpl, eval=FALSE}
 ras = get_sample(graph = n_ccs, spatial_extent = bbox_sample, format = "netCDF", as_stars = TRUE)
 
 ras
@@ -310,6 +314,8 @@ Load the result. It contains the number of pixels in the catchment, clouds and s
 
 ```{r percentages, eval=TRUE}
 
+pth = "data/timeseries.json"
+
 # load result
 perc = jsonlite::read_json(pth[[1]], simplifyVector = TRUE)
 
@@ -322,7 +328,7 @@ perc = lapply(X = perc, FUN = as.data.frame) %>%
          perc_snow = round(n_snow / n_catch, 2))
 
 # peak
-perc # careful unsorted dates!
+head(perc) # careful unsorted dates!
 ```
 
 Add some filters for the cases where there are not enough pixels in the catchment (catchment crossing s2 tiles and where cloud cover is higher than 25%.
@@ -375,7 +381,7 @@ ggplot(data = perc %>% filter(filter_cloud == TRUE & filter_catch == TRUE), mapp
 
 Load the discharge data at Meran. The main outlet of the catchment.
 
-```{r discharge_load, eval=TRUE}
+```{r discharge_load, eval=TRUE, message=FALSE}
 disch = readr::read_csv("data/ADO_DSC_ITH1_0025.csv") %>% rename(time = Time) %>% filter(between(time, as.Date("2018-02-01"), as.Date("2018-06-30"))) %>%  mutate(time = as.Date(time))
 head(disch)
 ```
