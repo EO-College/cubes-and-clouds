@@ -39,6 +39,10 @@ flowchart LR
 ### Learning Objectives
 After finishing the participant will understand the theoretical concepts of cloud native EO processing and have gained practical experience by conducting an end-to-end EO workflow. The participant will be capable of independently using cloud platforms to approach EO related research questions and be confident in how to share research by adhering to the concepts of open science.
 
+## Interactive Cubes and Clouds Map produced by the participants
+Check out the interactive cubes and clouds map! It's produced by the participants of the course. Every XXX adds their contribution to a community mapping project: mapping the snow cover of mountainous regions together!
+- LINK
+
 ## Sign-On Guide
 To follow the course completely, especially to execute the hands-on exercises on cloud platforms you will have to sign in to some free services.
 - EOCollege: Access to the e-learning platform and the jupyterhub coding environment hosted by EOX.
