@@ -56,7 +56,7 @@ def calculate_sca(conn, bbox, temporal_extent):
     # reference: https://sentinels.copernicus.eu/web/sentinel/technical-guides/sentinel-2-msi/level-2a/algorithm-overview
     scl_band = s2.band("SCL")
     cloud_mask = ( (scl_band == 8) | (scl_band == 9) | (scl_band == 3) ) * 1.0
-    snowmap_cloudfree = snowmap.mask(cloud_mask,replacement=2) # replacement is null by default
+    snowmap_cloudfree = snowmap.mask(cloud_mask)
     
     return snowmap_cloudfree
 
