@@ -108,6 +108,18 @@ def binarize_snow(df):
         return 0
     else:
         return 0
+
+
+def assign_site_snow(df, snow_val):
+    # assign site snow values to the datacube output for validation
+    df["cube_snow"] = snow_val
+    df = df.set_index("id")
+    df = df.sort_values(axis=0, by="id")
+    
+    # assign 0 to cloudy pixels -- assumes no-snow
+    df["cube_snow"] = np.where(df["cube_snow"] == np.nan, 0, np.where(df["cube_snow"]==1, 1, 0))
+    
+    return df
     
 def create_bounding_box(latitude, longitude, distance_km):
     # create a bounding box around a point
