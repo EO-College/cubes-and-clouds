@@ -33,7 +33,7 @@ from rio_stac.stac import (
 
 
 def calculate_sca(conn, bbox, temporal_extent):
-    s2 = conn.load_collection(
+    s2_cube = conn.load_collection(
         'SENTINEL2_L2A',
         spatial_extent={'west':bbox[0],
                         'east':bbox[2],
@@ -41,20 +41,31 @@ def calculate_sca(conn, bbox, temporal_extent):
                         'north':bbox[3],
                         'crs':4326
                        },
-        bands=['B03', 'B11', 'SCL'],
+        bands=['B03', 'B11'],
         temporal_extent=temporal_extent
     )
     
     # compute ndsi and snowmap
-    green = s2.band("B03")
-    swir = s2.band("B11")
+    green = s2_cube.band("B03")
+    swir = s2_cube.band("B11")
     ndsi = (green - swir) / (green + swir)
     
     snowmap = ( ndsi > 0.4 ) * 1.0
     
+    cm_cube = conn.load_collection(
+        'SENTINEL2_L2A',
+        spatial_extent={'west':bbox[0],
+                        'east':bbox[2],
+                        'south':bbox[1],
+                        'north':bbox[3],
+                        'crs':4326
+                       },
+        bands=['SCL'],
+        temporal_extent=temporal_extent
+    )
     # mask out cloud using SCL
     # reference: https://sentinels.copernicus.eu/web/sentinel/technical-guides/sentinel-2-msi/level-2a/algorithm-overview
-    scl_band = s2.band("SCL")
+    scl_band = cm_cube.band("SCL")
     cloud_mask = ( (scl_band == 8) | (scl_band == 9) | (scl_band == 3) ) * 1.0
     snowmap_cloudfree = snowmap.mask(cloud_mask)
     
@@ -115,9 +126,9 @@ def assign_site_snow(df, snow_val):
     df["cube_snow"] = snow_val
     df = df.set_index("id")
     df = df.sort_values(axis=0, by="id")
-    
+    df = df.dropna()
     # assign 0 to cloudy pixels -- assumes no-snow
-    df["cube_snow"] = np.where(df["cube_snow"] == np.nan, 0, np.where(df["cube_snow"]==1, 1, 0))
+    # df["cube_snow"] = np.where(df["cube_snow"] == np.nan, 0, np.where(df["cube_snow"]==1, 1, 0))
     
     return df
     
