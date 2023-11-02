@@ -65,30 +65,16 @@ We're happy to receive your contributions to lessons, exercises, bug reports etc
 
 ## Authors and Acknowledgement
 ### Reviewers
-- 1.1 What is a Platform
-  - [Jeroen Dries, VITO](https://remotesensing.vito.be/team/jeroen-dries)
-- 1.2 What is a Data Cube
-  - [Pontus Lurcock, Brockmann Consult](https://www.brockmann-consult.de/about-us/)
-  - [David Montero, University of Leipzig](https://www.uni-leipzig.de/personenprofil/mitarbeiter/david-montero)
-  - [Gunnar Brandt, Brockann Consult](https://www.brockmann-consult.de/about-us/)
-- 1.3 What is Open Science (1.3.1, 1.3.2, 1.3.3)
-  - [Kristina Vrouwenvelder, American Geoscience Union](https://www.rd-alliance.org/user/31394)
-  - [Shelley Stall, American Geoscience Union](https://www.rd-alliance.org/users/shelley-stall)
-- 2.1 Data Discovery
-  - [Matthias Mohr, Matthias Mohr Softwareentwicklung](https://mohr.ws/)
-- 2.2 Data Properties
-  - [Angelos Tzotsos, Open Source Geospatial Foundation](http://users.ntua.gr/tzotsos/)
-- 2.3 Data Access and Basic Processing
-  - TBD
-- 2.4 Formats and Performance
-  - [Aimee Barciauskas, Development Seed](https://developmentseed.org/team/aimee-barciauskas)
-  - [Ryan Avery, Development Seed](https://developmentseed.org/team/ryan-avery)
-- 3.1 Processing
-  - TBD
-- 3.2 Validation
-  - [Hanna Meyer, Universtiy of Münster](https://www.uni-muenster.de/RemoteSensing/team/meyer/index.html)
-- 3.3 Sharing
-  - [Leandro Parente, Open Geo Hub Foundation](https://opengeohub.org/people/leandro-parente/)
+- 1.1 What is a Platform: [Jeroen Dries, VITO](https://remotesensing.vito.be/team/jeroen-dries)
+- 1.2 What is a Data Cube: [Pontus Lurcock, Brockmann Consult](https://www.brockmann-consult.de/about-us/); [David Montero, University of Leipzig](https://www.uni-leipzig.de/personenprofil/mitarbeiter/david-montero); [Gunnar Brandt, Brockann Consult](https://www.brockmann-consult.de/about-us/)
+- 1.3 What is Open Science (1.3.1, 1.3.2, 1.3.3): [Kristina Vrouwenvelder, American Geoscience Union](https://www.rd-alliance.org/user/31394); [Shelley Stall, American Geoscience Union](https://www.rd-alliance.org/users/shelley-stall)
+- 2.1 Data Discovery: [Matthias Mohr, Matthias Mohr Softwareentwicklung](https://mohr.ws/)
+- 2.2 Data Properties: [Angelos Tzotsos, Open Source Geospatial Foundation](http://users.ntua.gr/tzotsos/)
+- 2.3 Data Access and Basic Processing: TBD
+- 2.4 Formats and Performance: [Aimee Barciauskas, Development Seed](https://developmentseed.org/team/aimee-barciauskas); [Ryan Avery, Development Seed](https://developmentseed.org/team/ryan-avery)
+- 3.1 Processing: TBD
+- 3.2 Validation: [Hanna Meyer, Universtiy of Münster](https://www.uni-muenster.de/RemoteSensing/team/meyer/index.html)
+- 3.3 Sharing: [Leandro Parente, Open Geo Hub Foundation](https://opengeohub.org/people/leandro-parente/)
 
 ### Authors
 <a href="https://www.esa.int/"><img src="https://eo-college.org/wp-content/uploads/2023/03/ESA_logo_2020_Deep_cropped-300x113.png" width="100"></a>   <a href="https://www.eurac.edu/en"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Eurac_Research_-_logo.png" width="100"></a>   <a href="http://ignite-education.io"><img src="http://ignite-education.io/assets/images/ignite_logo-scaled.jpg" width="100"></a>   <a href="https://eox.at/"><img src="https://eox.at/EOX_Logo.svg" width="100"></a>   <a href="https://jonaseberle.de"><img src="https://eo-college.org/wp-content/uploads/2023/03/logo_jonas-eberle.png" width="100"></a> 
