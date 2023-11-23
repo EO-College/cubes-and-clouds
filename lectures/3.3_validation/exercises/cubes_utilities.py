@@ -13,6 +13,9 @@ import rasterio
 import shapely
 from shapely.geometry import Polygon
 
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+
 
 # pystac libraries
 import pystac
@@ -30,6 +33,11 @@ from rio_stac.stac import (
     bbox_to_geom,
 )
 
+
+def validation_metrics(df):
+    acc = accuracy_score(df.snow_presence, df.cube_snow)
+    cf = confusion_matrix(df.snow_presence, df.cube_snow)
+    return acc, cf
 
 
 def calculate_sca(conn, bbox, temporal_extent):
