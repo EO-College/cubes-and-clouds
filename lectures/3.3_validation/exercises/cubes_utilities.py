@@ -35,10 +35,17 @@ from rio_stac.stac import (
 
 
 def validation_metrics(df):
+    cf_init = np.array([[np.nan, np.nan], [np.nan, np.nan]])
+
     acc = accuracy_score(df.snow_presence, df.cube_snow)
     cf = confusion_matrix(df.snow_presence, df.cube_snow)
-    return acc, cf
-
+    
+    if len(cf)==1:
+        cf_init[0][0] = cf[0][0]
+    else:
+        cf_init = cf
+    
+    return acc, cf_init
 
 def calculate_sca(conn, bbox, temporal_extent):
     s2_cube = conn.load_collection(
