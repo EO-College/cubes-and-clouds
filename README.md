@@ -68,7 +68,7 @@ We're happy to receive your contributions to lessons, exercises, bug reports etc
 - 1.2 What is a Data Cube: [Pontus Lurcock, Brockmann Consult](https://www.brockmann-consult.de/about-us/); [David Montero, University of Leipzig](https://www.uni-leipzig.de/personenprofil/mitarbeiter/david-montero); [Gunnar Brandt, Brockann Consult](https://www.brockmann-consult.de/about-us/)
 - 1.3 What is Open Science (1.3.1, 1.3.2, 1.3.3): [Kristina Vrouwenvelder, American Geoscience Union](https://www.rd-alliance.org/user/31394); [Shelley Stall, American Geoscience Union](https://www.rd-alliance.org/users/shelley-stall)
 - 2.1 Data Discovery: [Matthias Mohr, Matthias Mohr Softwareentwicklung](https://mohr.ws/)
-- 2.2 Data Properties: [Angelos Tzotsos, Open Source Geospatial Foundation](http://users.ntua.gr/tzotsos/)
+- 2.2 Data Properties: [Angelos Tzotsos, Open Source Geospatial Foundation](http://users.ntua.gr/tzotsos/); [Tom Kralidis, Meteorological Service of Canada](https://www.linkedin.com/in/tomkralidis/?originalSubdomain=ca)
 - 2.3 Data Access and Basic Processing: [Edzer Pebesma, University of Münster](https://www.uni-muenster.de/Geoinformatics/institute/staff/index.php/119/edzer_pebesma)
 - 2.4 Formats and Performance: [Aimee Barciauskas, Development Seed](https://developmentseed.org/team/aimee-barciauskas); [Ryan Avery, Development Seed](https://developmentseed.org/team/ryan-avery)
 - 3.1 Processing: [Mattia Callegari, Eurac Research](https://www.eurac.edu/en/people/mattia-callegari)
