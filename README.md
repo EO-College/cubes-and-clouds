@@ -44,24 +44,23 @@ Check out the interactive cubes and clouds map! It's produced by the participant
 - LINK
 
 ## Sign-On Guide
-To follow the course completely, especially to execute the hands-on exercises on cloud platforms you will have to sign in to some free services.
+To follow the course completely, especially to execute the hands-on exercises on cloud platforms you will sign in to some free services.
 - EOCollege: Access to the e-learning platform and the jupyterhub coding environment hosted by EOX.
-- Copernicus Data Space Ecosystem: 
-You can find all the necessary information in the lectures (Introduction)[https://github.com/EO-College/cubes-and-clouds/blob/main/lectures/0_introduction/0_introduction.md].
-
+- Copernicus Data Space Ecosystem: A cloud platform offering the data collections and computing resources for the exercises of the course.
+You can find all the necessary information in the lecture (Introduction)[https://github.com/EO-College/cubes-and-clouds/blob/main/lectures/0_introduction/0_introduction.md].
 
 ## Contributing
 We're happy to receive your contributions to lessons, exercises, bug reports etc.
 - Check out the [CONTRIBUTING.md](CONTRIBUTING.md) contributing guide to learn how you can contribute! 
 - The full list of all contributors is in the [CONTRIBUTORS.md](CONTRIBUTORS.md)
 
-## Alternative Rendering of the Course
-- LIAScript: Use the link to the .md files and copy them into [LIAscript](https://liascript.github.io/). It will give you an online lecture directly.
-- Obsidian: Add obsidian file toplevel to create your void, or add the course to an existing one.
-- Bookdown: You can render the course usin bookdown or similar to have a rendered version of the markdown files in the repo. Some work needed to do that.
-
-## License
-<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />Where not stated explicitly otherwise this work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+## Availability of the course
+- The course is openly available on EOCollege, a cloud learning platform for EO content. EOCollege is your one-stop-shop for this course. You will have an integrated experience of all the components: lectures, exercises, quizzes and get a certificate upon successful completion: https://eo-college.org/courses/cubes-and-clouds
+- The course material is available on zenodo. Each lecture can be accessed individually: [Cubes and Clouds Zenodo Community](https://zenodo.org/communities/cubes_and_clouds?q=&l=list&p=1&s=10&sort=newest)
+- Alternative Rendering of the Course
+  - [LIAScript](https://liascript.github.io/): Use the link to the .md files and copy them into LIAscript. It will give you an online lecture directly.
+  - [Obsidian](https://obsidian.md/): Obsidian is a knowledge management system. Add obsidian file toplevel to create your void, or add the course to an existing one.
+  - [Bookdown](https://bookdown.org/): You can render the course using bookdown or similar to have a rendered version of the markdown files in the repo. Some work needed to do that.
 
 ## Authors and Acknowledgement
 ### Reviewers
@@ -70,14 +69,25 @@ We're happy to receive your contributions to lessons, exercises, bug reports etc
 - 1.3 What is Open Science (1.3.1, 1.3.2, 1.3.3): [Kristina Vrouwenvelder, American Geoscience Union](https://www.rd-alliance.org/user/31394); [Shelley Stall, American Geoscience Union](https://www.rd-alliance.org/users/shelley-stall)
 - 2.1 Data Discovery: [Matthias Mohr, Matthias Mohr Softwareentwicklung](https://mohr.ws/)
 - 2.2 Data Properties: [Angelos Tzotsos, Open Source Geospatial Foundation](http://users.ntua.gr/tzotsos/)
-- 2.3 Data Access and Basic Processing: TBD
+- 2.3 Data Access and Basic Processing: [Edzer Pebesma, University of Münster](https://www.uni-muenster.de/Geoinformatics/institute/staff/index.php/119/edzer_pebesma)
 - 2.4 Formats and Performance: [Aimee Barciauskas, Development Seed](https://developmentseed.org/team/aimee-barciauskas); [Ryan Avery, Development Seed](https://developmentseed.org/team/ryan-avery)
-- 3.1 Processing: TBD
+- 3.1 Processing: [Mattia Callegari, Eurac Research](https://www.eurac.edu/en/people/mattia-callegari)
 - 3.2 Validation: [Hanna Meyer, Universtiy of Münster](https://www.uni-muenster.de/RemoteSensing/team/meyer/index.html)
 - 3.3 Sharing: [Leandro Parente, Open Geo Hub Foundation](https://opengeohub.org/people/leandro-parente/)
 
 ### Authors
 <a href="https://www.esa.int/"><img src="https://eo-college.org/wp-content/uploads/2023/03/ESA_logo_2020_Deep_cropped-300x113.png" width="100"></a>   <a href="https://www.eurac.edu/en"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Eurac_Research_-_logo.png" width="100"></a>   <a href="http://ignite-education.io"><img src="http://ignite-education.io/assets/images/ignite_logo-scaled.jpg" width="100"></a>   <a href="https://eox.at/"><img src="https://eox.at/EOX_Logo.svg" width="100"></a>   <a href="https://jonaseberle.de"><img src="https://eo-college.org/wp-content/uploads/2023/03/logo_jonas-eberle.png" width="100"></a> 
+
+## Citation
+Please refer to the whole course as described in the [CITATION.cff](https://github.com/EO-College/cubes-and-clouds/edit/main/CITATION.cff) file
+
+> Zellner PJ, Claus M, Dolezalova T, Eberle J, Balogun R, Meissel S, Eckardt R, Hodam H, Jacob A, Anghelea A (2023): "Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation". [DOI:XXX] 
+
+The individual chapters can be cited as listed in the [Cubes and Clouds Zenodo Community](https://zenodo.org/communities/cubes_and_clouds?q=&l=list&p=1&s=10&sort=newest).
+
+## License
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />Where not stated explicitly otherwise this work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
 
 ## Funding
 This project is funded by the European Space Agency through the program EXPRO+ with the contract number 4000138850/22/I-DT
