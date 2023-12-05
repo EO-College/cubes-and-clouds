@@ -45,8 +45,10 @@ Check out the interactive cubes and clouds map! It's produced by the participant
 
 ## Sign-On Guide
 To follow the course completely, especially to execute the hands-on exercises on cloud platforms you will sign in to some free services.
+
 - EOCollege: Access to the e-learning platform and the jupyterhub coding environment hosted by EOX.
 - Copernicus Data Space Ecosystem: A cloud platform offering the data collections and computing resources for the exercises of the course.
+
 You can find all the necessary information in the lecture [Introduction](https://github.com/EO-College/cubes-and-clouds/blob/main/lectures/0_introduction/0_introduction.md).
 
 ## Contributing
