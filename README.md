@@ -81,7 +81,7 @@ We're happy to receive your contributions to lessons, exercises, bug reports etc
 ## Citation
 Please refer to the whole course as described in the [CITATION.cff](https://github.com/EO-College/cubes-and-clouds/edit/main/CITATION.cff) file
 
-> Zellner, P. J., Dolezalova, T., Claus, M., Eberle, J., Balogun, R. O., Meißl, S., Eckardt, R., Hodam, H., Jacob, A., & Anghelea, A. (2023). Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation (Version 1.0.0) [Computer software]. https://doi.org/10.5281/zenodo.1234
+> Zellner, P. J., Dolezalova, T., Claus, M., Eberle, J., Balogun, R. O., Meißl, S., Eckardt, R., Hodam, H., Jacob, A., & Anghelea, A. (2024). Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation (Version 1.0.0). https://doi.org/10.5281/zenodo.1234
 
 The individual chapters can be cited as listed in the [Cubes and Clouds Zenodo Community](https://zenodo.org/communities/cubes_and_clouds?q=&l=list&p=1&s=10&sort=newest).
 
