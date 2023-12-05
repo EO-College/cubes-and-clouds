@@ -40,14 +40,14 @@ flowchart LR
 After finishing the participant will understand the theoretical concepts of cloud native EO processing and have gained practical experience by conducting an end-to-end EO workflow. The participant will be capable of independently using cloud platforms to approach EO related research questions and be confident in how to share research by adhering to the concepts of open science.
 
 ## Interactive Cubes and Clouds Map produced by the participants
-Check out the interactive cubes and clouds map! It's produced by the participants of the course. Every XXX adds their contribution to a community mapping project: mapping the snow cover of mountainous regions together!
+Check out the interactive cubes and clouds map! It's produced by the participants of the course. Every participant adds their contribution to a community mapping project: mapping the snow cover of mountainous regions together!
 - LINK
 
 ## Sign-On Guide
 To follow the course completely, especially to execute the hands-on exercises on cloud platforms you will sign in to some free services.
 - EOCollege: Access to the e-learning platform and the jupyterhub coding environment hosted by EOX.
 - Copernicus Data Space Ecosystem: A cloud platform offering the data collections and computing resources for the exercises of the course.
-You can find all the necessary information in the lecture (Introduction)[https://github.com/EO-College/cubes-and-clouds/blob/main/lectures/0_introduction/0_introduction.md].
+You can find all the necessary information in the lecture [Introduction](https://github.com/EO-College/cubes-and-clouds/blob/main/lectures/0_introduction/0_introduction.md).
 
 ## Contributing
 We're happy to receive your contributions to lessons, exercises, bug reports etc.
