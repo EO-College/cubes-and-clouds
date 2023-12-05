@@ -83,7 +83,7 @@ Please refer to the whole course as described in the [CITATION.cff](https://gith
 
 > Zellner, P. J., Dolezalova, T., Claus, M., Eberle, J., Balogun, R. O., Meißl, S., Eckardt, R., Hodam, H., Jacob, A., & Anghelea, A. (2024). Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation (Version 1.0.0). https://doi.org/10.5281/zenodo.1234
 
-The individual chapters can be cited as listed in the [Cubes and Clouds Zenodo Community](https://zenodo.org/communities/cubes_and_clouds?q=&l=list&p=1&s=10&sort=newest).
+The individual chapters can be reused and explicitly cited as listed in the [Cubes and Clouds Zenodo Community](https://zenodo.org/communities/cubes_and_clouds?q=&l=list&p=1&s=10&sort=newest).
 
 ## License
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />Where not stated explicitly otherwise this work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
