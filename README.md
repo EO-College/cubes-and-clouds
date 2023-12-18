@@ -41,7 +41,8 @@ After finishing the participant will understand the theoretical concepts of clou
 
 ## Interactive Cubes and Clouds Map produced by the participants
 Check out the interactive cubes and clouds map! It's produced by the participants of the course. Every participant adds their contribution to a community mapping project: mapping the snow cover of mountainous regions together!
-- LINK
+
+[**Cubes and Clouds: Snow Cover STAC Collection**](https://esa.pages.eox.at/cubes-and-clouds-catalog/browser/#/?.language=en)
 
 ## Sign-On Guide
 To follow the course completely, especially to execute the hands-on exercises on cloud platforms you will sign in to some free services.
