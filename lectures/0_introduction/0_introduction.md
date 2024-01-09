@@ -14,6 +14,9 @@ We are going to use the cloud processing platform **Copernicus Data Space Ecosys
 ## Your first steps in the Coding Environment
 Here is a guide how to find your way around in the Coding Environment JupyterHub. You will see a button that forwards you there whenever there is a hands-on exercise to do.
 
-#### BUTTON
+[![Screencast Cubes and Clouds Coding Environment](https://img.youtube.com/vi/GBXd4aQLMb0/0.jpg)](https://www.youtube.com/watch?v=GBXd4aQLMb0) <br>
 
-#### Screencast: First Steps JupyterHub Environment Cubes and Clouds
+After registering on EOX you are now ready to start your first exercise!
+
+[Exercise 0 Introduction](https://github.com/EO-College/cubes-and-clouds/blob/main/lectures/0_introduction/exercises/0_login.ipynb)
+
