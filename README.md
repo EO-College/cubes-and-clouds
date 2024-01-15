@@ -1,5 +1,7 @@
 ![Cubes and Clouds Banner](https://github.com/EO-College/cubes-and-clouds/blob/main/icons/cnc_3icons.svg "Cubes and Clouds Banner")
 
+[![DOI](https://zenodo.org/badge/611860611.svg)](https://zenodo.org/doi/10.5281/zenodo.10513914)
+
 # Cubes and Clouds
 This is the official content repository for the online course ['Cubes &amp; Clouds - Cloud Native Open Data Sciences for Earth Observation'](https://eo-college.org/courses/cubes-and-clouds) hosted on EO College.
 
