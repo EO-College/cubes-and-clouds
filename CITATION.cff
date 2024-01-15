@@ -31,7 +31,8 @@ authors:
 - family-names: "Anghelea"
   given-names: "Anca"
   orcid: "https://orcid.org/0000-0002-8503-7608"
-title: "Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation
+title: "Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation"
+version: 0.1.0-alpha
 doi: 10.5281/zenodo.10513915
 date-released: 2024-01-15
 url: "https://github.com/EO-College/cubes-and-clouds"
