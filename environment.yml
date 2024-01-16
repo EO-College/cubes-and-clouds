@@ -1,0 +1,26 @@
+name: cubes-and-clouds
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - numpy
+  - pandas
+  - matplotlib
+  - seaborn
+  - geopandas
+  - rasterio
+  - xarray
+  - rioxarray
+  - openeo
+  - sentinelhub
+  - leafmap
+  - shapely
+  - h5netcdf
+  - netcdf4
+  - pystac
+  - pip
+  - pip:
+    - rio_stac
+    - sklearn
+    - openeo-processes-dask[implementations]
+    - openeo-pg-parser-networkx
