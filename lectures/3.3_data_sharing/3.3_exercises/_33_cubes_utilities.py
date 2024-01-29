@@ -17,6 +17,7 @@ from shapely.geometry import Polygon
 # pystac libraries
 import pystac
 from pystac.utils import str_to_datetime
+from osgeo import gdal
 
 
 def calculate_sca(conn, bbox, temporal_extent):
@@ -143,3 +144,49 @@ def visualize_bbox(map_layer, bbox):
     gdf = gpd.GeoDataFrame({"col1": ["bbox"]}, geometry=gs, crs=4326)
     #visualize generated bounding box
     return map_layer.add_gdf(gdf)
+
+
+def raster_rescale_stats(in_data_path, stat_data_path):
+    # computes raster statistics
+    ds = gdal.Open(in_data_path, gdal.GA_Update)
+    n_of_bands = ds.RasterCount
+    
+    for band in range(n_of_bands):
+        ds.GetRasterBand(band+1).ComputeStatistics(0)
+        ds.GetRasterBand(band+1).SetNoDataValue(np.nan)
+    
+    # save raster statistics
+    fileformat = "GTiff"
+    driver = gdal.GetDriverByName(fileformat)
+    metadata = driver.GetMetadata()
+    if metadata.get(gdal.DCAP_CREATE) == "YES":
+        print("Driver {} supports Create() method.".format(fileformat))
+    
+    dst_ds = driver.CreateCopy(stat_data_path, ds, strict=0)
+    dst_ds = None
+    ds = None
+    
+    return None
+
+
+def extract_metadata_geometry(stac_collection):
+    meta_bbox = stac_collection["providers"][0]['processing:expression'][0]['expression']['loadcollection1']['arguments']['spatial_extent']
+    min_x = meta_bbox["west"]
+    min_y = meta_bbox["south"]
+    max_x = meta_bbox["east"]
+    max_y = meta_bbox["north"]
+    
+    bbox = [min_x, min_y, max_x, max_y]
+    
+    geometry = {
+        "type": "Polygon",
+        "coordinates": [[
+            [min_x, min_y],
+            [max_x, min_y],
+            [max_x, max_y],
+            [min_x, max_y],
+            [min_x, min_y]
+        ]]
+    }
+    
+    return bbox, geometry
