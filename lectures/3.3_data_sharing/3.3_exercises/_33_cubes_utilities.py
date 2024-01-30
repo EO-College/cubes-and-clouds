@@ -2,7 +2,7 @@
 Cubes and Clouds MOOC to enhance modularity, reproducibility of code"""
 
 import math
-import datetime
+from datetime import datetime
 
 import numpy as np
 import pandas as pd
@@ -44,7 +44,7 @@ def calculate_sca(conn, bbox, temporal_extent):
     # reference: https://sentinels.copernicus.eu/web/sentinel/technical-guides/sentinel-2-msi/level-2a/algorithm-overview
     scl_band = s2.band("SCL")
     cloud_mask = ( (scl_band == 8) | (scl_band == 9) | (scl_band == 3) ) * 1.0
-    snowmap_cloudfree = snowmap.mask(cloud_mask)
+    snowmap_cloudfree = snowmap.mask(cloud_mask, replacement=2)
     
     return snowmap_cloudfree
 
@@ -190,3 +190,11 @@ def extract_metadata_geometry(stac_collection):
     }
     
     return bbox, geometry
+
+def extract_metadata_time(stac_collection):
+    temporal_extent = stac_collection["providers"][0]['processing:expression'][0]['expression']['loadcollection1']['arguments']["temporal_extent"]
+    
+    start_time = datetime.strptime(temporal_extent[0], '%Y-%m-%d').isoformat() + "Z"
+    end_time = datetime.strptime(temporal_extent[1], '%Y-%m-%d').isoformat() + "Z"
+    
+    return start_time, end_time
