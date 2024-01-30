@@ -146,7 +146,7 @@ def visualize_bbox(map_layer, bbox):
     return map_layer.add_gdf(gdf)
 
 
-def raster_rescale_stats(in_data_path, stat_data_path):
+def compute_raster_stats(in_data_path, stat_data_path):
     # computes raster statistics
     ds = gdal.Open(in_data_path, gdal.GA_Update)
     n_of_bands = ds.RasterCount
