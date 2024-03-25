@@ -1,38 +1,45 @@
-cff-version: 1.2.0
-message: "If you reuse any of the information of this online course, please cite it as follows."
+abstract: <p>This is the github repository to the MOOC <a href="https://github.com/EO-College/cubes-and-clouds">'Cubes
+  &amp; Clouds - Cloud Native Open Data Sciences for Earth Observation'.</a> It contains
+  all lessons and exercises, it is the full course package.</p>
 authors:
-- family-names: "Zellner"
-  given-names: "Peter James"
-  orcid: "https://orcid.org/0000-0002-3394-9664"
-- family-names: "Dolezalova"
-  given-names: "Tyna"
-  orcid: "https://orcid.org/0000-0000-0000-0000"
-- family-names: "Claus"
-  given-names: "Michele"
-  orcid: "https://orcid.org/0000-0003-3680-381X"
-- family-names: "Eberle"
-  given-names: "Jonas"
-  orcid: "https://orcid.org/0000-0000-0000-0000"
-- family-names: "Balogun"
-  given-names: "Rufai Omonwunmi"
-  orcid: "https://orcid.org/0000-0002-7741-2957"
-- family-names: "Meißl"
-  given-names: "Stephan"
-  orcid: "https://orcid.org/0000-0002-1407-8859"
-- family-names: "Eckardt"
-  given-names: "Robert"
-  orcid: "https://orcid.org/0000-0002-5301-3441"
-- family-names: "Hodam"
-  given-names: "Henryk"
-  orcid: "https://orcid.org/0000-0002-9654-3338"
-- family-names: "Jacob"
-  given-names: "Alexander"
-  orcid: "https://orcid.org/0000-0003-4434-7244"
-- family-names: "Anghelea"
-  given-names: "Anca"
-  orcid: "https://orcid.org/0000-0002-8503-7608"
-title: "Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation"
-version: 0.1.0-alpha
+- affiliation: Eurac Research
+  family-names: Zellner
+  given-names: Peter James
+  orcid: 0000-0002-3394-9664
+- family-names: Dolezalova
+  given-names: Tyna
+- affiliation: Eurac Research
+  family-names: Claus
+  given-names: Michele
+  orcid: 0000-0003-3680-381X
+- family-names: Balogun
+  given-names: Rufai Omowunmi
+  orcid: 0000-0002-7741-2957
+- affiliation: German Aerospace Center - Earth Observation Center
+  family-names: Eberle
+  given-names: Jonas
+- family-names: Hodam
+  given-names: Henryk
+  orcid: 0000-0002-9654-3338
+- family-names: Eckardt
+  given-names: Robert
+  orcid: 0000-0002-5301-3441
+- family-names: "Mei\xDFl"
+  given-names: Stephan
+  orcid: 0000-0002-1407-8859
+- affiliation: Eurac Research
+  family-names: Jacob
+  given-names: Alexander
+  orcid: 0000-0003-4434-7244
+- affiliation: European Space Agency (ESA)
+  family-names: Anghelea
+  given-names: Anca
+  orcid: 0000-0002-8503-7608
+cff-version: 1.2.0
+date-released: '2024-03-04'
 doi: 10.5281/zenodo.10513915
-date-released: 2024-01-15
+license:
+- cc-by-4.0
+title: Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation
+version: v1.0.0
 url: "https://github.com/EO-College/cubes-and-clouds"
