@@ -170,7 +170,7 @@ def compute_raster_stats(in_data_path, stat_data_path):
 
 
 def extract_metadata_geometry(stac_collection):
-    meta_bbox = stac_collection["providers"][0]['processing:expression'][0]['expression']['loadcollection1']['arguments']['spatial_extent']
+    meta_bbox = stac_collection["providers"][0]['processing:expression']['expression']['loadcollection1']['arguments']['spatial_extent']
     min_x = meta_bbox["west"]
     min_y = meta_bbox["south"]
     max_x = meta_bbox["east"]
@@ -192,7 +192,7 @@ def extract_metadata_geometry(stac_collection):
     return bbox, geometry
 
 def extract_metadata_time(stac_collection):
-    temporal_extent = stac_collection["providers"][0]['processing:expression'][0]['expression']['loadcollection1']['arguments']["temporal_extent"]
+    temporal_extent = stac_collection["providers"][0]['processing:expression']['expression']['loadcollection1']['arguments']["temporal_extent"]
     
     start_time = datetime.strptime(temporal_extent[0], '%Y-%m-%d').isoformat() + "Z"
     end_time = datetime.strptime(temporal_extent[1], '%Y-%m-%d').isoformat() + "Z"

@@ -53,6 +53,15 @@
       "contributions": [
         "review"
       ]
+    },
+    {
+      "login": "JorisCod",
+      "name": "Joris C",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3611895?v=4",
+      "profile": "https://github.com/JorisCod",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
