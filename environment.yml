@@ -21,6 +21,6 @@ dependencies:
   - pip
   - pip:
     - rio_stac
-    - sklearn
+    - scikit-learn
     - openeo-processes-dask[implementations]
     - openeo-pg-parser-networkx
