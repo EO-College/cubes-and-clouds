@@ -1,0 +1,40 @@
+name: deploy
+
+on:
+  # Trigger the workflow on push to main branch and tutorial path
+  push:
+    branches:
+      - main
+    paths:
+      - lectures/**
+
+# This job installs dependencies, build the jupyter notebook, and pushes it to `render`, a new `branch`
+jobs:
+  build:
+    name: Setup
+    runs-on: "ubuntu-latest"
+    defaults:
+      run:
+        shell: bash -l {0}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up conda and dependencies
+        uses: mamba-org/setup-micromamba@v1
+        with:
+          environment-file: ./environment.yml
+          environment-name: cubes-and-clouds
+          condarc: |
+            channels:
+              - conda-forge
+      # Build the book
+      - name: Build the jupyter book
+        run: |
+          jupyter-book build lectures
+      # Deploy the book's HTML to gh-pages branch
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          publish_branch: gh-pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: lectures/_build/html
+          force_orphan: true
