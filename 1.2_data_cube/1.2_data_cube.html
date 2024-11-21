@@ -1,0 +1,808 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>What is a data cube? &#8212; Cubes &amp; Clouds - Cloud Native Open Data Sciences for Earth Observation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '1.2_data_cube/1.2_data_cube';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Open Science and the FAIR Principles" href="../1.3_openscience/1.3.1_openscienceandfair.html" />
+    <link rel="prev" title="Earth Observation cloud platforms" href="../1.1_intro_platform/1.1_intro_platform.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Lectures
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setup</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../0_introduction/0_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0_introduction/exercises/0_login.html">Login to openEO</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1.1_intro_platform/1.1_intro_platform.html">Earth Observation cloud platforms</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">What is a data cube?</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1.3_openscience/1.3.1_openscienceandfair.html">Open Science and the FAIR Principles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1.3_openscience/1.3.3_openscienceineo.html">The Open Science Journey - Open Science in geospatial, EO and EO cloud platforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1.3_openscience/1.3.2_opendataopensource.html">Open Data and Open Source Software</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Discovery and metadata</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.1_data_discovery/2.1_data_discovery.html">Data Discovery</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../2.2_data_properties/2.2_data_properties.html">Data Properties</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data access with OpenEO</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.3_data_access/2.3_data_access.html">Access EO Data from the Cloud</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data formats for achieving scalability</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.4_formats_and_performance/2.4_formats_and_performance.html">Data Formats and Performance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Process &amp; Share</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3.1_data_processing/3.1_data_processing.html">Data processing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3.1_data_processing/3.1_exercises/31_data_processing.html">Basic EO workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3.1_data_processing/3.1_exercises/_alternatives/31_data_processing_stac.html">EO workflow with STAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3.1_data_processing/3.1_exercises/_alternatives/31_data_processing_openEO_Platform.html">EO workflow with openEO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3.1_data_processing/3.1_exercises/_alternatives/34_data_sharing_aoi_test.html">Data sharing and publishing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3.2_validation/3.2_validation.html">Validation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3.2_validation/3.2_exercises/32_validation.html">Exercise validation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3.3_data_sharing/3.3_data_sharing.html">Data sharing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3.3_data_sharing/3.3_exercises/33_data_sharing.html">Exercise data sharing</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional materials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../9.9_master_asi_conae/s2_sca.html">Sentinel-2 snow cover area (SCA) time series</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/s1.html">S1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/s2_snowcover_test.html">Sentinel-2 snow cover</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/test_s1_s3.html">Sentinel-1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/s3_ndsi.html">List all the available dataset</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds/issues/new?title=Issue%20on%20page%20%2F1.2_data_cube/1.2_data_cube.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/1.2_data_cube/1.2_data_cube.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>What is a data cube?</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cubes-in-general">Data Cubes in General</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cubes-in-eo">Data Cubes in EO</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-data-cube">An example data cube</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensions">Dimensions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geometry-as-a-dimension">Geometry as a Dimension</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinate-reference-system-as-a-dimension">Coordinate Reference System as a Dimension</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resolution">Resolution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cubes-in-cloud-platforms">Data Cubes in Cloud Platforms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further Reading</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">Quiz</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="what-is-a-data-cube">
+<h1>What is a data cube?<a class="headerlink" href="#what-is-a-data-cube" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Understand what data cubes are and why they are needed</p></li>
+<li><p>Learn what dimensions are</p></li>
+<li><p>Understand the role of data cubes in EO cloud platforms</p></li>
+</ul>
+</section>
+<section id="data-cubes-in-general">
+<h2>Data Cubes in General<a class="headerlink" href="#data-cubes-in-general" title="Link to this heading">#</a></h2>
+<p>When you think about data, most likely tables come to your mind, with features organized in rows and columns. Data cubes overcome these constraints: they are a data structure that allows to represent data in more than only two dimensions. Generally a data cube is a multi-dimensional data structure. Even though it’s called a cube, it is n-dimensional. A 1-d data cube is an array. A 2-d data cube is a table. A 3-d data cube is a cube. A 4-d data cube is hard to visualize. A feature within a data cube is explained by multiple dimensions and has a certain value. An example would be: A company has sold multiple products (Shirts, Shoes, Pants), in different countries (Sweden, USA, Tunisia), in different years (2021, 2022, 2023).</p>
+<ul class="simple">
+<li><p>Dimensions: Products, Locations, Years</p></li>
+<li><p>Labels of the Dimensions:</p>
+<ul>
+<li><p>Products: Shrits, Shoes, Pants</p></li>
+<li><p>Countries: Sweden, USA, Tunisia</p></li>
+<li><p>Years: 2021, 2022, 2023</p></li>
+</ul>
+</li>
+<li><p>Feature: Revenue</p></li>
+<li><p>Value: $</p></li>
+</ul>
+<p><img alt="Datacube Economy" src="https://raw.githubusercontent.com/EO-College/cubes-and-clouds/main/lectures/1.2_data_cube/assets/datacubes_economy.png" /></p>
+<p>This concept can be applied to many fields such as economics, medicine, biology, and also very well to EO data!</p>
+</section>
+<section id="data-cubes-in-eo">
+<h2>Data Cubes in EO<a class="headerlink" href="#data-cubes-in-eo" title="Link to this heading">#</a></h2>
+<p>The concept of representing multidimensional data as data cubes fits ideally to the challenges of representing satellite data that is usually dealing with multiple dimensions such as: lat, lon, time, bands, etc. In the video below it becomes very clear what the strengths of data cubes in EO are.</p>
+<iframe src="https://www.esa.int/content/view/embedjw/504327" width="640" height="360" frameborder="0"></iframe>
+<section id="an-example-data-cube">
+<h3>An example data cube<a class="headerlink" href="#an-example-data-cube" title="Link to this heading">#</a></h3>
+<p>Data can be represented as datacubes in EO, which are multi-dimensional arrays with additional information about their dimensionality. Datacubes can provide a nice and tidy interface for spatiotemporal data as well as for the operations you may want to execute on them. As they are arrays, it might be easiest to look at raster data as an example, even though datacubes can hold vector data as well. Our example data however consists of a 6x7 raster with 4 bands [<code class="docutils literal notranslate"><span class="pre">blue</span></code>, <code class="docutils literal notranslate"><span class="pre">green</span></code>, <code class="docutils literal notranslate"><span class="pre">red</span></code>, <code class="docutils literal notranslate"><span class="pre">near-infrared</span></code>] and 3 timesteps [<code class="docutils literal notranslate"><span class="pre">2020-10-01</span></code>, <code class="docutils literal notranslate"><span class="pre">2020-10-13</span></code>, <code class="docutils literal notranslate"><span class="pre">2020-10-25</span></code>], displayed here in an orderly, timeseries-like manner:</p>
+<p><img alt="Raster datacube timeseries: 12 imagery tiles are depicted, grouped by 3 dates along a timeline (time dimension). Each date has a blue, green, red and near-infrared band (bands dimension). Each single tile has the dimensions x and y (spatial dimensions)" src="https://raw.githubusercontent.com/EO-College/cubes-and-clouds/main/lectures/1.2_data_cube/assets/dc_timeseries.png" /></p>
+<blockquote>
+<div><p>Figure: An examplary raster datacube with 4 dimensions: x, y, bands and time. Reference: <a class="reference external" href="https://openeo.org/documentation/1.0/datacubes.html#what-are-datacubes">openeo.org (2022). What are Data Cubes.</a></p>
+</div></blockquote>
+<p>It is important to understand that datacubes are designed to make things easier for us, and are not literally a cube, meaning that the above plot is just as good a representation as any other. That is why we can switch the dimensions around and display them in whatever way we want, including the view below:</p>
+<p><img alt="Raster datacube flat representation: The 12 imagery tiles are now laid out flat as a 4 by 3 grid (bands by timesteps). All dimension labels are depicted (The timestamps, the band names and the x, y coordinates)" src="https://raw.githubusercontent.com/EO-College/cubes-and-clouds/main/lectures/1.2_data_cube/assets/dc_flat.png" /></p>
+<blockquote>
+<div><p>Figure: Raster datacube flat representation: The 12 imagery tiles are now laid out flat as a 4 by 3 grid (bands by timesteps). All dimension labels are depicted (The timestamps, the band names and the x, y coordinates). Reference: <a class="reference external" href="https://openeo.org/documentation/1.0/datacubes.html#what-are-datacubes">openeo.org (2022). What are Data Cubes.</a></p>
+</div></blockquote>
+</section>
+<section id="dimensions">
+<h3>Dimensions<a class="headerlink" href="#dimensions" title="Link to this heading">#</a></h3>
+<p>A dimension refers to a certain axis of a datacube. This includes all variables (e.g. bands), which are represented as dimensions. Our exemplary raster datacube has the spatial dimensions <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>, and the temporal dimension <code class="docutils literal notranslate"><span class="pre">t</span></code>. Furthermore, it has a <code class="docutils literal notranslate"><span class="pre">bands</span></code> dimension, extending into the realm of <em>what kind of information</em> is contained in the cube.</p>
+<p>The following properties are usually available for dimensions:</p>
+<ul class="simple">
+<li><p>name</p></li>
+<li><p>type (potential types include: spatial (raster or vector data), temporal and other data such as bands)</p></li>
+<li><p>axis (for spatial dimensions) / number</p></li>
+<li><p>labels (usually exposed through textual or numerical representations, in the metadata as nominal values and/or extents)</p></li>
+<li><p>reference system / projection</p></li>
+<li><p>resolution / step size</p></li>
+<li><p>unit (either explicitly specified or implicitly given by the reference system)</p></li>
+<li><p>additional information specific to the dimension type (e.g. the geometry types for a dimension containing geometries)</p></li>
+</ul>
+<p>Here is an overview of the dimensions contained in our example raster datacube above:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>#</p></th>
+<th class="head"><p>name</p></th>
+<th class="head"><p>type</p></th>
+<th class="head"><p>labels</p></th>
+<th class="head"><p>resolution</p></th>
+<th class="head"><p>reference system</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x</span></code></p></td>
+<td><p>spatial</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">466380</span></code>, <code class="docutils literal notranslate"><span class="pre">466580</span></code>, <code class="docutils literal notranslate"><span class="pre">466780</span></code>, <code class="docutils literal notranslate"><span class="pre">466980</span></code>, <code class="docutils literal notranslate"><span class="pre">467180</span></code>, <code class="docutils literal notranslate"><span class="pre">467380</span></code></p></td>
+<td><p>200m</p></td>
+<td><p><a class="reference external" href="https://epsg.io/32627">EPSG:32627</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">y</span></code></p></td>
+<td><p>spatial</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">7167130</span></code>, <code class="docutils literal notranslate"><span class="pre">7166930</span></code>, <code class="docutils literal notranslate"><span class="pre">7166730</span></code>, <code class="docutils literal notranslate"><span class="pre">7166530</span></code>, <code class="docutils literal notranslate"><span class="pre">7166330</span></code>, <code class="docutils literal notranslate"><span class="pre">7166130</span></code>, <code class="docutils literal notranslate"><span class="pre">7165930</span></code></p></td>
+<td><p>200m</p></td>
+<td><p><a class="reference external" href="https://epsg.io/32627">EPSG:32627</a></p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bands</span></code></p></td>
+<td><p>bands</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">blue</span></code>, <code class="docutils literal notranslate"><span class="pre">green</span></code>, <code class="docutils literal notranslate"><span class="pre">red</span></code>, <code class="docutils literal notranslate"><span class="pre">nir</span></code></p></td>
+<td><p>4 bands</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">t</span></code></p></td>
+<td><p>temporal</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2020-10-01</span></code>, <code class="docutils literal notranslate"><span class="pre">2020-10-13</span></code>, <code class="docutils literal notranslate"><span class="pre">2020-10-25</span></code></p></td>
+<td><p>12 days</p></td>
+<td><p>Gregorian calendar / UTC</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p>Table: Overview of the dimensions contained in our example raster datacube above. Reference: <a class="reference external" href="https://openeo.org/documentation/1.0/datacubes.html#what-are-datacubes">openeo.org (2022). What are Data Cubes.</a></p>
+</div></blockquote>
+<p>Dimension labels are usually either numerical or text (also known as “strings”), which also includes textual representations of timestamps or geometries for example.
+For example, temporal labels are usually encoded as <a class="reference external" href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> compatible dates and/or times and similarly geometries can be encoded as <a class="reference external" href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-known Text (WKT)</a> or be represented by their IDs.</p>
+<p>Dimensions with a natural/inherent order (usually all temporal and spatial raster dimensions) are always sorted. Dimensions without inherent order (usually <code class="docutils literal notranslate"><span class="pre">bands</span></code>), retain the order in which they have been defined in metadata or processes (e.g. through <a class="reference external" href="https://processes.openeo.org/#filter_bands"><code class="docutils literal notranslate"><span class="pre">filter_bands</span></code></a>), with new labels simply being appended to the existing labels.</p>
+</section>
+<section id="geometry-as-a-dimension">
+<h3>Geometry as a Dimension<a class="headerlink" href="#geometry-as-a-dimension" title="Link to this heading">#</a></h3>
+<p>A geometry dimension is not included in the example raster datacube above and it is not used in the following examples, but to show how a vector dimension with two polygons could look like:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>name</p></th>
+<th class="head"><p>type</p></th>
+<th class="head"><p>labels</p></th>
+<th class="head"><p>reference system</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">geometry</span></code></p></td>
+<td><p>vector</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">POLYGON((-122.4</span> <span class="pre">37.6,-122.35</span> <span class="pre">37.6,-122.35</span> <span class="pre">37.64,-122.4</span> <span class="pre">37.64,-122.4</span> <span class="pre">37.6))</span></code>, <code class="docutils literal notranslate"><span class="pre">POLYGON((-122.51</span> <span class="pre">37.5,-122.48</span> <span class="pre">37.5,-122.48</span> <span class="pre">37.52,-122.51</span> <span class="pre">37.52,-122.51</span> <span class="pre">37.5))</span></code></p></td>
+<td><p><a class="reference external" href="https://epsg.io/4326">EPSG:4326</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p>Table: Geometry as a Dimension. Reference: <a class="reference external" href="https://openeo.org/documentation/1.0/datacubes.html#what-are-datacubes">openeo.org (2022). What are Data Cubes.</a></p>
+</div></blockquote>
+<p>A dimension with geometries can consist of points, linestrings, polygons, multi points, multi linestrings, or multi polygons.
+It is not possible to mix geometry types, but the single geometry type with their corresponding multi type can be combined in a dimension (e.g. points and multi points).</p>
+<p>EO datacubes contain scalar values (e.g. strings, numbers or boolean values), with all other associated attributes stored in dimensions (e.g. coordinates or timestamps). Attributes such as the CRS or the sensor can also be turned into dimensions. Be advised that in such a case, the uniqueness of pixel coordinates may be affected. When usually, <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">y)</span></code> refers to a unique location, that changes to <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">y,</span> <span class="pre">CRS)</span></code> when <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">y)</span></code> values are reused in other coordinate reference systems (e.g. two neighboring UTM zones).</p>
+</section>
+<section id="coordinate-reference-system-as-a-dimension">
+<h3>Coordinate Reference System as a Dimension<a class="headerlink" href="#coordinate-reference-system-as-a-dimension" title="Link to this heading">#</a></h3>
+<p>In the example above, <em>x</em> and <em>y</em> dimension values have a <em>unique</em> relationship to world coordinates through their coordinate reference system (CRS). This implies that a single coordinate reference system is associated with these <em>x</em> and <em>y</em> dimensions. If we want to create a data cube from multiple tiles spanning different coordinate reference systems (e.g. Sentinel-2: different UTM zones), we would <em>have</em> to resample/warp those to a single coordinate reference system. In many cases, this is wanted because we want to be able to <em>look</em> at the result, meaning it is available in a single coordinate reference system.</p>
+<p>Resampling is however costly, involves (some) data loss, and is in general not reversible. Suppose that we want to work only on the spectral and temporal dimensions of a data cube, and do not want to do any resampling. In that case, one could create one data cube for each coordinate reference system. An alternative would be to create one <em>single</em> data cube containing all tiles that has an <em>additional dimension</em> with the coordinate reference system. In that data cube, <em>x</em> and <em>y</em> no longer point to a unique world coordinate, because identical <em>x</em> and <em>y</em> coordinate pairs occur in each UTM zone. Now, only the combination (<em>x</em>, <em>y</em>, <em>crs</em>) has a unique relationship to the world coordinates.</p>
+<p>On such a <em>crs-dimensioned data cube</em>, several operations make perfect sense, such as <code class="docutils literal notranslate"><span class="pre">apply</span></code> or <code class="docutils literal notranslate"><span class="pre">reduce_dimension</span></code> on spectral and/or temporal dimensions. A simple reduction over the <code class="docutils literal notranslate"><span class="pre">crs</span></code> dimension, using <em>sum</em> or <em>mean</em> would typically not make sense. The “reduction” (removal) of the <code class="docutils literal notranslate"><span class="pre">crs</span></code> dimension that is meaningful involves the resampling/warping of all sub-cubes for the <code class="docutils literal notranslate"><span class="pre">crs</span></code> dimension to a single, common target coordinate reference system.</p>
+</section>
+<section id="resolution">
+<h3>Resolution<a class="headerlink" href="#resolution" title="Link to this heading">#</a></h3>
+<p>The resolution of a dimension gives information about what interval lies between observations. This is most obvious with the temporal resolution, where the intervals depict how often observations were made. Spatial resolution gives information about the pixel spacing, meaning how many ‘real world meters’ are contained in a pixel. The number of bands and their wavelength intervals give information about the spectral resolution.</p>
+<iframe src="https://www.lexcube.org/?!esdc-2.1.1-high-res/air_temperature_2m/1472-1836/0-2156/2248-4408"></iframe>
+<blockquote>
+<div><p>Images generated by LexCube - <a class="reference external" href="https://www.lexcube.org/">Leipzig Explorer of Earth Data Cubes</a> by <a class="reference external" href="https://rsc4earth.de/authors/msoechting/">Maximilian Söchting</a></p>
+</div></blockquote>
+<p><a class="reference external" href="https://www.youtube.com/watch?v=I6anJ5xaM8E"><img alt="The role of data cubes in EO" src="https://img.youtube.com/vi/I6anJ5xaM8E/0.jpg" /></a> <br></p>
+<blockquote>
+<div><p>Video content in cooperation with <a class="reference external" href="https://www.brockmann-consult.de/about-us/">Gunnar Brandt</a> (Brockmann Consult), <a class="reference external" href="https://www.brockmann-consult.de/about-us/">Pontus Lurcock</a> (Brockmann Consult) and <a class="reference external" href="https://www.uni-leipzig.de/en/profile/mitarbeiter/prof-dr-miguel-mahecha">Miguel Mahecha</a> (University of Leipzig).</p>
+</div></blockquote>
+</section>
+<section id="data-cubes-in-cloud-platforms">
+<h3>Data Cubes in Cloud Platforms<a class="headerlink" href="#data-cubes-in-cloud-platforms" title="Link to this heading">#</a></h3>
+<p>One important feature of an EO cloud platform is to host satellite data. Usually vast amounts of satellite data, for example the whole archive of Landsat and the Sentinels which adds up to Petabytes of data. Users want to access this data efficiently. Therefore the storage system of an EO cloud platform needs to be optimized towards user requests. Data Cubes play an important role here. Organizing the raw files into virtual data cubes solves many issues for EO cloud platforms.</p>
+<ul class="simple">
+<li><p><strong>Data Management:</strong> Different Satellites have different formats and are structured differently. This can easily create confusion because the different sources have to be treated differently. After organizing these files into data cubes the interaction with all different satellite data follows the same rules.</p></li>
+<li><p><strong>Separated Collections:</strong> Every satellite missions images form an own data cube, also called collection, with its according metadata. Ideally cloud processing tools on the platform allow for easy data fusion of different collections.</p></li>
+<li><p><strong>Flexible Subsetting:</strong> <a class="reference external" href="https://github.com/EO-College/cubes-and-clouds/blob/main/lectures/1.2_data_cube/1.2_data_cube.md#further-reading">Data Cube Management Systems</a> are developed to facilitate subsetting operations along the different dimensions and return only the required subset. Without worrying about the different raw files that are involved (e.g. area of interest is crossing a tile border).</p></li>
+</ul>
+<blockquote>
+<div><p>:warning: Remember, a data cube is not an EO cloud platform. It’s only one part of it.</p>
+</div></blockquote>
+</section>
+<section id="further-reading">
+<h3>Further Reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://doi.org/10.31223/X58M2V">David Montero Loaiza et al (2023). Data Cubes for Earth System Research: Challenges Ahead. Earth ArXiv (Preprint). https://doi.org/10.31223/X58M2V</a></p></li>
+<li><p>Popular Data Cube Management Systems:</p>
+<ul>
+<li><p><a class="reference external" href="https://www.opendatacube.org/">Open Data Cube</a></p></li>
+<li><p><a class="reference external" href="https://www.rasdaman.com/">Rasdaman</a>:</p></li>
+<li><p><a class="reference external" href="https://gdalcubes.github.io/">GDAL Cubes</a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://openeo.org/documentation/1.0/datacubes.html#what-are-datacubes">openeo.org (2022). What are Data Cubes.</a></p></li>
+<li><p><a class="reference external" href="https://www.esa.int/ESA_Multimedia/Videos/2018/07/Earth_System_Data_Lab">ESA (2018). Earth System Data Lab.</a></p></li>
+<li><p><a class="reference external" href="https://www.lexcube.org/">Maximilian Söchting (2022). LexCube - Leipzig Explorer of Earth Data Cubes</a></p></li>
+</ul>
+</section>
+</section>
+<section id="quiz">
+<h2>Quiz<a class="headerlink" href="#quiz" title="Link to this heading">#</a></h2>
+<p>What is a two dimensional data cube?</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[( )] vector, a one dimensional array
+[( )] atomic feature, a single value
+[(x)] table, in EO a raster
+</pre></div>
+</div>
+<p>Check the typical dimensions of an EO data cube.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[[x]] x
+[[ ]] rain
+[[x]] y
+[[ ]] function
+[[x]] time
+[[ ]] world
+[[x]] bands
+</pre></div>
+</div>
+<p>What is the main puorpose of a geometry dimension?</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[(x)] storing geometries (e.g. polygons, points) 
+[( )] it&#39;s holding the bounding box of the data cube 
+[( )] defining the shape of the pixels
+</pre></div>
+</div>
+<p>Attach the resolutions to their dimensions</p>
+<ul class="simple">
+<li><p>[[x and y] [time] [band]</p></li>
+<li><p>[(X)       ( )    ( )  ]  meter, kilometer, degrees</p></li>
+<li><p>[( )       (X)    ( )  ]  days, hours, years</p></li>
+<li><p>[( )       ( )    (X)  ]  micrometers, color</p></li>
+</ul>
+<p>What are the advantages of data cubes in EO?</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[[x]] EO data is multidimensional data cubes allow to represent this
+[[ ]] Data cubes introduce an unnecessary layer of complexity that is not needed in EO
+[[ ]] The file size of EO data is drastically reduced
+</pre></div>
+</div>
+<p>What are the advantages of data cubes in cloud platforms?</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[[x]] The user is not confronted with multiple files and file types
+[[x]] Different satellite missions can be stored in different data cubes that can be combined for analysis on the platform
+[[x]] subsetting operations become very powerful - users only receive the extents they are interested in.
+</pre></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./1.2_data_cube"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../1.1_intro_platform/1.1_intro_platform.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Earth Observation cloud platforms</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../1.3_openscience/1.3.1_openscienceandfair.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Open Science and the FAIR Principles</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cubes-in-general">Data Cubes in General</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cubes-in-eo">Data Cubes in EO</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-data-cube">An example data cube</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensions">Dimensions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geometry-as-a-dimension">Geometry as a Dimension</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinate-reference-system-as-a-dimension">Coordinate Reference System as a Dimension</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resolution">Resolution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cubes-in-cloud-platforms">Data Cubes in Cloud Platforms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further Reading</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">Quiz</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By ESA
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

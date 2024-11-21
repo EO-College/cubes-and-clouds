@@ -1,0 +1,697 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>The Open Science Journey - Open Science in geospatial, EO and EO cloud platforms &#8212; Cubes &amp; Clouds - Cloud Native Open Data Sciences for Earth Observation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '1.3_openscience/1.3.3_openscienceineo';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Open Data and Open Source Software" href="1.3.2_opendataopensource.html" />
+    <link rel="prev" title="Open Science and the FAIR Principles" href="1.3.1_openscienceandfair.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Lectures
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setup</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../0_introduction/0_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0_introduction/exercises/0_login.html">Login to openEO</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1.1_intro_platform/1.1_intro_platform.html">Earth Observation cloud platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.2_data_cube/1.2_data_cube.html">What is a data cube?</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="1.3.1_openscienceandfair.html">Open Science and the FAIR Principles</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">The Open Science Journey - Open Science in geospatial, EO and EO cloud platforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1.3.2_opendataopensource.html">Open Data and Open Source Software</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Discovery and metadata</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.1_data_discovery/2.1_data_discovery.html">Data Discovery</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../2.2_data_properties/2.2_data_properties.html">Data Properties</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data access with OpenEO</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.3_data_access/2.3_data_access.html">Access EO Data from the Cloud</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data formats for achieving scalability</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.4_formats_and_performance/2.4_formats_and_performance.html">Data Formats and Performance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Process &amp; Share</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3.1_data_processing/3.1_data_processing.html">Data processing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3.1_data_processing/3.1_exercises/31_data_processing.html">Basic EO workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3.1_data_processing/3.1_exercises/_alternatives/31_data_processing_stac.html">EO workflow with STAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3.1_data_processing/3.1_exercises/_alternatives/31_data_processing_openEO_Platform.html">EO workflow with openEO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3.1_data_processing/3.1_exercises/_alternatives/34_data_sharing_aoi_test.html">Data sharing and publishing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3.2_validation/3.2_validation.html">Validation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3.2_validation/3.2_exercises/32_validation.html">Exercise validation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3.3_data_sharing/3.3_data_sharing.html">Data sharing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3.3_data_sharing/3.3_exercises/33_data_sharing.html">Exercise data sharing</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional materials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../9.9_master_asi_conae/s2_sca.html">Sentinel-2 snow cover area (SCA) time series</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/s1.html">S1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/s2_snowcover_test.html">Sentinel-2 snow cover</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/test_s1_s3.html">Sentinel-1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/s3_ndsi.html">List all the available dataset</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds/issues/new?title=Issue%20on%20page%20%2F1.3_openscience/1.3.3_openscienceineo.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/1.3_openscience/1.3.3_openscienceineo.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>The Open Science Journey - Open Science in geospatial, EO and EO cloud platforms</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-open-science-journey">The Open Science Journey</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-science-in-the-clirsnow-project">Open Science in the ClirSnow Project</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-role-of-open-source-software-in-geospatial-the-example-of-gdal">The Role of Open Source Software in Geospatial - The example of GDAL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-science-in-eo-cloud-platforms">Open Science in EO Cloud Platforms</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exam">Exam</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="the-open-science-journey-open-science-in-geospatial-eo-and-eo-cloud-platforms">
+<h1>The Open Science Journey - Open Science in geospatial, EO and EO cloud platforms<a class="headerlink" href="#the-open-science-journey-open-science-in-geospatial-eo-and-eo-cloud-platforms" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Understand what Open Science is</p></li>
+<li><p>Get to know the FAIR concept</p></li>
+<li><p>Follow the steps of creating Open Science</p></li>
+<li><p>Understand the role of Open Science in geospatial, EO and EO cloud platforms</p></li>
+</ul>
+</section>
+<section id="the-open-science-journey">
+<h2>The Open Science Journey<a class="headerlink" href="#the-open-science-journey" title="Link to this heading">#</a></h2>
+<p>Finally let’s see how open science principles are applied in the field of geospatial, earth observation and EO cloud platforms. To begin we will have a look at the open science journey and a research project that has adapted openness and the FAIR principles very well. Then we will have a look at the role open science plays in today’s geospatial and EO world.</p>
+<p>This drag and drop game asks you to connect the tasks to their respective step within the open science journey. If you hover over the icons, their description will pop up.</p>
+<iframe src="https://create.eo-college.org/wp-admin/admin-ajax.php?action=h5p_embed&id=5" width="958" height="588" frameborder="0" allowfullscreen="allowfullscreen" title="Cubes&amp;Clouds: Open Science Journey"></iframe><script src="https://create.eo-college.org/wp-content/plugins/h5p/h5p-php-library/js/h5p-resizer.js" charset="UTF-8"></script>
+<section id="open-science-in-the-clirsnow-project">
+<h3>Open Science in the ClirSnow Project<a class="headerlink" href="#open-science-in-the-clirsnow-project" title="Link to this heading">#</a></h3>
+<p>The ClirSnow Project is a great example of how the concepts of opennes and FAIR are applied to a real world research project.</p>
+<p><a class="reference external" href="https://www.youtube.com/watch?v=lmd9wwGNw6M"><img alt="The Open Science Journey" src="https://img.youtube.com/vi/lmd9wwGNw6M/0.jpg" /></a> <br></p>
+<blockquote>
+<div><p>Video content in collaboration with <a class="reference external" href="https://mitmat.eu/">Michael Matiu</a> (University of Trento). <br>
+<em>“It seems like a lot of work the first time you do it. And it is. But once you know how to do it, you will use it in every research project, because it actually makes research so much easier. And, it will boost your research impact and credibility. It is really worth it.”</em></p>
+</div></blockquote>
+</section>
+</section>
+<section id="the-role-of-open-source-software-in-geospatial-the-example-of-gdal">
+<h2>The Role of Open Source Software in Geospatial - The example of GDAL<a class="headerlink" href="#the-role-of-open-source-software-in-geospatial-the-example-of-gdal" title="Link to this heading">#</a></h2>
+<p>Open Science plays an important role in geospatial. Open source software is a part of that and the Geographic Data Abstraction Library (GDAL) software is a great example of how important open source software is in the geospatial world.
+Paul Ramsey, the co-founder of the PostGIS extension, has described what GDAL is in a metaphoric way in a <a class="reference external" href="https://mapscaping.com/podcast/gdal-geospatial-data-abstraction-library/">mapscaping.com podcast</a>: “GDAL is data plumbing, a bit like an international electrical plug set for traveling — it’s got multiple different shaped plugs. Electricity is “just” electrons moving around. But they can move around as DC, AC, 120 volts or 240 volts. Plus, there are all these different ways you can plug and join electrical things. At the core, electricity is electrons vibrating, but it can be quite complex to get your hair dryer spinning.”
+Howard Butler, a director of the Open-Source Geospatial Foundation, said about the importance of GDAL:  “[…] It’s open, it provides core functionality, I can’t understand how anybody gets anything done without it.“</p>
+<p><a class="reference external" href="https://www.youtube.com/watch?v=DbU35RqaQ-U"><img alt="The Role of Open Source Software in Geospatial - The example of GDAL" src="https://img.youtube.com/vi/DbU35RqaQ-U/0.jpg" /></a> <br></p>
+<blockquote>
+<div><p>Video content in collaboration with <a class="reference external" href="https://www.spatialys.com/en/about/">Even Rouault</a> (Main Developer of GDAL).</p>
+</div></blockquote>
+</section>
+<section id="open-science-in-eo-cloud-platforms">
+<h2>Open Science in EO Cloud Platforms<a class="headerlink" href="#open-science-in-eo-cloud-platforms" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Code:</strong> Workflows and Code can easily be shared on EO Cloud Platforms. There are openly available tutorial notebooks. Workflows can be shared as user defined processes and be reused by the community. There are user forums that share solutions and snippets. OpenEO, a standardized processing API for EO in the cloud, allows code to be portable between different cloud platforms. This increases reprodicibility, collaboration and prevents vendor locks.</p>
+<ul>
+<li><p><strong>To Do: Image Slider:</strong> openEO Platform Forum, Tutorial Notebooks Microsoft Planetary Computer, User Defined Processes openEO,</p></li>
+</ul>
+</li>
+<li><p><strong>Results:</strong> There are multiple ways to share results created in EO cloud platforms. Ideally they can be ingested into the platform and be made available as collections for other users directly upon creation. If the result comes with appropiate metadata (e.g. according to the STAC specification) they can easily be registered in publicly avialable STAC Catalogues. Cloud Native Data Formats (described in more detail in lesson <a class="reference internal" href="../2.4_formats_and_performance/2.4_formats_and_performance.html"><span class="std std-doc">2.4 Formats and Performance</span></a>), like cloud optimized geotiff, are accessible via https requests. So instead of sharing a file, only a URL pointing to the file is shared.</p>
+<ul>
+<li><p><strong>To Do: Image Slider</strong>: Collection in a Platform, STAC Catalogue, Link to a COG</p></li>
+</ul>
+</li>
+<li><p><strong>Publication:</strong> If a publication is built on top of results produced in an EO cloud platform, the results and code can easily be linked to the publication in one of the forms described aboved. For example, you can publish your openEO process graph and link to it, and provide a link to a STAC Catalogue where the results are accessible.</p>
+<ul>
+<li><p><strong>To Do: Example of a Publication where the code is available on a cloud platform</strong></p></li>
+</ul>
+</li>
+<li><p><strong>FAIRness:</strong></p>
+<ul>
+<li><p>Findable: Data is usually presented through a data catalogue (e.g. STAC Catalogues are used in openEO platform and the Microsoft Planetary Computer) that is explicitly made for searching data. In many cases searching data works even without registration on the platform.</p></li>
+<li><p>Accessible: Data access in cloud platforms is usually granted after registration and authentication. Since cloud computing resources can easily be misused a certain degree of access control is necessary.</p></li>
+<li><p>Interoperable: Processing standards like openEO aim at making the code interoperable, which means it is transferable between platforms. Standardised metadata attached to the results,the use of cloud optimized formats and reingestion of the results into the platform guarantee easy uptake of the results right away. Different sources of satellite data are made interoperable by the cloud platform through the use of data cubes and processing on the fly - reprojections, regridding and temporal alignment are enabled on the fly.</p></li>
+<li><p>Reusable: To make results reusable for others, they need to be accessible and have an open license. Ideally, a license of choice can be added to the metadata and the results are reingested into the platform as a public collection, available for everyone.</p></li>
+</ul>
+</li>
+<li><p><strong>Analysis Ready Data (ARD):</strong> Analysis Ready Data are in the context of EO cloud platforms are usually satellite data that have been processed to a minimum set of requirements and organized into a form that allows immediate analysis with a minimum of additional user effort and interoperability both through time and with other datasets. This means for example that atmospheric correction and cloud masking has already been applied to optical data. Many collections on cloud platforms are analysis ready, so that users can directly start the analysis withouth the tedious and technically demanding preprocessing steps. Since ‘analysis ready’ can mean different things to different people, CEOS is working on standardizing what analysis ready data are.</p>
+<ul>
+<li><p><strong>To Do: Image of CEOS ARD</strong></p></li>
+</ul>
+</li>
+</ul>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ardc.edu.au/resource/making-your-data-fair-a-flowchart/">ARDC Ltd. (2022). How to Make Your Data FAIR. DOI: 10.5281/zenodo.7426145.</a></p></li>
+<li><p><a class="reference external" href="https://www.go-fair.org/fair-principles/fairification-process/">GO FAIR (2022). The FAIRification Process.</a></p></li>
+<li><p><a class="reference external" href="https://mapscaping.com/podcast/gdal-geospatial-data-abstraction-library/">Mapscaping Podcast with Paul Ramsey (2021). GDAL - Geospatial Data Abstraction Library</a></p></li>
+<li><p><a class="reference external" href="https://ceos.org/ard/">CEOS (2022). CEOS Analysis Ready Data.</a></p></li>
+</ul>
+</section>
+</section>
+<section id="exam">
+<h2>Exam<a class="headerlink" href="#exam" title="Link to this heading">#</a></h2>
+<p>Search a license from the <a class="reference external" href="https://creativecommons.org/choose/">Creative Commons License Chooser</a> that adheres to the following: <strong>proper attribution/citation must be included when used</strong>, <strong>free for commercial use</strong> and <strong>Adaptions of the work can be shared, but only under the same or a compatible  license</strong>.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[( )] CC BY 4.0
+[(X)] CC BY-SA 4.0
+[( )] CC BY-SA-ND 4.0
+</pre></div>
+</div>
+<p>Was the license you have just chosen a software license or a data license?</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[( )] Software License
+[(X)] Data License
+</pre></div>
+</div>
+<p>Find the Open Research Data Set <em>“Snow cover in the European Alps: Station observations of snow depth and depth of snowfall”</em> on the catalogue <a class="reference external" href="https://explore.openaire.eu/">OpenAIRE</a>.</p>
+<p>Share the DOI link to the data set version v1.3 in the format <code class="docutils literal notranslate"><span class="pre">https://doi.org/10.5281/zenodo.XXXXXXX</span></code>. <em>Hint the last numbers are 74</em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[[https://doi.org/10.5281/zenodo.5109574]]
+</pre></div>
+</div>
+<p>On which repository is the data set registered?</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[( )] Integrated Ocean Observing System (https://ioos.noaa.gov)
+[( )] PANGAEA (https://pangaea.de)
+[(X)] ZENODO (https://zenodo.org)
+</pre></div>
+</div>
+<p>Which license is used for the data set? Copy the URL to the license here.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[(X)] Creative Commons Attribution 4.0 International
+[( )] Creative Commons Attribution-NonCommercial 4.0 International
+[( )] Creative Commons Attribution-ShareAlike 4.0 International
+</pre></div>
+</div>
+<p>Find the open access publication that is connected to the dataset. The one that has been published in “The Cryosphere”. Copy the DOI of the article here in the format <code class="docutils literal notranslate"><span class="pre">https://doi.org/XX.XXXX/tc-XX-XXXX-XXXX</span></code>. <em>Hint: The DOI ends with 21</em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[[https://doi.org/10.5194/tc-15-1343-2021]]
+</pre></div>
+</div>
+<p>Under which license is this course published. You can find this out on the courses GitHub page.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[( )] Massachusets Institute of Technology License (MIT License)
+[( )] Creative Commons Attribution-ShareAlike 4.0 International License 
+[(X)] Creative Commons Attribution 4.0 International License 
+</pre></div>
+</div>
+<p>How is data FAIR in a cloud platform? Connect the subjects to the FAIR keywords.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[[Findable] [Accessible] [Interoperable] [Reusable]]
+[(X)        ( )          ( )             ( )       ]  STAC Metadata, Metadata Catalogue
+[( )        ( )          (X)             ( )       ]  Usage of abstract data cubes instead of different file formats
+[( )        (X)          ( )             ( )       ]  Authentication, Login, Free Trial Accounts
+[( )        ( )          ( )             (X)       ]  Data licenses attached to collections, provenance of the data is reported
+</pre></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./1.3_openscience"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1.3.1_openscienceandfair.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Open Science and the FAIR Principles</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="1.3.2_opendataopensource.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Open Data and Open Source Software</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-open-science-journey">The Open Science Journey</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-science-in-the-clirsnow-project">Open Science in the ClirSnow Project</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-role-of-open-source-software-in-geospatial-the-example-of-gdal">The Role of Open Source Software in Geospatial - The example of GDAL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-science-in-eo-cloud-platforms">Open Science in EO Cloud Platforms</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exam">Exam</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By ESA
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

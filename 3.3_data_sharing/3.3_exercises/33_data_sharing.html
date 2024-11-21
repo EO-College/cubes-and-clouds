@@ -1,0 +1,2130 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3.3 Data Sharing &#8212; Cubes &amp; Clouds - Cloud Native Open Data Sciences for Earth Observation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '3.3_data_sharing/3.3_exercises/33_data_sharing';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Sentinel-2 snow cover area (SCA) time series" href="../../9.9_master_asi_conae/s2_sca.html" />
+    <link rel="prev" title="3.3 Data Sharing" href="../3.3_data_sharing.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>
+    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    Lectures
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setup</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../0_introduction/0_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../0_introduction/exercises/0_login.html">Login to openEO</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../1.1_intro_platform/1.1_intro_platform.html">Earth Observation cloud platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../1.2_data_cube/1.2_data_cube.html">What is a data cube?</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../1.3_openscience/1.3.1_openscienceandfair.html">Open Science and the FAIR Principles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../1.3_openscience/1.3.3_openscienceineo.html">The Open Science Journey - Open Science in geospatial, EO and EO cloud platforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1.3_openscience/1.3.2_opendataopensource.html">Open Data and Open Source Software</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Discovery and metadata</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../2.1_data_discovery/2.1_data_discovery.html">Data Discovery</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../2.2_data_properties/2.2_data_properties.html">Data Properties</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data access with OpenEO</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../2.3_data_access/2.3_data_access.html">Access EO Data from the Cloud</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data formats for achieving scalability</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../2.4_formats_and_performance/2.4_formats_and_performance.html">Data Formats and Performance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Process &amp; Share</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3.1_data_processing/3.1_data_processing.html">Data processing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../3.1_data_processing/3.1_exercises/31_data_processing.html">Basic EO workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3.1_data_processing/3.1_exercises/_alternatives/31_data_processing_stac.html">EO workflow with STAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3.1_data_processing/3.1_exercises/_alternatives/31_data_processing_openEO_Platform.html">EO workflow with openEO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3.1_data_processing/3.1_exercises/_alternatives/34_data_sharing_aoi_test.html">Data sharing and publishing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3.2_validation/3.2_validation.html">Validation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../3.2_validation/3.2_exercises/32_validation.html">Exercise validation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../3.3_data_sharing.html">Data sharing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Exercise data sharing</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional materials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../9.9_master_asi_conae/s2_sca.html">Sentinel-2 snow cover area (SCA) time series</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../9.9_master_asi_conae/test/s1.html">S1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../9.9_master_asi_conae/test/s2_snowcover_test.html">Sentinel-2 snow cover</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../9.9_master_asi_conae/test/test_s1_s3.html">Sentinel-1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../9.9_master_asi_conae/test/s3_ndsi.html">List all the available dataset</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds/issues/new?title=Issue%20on%20page%20%2F3.3_data_sharing/3.3_exercises/33_data_sharing.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/3.3_data_sharing/3.3_exercises/33_data_sharing.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>3.3 Data Sharing</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libraries">Libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#login">Login</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-an-area-of-interest-and-time-frame">Select an Area of Interest and Time Frame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reuse-the-process-graph-of-the-snow-covered-area-data-cube">Reuse the process graph of the snow covered area data cube</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduce-the-time-dimension">Reduce the time dimension</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-result">Download result</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-results">Load results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-stac-metadata">Load STAC metadata</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-author-of-the-data">Adding Author of the data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#now-it-is-time-to-upload-solution-to-the-submission-folder-and-make-results-visible-in-stac-browser">Now it is time to upload solution to the submission folder and make results visible in STAC browser</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#your-results-are-online">Your results are online!</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p><img src="https://raw.githubusercontent.com/EO-College/cubes-and-clouds/main/icons/cnc_3icons_share_cirlce.svg"
+     alt="Cubes & Clouds logo"
+     style="float: center; margin-right: 10px;" /></p>
+<section class="tex2jax_ignore mathjax_ignore" id="data-sharing">
+<h1>3.3 Data Sharing<a class="headerlink" href="#data-sharing" title="Link to this heading">#</a></h1>
+<p>Science is much more impactful once it’s shared. Therefore, we are going to learn how to
+open up our scientific output from a cloud platform, so that is openly available - and
+has the chance to make the impact it should.</p>
+<ul class="simple">
+<li><p>Reuse the workflow we have used before for creating the snow covered area</p></li>
+<li><p>Select AOI,</p></li>
+<li><p>Recreate process graph,</p></li>
+<li><p>Download results for one time-step</p>
+<ul>
+<li><p>A Snow Cover Area map in the COG format</p></li>
+<li><p>A STAC metadata item that is provided with the result from openEO at CDSE</p></li>
+</ul>
+</li>
+<li><p>Adapt the STAC item</p></li>
+<li><p>Upload the results and make them available openly via a STAC browser and web map</p></li>
+</ul>
+<section id="libraries">
+<h2>Libraries<a class="headerlink" href="#libraries" title="Link to this heading">#</a></h2>
+<p>Start by creating the folders and data files needed to complete the exercise</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cp<span class="w"> </span>-r<span class="w"> </span><span class="nv">$DATA_PATH</span>/33_results/<span class="w"> </span><span class="nv">$HOME</span>/
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cp<span class="w"> </span><span class="nv">$DATA_PATH</span>/_33_cubes_utilities.py<span class="w"> </span><span class="nv">$HOME</span>/
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="kn">import</span> <span class="nn">openeo</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">leafmap</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">shapely</span>
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Polygon</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.ticker</span> <span class="kn">import</span> <span class="n">PercentFormatter</span>
+
+<span class="kn">import</span> <span class="nn">rioxarray</span> <span class="k">as</span> <span class="nn">rio</span>
+<span class="kn">import</span> <span class="nn">xarray</span>
+<span class="kn">from</span> <span class="nn">osgeo</span> <span class="kn">import</span> <span class="n">gdal</span>
+
+<span class="kn">from</span> <span class="nn">_33_cubes_utilities</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">calculate_sca</span><span class="p">,</span>
+    <span class="n">visualize_bbox</span><span class="p">,</span>
+    <span class="n">create_bounding_box</span><span class="p">,</span>
+    <span class="n">extract_metadata_geometry</span><span class="p">,</span> 
+    <span class="n">extract_metadata_time</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="login">
+<h2>Login<a class="headerlink" href="#login" title="Link to this heading">#</a></h2>
+<p>Connect to the copernicus dataspace ecosystem.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conn</span> <span class="o">=</span> <span class="n">openeo</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;https://openeo.dataspace.copernicus.eu/&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Authenticate login</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">authenticate_oidc</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Authenticated using refresh token.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Connection to &#39;https://openeo.dataspace.copernicus.eu/openeo/1.2/&#39; with OidcBearerAuth&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Check if the login worked</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">describe_account</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="select-an-area-of-interest-and-time-frame">
+<h2>Select an Area of Interest and Time Frame<a class="headerlink" href="#select-an-area-of-interest-and-time-frame" title="Link to this heading">#</a></h2>
+<p>Start by selecting a center point of the area you would like to analyse from the map shown below. The starting extent is the full alps. Zoom in to an area and choose a region that has not been mapped yet. <em>Make sure not to overlap too much with already mapped areas by having a look at the <a class="reference external" href="https://esa.pages.eox.at/cubes-and-clouds-catalog/browser/#/?.language=en">STAC Collection</a></em>. It’s a community mapping project :)
+Create a 1 km bounding box around it. This will be the area you are calculating the snow covered area for.</p>
+<p><strong>Attention:</strong>
+Execute the cell below to show the map. Zoom to a location you want to analyze. Use the location symbol to select a point. A marker appears on the map. This is the center of your area of interest</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">leafmap</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="p">(</span><span class="mf">47.005</span><span class="p">,</span> <span class="mf">11.507</span><span class="p">),</span> <span class="n">zoom</span><span class="o">=</span><span class="mf">7.5</span><span class="p">)</span>
+<span class="n">m</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "2f462abf085248ab9c7e82fe548a5d6f", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<p><strong>Attention:</strong>
+Now this cell will get the coordinates of the marker you have placed. This will create a 1 km bounding box around the chosen location. And visualize it in the map above. <em>The marker moves to the center when you zoom in</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feat</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">draw_features</span>
+<span class="n">geom</span> <span class="o">=</span> <span class="n">feat</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;geometry&#39;</span><span class="p">][</span><span class="s1">&#39;coordinates&#39;</span><span class="p">]</span>
+
+<span class="c1"># set distance of 1 km around bbox</span>
+<span class="n">distance_km</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Create a bounding box around the point</span>
+<span class="n">bbox</span> <span class="o">=</span> <span class="n">create_bounding_box</span><span class="p">(</span><span class="n">geom</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">geom</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">distance_km</span><span class="p">)</span>
+<span class="n">visualize_bbox</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">bbox</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we’ll select the time frame. We’ll start with the winter months of 2023.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temporal_extent</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;2023-02-01&quot;</span><span class="p">,</span> <span class="s2">&quot;2023-06-01&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="reuse-the-process-graph-of-the-snow-covered-area-data-cube">
+<h2>Reuse the process graph of the snow covered area data cube<a class="headerlink" href="#reuse-the-process-graph-of-the-snow-covered-area-data-cube" title="Link to this heading">#</a></h2>
+<p>We’ve saved the python code that we had used to create the snow cover area data cube into a python function <code class="docutils literal notranslate"><span class="pre">calculate_sca()</span></code>. It’s stored in <code class="docutils literal notranslate"><span class="pre">cubes_utilities.py</span></code>. It creates a 4 dimensional data cube with the dimensions: x, y, time, bands.
+As parameters we have exposed the bounding box and temporal extent. We will update them with the choices we have made above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snow_map_4dcube</span> <span class="o">=</span> <span class="n">calculate_sca</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">bbox</span><span class="p">,</span> <span class="n">temporal_extent</span><span class="p">)</span>
+<span class="n">snow_map_4dcube</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <script>
+    if (!window.customElements || !window.customElements.get('openeo-model-builder')) {
+        var el = document.createElement('script');
+        el.src = "https://cdn.jsdelivr.net/npm/@openeo/vue-components@2/assets/openeo.min.js";
+        document.head.appendChild(el);
+
+        var font = document.createElement('font');
+        font.as = "font";
+        font.type = "font/woff2";
+        font.crossOrigin = true;
+        font.href = "https://use.fontawesome.com/releases/v5.13.0/webfonts/fa-solid-900.woff2"
+        document.head.appendChild(font);
+    }
+    </script>
+    <openeo-model-builder>
+        <script type="application/json">{"id": "843126f4a9334269a251eef3180070d1", "explicit-zoom": true, "height": "400px", "value": {"process_graph": {"loadcollection1": {"process_id": "load_collection", "arguments": {"bands": ["B03", "B11", "SCL"], "id": "SENTINEL2_L2A", "spatial_extent": {"west": 11.461193783940812, "east": 11.479180216059186, "south": 46.62835651400798, "north": 46.64670948599201, "crs": 4326}, "temporal_extent": ["2023-02-01", "2023-06-01"]}}, "reducedimension1": {"process_id": "reduce_dimension", "arguments": {"data": {"from_node": "loadcollection1"}, "dimension": "bands", "reducer": {"process_graph": {"arrayelement1": {"process_id": "array_element", "arguments": {"data": {"from_parameter": "data"}, "index": 0}}, "arrayelement2": {"process_id": "array_element", "arguments": {"data": {"from_parameter": "data"}, "index": 1}}, "subtract1": {"process_id": "subtract", "arguments": {"x": {"from_node": "arrayelement1"}, "y": {"from_node": "arrayelement2"}}}, "add1": {"process_id": "add", "arguments": {"x": {"from_node": "arrayelement1"}, "y": {"from_node": "arrayelement2"}}}, "divide1": {"process_id": "divide", "arguments": {"x": {"from_node": "subtract1"}, "y": {"from_node": "add1"}}}, "gt1": {"process_id": "gt", "arguments": {"x": {"from_node": "divide1"}, "y": 0.4}}, "multiply1": {"process_id": "multiply", "arguments": {"x": {"from_node": "gt1"}, "y": 1.0}, "result": true}}}}}, "reducedimension2": {"process_id": "reduce_dimension", "arguments": {"data": {"from_node": "loadcollection1"}, "dimension": "bands", "reducer": {"process_graph": {"arrayelement3": {"process_id": "array_element", "arguments": {"data": {"from_parameter": "data"}, "index": 2}}, "eq1": {"process_id": "eq", "arguments": {"x": {"from_node": "arrayelement3"}, "y": 8}}, "eq2": {"process_id": "eq", "arguments": {"x": {"from_node": "arrayelement3"}, "y": 9}}, "or1": {"process_id": "or", "arguments": {"x": {"from_node": "eq1"}, "y": {"from_node": "eq2"}}}, "eq3": {"process_id": "eq", "arguments": {"x": {"from_node": "arrayelement3"}, "y": 3}}, "or2": {"process_id": "or", "arguments": {"x": {"from_node": "or1"}, "y": {"from_node": "eq3"}}}, "multiply2": {"process_id": "multiply", "arguments": {"x": {"from_node": "or2"}, "y": 1.0}, "result": true}}}}}, "mask1": {"process_id": "mask", "arguments": {"data": {"from_node": "reducedimension1"}, "mask": {"from_node": "reducedimension2"}, "replacement": 2}, "result": true}}}}</script>
+    </openeo-model-builder>
+    </div></div>
+</div>
+</section>
+<section id="reduce-the-time-dimension">
+<h2>Reduce the time dimension<a class="headerlink" href="#reduce-the-time-dimension" title="Link to this heading">#</a></h2>
+<p>We want to calculate the SCA for the winter period of a given year. Therefore, we need to reduce the values along the time dimension. We’ll use the process <code class="docutils literal notranslate"><span class="pre">reduce_dimension()</span></code> with a <code class="docutils literal notranslate"><span class="pre">median()</span></code> to accomplish this. We are directly continuing to build on our process graph that we have loaded above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snow_map_3dcube</span> <span class="o">=</span> <span class="n">snow_map_4dcube</span><span class="o">.</span><span class="n">reduce_dimension</span><span class="p">(</span><span class="n">reducer</span><span class="o">=</span><span class="s2">&quot;median&quot;</span><span class="p">,</span> <span class="n">dimension</span><span class="o">=</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
+<span class="n">snow_map_3dcube</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <script>
+    if (!window.customElements || !window.customElements.get('openeo-model-builder')) {
+        var el = document.createElement('script');
+        el.src = "https://cdn.jsdelivr.net/npm/@openeo/vue-components@2/assets/openeo.min.js";
+        document.head.appendChild(el);
+
+        var font = document.createElement('font');
+        font.as = "font";
+        font.type = "font/woff2";
+        font.crossOrigin = true;
+        font.href = "https://use.fontawesome.com/releases/v5.13.0/webfonts/fa-solid-900.woff2"
+        document.head.appendChild(font);
+    }
+    </script>
+    <openeo-model-builder>
+        <script type="application/json">{"id": "151ee64f218f4c60a85d84419c657a38", "explicit-zoom": true, "height": "400px", "value": {"process_graph": {"loadcollection1": {"process_id": "load_collection", "arguments": {"bands": ["B03", "B11", "SCL"], "id": "SENTINEL2_L2A", "spatial_extent": {"west": 11.461193783940812, "east": 11.479180216059186, "south": 46.62835651400798, "north": 46.64670948599201, "crs": 4326}, "temporal_extent": ["2023-02-01", "2023-06-01"]}}, "reducedimension1": {"process_id": "reduce_dimension", "arguments": {"data": {"from_node": "loadcollection1"}, "dimension": "bands", "reducer": {"process_graph": {"arrayelement1": {"process_id": "array_element", "arguments": {"data": {"from_parameter": "data"}, "index": 0}}, "arrayelement2": {"process_id": "array_element", "arguments": {"data": {"from_parameter": "data"}, "index": 1}}, "subtract1": {"process_id": "subtract", "arguments": {"x": {"from_node": "arrayelement1"}, "y": {"from_node": "arrayelement2"}}}, "add1": {"process_id": "add", "arguments": {"x": {"from_node": "arrayelement1"}, "y": {"from_node": "arrayelement2"}}}, "divide1": {"process_id": "divide", "arguments": {"x": {"from_node": "subtract1"}, "y": {"from_node": "add1"}}}, "gt1": {"process_id": "gt", "arguments": {"x": {"from_node": "divide1"}, "y": 0.4}}, "multiply1": {"process_id": "multiply", "arguments": {"x": {"from_node": "gt1"}, "y": 1.0}, "result": true}}}}}, "reducedimension2": {"process_id": "reduce_dimension", "arguments": {"data": {"from_node": "loadcollection1"}, "dimension": "bands", "reducer": {"process_graph": {"arrayelement3": {"process_id": "array_element", "arguments": {"data": {"from_parameter": "data"}, "index": 2}}, "eq1": {"process_id": "eq", "arguments": {"x": {"from_node": "arrayelement3"}, "y": 8}}, "eq2": {"process_id": "eq", "arguments": {"x": {"from_node": "arrayelement3"}, "y": 9}}, "or1": {"process_id": "or", "arguments": {"x": {"from_node": "eq1"}, "y": {"from_node": "eq2"}}}, "eq3": {"process_id": "eq", "arguments": {"x": {"from_node": "arrayelement3"}, "y": 3}}, "or2": {"process_id": "or", "arguments": {"x": {"from_node": "or1"}, "y": {"from_node": "eq3"}}}, "multiply2": {"process_id": "multiply", "arguments": {"x": {"from_node": "or2"}, "y": 1.0}, "result": true}}}}}, "mask1": {"process_id": "mask", "arguments": {"data": {"from_node": "reducedimension1"}, "mask": {"from_node": "reducedimension2"}, "replacement": 2}}, "reducedimension3": {"process_id": "reduce_dimension", "arguments": {"data": {"from_node": "mask1"}, "dimension": "t", "reducer": {"process_graph": {"median1": {"process_id": "median", "arguments": {"data": {"from_parameter": "data"}}, "result": true}}}}, "result": true}}}}</script>
+    </openeo-model-builder>
+    </div></div>
+</div>
+</section>
+<section id="download-result">
+<h2>Download result<a class="headerlink" href="#download-result" title="Link to this heading">#</a></h2>
+<p>To finish our process graph we add the <code class="docutils literal notranslate"><span class="pre">save_result()</span></code> process choosing the <code class="docutils literal notranslate"><span class="pre">GTiff</span></code> format. It creates a COG out of the box with openEO on CDSE.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a batch job</span>
+<span class="n">snowmap_cog</span> <span class="o">=</span> <span class="n">snow_map_3dcube</span><span class="o">.</span><span class="n">save_result</span><span class="p">(</span><span class="nb">format</span> <span class="o">=</span> <span class="s2">&quot;GTiff&quot;</span><span class="p">)</span> <span class="c1">#, options = {&quot;overviews&quot;: &quot;AUTO&quot;})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We register the job as a batch job on the backend and start the processing. Depending on the traffic on the backend, this usually takes between 1 to 5 minutes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">snowmap_cog</span><span class="o">.</span><span class="n">create_job</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;snowmap_cog&quot;</span><span class="p">)</span>
+<span class="n">job</span><span class="o">.</span><span class="n">start_and_wait</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0:00:00 Job &#39;j-2401318f19a84122b62657ed798f0c9e&#39;: send &#39;start&#39;
+0:00:17 Job &#39;j-2401318f19a84122b62657ed798f0c9e&#39;: created (progress N/A)
+0:00:22 Job &#39;j-2401318f19a84122b62657ed798f0c9e&#39;: created (progress N/A)
+0:00:29 Job &#39;j-2401318f19a84122b62657ed798f0c9e&#39;: created (progress N/A)
+0:00:37 Job &#39;j-2401318f19a84122b62657ed798f0c9e&#39;: created (progress N/A)
+0:00:47 Job &#39;j-2401318f19a84122b62657ed798f0c9e&#39;: created (progress N/A)
+0:01:00 Job &#39;j-2401318f19a84122b62657ed798f0c9e&#39;: created (progress N/A)
+0:01:16 Job &#39;j-2401318f19a84122b62657ed798f0c9e&#39;: created (progress N/A)
+0:01:36 Job &#39;j-2401318f19a84122b62657ed798f0c9e&#39;: created (progress N/A)
+0:02:01 Job &#39;j-2401318f19a84122b62657ed798f0c9e&#39;: created (progress N/A)
+0:02:31 Job &#39;j-2401318f19a84122b62657ed798f0c9e&#39;: created (progress N/A)
+0:03:09 Job &#39;j-2401318f19a84122b62657ed798f0c9e&#39;: created (progress N/A)
+0:03:56 Job &#39;j-2401318f19a84122b62657ed798f0c9e&#39;: created (progress N/A)
+0:04:54 Job &#39;j-2401318f19a84122b62657ed798f0c9e&#39;: running (progress N/A)
+0:05:54 Job &#39;j-2401318f19a84122b62657ed798f0c9e&#39;: finished (progress N/A)
+</pre></div>
+</div>
+<div class="output text_html">
+    <script>
+    if (!window.customElements || !window.customElements.get('openeo-job')) {
+        var el = document.createElement('script');
+        el.src = "https://cdn.jsdelivr.net/npm/@openeo/vue-components@2/assets/openeo.min.js";
+        document.head.appendChild(el);
+
+        var font = document.createElement('font');
+        font.as = "font";
+        font.type = "font/woff2";
+        font.crossOrigin = true;
+        font.href = "https://use.fontawesome.com/releases/v5.13.0/webfonts/fa-solid-900.woff2"
+        document.head.appendChild(font);
+    }
+    </script>
+    <openeo-job>
+        <script type="application/json">{"currency": "credits", "job": {"costs": 0.0, "created": "2024-01-31T12:59:18Z", "id": "j-2401318f19a84122b62657ed798f0c9e", "process": {"process_graph": {"loadcollection1": {"arguments": {"bands": ["B03", "B11", "SCL"], "id": "SENTINEL2_L2A", "spatial_extent": {"crs": 4326, "east": 11.479180216059186, "north": 46.64670948599201, "south": 46.62835651400798, "west": 11.461193783940812}, "temporal_extent": ["2023-02-01", "2023-06-01"]}, "process_id": "load_collection"}, "mask1": {"arguments": {"data": {"from_node": "reducedimension1"}, "mask": {"from_node": "reducedimension2"}, "replacement": 2}, "process_id": "mask"}, "reducedimension1": {"arguments": {"data": {"from_node": "loadcollection1"}, "dimension": "bands", "reducer": {"process_graph": {"add1": {"arguments": {"x": {"from_node": "arrayelement1"}, "y": {"from_node": "arrayelement2"}}, "process_id": "add"}, "arrayelement1": {"arguments": {"data": {"from_parameter": "data"}, "index": 0}, "process_id": "array_element"}, "arrayelement2": {"arguments": {"data": {"from_parameter": "data"}, "index": 1}, "process_id": "array_element"}, "divide1": {"arguments": {"x": {"from_node": "subtract1"}, "y": {"from_node": "add1"}}, "process_id": "divide"}, "gt1": {"arguments": {"x": {"from_node": "divide1"}, "y": 0.4}, "process_id": "gt"}, "multiply1": {"arguments": {"x": {"from_node": "gt1"}, "y": 1.0}, "process_id": "multiply", "result": true}, "subtract1": {"arguments": {"x": {"from_node": "arrayelement1"}, "y": {"from_node": "arrayelement2"}}, "process_id": "subtract"}}}}, "process_id": "reduce_dimension"}, "reducedimension2": {"arguments": {"data": {"from_node": "loadcollection1"}, "dimension": "bands", "reducer": {"process_graph": {"arrayelement3": {"arguments": {"data": {"from_parameter": "data"}, "index": 2}, "process_id": "array_element"}, "eq1": {"arguments": {"x": {"from_node": "arrayelement3"}, "y": 8}, "process_id": "eq"}, "eq2": {"arguments": {"x": {"from_node": "arrayelement3"}, "y": 9}, "process_id": "eq"}, "eq3": {"arguments": {"x": {"from_node": "arrayelement3"}, "y": 3}, "process_id": "eq"}, "multiply2": {"arguments": {"x": {"from_node": "or2"}, "y": 1.0}, "process_id": "multiply", "result": true}, "or1": {"arguments": {"x": {"from_node": "eq1"}, "y": {"from_node": "eq2"}}, "process_id": "or"}, "or2": {"arguments": {"x": {"from_node": "or1"}, "y": {"from_node": "eq3"}}, "process_id": "or"}}}}, "process_id": "reduce_dimension"}, "reducedimension3": {"arguments": {"data": {"from_node": "mask1"}, "dimension": "t", "reducer": {"process_graph": {"median1": {"arguments": {"data": {"from_parameter": "data"}}, "process_id": "median", "result": true}}}}, "process_id": "reduce_dimension"}, "saveresult1": {"arguments": {"data": {"from_node": "reducedimension3"}, "format": "GTiff", "options": {}}, "process_id": "save_result", "result": true}}}, "status": "finished", "title": "snowmap_cog", "updated": "2024-01-31T13:04:41Z", "usage": {"duration": {"unit": "seconds", "value": 274}, "input_pixel": {"unit": "mega-pixel", "value": 18.0}}}}</script>
+    </openeo-job>
+    </div></div>
+</div>
+<p>Now let’s wait until the job is finished and then download the results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">job</span><span class="o">.</span><span class="n">status</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;finished&quot;</span><span class="p">:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">get_results</span><span class="p">()</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">download_files</span><span class="p">(</span><span class="s2">&quot;33_results/&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Add statistics to the dataset via gdal, such as a summary of the values within the dataset and also some metadata, i.e. the legend (TIFFTAGS).  And we reduce the datatype to the lowest possible datatype supported by COG uint8, since only have three values to represent (0, 1, 2). If you’re interested you can check what happened via <code class="docutils literal notranslate"><span class="pre">!gdalinfo</span> <span class="pre">33_results/openEO_uint8.tif</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>gdal_translate<span class="w"> </span>-mo<span class="w"> </span><span class="o">{</span>TIFFTAG_IMAGEDESCRIPTION<span class="o">}=</span><span class="nv">SnowCoveredArea_0</span><span class="o">=</span><span class="nv">nosnow_1</span><span class="o">=</span>snow_2-nodatavalue<span class="o">=</span>cloud<span class="w"> </span>-ot<span class="w"> </span>Byte<span class="w"> </span>-of<span class="w"> </span>COG<span class="w"> </span>-a_nodata<span class="w"> </span><span class="m">2</span><span class="w"> </span>-stats<span class="w"> </span><span class="s2">&quot;33_results/openEO.tif&quot;</span><span class="w"> </span><span class="s2">&quot;33_results/openEO_uint8.tif&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Input file size is 145, 210
+0...10...20...30...40...50...60...70...80...90...100 - done.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-results">
+<h2>Load results<a class="headerlink" href="#load-results" title="Link to this heading">#</a></h2>
+<p>Now we can open the COG and visualize it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snowmap</span> <span class="o">=</span> <span class="n">rio</span><span class="o">.</span><span class="n">open_rasterio</span><span class="p">(</span><span class="s2">&quot;33_results/openEO_uint8.tif&quot;</span><span class="p">,</span> <span class="n">decode_coords</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">snowmap</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+body[data-theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 20px 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: none;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.DataArray (band: 1, y: 210, x: 145)&gt;
+[30450 values with dtype=uint8]
+Coordinates:
+  * band         (band) int64 1
+  * x            (x) float64 6.883e+05 6.884e+05 ... 6.898e+05 6.898e+05
+  * y            (y) float64 5.169e+06 5.169e+06 ... 5.167e+06 5.167e+06
+    spatial_ref  int64 0
+Attributes:
+    AREA_OR_POINT:               Area
+    PROCESSING_SOFTWARE:         0.24.0a1
+    {TIFFTAG_IMAGEDESCRIPTION}:  SnowCoveredArea_0=nosnow_1=snow_2-nodatavalu...
+    STATISTICS_MAXIMUM:          1
+    STATISTICS_MEAN:             1
+    STATISTICS_MINIMUM:          1
+    STATISTICS_STDDEV:           0
+    STATISTICS_VALID_PERCENT:    39.04
+    _FillValue:                  2
+    scale_factor:                1.0
+    add_offset:                  0.0</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'></div><ul class='xr-dim-list'><li><span class='xr-has-index'>band</span>: 1</li><li><span class='xr-has-index'>y</span>: 210</li><li><span class='xr-has-index'>x</span>: 145</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-8728e101-160c-457c-9c48-11a12dbf3605' class='xr-array-in' type='checkbox' checked><label for='section-8728e101-160c-457c-9c48-11a12dbf3605' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>...</span></div><div class='xr-array-data'><pre>[30450 values with dtype=uint8]</pre></div></div></li><li class='xr-section-item'><input id='section-6cc6a8a1-fb23-4643-9d01-8a9ef7deaa7f' class='xr-section-summary-in' type='checkbox'  checked><label for='section-6cc6a8a1-fb23-4643-9d01-8a9ef7deaa7f' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>band</span></div><div class='xr-var-dims'>(band)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>1</div><input id='attrs-4a6d3798-2da9-4f57-9c42-1061753306b9' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-4a6d3798-2da9-4f57-9c42-1061753306b9' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-5bb61c88-a745-4d47-9b3f-a22277d546b4' class='xr-var-data-in' type='checkbox'><label for='data-5bb61c88-a745-4d47-9b3f-a22277d546b4' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>x</span></div><div class='xr-var-dims'>(x)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>6.883e+05 6.884e+05 ... 6.898e+05</div><input id='attrs-9f464b9a-b94e-49a3-9789-5dd66205e9d7' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-9f464b9a-b94e-49a3-9789-5dd66205e9d7' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-01ed7ce4-b9d1-46ad-a366-685e60c15e97' class='xr-var-data-in' type='checkbox'><label for='data-01ed7ce4-b9d1-46ad-a366-685e60c15e97' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([688345., 688355., 688365., 688375., 688385., 688395., 688405., 688415.,
+       688425., 688435., 688445., 688455., 688465., 688475., 688485., 688495.,
+       688505., 688515., 688525., 688535., 688545., 688555., 688565., 688575.,
+       688585., 688595., 688605., 688615., 688625., 688635., 688645., 688655.,
+       688665., 688675., 688685., 688695., 688705., 688715., 688725., 688735.,
+       688745., 688755., 688765., 688775., 688785., 688795., 688805., 688815.,
+       688825., 688835., 688845., 688855., 688865., 688875., 688885., 688895.,
+       688905., 688915., 688925., 688935., 688945., 688955., 688965., 688975.,
+       688985., 688995., 689005., 689015., 689025., 689035., 689045., 689055.,
+       689065., 689075., 689085., 689095., 689105., 689115., 689125., 689135.,
+       689145., 689155., 689165., 689175., 689185., 689195., 689205., 689215.,
+       689225., 689235., 689245., 689255., 689265., 689275., 689285., 689295.,
+       689305., 689315., 689325., 689335., 689345., 689355., 689365., 689375.,
+       689385., 689395., 689405., 689415., 689425., 689435., 689445., 689455.,
+       689465., 689475., 689485., 689495., 689505., 689515., 689525., 689535.,
+       689545., 689555., 689565., 689575., 689585., 689595., 689605., 689615.,
+       689625., 689635., 689645., 689655., 689665., 689675., 689685., 689695.,
+       689705., 689715., 689725., 689735., 689745., 689755., 689765., 689775.,
+       689785.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>y</span></div><div class='xr-var-dims'>(y)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>5.169e+06 5.169e+06 ... 5.167e+06</div><input id='attrs-bca2bcea-4fb9-499d-b3c9-9e2af04449c7' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-bca2bcea-4fb9-499d-b3c9-9e2af04449c7' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-988035ec-4f82-46ac-863c-c91053403b1a' class='xr-var-data-in' type='checkbox'><label for='data-988035ec-4f82-46ac-863c-c91053403b1a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([5168895., 5168885., 5168875., ..., 5166825., 5166815., 5166805.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>spatial_ref</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-b60ab124-d53e-400a-8145-db0cc8dca873' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-b60ab124-d53e-400a-8145-db0cc8dca873' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-05cd9f70-810e-4a29-a230-efc7fcf134cb' class='xr-var-data-in' type='checkbox'><label for='data-05cd9f70-810e-4a29-a230-efc7fcf134cb' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>crs_wkt :</span></dt><dd>PROJCS[&quot;WGS 84 / UTM zone 32N&quot;,GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]],PROJECTION[&quot;Transverse_Mercator&quot;],PARAMETER[&quot;latitude_of_origin&quot;,0],PARAMETER[&quot;central_meridian&quot;,9],PARAMETER[&quot;scale_factor&quot;,0.9996],PARAMETER[&quot;false_easting&quot;,500000],PARAMETER[&quot;false_northing&quot;,0],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Easting&quot;,EAST],AXIS[&quot;Northing&quot;,NORTH],AUTHORITY[&quot;EPSG&quot;,&quot;32632&quot;]]</dd><dt><span>semi_major_axis :</span></dt><dd>6378137.0</dd><dt><span>semi_minor_axis :</span></dt><dd>6356752.314245179</dd><dt><span>inverse_flattening :</span></dt><dd>298.257223563</dd><dt><span>reference_ellipsoid_name :</span></dt><dd>WGS 84</dd><dt><span>longitude_of_prime_meridian :</span></dt><dd>0.0</dd><dt><span>prime_meridian_name :</span></dt><dd>Greenwich</dd><dt><span>geographic_crs_name :</span></dt><dd>WGS 84</dd><dt><span>horizontal_datum_name :</span></dt><dd>World Geodetic System 1984</dd><dt><span>projected_crs_name :</span></dt><dd>WGS 84 / UTM zone 32N</dd><dt><span>grid_mapping_name :</span></dt><dd>transverse_mercator</dd><dt><span>latitude_of_projection_origin :</span></dt><dd>0.0</dd><dt><span>longitude_of_central_meridian :</span></dt><dd>9.0</dd><dt><span>false_easting :</span></dt><dd>500000.0</dd><dt><span>false_northing :</span></dt><dd>0.0</dd><dt><span>scale_factor_at_central_meridian :</span></dt><dd>0.9996</dd><dt><span>spatial_ref :</span></dt><dd>PROJCS[&quot;WGS 84 / UTM zone 32N&quot;,GEOGCS[&quot;WGS 84&quot;,DATUM[&quot;WGS_1984&quot;,SPHEROID[&quot;WGS 84&quot;,6378137,298.257223563,AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]],PRIMEM[&quot;Greenwich&quot;,0,AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],UNIT[&quot;degree&quot;,0.0174532925199433,AUTHORITY[&quot;EPSG&quot;,&quot;9122&quot;]],AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]],PROJECTION[&quot;Transverse_Mercator&quot;],PARAMETER[&quot;latitude_of_origin&quot;,0],PARAMETER[&quot;central_meridian&quot;,9],PARAMETER[&quot;scale_factor&quot;,0.9996],PARAMETER[&quot;false_easting&quot;,500000],PARAMETER[&quot;false_northing&quot;,0],UNIT[&quot;metre&quot;,1,AUTHORITY[&quot;EPSG&quot;,&quot;9001&quot;]],AXIS[&quot;Easting&quot;,EAST],AXIS[&quot;Northing&quot;,NORTH],AUTHORITY[&quot;EPSG&quot;,&quot;32632&quot;]]</dd><dt><span>GeoTransform :</span></dt><dd>688340.0 10.0 0.0 5168900.0 0.0 -10.0</dd></dl></div><div class='xr-var-data'><pre>array(0)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-b85b8743-ad81-4832-97f3-7c51b72bdf3d' class='xr-section-summary-in' type='checkbox'  ><label for='section-b85b8743-ad81-4832-97f3-7c51b72bdf3d' class='xr-section-summary' >Indexes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>band</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-50bf0ab5-3964-4975-a8dd-86486d432005' class='xr-index-data-in' type='checkbox'/><label for='index-50bf0ab5-3964-4975-a8dd-86486d432005' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([1], dtype=&#x27;int64&#x27;, name=&#x27;band&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>x</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-8fa93d98-0039-4059-b5d2-4a10483afb48' class='xr-index-data-in' type='checkbox'/><label for='index-8fa93d98-0039-4059-b5d2-4a10483afb48' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([688345.0, 688355.0, 688365.0, 688375.0, 688385.0, 688395.0, 688405.0,
+       688415.0, 688425.0, 688435.0,
+       ...
+       689695.0, 689705.0, 689715.0, 689725.0, 689735.0, 689745.0, 689755.0,
+       689765.0, 689775.0, 689785.0],
+      dtype=&#x27;float64&#x27;, name=&#x27;x&#x27;, length=145))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>y</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-78820969-42f4-494b-a64a-2233a133b68a' class='xr-index-data-in' type='checkbox'/><label for='index-78820969-42f4-494b-a64a-2233a133b68a' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([5168895.0, 5168885.0, 5168875.0, 5168865.0, 5168855.0, 5168845.0,
+       5168835.0, 5168825.0, 5168815.0, 5168805.0,
+       ...
+       5166895.0, 5166885.0, 5166875.0, 5166865.0, 5166855.0, 5166845.0,
+       5166835.0, 5166825.0, 5166815.0, 5166805.0],
+      dtype=&#x27;float64&#x27;, name=&#x27;y&#x27;, length=210))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-1b1125d1-873b-4b59-b40b-dd81f3c9633b' class='xr-section-summary-in' type='checkbox'  ><label for='section-1b1125d1-873b-4b59-b40b-dd81f3c9633b' class='xr-section-summary' >Attributes: <span>(11)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>AREA_OR_POINT :</span></dt><dd>Area</dd><dt><span>PROCESSING_SOFTWARE :</span></dt><dd>0.24.0a1</dd><dt><span>{TIFFTAG_IMAGEDESCRIPTION} :</span></dt><dd>SnowCoveredArea_0=nosnow_1=snow_2-nodatavalue=cloud</dd><dt><span>STATISTICS_MAXIMUM :</span></dt><dd>1</dd><dt><span>STATISTICS_MEAN :</span></dt><dd>1</dd><dt><span>STATISTICS_MINIMUM :</span></dt><dd>1</dd><dt><span>STATISTICS_STDDEV :</span></dt><dd>0</dd><dt><span>STATISTICS_VALID_PERCENT :</span></dt><dd>39.04</dd><dt><span>_FillValue :</span></dt><dd>2</dd><dt><span>scale_factor :</span></dt><dd>1.0</dd><dt><span>add_offset :</span></dt><dd>0.0</dd></dl></div></li></ul></div></div></div></div>
+</div>
+<p>Now, we check if the nodata value can be determined directly from the COG metadata</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snowmap</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">nodata</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we make a plot of the snowmap keeping in mind that <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">=</span> <span class="pre">no</span> <span class="pre">snow</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">=</span> <span class="pre">snow</span></code>, and <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">=</span> <span class="pre">clouds</span> <span class="pre">(nodata</span> <span class="pre">value)</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snowmap</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Spatial distribution of snow, no snow and cloudy pixels&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Latitude&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Longitude&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d69c4ccbd8906c73d7551b262a8918a24871fc990f2600f0005adea431a48d29.png" src="../../_images/d69c4ccbd8906c73d7551b262a8918a24871fc990f2600f0005adea431a48d29.png" />
+</div>
+</div>
+<p>Let’s have a look at the histogram to understand the distribution of the values in our map</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">snowmap</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">snowmap</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">xticks</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">weights</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">PercentFormatter</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribution of snow, no snow and cloud pixels&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/977ee1a6f0e18618aa7db64934b26ae38955154adb7c690dc9e4e55e94dd3bc3.png" src="../../_images/977ee1a6f0e18618aa7db64934b26ae38955154adb7c690dc9e4e55e94dd3bc3.png" />
+</div>
+</div>
+</section>
+<section id="load-stac-metadata">
+<h2>Load STAC metadata<a class="headerlink" href="#load-stac-metadata" title="Link to this heading">#</a></h2>
+<p>In addition to the COG we also receive STAC metadata for our result.
+Let’s have a look at it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stac_collection</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get_metadata</span><span class="p">()</span>
+<span class="n">stac_collection</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;assets&#39;: {&#39;openEO.tif&#39;: {&#39;file:nodata&#39;: [&#39;nan&#39;],
+   &#39;href&#39;: &#39;https://openeo.dataspace.copernicus.eu/openeo/1.2/jobs/j-2401318f19a84122b62657ed798f0c9e/results/assets/MDYxODNjYmMtODRjOC00YzZhLThhN2QtY2IxOGJhMDhjYzhj/ed41e358ad1fe308f681e33015b06869/openEO.tif?expires=1707311403&#39;,
+   &#39;proj:bbox&#39;: [688340.0, 5166800.0, 689790.0, 5168900.0],
+   &#39;proj:epsg&#39;: 32632,
+   &#39;proj:shape&#39;: [145, 210],
+   &#39;raster:bands&#39;: [{&#39;name&#39;: &#39;1&#39;,
+     &#39;statistics&#39;: {&#39;maximum&#39;: 2.0,
+      &#39;mean&#39;: 1.5691625615764,
+      &#39;minimum&#39;: 0.5,
+      &#39;stddev&#39;: 0.47448333824272,
+      &#39;valid_percent&#39;: 100.0}}],
+   &#39;roles&#39;: [&#39;data&#39;],
+   &#39;title&#39;: &#39;openEO.tif&#39;,
+   &#39;type&#39;: &#39;image/tiff; application=geotiff&#39;}},
+ &#39;description&#39;: &#39;Results for batch job j-2401318f19a84122b62657ed798f0c9e&#39;,
+ &#39;extent&#39;: {&#39;spatial&#39;: {&#39;bbox&#39;: [[11.461193783940812,
+     46.62835651400798,
+     11.479180216059186,
+     46.64670948599201]]},
+  &#39;temporal&#39;: {&#39;interval&#39;: [[&#39;2023-02-01T00:00:00Z&#39;,
+     &#39;2023-06-01T00:00:00Z&#39;]]}},
+ &#39;id&#39;: &#39;j-2401318f19a84122b62657ed798f0c9e&#39;,
+ &#39;license&#39;: &#39;proprietary&#39;,
+ &#39;links&#39;: [{&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/02/02/S2A_MSIL2A_20230202T101231_N0509_R022_T32TPS_20230202T142000.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/02/02/S2A_MSIL2A_20230202T101231_N0509_R022_T32TPS_20230202T142000.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/02/05/S2A_MSIL2A_20230205T102221_N0509_R065_T32TPS_20230205T135958.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/02/05/S2A_MSIL2A_20230205T102221_N0509_R065_T32TPS_20230205T135958.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/02/07/S2B_MSIL2A_20230207T101109_N0509_R022_T32TPS_20230207T124736.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/02/07/S2B_MSIL2A_20230207T101109_N0509_R022_T32TPS_20230207T124736.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/02/10/S2B_MSIL2A_20230210T102049_N0509_R065_T32TPS_20230210T125716.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/02/10/S2B_MSIL2A_20230210T102049_N0509_R065_T32TPS_20230210T125716.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/02/12/S2A_MSIL2A_20230212T101131_N0509_R022_T32TPS_20230212T142159.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/02/12/S2A_MSIL2A_20230212T101131_N0509_R022_T32TPS_20230212T142159.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/02/15/S2A_MSIL2A_20230215T102121_N0509_R065_T32TPS_20230215T141008.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/02/15/S2A_MSIL2A_20230215T102121_N0509_R065_T32TPS_20230215T141008.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/02/17/S2B_MSIL2A_20230217T101029_N0509_R022_T32TPS_20230217T125054.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/02/17/S2B_MSIL2A_20230217T101029_N0509_R022_T32TPS_20230217T125054.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/02/20/S2B_MSIL2A_20230220T101949_N0509_R065_T32TPS_20230220T145403.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/02/20/S2B_MSIL2A_20230220T101949_N0509_R065_T32TPS_20230220T145403.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/02/22/S2A_MSIL2A_20230222T101031_N0509_R022_T32TPS_20230222T141055.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/02/22/S2A_MSIL2A_20230222T101031_N0509_R022_T32TPS_20230222T141055.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/02/25/S2A_MSIL2A_20230225T102021_N0509_R065_T32TPS_20230225T163245.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/02/25/S2A_MSIL2A_20230225T102021_N0509_R065_T32TPS_20230225T163245.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/02/27/S2B_MSIL2A_20230227T101029_N0509_R022_T32TPS_20230227T124853.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/02/27/S2B_MSIL2A_20230227T101029_N0509_R022_T32TPS_20230227T124853.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/03/02/S2B_MSIL2A_20230302T101839_N0509_R065_T32TPS_20230302T165059.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/03/02/S2B_MSIL2A_20230302T101839_N0509_R065_T32TPS_20230302T165059.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/03/04/S2A_MSIL2A_20230304T101021_N0509_R022_T32TPS_20230907T154000.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/03/04/S2A_MSIL2A_20230304T101021_N0509_R022_T32TPS_20230907T154000.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/03/07/S2A_MSIL2A_20230307T101901_N0509_R065_T32TPS_20230307T162402.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/03/07/S2A_MSIL2A_20230307T101901_N0509_R065_T32TPS_20230307T162402.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/03/09/S2B_MSIL2A_20230309T100749_N0509_R022_T32TPS_20230309T162710.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/03/09/S2B_MSIL2A_20230309T100749_N0509_R022_T32TPS_20230309T162710.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/03/12/S2B_MSIL2A_20230312T101729_N0509_R065_T32TPS_20230312T163807.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/03/12/S2B_MSIL2A_20230312T101729_N0509_R065_T32TPS_20230312T163807.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/03/14/S2A_MSIL2A_20230314T101021_N0509_R022_T32TPS_20230314T161800.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/03/14/S2A_MSIL2A_20230314T101021_N0509_R022_T32TPS_20230314T161800.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/03/17/S2A_MSIL2A_20230317T101741_N0509_R065_T32TPS_20230317T162557.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/03/17/S2A_MSIL2A_20230317T101741_N0509_R065_T32TPS_20230317T162557.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/03/19/S2B_MSIL2A_20230319T100649_N0509_R022_T32TPS_20230319T130804.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/03/19/S2B_MSIL2A_20230319T100649_N0509_R022_T32TPS_20230319T130804.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/03/22/S2B_MSIL2A_20230322T101649_N0509_R065_T32TPS_20230322T145625.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/03/22/S2B_MSIL2A_20230322T101649_N0509_R065_T32TPS_20230322T145625.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/03/24/S2A_MSIL2A_20230324T101021_N0509_R022_T32TPS_20230324T161752.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/03/24/S2A_MSIL2A_20230324T101021_N0509_R022_T32TPS_20230324T161752.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/03/27/S2A_MSIL2A_20230327T101631_N0509_R065_T32TPS_20230327T162303.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/03/27/S2A_MSIL2A_20230327T101631_N0509_R065_T32TPS_20230327T162303.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/03/29/S2B_MSIL2A_20230329T100629_N0509_R022_T32TPS_20230329T130657.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/03/29/S2B_MSIL2A_20230329T100629_N0509_R022_T32TPS_20230329T130657.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/04/01/S2B_MSIL2A_20230401T101559_N0509_R065_T32TPS_20230401T145632.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/04/01/S2B_MSIL2A_20230401T101559_N0509_R065_T32TPS_20230401T145632.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/04/03/S2A_MSIL2A_20230403T100551_N0509_R022_T32TPS_20230403T162459.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/04/03/S2A_MSIL2A_20230403T100551_N0509_R022_T32TPS_20230403T162459.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/04/06/S2A_MSIL2A_20230406T102021_N0509_R065_T32TPS_20230406T194357.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/04/06/S2A_MSIL2A_20230406T102021_N0509_R065_T32TPS_20230406T194357.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/04/08/S2B_MSIL2A_20230408T100559_N0509_R022_T32TPS_20230408T131134.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/04/08/S2B_MSIL2A_20230408T100559_N0509_R022_T32TPS_20230408T131134.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/04/11/S2B_MSIL2A_20230411T101559_N0509_R065_T32TPS_20230411T131019.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/04/11/S2B_MSIL2A_20230411T101559_N0509_R065_T32TPS_20230411T131019.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/04/13/S2A_MSIL2A_20230413T100551_N0509_R022_T32TPS_20230413T161903.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/04/13/S2A_MSIL2A_20230413T100551_N0509_R022_T32TPS_20230413T161903.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/04/16/S2A_MSIL2A_20230416T101601_N0509_R065_T32TPS_20230416T162901.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/04/16/S2A_MSIL2A_20230416T101601_N0509_R065_T32TPS_20230416T162901.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/04/18/S2B_MSIL2A_20230418T100559_N0509_R022_T32TPS_20230418T131202.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/04/18/S2B_MSIL2A_20230418T100559_N0509_R022_T32TPS_20230418T131202.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/04/21/S2B_MSIL2A_20230421T101559_N0509_R065_T32TPS_20230421T131333.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/04/21/S2B_MSIL2A_20230421T101559_N0509_R065_T32TPS_20230421T131333.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/04/23/S2A_MSIL2A_20230423T100551_N0509_R022_T32TPS_20230423T162900.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/04/23/S2A_MSIL2A_20230423T100551_N0509_R022_T32TPS_20230423T162900.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/04/26/S2A_MSIL2A_20230426T101601_N0509_R065_T32TPS_20230426T162055.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/04/26/S2A_MSIL2A_20230426T101601_N0509_R065_T32TPS_20230426T162055.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/04/28/S2B_MSIL2A_20230428T100559_N0509_R022_T32TPS_20230428T133214.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/04/28/S2B_MSIL2A_20230428T100559_N0509_R022_T32TPS_20230428T133214.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/05/01/S2B_MSIL2A_20230501T101559_N0509_R065_T32TPS_20230501T132325.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/05/01/S2B_MSIL2A_20230501T101559_N0509_R065_T32TPS_20230501T132325.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/05/03/S2A_MSIL2A_20230503T101021_N0509_R022_T32TPS_20230503T180406.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/05/03/S2A_MSIL2A_20230503T101021_N0509_R022_T32TPS_20230503T180406.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/05/06/S2A_MSIL2A_20230506T101601_N0509_R065_T32TPS_20230506T162659.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/05/06/S2A_MSIL2A_20230506T101601_N0509_R065_T32TPS_20230506T162659.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/05/08/S2B_MSIL2A_20230508T100559_N0509_R022_T32TPS_20230508T131238.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/05/08/S2B_MSIL2A_20230508T100559_N0509_R022_T32TPS_20230508T131238.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/05/11/S2B_MSIL2A_20230511T101559_N0509_R065_T32TPS_20230511T163715.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/05/11/S2B_MSIL2A_20230511T101559_N0509_R065_T32TPS_20230511T163715.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/05/13/S2A_MSIL2A_20230513T100551_N0509_R022_T32TPS_20230513T161552.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/05/13/S2A_MSIL2A_20230513T100551_N0509_R022_T32TPS_20230513T161552.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/05/16/S2A_MSIL2A_20230516T101601_N0509_R065_T32TPS_20230516T181153.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/05/16/S2A_MSIL2A_20230516T101601_N0509_R065_T32TPS_20230516T181153.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/05/18/S2B_MSIL2A_20230518T100559_N0509_R022_T32TPS_20230518T144255.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/05/18/S2B_MSIL2A_20230518T100559_N0509_R022_T32TPS_20230518T144255.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/05/21/S2B_MSIL2A_20230521T101609_N0509_R065_T32TPS_20230521T131745.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/05/21/S2B_MSIL2A_20230521T101609_N0509_R065_T32TPS_20230521T131745.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/05/23/S2A_MSIL2A_20230523T100601_N0509_R022_T32TPS_20230523T161057.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/05/23/S2A_MSIL2A_20230523T100601_N0509_R022_T32TPS_20230523T161057.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/05/26/S2A_MSIL2A_20230526T101601_N0509_R065_T32TPS_20230526T162854.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/05/26/S2A_MSIL2A_20230526T101601_N0509_R065_T32TPS_20230526T162854.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/05/28/S2B_MSIL2A_20230528T100559_N0509_R022_T32TPS_20230528T131159.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/05/28/S2B_MSIL2A_20230528T100559_N0509_R022_T32TPS_20230528T131159.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/05/31/S2B_MSIL2A_20230531T101559_N0509_R065_T32TPS_20230531T131936.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/05/31/S2B_MSIL2A_20230531T101559_N0509_R065_T32TPS_20230531T131936.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;https://openeo.dataspace.copernicus.eu/openeo/1.2/jobs/j-2401318f19a84122b62657ed798f0c9e/results&#39;,
+   &#39;rel&#39;: &#39;self&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;https://openeo.dataspace.copernicus.eu/openeo/1.2/jobs/j-2401318f19a84122b62657ed798f0c9e/results/MDYxODNjYmMtODRjOC00YzZhLThhN2QtY2IxOGJhMDhjYzhj/e967c4ba33e20f0757876cf974ef7eb7?expires=1707311403&#39;,
+   &#39;rel&#39;: &#39;canonical&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;http://ceos.org/ard/files/PFS/SR/v5.0/CARD4L_Product_Family_Specification_Surface_Reflectance-v5.0.pdf&#39;,
+   &#39;rel&#39;: &#39;card4l-document&#39;,
+   &#39;type&#39;: &#39;application/pdf&#39;},
+  {&#39;href&#39;: &#39;https://openeo.dataspace.copernicus.eu/openeo/1.2/jobs/j-2401318f19a84122b62657ed798f0c9e/results/items/MDYxODNjYmMtODRjOC00YzZhLThhN2QtY2IxOGJhMDhjYzhj/ed41e358ad1fe308f681e33015b06869/openEO.tif?expires=1707311403&#39;,
+   &#39;rel&#39;: &#39;item&#39;,
+   &#39;type&#39;: &#39;application/geo+json&#39;}],
+ &#39;openeo:status&#39;: &#39;finished&#39;,
+ &#39;providers&#39;: [{&#39;description&#39;: &#39;This data was processed on an openEO backend maintained by VITO.&#39;,
+   &#39;name&#39;: &#39;VITO&#39;,
+   &#39;processing:expression&#39;: [{&#39;expression&#39;: {&#39;loadcollection1&#39;: {&#39;arguments&#39;: {&#39;bands&#39;: [&#39;B03&#39;,
+         &#39;B11&#39;,
+         &#39;SCL&#39;],
+        &#39;id&#39;: &#39;SENTINEL2_L2A&#39;,
+        &#39;spatial_extent&#39;: {&#39;crs&#39;: 4326,
+         &#39;east&#39;: 11.479180216059186,
+         &#39;north&#39;: 46.64670948599201,
+         &#39;south&#39;: 46.62835651400798,
+         &#39;west&#39;: 11.461193783940812},
+        &#39;temporal_extent&#39;: [&#39;2023-02-01&#39;, &#39;2023-06-01&#39;]},
+       &#39;process_id&#39;: &#39;load_collection&#39;},
+      &#39;mask1&#39;: {&#39;arguments&#39;: {&#39;data&#39;: {&#39;from_node&#39;: &#39;reducedimension1&#39;},
+        &#39;mask&#39;: {&#39;from_node&#39;: &#39;reducedimension2&#39;},
+        &#39;replacement&#39;: 2},
+       &#39;process_id&#39;: &#39;mask&#39;},
+      &#39;reducedimension1&#39;: {&#39;arguments&#39;: {&#39;data&#39;: {&#39;from_node&#39;: &#39;loadcollection1&#39;},
+        &#39;dimension&#39;: &#39;bands&#39;,
+        &#39;reducer&#39;: {&#39;process_graph&#39;: {&#39;add1&#39;: {&#39;arguments&#39;: {&#39;x&#39;: {&#39;from_node&#39;: &#39;arrayelement1&#39;},
+            &#39;y&#39;: {&#39;from_node&#39;: &#39;arrayelement2&#39;}},
+           &#39;process_id&#39;: &#39;add&#39;},
+          &#39;arrayelement1&#39;: {&#39;arguments&#39;: {&#39;data&#39;: {&#39;from_parameter&#39;: &#39;data&#39;},
+            &#39;index&#39;: 0},
+           &#39;process_id&#39;: &#39;array_element&#39;},
+          &#39;arrayelement2&#39;: {&#39;arguments&#39;: {&#39;data&#39;: {&#39;from_parameter&#39;: &#39;data&#39;},
+            &#39;index&#39;: 1},
+           &#39;process_id&#39;: &#39;array_element&#39;},
+          &#39;divide1&#39;: {&#39;arguments&#39;: {&#39;x&#39;: {&#39;from_node&#39;: &#39;subtract1&#39;},
+            &#39;y&#39;: {&#39;from_node&#39;: &#39;add1&#39;}},
+           &#39;process_id&#39;: &#39;divide&#39;},
+          &#39;gt1&#39;: {&#39;arguments&#39;: {&#39;x&#39;: {&#39;from_node&#39;: &#39;divide1&#39;}, &#39;y&#39;: 0.4},
+           &#39;process_id&#39;: &#39;gt&#39;},
+          &#39;multiply1&#39;: {&#39;arguments&#39;: {&#39;x&#39;: {&#39;from_node&#39;: &#39;gt1&#39;}, &#39;y&#39;: 1.0},
+           &#39;process_id&#39;: &#39;multiply&#39;,
+           &#39;result&#39;: True},
+          &#39;subtract1&#39;: {&#39;arguments&#39;: {&#39;x&#39;: {&#39;from_node&#39;: &#39;arrayelement1&#39;},
+            &#39;y&#39;: {&#39;from_node&#39;: &#39;arrayelement2&#39;}},
+           &#39;process_id&#39;: &#39;subtract&#39;}}}},
+       &#39;process_id&#39;: &#39;reduce_dimension&#39;},
+      &#39;reducedimension2&#39;: {&#39;arguments&#39;: {&#39;data&#39;: {&#39;from_node&#39;: &#39;loadcollection1&#39;},
+        &#39;dimension&#39;: &#39;bands&#39;,
+        &#39;reducer&#39;: {&#39;process_graph&#39;: {&#39;arrayelement3&#39;: {&#39;arguments&#39;: {&#39;data&#39;: {&#39;from_parameter&#39;: &#39;data&#39;},
+            &#39;index&#39;: 2},
+           &#39;process_id&#39;: &#39;array_element&#39;},
+          &#39;eq1&#39;: {&#39;arguments&#39;: {&#39;x&#39;: {&#39;from_node&#39;: &#39;arrayelement3&#39;}, &#39;y&#39;: 8},
+           &#39;process_id&#39;: &#39;eq&#39;},
+          &#39;eq2&#39;: {&#39;arguments&#39;: {&#39;x&#39;: {&#39;from_node&#39;: &#39;arrayelement3&#39;}, &#39;y&#39;: 9},
+           &#39;process_id&#39;: &#39;eq&#39;},
+          &#39;eq3&#39;: {&#39;arguments&#39;: {&#39;x&#39;: {&#39;from_node&#39;: &#39;arrayelement3&#39;}, &#39;y&#39;: 3},
+           &#39;process_id&#39;: &#39;eq&#39;},
+          &#39;multiply2&#39;: {&#39;arguments&#39;: {&#39;x&#39;: {&#39;from_node&#39;: &#39;or2&#39;}, &#39;y&#39;: 1.0},
+           &#39;process_id&#39;: &#39;multiply&#39;,
+           &#39;result&#39;: True},
+          &#39;or1&#39;: {&#39;arguments&#39;: {&#39;x&#39;: {&#39;from_node&#39;: &#39;eq1&#39;},
+            &#39;y&#39;: {&#39;from_node&#39;: &#39;eq2&#39;}},
+           &#39;process_id&#39;: &#39;or&#39;},
+          &#39;or2&#39;: {&#39;arguments&#39;: {&#39;x&#39;: {&#39;from_node&#39;: &#39;or1&#39;},
+            &#39;y&#39;: {&#39;from_node&#39;: &#39;eq3&#39;}},
+           &#39;process_id&#39;: &#39;or&#39;}}}},
+       &#39;process_id&#39;: &#39;reduce_dimension&#39;},
+      &#39;reducedimension3&#39;: {&#39;arguments&#39;: {&#39;data&#39;: {&#39;from_node&#39;: &#39;mask1&#39;},
+        &#39;dimension&#39;: &#39;t&#39;,
+        &#39;reducer&#39;: {&#39;process_graph&#39;: {&#39;median1&#39;: {&#39;arguments&#39;: {&#39;data&#39;: {&#39;from_parameter&#39;: &#39;data&#39;}},
+           &#39;process_id&#39;: &#39;median&#39;,
+           &#39;result&#39;: True}}}},
+       &#39;process_id&#39;: &#39;reduce_dimension&#39;},
+      &#39;saveresult1&#39;: {&#39;arguments&#39;: {&#39;data&#39;: {&#39;from_node&#39;: &#39;reducedimension3&#39;},
+        &#39;format&#39;: &#39;GTiff&#39;,
+        &#39;options&#39;: {}},
+       &#39;process_id&#39;: &#39;save_result&#39;,
+       &#39;result&#39;: True}},
+     &#39;format&#39;: &#39;openeo&#39;}],
+   &#39;processing:facility&#39;: &#39;openEO Geotrellis backend&#39;,
+   &#39;processing:software&#39;: {&#39;Geotrellis backend&#39;: &#39;0.24.0a1&#39;},
+   &#39;roles&#39;: [&#39;processor&#39;]}],
+ &#39;stac_extensions&#39;: [&#39;https://stac-extensions.github.io/eo/v1.1.0/schema.json&#39;,
+  &#39;https://stac-extensions.github.io/file/v2.1.0/schema.json&#39;,
+  &#39;https://stac-extensions.github.io/processing/v1.1.0/schema.json&#39;,
+  &#39;https://stac-extensions.github.io/projection/v1.1.0/schema.json&#39;],
+ &#39;stac_version&#39;: &#39;1.0.0&#39;,
+ &#39;summaries&#39;: {&#39;instruments&#39;: []},
+ &#39;title&#39;: &#39;snowmap_cog&#39;,
+ &#39;type&#39;: &#39;Collection&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<section id="adding-author-of-the-data">
+<h3>Adding Author of the data<a class="headerlink" href="#adding-author-of-the-data" title="Link to this heading">#</a></h3>
+<p>Add your information to become visible as author of the data -  description of each field can be found here: <a class="github reference external" href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/common-metadata.md#provider-object">radiantearth/stac-spec</a></p>
+<p>Please note that leaving the field empty will lead to failed validation of STAC item</p>
+<p><strong>Attention:</strong> Enter your full name and a short description of the snowmap you generated e.g. <code class="docutils literal notranslate"><span class="pre">name</span> <span class="pre">=</span> <span class="pre">&quot;Jane</span> <span class="pre">Doe&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">description</span> <span class="pre">=</span> <span class="pre">&quot;snow</span> <span class="pre">map</span> <span class="pre">of</span> <span class="pre">Merano&quot;</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">author</span> <span class="o">=</span> <span class="p">[{</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+    <span class="s2">&quot;roles&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;processor&quot;</span><span class="p">],</span>
+<span class="p">}]</span>
+
+<span class="n">providers</span> <span class="o">=</span> <span class="n">stac_collection</span><span class="p">[</span><span class="s2">&quot;providers&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">author</span>
+
+<span class="n">author_id</span> <span class="o">=</span> <span class="p">[</span><span class="n">nam</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">nam</span> <span class="ow">in</span> <span class="n">author</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)]</span>
+
+<span class="c1"># generate timestamp</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Extract bbox information and temporal extent from the STAC collection that was delivered with the result from OpenEO. We are reusing it to create our STAC item. We have prepared these function for you <code class="docutils literal notranslate"><span class="pre">extract_metadata_geometry</span></code> and <code class="docutils literal notranslate"><span class="pre">extract_metadata_time</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geometry</span> <span class="o">=</span> <span class="n">extract_metadata_geometry</span><span class="p">(</span><span class="n">stac_collection</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start_time</span><span class="p">,</span> <span class="n">end_time</span> <span class="o">=</span> <span class="n">extract_metadata_time</span><span class="p">(</span><span class="n">stac_collection</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since we calculated the statistics and renamed the file, we have to add this new file name to the STAC item.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;openEO_uint8.tif&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s create the actual STAC item describing your data! As talked about in previous lessons, STAC item has various required fields which need to be present and filled correctly. For the field ID we assign the fixed name snowcover and the initials of your name. That will be visible on the STAC browser once you have submitted the result!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stac_item</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Feature&quot;</span><span class="p">,</span> 
+    <span class="s2">&quot;stac_version&quot;</span><span class="p">:</span> <span class="n">stac_collection</span><span class="p">[</span><span class="s2">&quot;stac_version&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;stac_extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;snowcover_&quot;</span> <span class="o">+</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">author_id</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span>
+    <span class="s2">&quot;geometry&quot;</span><span class="p">:</span> <span class="n">geometry</span><span class="p">,</span>
+    <span class="s2">&quot;bbox&quot;</span><span class="p">:</span> <span class="n">bbox</span><span class="p">,</span>
+    <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+       <span class="s2">&quot;datetime&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> 
+        <span class="s2">&quot;start_datetime&quot;</span><span class="p">:</span> <span class="n">start_time</span><span class="p">,</span>
+        <span class="s2">&quot;end_datetime&quot;</span><span class="p">:</span> <span class="n">end_time</span><span class="p">,</span>
+        <span class="s2">&quot;providers&quot;</span> <span class="p">:</span> <span class="n">providers</span>
+                 <span class="p">},</span>
+    
+    <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="n">stac_collection</span><span class="p">[</span><span class="s2">&quot;links&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;assets&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;visual&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;href&quot;</span><span class="p">:</span> <span class="n">filename</span><span class="p">,</span>
+      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;image/tiff; application=geotiff; profile=cloud-optimized&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Snow coverage&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;roles&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;data&quot;</span>
+              <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stac_item</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;type&#39;: &#39;Feature&#39;,
+ &#39;stac_version&#39;: &#39;1.0.0&#39;,
+ &#39;stac_extensions&#39;: [],
+ &#39;id&#39;: &#39;snowcover_ruomba_2024-01-31&#39;,
+ &#39;geometry&#39;: {&#39;type&#39;: &#39;Polygon&#39;,
+  &#39;coordinates&#39;: [[[11.461193783940812, 46.62835651400798],
+    [11.479180216059186, 46.62835651400798],
+    [11.479180216059186, 46.64670948599201],
+    [11.461193783940812, 46.64670948599201],
+    [11.461193783940812, 46.62835651400798]]]},
+ &#39;bbox&#39;: (11.461193783940812,
+  46.62835651400798,
+  11.479180216059186,
+  46.64670948599201),
+ &#39;properties&#39;: {&#39;datetime&#39;: None,
+  &#39;start_datetime&#39;: &#39;2023-02-01T00:00:00Z&#39;,
+  &#39;end_datetime&#39;: &#39;2023-06-01T00:00:00Z&#39;,
+  &#39;providers&#39;: [{&#39;description&#39;: &#39;This data was processed on an openEO backend maintained by VITO.&#39;,
+    &#39;name&#39;: &#39;VITO&#39;,
+    &#39;processing:expression&#39;: [{&#39;expression&#39;: {&#39;loadcollection1&#39;: {&#39;arguments&#39;: {&#39;bands&#39;: [&#39;B03&#39;,
+          &#39;B11&#39;,
+          &#39;SCL&#39;],
+         &#39;id&#39;: &#39;SENTINEL2_L2A&#39;,
+         &#39;spatial_extent&#39;: {&#39;crs&#39;: 4326,
+          &#39;east&#39;: 11.479180216059186,
+          &#39;north&#39;: 46.64670948599201,
+          &#39;south&#39;: 46.62835651400798,
+          &#39;west&#39;: 11.461193783940812},
+         &#39;temporal_extent&#39;: [&#39;2023-02-01&#39;, &#39;2023-06-01&#39;]},
+        &#39;process_id&#39;: &#39;load_collection&#39;},
+       &#39;mask1&#39;: {&#39;arguments&#39;: {&#39;data&#39;: {&#39;from_node&#39;: &#39;reducedimension1&#39;},
+         &#39;mask&#39;: {&#39;from_node&#39;: &#39;reducedimension2&#39;},
+         &#39;replacement&#39;: 2},
+        &#39;process_id&#39;: &#39;mask&#39;},
+       &#39;reducedimension1&#39;: {&#39;arguments&#39;: {&#39;data&#39;: {&#39;from_node&#39;: &#39;loadcollection1&#39;},
+         &#39;dimension&#39;: &#39;bands&#39;,
+         &#39;reducer&#39;: {&#39;process_graph&#39;: {&#39;add1&#39;: {&#39;arguments&#39;: {&#39;x&#39;: {&#39;from_node&#39;: &#39;arrayelement1&#39;},
+             &#39;y&#39;: {&#39;from_node&#39;: &#39;arrayelement2&#39;}},
+            &#39;process_id&#39;: &#39;add&#39;},
+           &#39;arrayelement1&#39;: {&#39;arguments&#39;: {&#39;data&#39;: {&#39;from_parameter&#39;: &#39;data&#39;},
+             &#39;index&#39;: 0},
+            &#39;process_id&#39;: &#39;array_element&#39;},
+           &#39;arrayelement2&#39;: {&#39;arguments&#39;: {&#39;data&#39;: {&#39;from_parameter&#39;: &#39;data&#39;},
+             &#39;index&#39;: 1},
+            &#39;process_id&#39;: &#39;array_element&#39;},
+           &#39;divide1&#39;: {&#39;arguments&#39;: {&#39;x&#39;: {&#39;from_node&#39;: &#39;subtract1&#39;},
+             &#39;y&#39;: {&#39;from_node&#39;: &#39;add1&#39;}},
+            &#39;process_id&#39;: &#39;divide&#39;},
+           &#39;gt1&#39;: {&#39;arguments&#39;: {&#39;x&#39;: {&#39;from_node&#39;: &#39;divide1&#39;}, &#39;y&#39;: 0.4},
+            &#39;process_id&#39;: &#39;gt&#39;},
+           &#39;multiply1&#39;: {&#39;arguments&#39;: {&#39;x&#39;: {&#39;from_node&#39;: &#39;gt1&#39;}, &#39;y&#39;: 1.0},
+            &#39;process_id&#39;: &#39;multiply&#39;,
+            &#39;result&#39;: True},
+           &#39;subtract1&#39;: {&#39;arguments&#39;: {&#39;x&#39;: {&#39;from_node&#39;: &#39;arrayelement1&#39;},
+             &#39;y&#39;: {&#39;from_node&#39;: &#39;arrayelement2&#39;}},
+            &#39;process_id&#39;: &#39;subtract&#39;}}}},
+        &#39;process_id&#39;: &#39;reduce_dimension&#39;},
+       &#39;reducedimension2&#39;: {&#39;arguments&#39;: {&#39;data&#39;: {&#39;from_node&#39;: &#39;loadcollection1&#39;},
+         &#39;dimension&#39;: &#39;bands&#39;,
+         &#39;reducer&#39;: {&#39;process_graph&#39;: {&#39;arrayelement3&#39;: {&#39;arguments&#39;: {&#39;data&#39;: {&#39;from_parameter&#39;: &#39;data&#39;},
+             &#39;index&#39;: 2},
+            &#39;process_id&#39;: &#39;array_element&#39;},
+           &#39;eq1&#39;: {&#39;arguments&#39;: {&#39;x&#39;: {&#39;from_node&#39;: &#39;arrayelement3&#39;}, &#39;y&#39;: 8},
+            &#39;process_id&#39;: &#39;eq&#39;},
+           &#39;eq2&#39;: {&#39;arguments&#39;: {&#39;x&#39;: {&#39;from_node&#39;: &#39;arrayelement3&#39;}, &#39;y&#39;: 9},
+            &#39;process_id&#39;: &#39;eq&#39;},
+           &#39;eq3&#39;: {&#39;arguments&#39;: {&#39;x&#39;: {&#39;from_node&#39;: &#39;arrayelement3&#39;}, &#39;y&#39;: 3},
+            &#39;process_id&#39;: &#39;eq&#39;},
+           &#39;multiply2&#39;: {&#39;arguments&#39;: {&#39;x&#39;: {&#39;from_node&#39;: &#39;or2&#39;}, &#39;y&#39;: 1.0},
+            &#39;process_id&#39;: &#39;multiply&#39;,
+            &#39;result&#39;: True},
+           &#39;or1&#39;: {&#39;arguments&#39;: {&#39;x&#39;: {&#39;from_node&#39;: &#39;eq1&#39;},
+             &#39;y&#39;: {&#39;from_node&#39;: &#39;eq2&#39;}},
+            &#39;process_id&#39;: &#39;or&#39;},
+           &#39;or2&#39;: {&#39;arguments&#39;: {&#39;x&#39;: {&#39;from_node&#39;: &#39;or1&#39;},
+             &#39;y&#39;: {&#39;from_node&#39;: &#39;eq3&#39;}},
+            &#39;process_id&#39;: &#39;or&#39;}}}},
+        &#39;process_id&#39;: &#39;reduce_dimension&#39;},
+       &#39;reducedimension3&#39;: {&#39;arguments&#39;: {&#39;data&#39;: {&#39;from_node&#39;: &#39;mask1&#39;},
+         &#39;dimension&#39;: &#39;t&#39;,
+         &#39;reducer&#39;: {&#39;process_graph&#39;: {&#39;median1&#39;: {&#39;arguments&#39;: {&#39;data&#39;: {&#39;from_parameter&#39;: &#39;data&#39;}},
+            &#39;process_id&#39;: &#39;median&#39;,
+            &#39;result&#39;: True}}}},
+        &#39;process_id&#39;: &#39;reduce_dimension&#39;},
+       &#39;saveresult1&#39;: {&#39;arguments&#39;: {&#39;data&#39;: {&#39;from_node&#39;: &#39;reducedimension3&#39;},
+         &#39;format&#39;: &#39;GTiff&#39;,
+         &#39;options&#39;: {}},
+        &#39;process_id&#39;: &#39;save_result&#39;,
+        &#39;result&#39;: True}},
+      &#39;format&#39;: &#39;openeo&#39;}],
+    &#39;processing:facility&#39;: &#39;openEO Geotrellis backend&#39;,
+    &#39;processing:software&#39;: {&#39;Geotrellis backend&#39;: &#39;0.24.0a1&#39;},
+    &#39;roles&#39;: [&#39;processor&#39;]},
+   {&#39;name&#39;: &#39;Rufai Omowunmi Balogun&#39;,
+    &#39;description&#39;: &#39;snow map of merano&#39;,
+    &#39;roles&#39;: [&#39;processor&#39;]}]},
+ &#39;links&#39;: [{&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/02/02/S2A_MSIL2A_20230202T101231_N0509_R022_T32TPS_20230202T142000.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/02/02/S2A_MSIL2A_20230202T101231_N0509_R022_T32TPS_20230202T142000.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/02/05/S2A_MSIL2A_20230205T102221_N0509_R065_T32TPS_20230205T135958.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/02/05/S2A_MSIL2A_20230205T102221_N0509_R065_T32TPS_20230205T135958.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/02/07/S2B_MSIL2A_20230207T101109_N0509_R022_T32TPS_20230207T124736.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/02/07/S2B_MSIL2A_20230207T101109_N0509_R022_T32TPS_20230207T124736.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/02/10/S2B_MSIL2A_20230210T102049_N0509_R065_T32TPS_20230210T125716.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/02/10/S2B_MSIL2A_20230210T102049_N0509_R065_T32TPS_20230210T125716.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/02/12/S2A_MSIL2A_20230212T101131_N0509_R022_T32TPS_20230212T142159.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/02/12/S2A_MSIL2A_20230212T101131_N0509_R022_T32TPS_20230212T142159.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/02/15/S2A_MSIL2A_20230215T102121_N0509_R065_T32TPS_20230215T141008.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/02/15/S2A_MSIL2A_20230215T102121_N0509_R065_T32TPS_20230215T141008.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/02/17/S2B_MSIL2A_20230217T101029_N0509_R022_T32TPS_20230217T125054.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/02/17/S2B_MSIL2A_20230217T101029_N0509_R022_T32TPS_20230217T125054.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/02/20/S2B_MSIL2A_20230220T101949_N0509_R065_T32TPS_20230220T145403.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/02/20/S2B_MSIL2A_20230220T101949_N0509_R065_T32TPS_20230220T145403.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/02/22/S2A_MSIL2A_20230222T101031_N0509_R022_T32TPS_20230222T141055.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/02/22/S2A_MSIL2A_20230222T101031_N0509_R022_T32TPS_20230222T141055.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/02/25/S2A_MSIL2A_20230225T102021_N0509_R065_T32TPS_20230225T163245.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/02/25/S2A_MSIL2A_20230225T102021_N0509_R065_T32TPS_20230225T163245.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/02/27/S2B_MSIL2A_20230227T101029_N0509_R022_T32TPS_20230227T124853.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/02/27/S2B_MSIL2A_20230227T101029_N0509_R022_T32TPS_20230227T124853.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/03/02/S2B_MSIL2A_20230302T101839_N0509_R065_T32TPS_20230302T165059.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/03/02/S2B_MSIL2A_20230302T101839_N0509_R065_T32TPS_20230302T165059.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/03/04/S2A_MSIL2A_20230304T101021_N0509_R022_T32TPS_20230907T154000.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/03/04/S2A_MSIL2A_20230304T101021_N0509_R022_T32TPS_20230907T154000.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/03/07/S2A_MSIL2A_20230307T101901_N0509_R065_T32TPS_20230307T162402.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/03/07/S2A_MSIL2A_20230307T101901_N0509_R065_T32TPS_20230307T162402.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/03/09/S2B_MSIL2A_20230309T100749_N0509_R022_T32TPS_20230309T162710.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/03/09/S2B_MSIL2A_20230309T100749_N0509_R022_T32TPS_20230309T162710.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/03/12/S2B_MSIL2A_20230312T101729_N0509_R065_T32TPS_20230312T163807.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/03/12/S2B_MSIL2A_20230312T101729_N0509_R065_T32TPS_20230312T163807.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/03/14/S2A_MSIL2A_20230314T101021_N0509_R022_T32TPS_20230314T161800.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/03/14/S2A_MSIL2A_20230314T101021_N0509_R022_T32TPS_20230314T161800.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/03/17/S2A_MSIL2A_20230317T101741_N0509_R065_T32TPS_20230317T162557.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/03/17/S2A_MSIL2A_20230317T101741_N0509_R065_T32TPS_20230317T162557.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/03/19/S2B_MSIL2A_20230319T100649_N0509_R022_T32TPS_20230319T130804.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/03/19/S2B_MSIL2A_20230319T100649_N0509_R022_T32TPS_20230319T130804.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/03/22/S2B_MSIL2A_20230322T101649_N0509_R065_T32TPS_20230322T145625.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/03/22/S2B_MSIL2A_20230322T101649_N0509_R065_T32TPS_20230322T145625.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/03/24/S2A_MSIL2A_20230324T101021_N0509_R022_T32TPS_20230324T161752.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/03/24/S2A_MSIL2A_20230324T101021_N0509_R022_T32TPS_20230324T161752.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/03/27/S2A_MSIL2A_20230327T101631_N0509_R065_T32TPS_20230327T162303.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/03/27/S2A_MSIL2A_20230327T101631_N0509_R065_T32TPS_20230327T162303.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/03/29/S2B_MSIL2A_20230329T100629_N0509_R022_T32TPS_20230329T130657.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/03/29/S2B_MSIL2A_20230329T100629_N0509_R022_T32TPS_20230329T130657.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/04/01/S2B_MSIL2A_20230401T101559_N0509_R065_T32TPS_20230401T145632.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/04/01/S2B_MSIL2A_20230401T101559_N0509_R065_T32TPS_20230401T145632.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/04/03/S2A_MSIL2A_20230403T100551_N0509_R022_T32TPS_20230403T162459.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/04/03/S2A_MSIL2A_20230403T100551_N0509_R022_T32TPS_20230403T162459.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/04/06/S2A_MSIL2A_20230406T102021_N0509_R065_T32TPS_20230406T194357.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/04/06/S2A_MSIL2A_20230406T102021_N0509_R065_T32TPS_20230406T194357.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/04/08/S2B_MSIL2A_20230408T100559_N0509_R022_T32TPS_20230408T131134.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/04/08/S2B_MSIL2A_20230408T100559_N0509_R022_T32TPS_20230408T131134.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/04/11/S2B_MSIL2A_20230411T101559_N0509_R065_T32TPS_20230411T131019.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/04/11/S2B_MSIL2A_20230411T101559_N0509_R065_T32TPS_20230411T131019.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/04/13/S2A_MSIL2A_20230413T100551_N0509_R022_T32TPS_20230413T161903.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/04/13/S2A_MSIL2A_20230413T100551_N0509_R022_T32TPS_20230413T161903.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/04/16/S2A_MSIL2A_20230416T101601_N0509_R065_T32TPS_20230416T162901.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/04/16/S2A_MSIL2A_20230416T101601_N0509_R065_T32TPS_20230416T162901.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/04/18/S2B_MSIL2A_20230418T100559_N0509_R022_T32TPS_20230418T131202.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/04/18/S2B_MSIL2A_20230418T100559_N0509_R022_T32TPS_20230418T131202.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/04/21/S2B_MSIL2A_20230421T101559_N0509_R065_T32TPS_20230421T131333.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/04/21/S2B_MSIL2A_20230421T101559_N0509_R065_T32TPS_20230421T131333.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/04/23/S2A_MSIL2A_20230423T100551_N0509_R022_T32TPS_20230423T162900.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/04/23/S2A_MSIL2A_20230423T100551_N0509_R022_T32TPS_20230423T162900.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/04/26/S2A_MSIL2A_20230426T101601_N0509_R065_T32TPS_20230426T162055.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/04/26/S2A_MSIL2A_20230426T101601_N0509_R065_T32TPS_20230426T162055.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/04/28/S2B_MSIL2A_20230428T100559_N0509_R022_T32TPS_20230428T133214.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/04/28/S2B_MSIL2A_20230428T100559_N0509_R022_T32TPS_20230428T133214.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/05/01/S2B_MSIL2A_20230501T101559_N0509_R065_T32TPS_20230501T132325.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/05/01/S2B_MSIL2A_20230501T101559_N0509_R065_T32TPS_20230501T132325.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/05/03/S2A_MSIL2A_20230503T101021_N0509_R022_T32TPS_20230503T180406.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/05/03/S2A_MSIL2A_20230503T101021_N0509_R022_T32TPS_20230503T180406.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/05/06/S2A_MSIL2A_20230506T101601_N0509_R065_T32TPS_20230506T162659.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/05/06/S2A_MSIL2A_20230506T101601_N0509_R065_T32TPS_20230506T162659.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/05/08/S2B_MSIL2A_20230508T100559_N0509_R022_T32TPS_20230508T131238.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/05/08/S2B_MSIL2A_20230508T100559_N0509_R022_T32TPS_20230508T131238.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/05/11/S2B_MSIL2A_20230511T101559_N0509_R065_T32TPS_20230511T163715.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/05/11/S2B_MSIL2A_20230511T101559_N0509_R065_T32TPS_20230511T163715.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/05/13/S2A_MSIL2A_20230513T100551_N0509_R022_T32TPS_20230513T161552.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/05/13/S2A_MSIL2A_20230513T100551_N0509_R022_T32TPS_20230513T161552.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/05/16/S2A_MSIL2A_20230516T101601_N0509_R065_T32TPS_20230516T181153.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/05/16/S2A_MSIL2A_20230516T101601_N0509_R065_T32TPS_20230516T181153.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/05/18/S2B_MSIL2A_20230518T100559_N0509_R022_T32TPS_20230518T144255.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/05/18/S2B_MSIL2A_20230518T100559_N0509_R022_T32TPS_20230518T144255.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/05/21/S2B_MSIL2A_20230521T101609_N0509_R065_T32TPS_20230521T131745.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/05/21/S2B_MSIL2A_20230521T101609_N0509_R065_T32TPS_20230521T131745.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/05/23/S2A_MSIL2A_20230523T100601_N0509_R022_T32TPS_20230523T161057.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/05/23/S2A_MSIL2A_20230523T100601_N0509_R022_T32TPS_20230523T161057.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/05/26/S2A_MSIL2A_20230526T101601_N0509_R065_T32TPS_20230526T162854.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/05/26/S2A_MSIL2A_20230526T101601_N0509_R065_T32TPS_20230526T162854.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/05/28/S2B_MSIL2A_20230528T100559_N0509_R022_T32TPS_20230528T131159.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/05/28/S2B_MSIL2A_20230528T100559_N0509_R022_T32TPS_20230528T131159.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;/eodata/Sentinel-2/MSI/L2A/2023/05/31/S2B_MSIL2A_20230531T101559_N0509_R065_T32TPS_20230531T131936.SAFE&#39;,
+   &#39;rel&#39;: &#39;derived_from&#39;,
+   &#39;title&#39;: &#39;Derived from /eodata/Sentinel-2/MSI/L2A/2023/05/31/S2B_MSIL2A_20230531T101559_N0509_R065_T32TPS_20230531T131936.SAFE&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;https://openeo.dataspace.copernicus.eu/openeo/1.2/jobs/j-2401318f19a84122b62657ed798f0c9e/results&#39;,
+   &#39;rel&#39;: &#39;self&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;https://openeo.dataspace.copernicus.eu/openeo/1.2/jobs/j-2401318f19a84122b62657ed798f0c9e/results/MDYxODNjYmMtODRjOC00YzZhLThhN2QtY2IxOGJhMDhjYzhj/e967c4ba33e20f0757876cf974ef7eb7?expires=1707311403&#39;,
+   &#39;rel&#39;: &#39;canonical&#39;,
+   &#39;type&#39;: &#39;application/json&#39;},
+  {&#39;href&#39;: &#39;http://ceos.org/ard/files/PFS/SR/v5.0/CARD4L_Product_Family_Specification_Surface_Reflectance-v5.0.pdf&#39;,
+   &#39;rel&#39;: &#39;card4l-document&#39;,
+   &#39;type&#39;: &#39;application/pdf&#39;},
+  {&#39;href&#39;: &#39;https://openeo.dataspace.copernicus.eu/openeo/1.2/jobs/j-2401318f19a84122b62657ed798f0c9e/results/items/MDYxODNjYmMtODRjOC00YzZhLThhN2QtY2IxOGJhMDhjYzhj/ed41e358ad1fe308f681e33015b06869/openEO.tif?expires=1707311403&#39;,
+   &#39;rel&#39;: &#39;item&#39;,
+   &#39;type&#39;: &#39;application/geo+json&#39;}],
+ &#39;assets&#39;: {&#39;visual&#39;: {&#39;href&#39;: &#39;openEO_uint8.tif&#39;,
+   &#39;type&#39;: &#39;image/tiff; application=geotiff; profile=cloud-optimized&#39;,
+   &#39;title&#39;: &#39;Snow coverage&#39;,
+   &#39;roles&#39;: [&#39;data&#39;]}}}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Saving the resulting item as stac_item.json into results folder</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stac_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">stac_item</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;33_results/stac_item.json&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">stac_json</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Validating that STAC item is important - non valid STAC will not be displayed in the STAC browser after upload</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">stac_validator</span> <span class="kn">import</span> <span class="n">stac_validator</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">stac</span> <span class="o">=</span> <span class="n">stac_validator</span><span class="o">.</span><span class="n">StacValidate</span><span class="p">()</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;33_results/stac_item.json&#39;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">stac</span><span class="o">.</span><span class="n">validate_dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stac</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;version&#39;: &#39;1.0.0&#39;, &#39;path&#39;: None, &#39;schema&#39;: [&#39;https://schemas.stacspec.org/v1.0.0/item-spec/json-schema/item.json&#39;], &#39;valid_stac&#39;: True, &#39;asset_type&#39;: &#39;ITEM&#39;, &#39;validation_method&#39;: &#39;default&#39;}]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="now-it-is-time-to-upload-solution-to-the-submission-folder-and-make-results-visible-in-stac-browser">
+<h3>Now it is time to upload solution to the submission folder and make results visible in STAC browser<a class="headerlink" href="#now-it-is-time-to-upload-solution-to-the-submission-folder-and-make-results-visible-in-stac-browser" title="Link to this heading">#</a></h3>
+<p>Upload both the STAC json file and the final .tif file to “submissions” folder in your home directory</p>
+<p>You can use the code below to copy the results to the submissions folder</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cp<span class="w"> </span>./33_results/stac_item.json<span class="w"> </span>~/submissions/
+<span class="o">!</span>cp<span class="w"> </span>./33_results/openEO_uint8.tif<span class="w"> </span>~/submissions/
+</pre></div>
+</div>
+</div>
+</div>
+<p>And now by executing the cell below, update of the STAC browser will start. By this, you are uploading your results to the openly available STAC browser. This might take some minutes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env_var1</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;EMAIL&#39;</span><span class="p">)</span>
+<span class="n">curl_command</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;curl -X POST -F token=glptt-42d31ac6f592a9e321d0e4877e654dc50dcf4854 -F ref=main -F &#39;variables[USER_DIRECTORY]=</span><span class="se">\&quot;</span><span class="si">{</span><span class="n">env_var1</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&#39; https://gitlab.eox.at/api/v4/projects/554/trigger/pipeline&quot;</span> 
+<span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">curl_command</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+<span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="your-results-are-online">
+<h3>Your results are online!<a class="headerlink" href="#your-results-are-online" title="Link to this heading">#</a></h3>
+<p>You can now browse your results together with all the other submissions at the publicly available STAC Catalog! You can check your snow cover map, that you are correctly listed as the author and that your contribution has the correct name. The license on the STAC Collection “Cubes and Clouds: Snow Cover” is CC-BY-4.0. The STAC Collection also has it’s own DOI.</p>
+<p>Congratulations you have just contributed to a community mapping project that is completely open source, open data and FAIR! Make sure to show it also to your friends, colleagues or potential employers :)</p>
+<p><a class="reference external" href="https://esa.pages.eox.at/cubes-and-clouds-catalog/browser/#/?.language=en">https://esa.pages.eox.at/cubes-and-clouds-catalog/browser/#/?.language=en</a></p>
+<p>If you would like to redo your submission, you can still update your files in submissions folder and once ready, run again the code in the cell above.</p>
+<p><strong>Attention:</strong> If you have previously opened the STAC browser, your old submission will be cached and not directly displayed. To circumvent this, open a private window from your browser.</p>
+<p>Happy coding!</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "conda-env-cubes-and-clouds-cubes-and-clouds2-py"
+        },
+        kernelOptions: {
+            name: "conda-env-cubes-and-clouds-cubes-and-clouds2-py",
+            path: "./3.3_data_sharing/3.3_exercises"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'conda-env-cubes-and-clouds-cubes-and-clouds2-py'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../3.3_data_sharing.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">3.3 Data Sharing</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../9.9_master_asi_conae/s2_sca.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Sentinel-2 snow cover area (SCA) time series</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libraries">Libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#login">Login</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-an-area-of-interest-and-time-frame">Select an Area of Interest and Time Frame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reuse-the-process-graph-of-the-snow-covered-area-data-cube">Reuse the process graph of the snow covered area data cube</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduce-the-time-dimension">Reduce the time dimension</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-result">Download result</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-results">Load results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-stac-metadata">Load STAC metadata</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-author-of-the-data">Adding Author of the data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#now-it-is-time-to-upload-solution-to-the-submission-folder-and-make-results-visible-in-stac-browser">Now it is time to upload solution to the submission folder and make results visible in STAC browser</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#your-results-are-online">Your results are online!</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By ESA
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

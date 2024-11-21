@@ -1,0 +1,1729 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3.1 Data Processing &#8212; Cubes &amp; Clouds - Cloud Native Open Data Sciences for Earth Observation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '3.1_data_processing/3.1_exercises/31_data_processing';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3.1 Data Processing" href="_alternatives/31_data_processing_stac.html" />
+    <link rel="prev" title="3.1 Data Processing" href="../3.1_data_processing.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>
+    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    Lectures
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setup</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../0_introduction/0_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../0_introduction/exercises/0_login.html">Login to openEO</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../1.1_intro_platform/1.1_intro_platform.html">Earth Observation cloud platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../1.2_data_cube/1.2_data_cube.html">What is a data cube?</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../1.3_openscience/1.3.1_openscienceandfair.html">Open Science and the FAIR Principles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../1.3_openscience/1.3.3_openscienceineo.html">The Open Science Journey - Open Science in geospatial, EO and EO cloud platforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1.3_openscience/1.3.2_opendataopensource.html">Open Data and Open Source Software</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Discovery and metadata</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../2.1_data_discovery/2.1_data_discovery.html">Data Discovery</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../2.2_data_properties/2.2_data_properties.html">Data Properties</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data access with OpenEO</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../2.3_data_access/2.3_data_access.html">Access EO Data from the Cloud</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data formats for achieving scalability</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../2.4_formats_and_performance/2.4_formats_and_performance.html">Data Formats and Performance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Process &amp; Share</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../3.1_data_processing.html">Data processing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Basic EO workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_alternatives/31_data_processing_stac.html">EO workflow with STAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_alternatives/31_data_processing_openEO_Platform.html">EO workflow with openEO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_alternatives/34_data_sharing_aoi_test.html">Data sharing and publishing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3.2_validation/3.2_validation.html">Validation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../3.2_validation/3.2_exercises/32_validation.html">Exercise validation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3.3_data_sharing/3.3_data_sharing.html">Data sharing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../3.3_data_sharing/3.3_exercises/33_data_sharing.html">Exercise data sharing</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional materials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../9.9_master_asi_conae/s2_sca.html">Sentinel-2 snow cover area (SCA) time series</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../9.9_master_asi_conae/test/s1.html">S1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../9.9_master_asi_conae/test/s2_snowcover_test.html">Sentinel-2 snow cover</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../9.9_master_asi_conae/test/test_s1_s3.html">Sentinel-1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../9.9_master_asi_conae/test/s3_ndsi.html">List all the available dataset</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds/issues/new?title=Issue%20on%20page%20%2F3.1_data_processing/3.1_exercises/31_data_processing.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/3.1_data_processing/3.1_exercises/31_data_processing.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>3.1 Data Processing</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libraries">Libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-to-a-cloud-platform">Connect to a cloud platform</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#region-of-interest">Region of Interest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspect-metadata">Inspect Metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-workflow">Define a workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-data-cube">Define the data cube</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-data-cube">Load the data cube</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ndsi-normalized-difference-snow-index">NDSI - Normalized Difference Snow Index</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-the-snow-map">Creating the Snow Map</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-cloud-mask">Creating a cloud mask</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-the-cloud-mask-to-the-snowmap">Applying the cloud mask to the snowmap</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mask-polygon-from-bounding-box-to-shape">Mask Polygon: From Bounding Box to Shape</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-one-time-step-of-the-timeseries">Visualize one time step of the timeseries</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-catchment-statistics">Calculate Catchment Statistics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#count-pixels-and-aggregate-spatially-to-the-catchment">Count pixels and aggregate spatially to the catchment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#register-a-batch-job-for-processing">Register a batch job for processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-resulting-time-series">Load the resulting time series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-the-cloud-percentage-for-filtering-time-steps">Calculate the cloud percentage for filtering time steps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-the-snow-percentage">Calculate the snow percentage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-out-cloudy-time-steps">Filter out cloudy time steps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-and-save-the-cloud-free-snow-percentage-time-series">Plot and save the cloud free snow percentage time series</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p><img src="https://raw.githubusercontent.com/EO-College/cubes-and-clouds/main/icons/cnc_3icons_process_circle.svg"
+     alt="Cubes & Clouds logo"
+     style="float: center; margin-right: 10px;" /></p>
+<section class="tex2jax_ignore mathjax_ignore" id="data-processing">
+<h1>3.1 Data Processing<a class="headerlink" href="#data-processing" title="Link to this heading">#</a></h1>
+<p>In this exercise we will build a complete EO workflow on a cloud platform; from data access to obtaining the result. In this example we will analyse snow cover in the Alps.</p>
+<p>We are going to follow these steps in our analysis:</p>
+<ul class="simple">
+<li><p>Load satellite collections</p></li>
+<li><p>Specify the spatial, temporal extents and the features we are interested in</p></li>
+<li><p>Process the satellite data to retrieve snow cover information</p></li>
+<li><p>aggregate information to get catchment statistics over time</p></li>
+<li><p>Visualize and analyse the results</p></li>
+</ul>
+<p>More information on the openEO Python Client: <a class="reference external" href="https://open-eo.github.io/openeo-python-client/index.html">https://open-eo.github.io/openeo-python-client/index.html</a></p>
+<section id="libraries">
+<h2>Libraries<a class="headerlink" href="#libraries" title="Link to this heading">#</a></h2>
+<p>We start by creating the shared folders and data files needed to complete the exercise using the following shell commands</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cp<span class="w"> </span>-r<span class="w"> </span><span class="nv">$DATA_PATH</span>/31_results/<span class="w"> </span><span class="nv">$HOME</span>/
+<span class="o">!</span>cp<span class="w"> </span>-r<span class="w"> </span><span class="nv">$DATA_PATH</span>/31_data/<span class="w"> </span><span class="nv">$HOME</span>/
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># platform libraries</span>
+<span class="kn">import</span> <span class="nn">openeo</span>
+
+<span class="c1"># utility libraries</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">rioxarray</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">leafmap.foliumap</span> <span class="k">as</span> <span class="nn">leafmap</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="connect-to-a-cloud-platform">
+<h2>Connect to a cloud platform<a class="headerlink" href="#connect-to-a-cloud-platform" title="Link to this heading">#</a></h2>
+<p>Connect to the Copernicus Dataspace Ecosystem. Being connected allows for data discovery.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conn</span> <span class="o">=</span> <span class="n">openeo</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;https://openeo.dataspace.copernicus.eu/&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And login. Being logged in allows to use the full range of functionality including processing!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">authenticate_oidc</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Authenticated using refresh token.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Connection to &#39;https://openeo.dataspace.copernicus.eu/openeo/1.2/&#39; with OidcBearerAuth&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Check if the login worked.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">describe_account</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="region-of-interest">
+<h2>Region of Interest<a class="headerlink" href="#region-of-interest" title="Link to this heading">#</a></h2>
+<p>Our region of interest is the Val Passiria Catchment in the South Tyrolian Alps (Italy). Let’s load the catchment area.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">catchment_outline</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;31_data/catchment_outline.geojson&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">center</span> <span class="o">=</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">catchment_outline</span><span class="o">.</span><span class="n">centroid</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">catchment_outline</span><span class="o">.</span><span class="n">centroid</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">leafmap</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="n">center</span><span class="p">,</span> <span class="n">zoom</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">add_vector</span><span class="p">(</span><span class="s1">&#39;31_data/catchment_outline.geojson&#39;</span><span class="p">,</span> <span class="n">layer_name</span><span class="o">=</span><span class="s2">&quot;catchment&quot;</span><span class="p">)</span>
+<span class="n">m</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><iframe srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+    
+        &lt;script&gt;
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        &lt;/script&gt;
+    
+    &lt;style&gt;html, body {width: 100%;height: 100%;margin: 0;padding: 0;}&lt;/style&gt;
+    &lt;style&gt;#map {position:absolute;top:0;bottom:0;right:0;left:0;}&lt;/style&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://code.jquery.com/jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/&gt;
+    
+            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
+            &lt;style&gt;
+                #map_470459cf54cd8c631d30856a4b190b48 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            &lt;/style&gt;
+        
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.min.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.css&quot;/&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.2/leaflet.draw.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.2/leaflet.draw.css&quot;/&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.css&quot;/&gt;
+    &lt;script src=&quot;https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css&quot;/&gt;
+    
+                    &lt;style&gt;
+                        .foliumtooltip {
+                            
+                        }
+                       .foliumtooltip table{
+                            margin: auto;
+                        }
+                        .foliumtooltip tr{
+                            text-align: left;
+                        }
+                        .foliumtooltip th{
+                            padding: 2px; padding-right: 8px;
+                        }
+                    &lt;/style&gt;
+            
+&lt;/head&gt;
+&lt;body&gt;
+    
+    
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_470459cf54cd8c631d30856a4b190b48&quot; &gt;&lt;/div&gt;
+        
+&lt;/body&gt;
+&lt;script&gt;
+    
+    
+            var map_470459cf54cd8c631d30856a4b190b48 = L.map(
+                &quot;map_470459cf54cd8c631d30856a4b190b48&quot;,
+                {
+                    center: [46.79856263096177, 11.177346530561929],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 10,
+                    zoomControl: true,
+                    preferCanvas: false,
+                    drawExport: false,
+                    layersControl: true,
+                }
+            );
+            L.control.scale().addTo(map_470459cf54cd8c631d30856a4b190b48);
+
+            
+
+        
+    
+            var tile_layer_c17a6b14dec8b45f98c2d66aa23b97bd = L.tileLayer(
+                &quot;https://tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
+                {&quot;attribution&quot;: &quot;\u0026copy; \u003ca href=\&quot;https://www.openstreetmap.org/copyright\&quot;\u003eOpenStreetMap\u003c/a\u003e contributors&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 19, &quot;maxZoom&quot;: 19, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
+            );
+        
+    
+            tile_layer_c17a6b14dec8b45f98c2d66aa23b97bd.addTo(map_470459cf54cd8c631d30856a4b190b48);
+        
+    
+            L.control.fullscreen(
+                {&quot;forceSeparateButton&quot;: false, &quot;position&quot;: &quot;topleft&quot;, &quot;title&quot;: &quot;Full Screen&quot;, &quot;titleCancel&quot;: &quot;Exit Full Screen&quot;}
+            ).addTo(map_470459cf54cd8c631d30856a4b190b48);
+        
+    
+            var options = {
+              position: &quot;topleft&quot;,
+              draw: {},
+              edit: {},
+            }
+            // FeatureGroup is to store editable layers.
+            var drawnItems_draw_control_8e9b035ebe7388c02cf451a099e75262 = new L.featureGroup().addTo(
+                map_470459cf54cd8c631d30856a4b190b48
+            );
+            options.edit.featureGroup = drawnItems_draw_control_8e9b035ebe7388c02cf451a099e75262;
+            var draw_control_8e9b035ebe7388c02cf451a099e75262 = new L.Control.Draw(
+                options
+            ).addTo( map_470459cf54cd8c631d30856a4b190b48 );
+            map_470459cf54cd8c631d30856a4b190b48.on(L.Draw.Event.CREATED, function(e) {
+                var layer = e.layer,
+                    type = e.layerType;
+                var coords = JSON.stringify(layer.toGeoJSON());
+                layer.on(&#x27;click&#x27;, function() {
+                    alert(coords);
+                    console.log(coords);
+                });
+                drawnItems_draw_control_8e9b035ebe7388c02cf451a099e75262.addLayer(layer);
+             });
+            map_470459cf54cd8c631d30856a4b190b48.on(&#x27;draw:created&#x27;, function(e) {
+                drawnItems_draw_control_8e9b035ebe7388c02cf451a099e75262.addLayer(e.layer);
+            });
+            
+        
+    
+            var measure_control_218f184d697b7b07dd279dd1330ea90b = new L.Control.Measure(
+                {&quot;position&quot;: &quot;bottomleft&quot;, &quot;primaryAreaUnit&quot;: &quot;sqmeters&quot;, &quot;primaryLengthUnit&quot;: &quot;meters&quot;, &quot;secondaryAreaUnit&quot;: &quot;acres&quot;, &quot;secondaryLengthUnit&quot;: &quot;miles&quot;});
+            map_470459cf54cd8c631d30856a4b190b48.addControl(measure_control_218f184d697b7b07dd279dd1330ea90b);
+
+            // Workaround for using this plugin with Leaflet&gt;=1.8.0
+            // https://github.com/ljagis/leaflet-measure/issues/171
+            L.Control.Measure.include({
+                _setCaptureMarkerIcon: function () {
+                    // disable autopan
+                    this._captureMarker.options.autoPanOnFocus = false;
+                    // default function
+                    this._captureMarker.setIcon(
+                        L.divIcon({
+                            iconSize: this._map.getSize().multiplyBy(2)
+                        })
+                    );
+                },
+            });
+
+        
+    
+            L.Control.geocoder(
+                {&quot;collapsed&quot;: true, &quot;defaultMarkGeocode&quot;: true, &quot;position&quot;: &quot;topleft&quot;}
+            ).on(&#x27;markgeocode&#x27;, function(e) {
+                map_470459cf54cd8c631d30856a4b190b48.setView(e.geocode.center, 11);
+            }).addTo(map_470459cf54cd8c631d30856a4b190b48);
+
+        
+    
+            map_470459cf54cd8c631d30856a4b190b48.fitBounds(
+                [[46.79856263096177, 11.177346530561929], [46.79856263096177, 11.177346530561929]],
+                {&quot;maxZoom&quot;: 10}
+            );
+        
+    
+        function geo_json_25e0b1298ec1448c1c1b1277f742d16d_styler(feature) {
+            switch(feature.properties.HYBAS_ID) {
+                default:
+                    return {&quot;color&quot;: &quot;#3388ff&quot;, &quot;fillOpacity&quot;: 0, &quot;opacity&quot;: 1, &quot;weight&quot;: 2};
+            }
+        }
+        function geo_json_25e0b1298ec1448c1c1b1277f742d16d_highlighter(feature) {
+            switch(feature.properties.HYBAS_ID) {
+                default:
+                    return {&quot;fillOpacity&quot;: 0, &quot;weight&quot;: 4};
+            }
+        }
+
+        function geo_json_25e0b1298ec1448c1c1b1277f742d16d_onEachFeature(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === &quot;function&quot;){
+                        geo_json_25e0b1298ec1448c1c1b1277f742d16d.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === &quot;function&quot;){
+                        const highlightStyle = geo_json_25e0b1298ec1448c1c1b1277f742d16d_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_25e0b1298ec1448c1c1b1277f742d16d = L.geoJson(null, {
+                onEachFeature: geo_json_25e0b1298ec1448c1c1b1277f742d16d_onEachFeature,
+            
+                style: geo_json_25e0b1298ec1448c1c1b1277f742d16d_styler,
+        });
+
+        function geo_json_25e0b1298ec1448c1c1b1277f742d16d_add (data) {
+            geo_json_25e0b1298ec1448c1c1b1277f742d16d
+                .addData(data);
+        }
+            geo_json_25e0b1298ec1448c1c1b1277f742d16d_add({&quot;crs&quot;: {&quot;properties&quot;: {&quot;name&quot;: &quot;urn:ogc:def:crs:OGC:1.3:CRS84&quot;}, &quot;type&quot;: &quot;name&quot;}, &quot;features&quot;: [{&quot;geometry&quot;: {&quot;coordinates&quot;: [[[11.075, 46.72916666666669], [11.072575547960094, 46.728813340928845], [11.069091118706622, 46.72535332573787], [11.048285590277802, 46.724646674262175], [11.042024739583358, 46.73087632921009], [11.041666666666691, 46.733333333333356], [11.038123575846377, 46.73424241807728], [11.0375, 46.74583333333336], [11.03664923773874, 46.74914923773874], [11.030017428927975, 46.75085076226131], [11.028599378797768, 46.756377156575546], [11.025567287868947, 46.76028951009117], [11.0244327121311, 46.76471048990888], [11.02140062120228, 46.7686228434245], [11.020833333333357, 46.77083333333336], [11.024291653103322, 46.77172071668839], [11.025567287868947, 46.781377156575545], [11.032766045464435, 46.78945617675784], [11.033900621202282, 46.79387715657555], [11.036932712131101, 46.79778951009117], [11.038067287868948, 46.80221048990888], [11.042586263020858, 46.80762905544707], [11.052210489908878, 46.808900621202284], [11.06028951009117, 46.816099378797766], [11.06471048990888, 46.81723395453562], [11.068622843424503, 46.820266045464436], [11.073043823242212, 46.82140062120228], [11.077974107530407, 46.82522176106773], [11.079733954535614, 46.83010389539933], [11.071295166015648, 46.83957451714412], [11.0744327121311, 46.843622843424505], [11.075567287868948, 46.846579996744815], [11.071400621202281, 46.85195617675784], [11.070266045464434, 46.859321424696205], [11.082766045464435, 46.872789510091174], [11.084041680230058, 46.882445949978326], [11.089710489908878, 46.88390062120228], [11.09995964898006, 46.89319695366756], [11.096400621202282, 46.89778951009117], [11.095266045464435, 46.91343722873266], [11.103599378797767, 46.92278951009117], [11.104166666666691, 46.929166666666696], [11.114924452039954, 46.92951999240454], [11.11875, 46.9333187527127], [11.12328694661461, 46.92881334092885], [11.139924452039956, 46.92951999240454], [11.143408881293428, 46.93298000759551], [11.148288302951414, 46.933691067165825], [11.157980007595512, 46.94340888129343], [11.158691406250025, 46.948290337456626], [11.16424221462676, 46.953813340928846], [11.166666666666693, 46.954166666666694], [11.167024739583358, 46.95170966254343], [11.172575547960095, 46.94618665907121], [11.177424452039956, 46.94548000759551], [11.180908881293428, 46.94201999240454], [11.185757785373289, 46.94131334092884], [11.189242214626761, 46.937853325737876], [11.194123670789956, 46.93714192708336], [11.199646674262178, 46.93159111870662], [11.200353325737872, 46.9100755479601], [11.204519992404538, 46.90587972005211], [11.203813340928845, 46.901742214626765], [11.199646674262178, 46.89754638671877], [11.200353325737872, 46.89340888129343], [11.203813340928845, 46.889924452039956], [11.204519992404538, 46.8850755479601], [11.21248609754777, 46.877084011501765], [11.208686659071207, 46.87325778537329], [11.208333333333359, 46.85833333333336], [11.210543823242213, 46.85776604546444], [11.214456176757839, 46.85473395453562], [11.231377156575547, 46.85359937879777], [11.239456176757837, 46.846400621202285], [11.260543823242212, 46.845266045464435], [11.26458333333336, 46.84213528103301], [11.26875, 46.84536471896704], [11.272789510091172, 46.842233954535615], [11.323043823242214, 46.84109937879777], [11.331122843424506, 46.83390062120228], [11.343877156575548, 46.83276604546444], [11.347789510091172, 46.82973395453561], [11.35331590440541, 46.82831590440541], [11.354733954535616, 46.82278951009117], [11.357766045464437, 46.818877156575546], [11.358900621202284, 46.81445617675784], [11.36609937879777, 46.80637715657554], [11.366666666666694, 46.80416666666669], [11.365779283311658, 46.80070834689673], [11.356122843424506, 46.7994327121311], [11.35208333333336, 46.796301947699675], [11.347916666666693, 46.799531385633706], [11.343877156575548, 46.79640062120228], [11.339456176757839, 46.79526604546444], [11.335543823242213, 46.79223395453562], [11.321806165907145, 46.79101189507381], [11.31306728786895, 46.781377156575545], [11.311932712131103, 46.776956176757835], [11.304733954535617, 46.76887715657555], [11.30359937879777, 46.76445617675784], [11.30056728786895, 46.760543823242216], [11.299149237738742, 46.75501742892798], [11.293622843424505, 46.753599378797766], [11.289710489908881, 46.75056728786895], [11.279166666666693, 46.75], [11.278813340928846, 46.73924221462676], [11.27464667426218, 46.73504638671878], [11.275353325737873, 46.73090888129343], [11.283319430881102, 46.722917344835096], [11.27951999240454, 46.71909111870662], [11.278813340928846, 46.705908881293425], [11.275353325737873, 46.702424452039956], [11.275, 46.7], [11.274032253689262, 46.69622938368058], [11.267413330078151, 46.691099378797766], [11.260289510091171, 46.69223395453562], [11.25491333007815, 46.69640062120228], [11.251956176757838, 46.695266045464436], [11.248043823242213, 46.69223395453562], [11.239456176757837, 46.691099378797766], [11.235543823242214, 46.68806728786895], [11.218622843424505, 46.6869327121311], [11.21471048990888, 46.683900621202284], [11.197789510091171, 46.68276604546443], [11.193877156575546, 46.679733954535614], [11.184220716688394, 46.67845831976999], [11.182413736979193, 46.671416219075546], [11.173043823242214, 46.66306728786895], [11.168622843424505, 46.6619327121311], [11.159270562065997, 46.653599378797765], [11.154985215928845, 46.655143907335095], [11.154166666666692, 46.65833333333336], [11.15085076226131, 46.65918409559464], [11.15, 46.6625], [11.150353325737871, 46.66909111870662], [11.155876329210095, 46.67464192708336], [11.160757785373288, 46.67535332573787], [11.166668023003497, 46.68123406304256], [11.162853325737872, 46.685075547960096], [11.162146674262178, 46.68992445203995], [11.15451999240454, 46.69757554796009], [11.153813340928846, 46.702424452039956], [11.148290337456622, 46.70797526041669], [11.143408881293428, 46.708686659071205], [11.139924452039956, 46.71214667426218], [11.122575547960095, 46.712853325737875], [11.119091118706622, 46.71631334092884], [11.11424221462676, 46.71701999240454], [11.110757785373288, 46.72048000759551], [11.10174221462676, 46.72118665907121], [11.098257785373288, 46.724646674262175], [11.085075547960095, 46.72535332573787], [11.081591118706623, 46.728813340928845], [11.075, 46.72916666666669]]], &quot;type&quot;: &quot;Polygon&quot;}, &quot;properties&quot;: {&quot;COAST&quot;: 0, &quot;DIST_MAIN&quot;: 334.5, &quot;DIST_SINK&quot;: 334.5, &quot;ENDO&quot;: 0, &quot;HYBAS_ID&quot;: 2090516090, &quot;MAIN_BAS&quot;: 2090012980, &quot;NEXT_DOWN&quot;: 2090516950, &quot;NEXT_SINK&quot;: 2090012980, &quot;ORDER&quot;: 3, &quot;PFAF_ID&quot;: 214040804, &quot;SORT&quot;: 10988, &quot;SUB_AREA&quot;: 419.1, &quot;UP_AREA&quot;: 419.2}, &quot;type&quot;: &quot;Feature&quot;}], &quot;type&quot;: &quot;FeatureCollection&quot;});
+
+        
+    
+    geo_json_25e0b1298ec1448c1c1b1277f742d16d.bindTooltip(
+    function(layer){
+    let div = L.DomUtil.create(&#x27;div&#x27;);
+    
+    let handleObject = feature=&gt;typeof(feature)==&#x27;object&#x27; ? JSON.stringify(feature) : feature;
+    let fields = [&quot;HYBAS_ID&quot;, &quot;NEXT_DOWN&quot;, &quot;NEXT_SINK&quot;, &quot;MAIN_BAS&quot;, &quot;DIST_SINK&quot;, &quot;DIST_MAIN&quot;, &quot;SUB_AREA&quot;, &quot;UP_AREA&quot;, &quot;PFAF_ID&quot;, &quot;ENDO&quot;, &quot;COAST&quot;, &quot;ORDER&quot;, &quot;SORT&quot;];
+    let aliases = [&quot;HYBAS_ID&quot;, &quot;NEXT_DOWN&quot;, &quot;NEXT_SINK&quot;, &quot;MAIN_BAS&quot;, &quot;DIST_SINK&quot;, &quot;DIST_MAIN&quot;, &quot;SUB_AREA&quot;, &quot;UP_AREA&quot;, &quot;PFAF_ID&quot;, &quot;ENDO&quot;, &quot;COAST&quot;, &quot;ORDER&quot;, &quot;SORT&quot;];
+    let table = &#x27;&lt;table&gt;&#x27; +
+        String(
+        fields.map(
+        (v,i)=&gt;
+        `&lt;tr&gt;
+            &lt;th&gt;${aliases[i]}&lt;/th&gt;
+            
+            &lt;td&gt;${handleObject(layer.feature.properties[v])}&lt;/td&gt;
+        &lt;/tr&gt;`).join(&#x27;&#x27;))
+    +&#x27;&lt;/table&gt;&#x27;;
+    div.innerHTML=table;
+    
+    return div
+    }
+    ,{&quot;className&quot;: &quot;foliumtooltip&quot;, &quot;sticky&quot;: true});
+                     
+    
+            geo_json_25e0b1298ec1448c1c1b1277f742d16d.addTo(map_470459cf54cd8c631d30856a4b190b48);
+        
+    
+            map_470459cf54cd8c631d30856a4b190b48.fitBounds(
+                [[46.653599378797765, 11.020833333333357], [46.954166666666694, 11.366666666666694]],
+                {}
+            );
+        
+    
+            var layer_control_9bcbe176d12eec6e035c0b2d8508e246_layers = {
+                base_layers : {
+                    &quot;openstreetmap&quot; : tile_layer_c17a6b14dec8b45f98c2d66aa23b97bd,
+                },
+                overlays :  {
+                    &quot;catchment&quot; : geo_json_25e0b1298ec1448c1c1b1277f742d16d,
+                },
+            };
+            let layer_control_9bcbe176d12eec6e035c0b2d8508e246 = L.control.layers(
+                layer_control_9bcbe176d12eec6e035c0b2d8508e246_layers.base_layers,
+                layer_control_9bcbe176d12eec6e035c0b2d8508e246_layers.overlays,
+                {&quot;autoZIndex&quot;: true, &quot;collapsed&quot;: true, &quot;position&quot;: &quot;topright&quot;}
+            ).addTo(map_470459cf54cd8c631d30856a4b190b48);
+
+        
+&lt;/script&gt;
+&lt;/html&gt;" width="100%" height="600"style="border:none !important;" "allowfullscreen" "webkitallowfullscreen" "mozallowfullscreen"></iframe></div></div>
+</div>
+<p><strong>Quiz hint: Look closely at the end of the displayed catchment area to identify the outlet</strong></p>
+</section>
+<section id="inspect-metadata">
+<h2>Inspect Metadata<a class="headerlink" href="#inspect-metadata" title="Link to this heading">#</a></h2>
+<p>We need to set the following configurations to define the content of the data cube we want to access:</p>
+<ul class="simple">
+<li><p>dataset name</p></li>
+<li><p>band names</p></li>
+<li><p>time range</p></li>
+<li><p>the area of interest specifed via bounding box coordinates</p></li>
+<li><p>spatial resolution</p></li>
+</ul>
+<p>To select the correct dataset we can first list all the available datasets.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">conn</span><span class="o">.</span><span class="n">list_collection_ids</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;SENTINEL3_OLCI_L1B&#39;, &#39;SENTINEL3_SLSTR&#39;, &#39;SENTINEL_5P_L2&#39;, &#39;SENTINEL2_L1C&#39;, &#39;SENTINEL2_L2A&#39;, &#39;SENTINEL1_GRD&#39;, &#39;COPERNICUS_30&#39;, &#39;LANDSAT8_L2&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We want to use the Sentinel-2 L2A product. It’s name is <code class="docutils literal notranslate"><span class="pre">'SENTINEL2_L2A'</span></code>.</p>
+<p>We get the metadata for this collection as follows. This is an important step to familiarize yourself with the data collection (e.g. learn the band names).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">describe_collection</span><span class="p">(</span><span class="s2">&quot;SENTINEL2_L2A&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <script>
+    if (!window.customElements || !window.customElements.get('openeo-collection')) {
+        var el = document.createElement('script');
+        el.src = "https://cdn.jsdelivr.net/npm/@openeo/vue-components@2/assets/openeo.min.js";
+        document.head.appendChild(el);
+
+        var font = document.createElement('font');
+        font.as = "font";
+        font.type = "font/woff2";
+        font.crossOrigin = true;
+        font.href = "https://use.fontawesome.com/releases/v5.13.0/webfonts/fa-solid-900.woff2"
+        document.head.appendChild(font);
+    }
+    </script>
+    <openeo-collection>
+        <script type="application/json">{"mapOptions": {}, "data": {"assets": {"thumbnail": {"href": "https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2022/07/tallinn_estonia/24383281-1-eng-GB/Tallinn_Estonia_pillars.jpg", "roles": ["thumbnail"], "title": "Sentinel 2 L2A", "type": "image/png"}}, "cube:dimensions": {"bands": {"type": "bands", "values": ["B01", "B02", "B03", "B04", "B05", "B06", "B07", "B08", "B8A", "B09", "B11", "B12", "WVP", "AOT", "SCL", "sunAzimuthAngles", "sunZenithAngles", "viewAzimuthMean", "viewZenithMean"]}, "t": {"extent": ["2015-07-04T00:00:00Z", null], "type": "temporal"}, "x": {"axis": "x", "extent": [-180, 180], "reference_system": {"$schema": "https://proj.org/schemas/v0.2/projjson.schema.json", "area": "World", "bbox": {"east_longitude": 180, "north_latitude": 90, "south_latitude": -90, "west_longitude": -180}, "coordinate_system": {"axis": [{"abbreviation": "Lat", "direction": "north", "name": "Geodetic latitude", "unit": "degree"}, {"abbreviation": "Lon", "direction": "east", "name": "Geodetic longitude", "unit": "degree"}], "subtype": "ellipsoidal"}, "datum": {"ellipsoid": {"inverse_flattening": 298.257223563, "name": "WGS 84", "semi_major_axis": 6378137}, "name": "World Geodetic System 1984", "type": "GeodeticReferenceFrame"}, "id": {"authority": "OGC", "code": "Auto42001", "version": "1.3"}, "name": "AUTO 42001 (Universal Transverse Mercator)", "type": "GeodeticCRS"}, "step": 10, "type": "spatial"}, "y": {"axis": "y", "extent": [-56, 83], "reference_system": {"$schema": "https://proj.org/schemas/v0.2/projjson.schema.json", "area": "World", "bbox": {"east_longitude": 180, "north_latitude": 90, "south_latitude": -90, "west_longitude": -180}, "coordinate_system": {"axis": [{"abbreviation": "Lat", "direction": "north", "name": "Geodetic latitude", "unit": "degree"}, {"abbreviation": "Lon", "direction": "east", "name": "Geodetic longitude", "unit": "degree"}], "subtype": "ellipsoidal"}, "datum": {"ellipsoid": {"inverse_flattening": 298.257223563, "name": "WGS 84", "semi_major_axis": 6378137}, "name": "World Geodetic System 1984", "type": "GeodeticReferenceFrame"}, "id": {"authority": "OGC", "code": "Auto42001", "version": "1.3"}, "name": "AUTO 42001 (Universal Transverse Mercator)", "type": "GeodeticCRS"}, "step": 10, "type": "spatial"}}, "description": "SENTINEL-2 is a wide-swath, high-resolution, multi-spectral imaging mission, supporting Copernicus Land Monitoring studies, including the monitoring of vegetation, soil and water cover, as well as observation of inland waterways and coastal areas. The SENTINEL-2 Multispectral Instrument (MSI) samples 13 spectral bands: four bands at 10 metres, six bands at 20 metres and three bands at 60 metres spatial resolution.\n The level 2A data is atmospherically corrected using Sen2Cor.", "extent": {"spatial": {"bbox": [[-180, -56, 180, 83]]}, "temporal": {"interval": [["2015-07-04T00:00:00Z", null]]}}, "id": "SENTINEL2_L2A", "keywords": ["COPERNICUS", "ESA", "Orthoimagery", "Sentinel-2", "MSI", "Level-2A", "Radiometry", "Plant Resource", "TOC"], "license": "proprietary", "links": [{"href": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice", "rel": "license", "type": "application/pdf"}, {"href": "https://documentation.dataspace.copernicus.eu/Data/Sentinel2.html", "rel": "alternate", "type": "application/html"}, {"href": "https://dataspace.copernicus.eu/browser/?zoom=11&lat=45.36638&lng=12.49832&themeId=DEFAULT-THEME&visualizationUrl=https%3A%2F%2Fsh.dataspace.copernicus.eu%2Fogc%2Fwms%2F28b654e7-8912-4e59-9e58-85b58d768b3a&datasetId=S2_L2A_CDAS&fromTime=2023-02-07T00%3A00%3A00.000Z&toTime=2023-02-07T23%3A59%3A59.999Z&layerId=1_TRUE_COLOR&demSource3D=%22MAPZEN%22&cloudCoverage=10", "rel": "browser", "title": "CDSE Data-Browser"}, {"href": "https://catalogue.dataspace.copernicus.eu/resto/api/collections/Sentinel2/search.json?cloudCover=[0,10]&productType=S2MSI2A&startDate=2022-06-11&completionDate=2022-06-22&maxRecords=10", "rel": "opensearch", "title": "Opensearch product query"}, {"href": "https://sentinels.copernicus.eu/web/sentinel/user-guides/sentinel-2-msi/product-types/level-2a", "rel": "about", "title": "User guide"}, {"href": "https://services.sentinel-hub.com/ogc/wmts/7d34803f-511c-4caf-9438-6d72f32c8174", "rel": "wmts", "title": "Web Map Tile Service", "wmts:dimensions": {"warnings": true}, "wmts:layer": "TRUE-COLOR"}, {"href": "https://openeo.dataspace.copernicus.eu/openeo/1.2/collections", "rel": "root"}, {"href": "https://openeo.dataspace.copernicus.eu/openeo/1.2/collections", "rel": "parent"}, {"href": "https://openeo.dataspace.copernicus.eu/openeo/1.2/collections/SENTINEL2_L2A", "rel": "self"}], "mission": "Sentinel-2", "name": "SENTINEL2_L2A", "providers": [{"name": "ESA", "roles": ["producer"], "url": "https://esa.int/"}, {"name": "CDSE", "roles": ["processor", "host"], "url": "https://dataspace.copernicus.eu/"}], "stac_extensions": ["https://stac-extensions.github.io/datacube/v2.2.0/schema.json", "https://stac-extensions.github.io/eo/v1.1.0/schema.json"], "stac_version": "0.9.0", "summaries": {"constellation": ["sentinel-2"], "eo:bands": [{"aliases": ["IMG_DATA_Band_B01_60m_Tile1_Data"], "center_wavelength": 0.4427, "common_name": "coastal", "full_width_half_max": 0.021, "gsd": 60, "name": "B01", "offset": 0, "scale": 0.0001, "type": "int16", "unit": "1"}, {"aliases": ["IMG_DATA_Band_B02_10m_Tile1_Data"], "center_wavelength": 0.4924, "common_name": "blue", "full_width_half_max": 0.066, "gsd": 10, "name": "B02", "offset": 0, "scale": 0.0001, "type": "int16", "unit": "1"}, {"aliases": ["IMG_DATA_Band_B03_10m_Tile1_Data"], "center_wavelength": 0.5598, "common_name": "green", "full_width_half_max": 0.036, "gsd": 10, "name": "B03", "offset": 0, "scale": 0.0001, "type": "int16", "unit": "1"}, {"aliases": ["IMG_DATA_Band_B04_10m_Tile1_Data"], "center_wavelength": 0.6646, "common_name": "red", "full_width_half_max": 0.031, "gsd": 10, "name": "B04", "offset": 0, "scale": 0.0001, "type": "int16", "unit": "1"}, {"aliases": ["IMG_DATA_Band_B05_20m_Tile1_Data"], "center_wavelength": 0.7041, "full_width_half_max": 0.015, "gsd": 20, "name": "B05", "offset": 0, "scale": 0.0001, "type": "int16", "unit": "1"}, {"aliases": ["IMG_DATA_Band_B06_20m_Tile1_Data"], "center_wavelength": 0.7405, "full_width_half_max": 0.015, "gsd": 20, "name": "B06", "offset": 0, "scale": 0.0001, "type": "int16", "unit": "1"}, {"aliases": ["IMG_DATA_Band_B07_20m_Tile1_Data"], "center_wavelength": 0.7828, "full_width_half_max": 0.02, "gsd": 20, "name": "B07", "offset": 0, "scale": 0.0001, "type": "int16", "unit": "1"}, {"aliases": ["IMG_DATA_Band_B08_10m_Tile1_Data"], "center_wavelength": 0.8328, "common_name": "nir", "full_width_half_max": 0.106, "gsd": 10, "name": "B08", "offset": 0, "scale": 0.0001, "type": "int16", "unit": "1"}, {"aliases": ["IMG_DATA_Band_B8A_20m_Tile1_Data"], "center_wavelength": 0.8647, "common_name": "nir08", "full_width_half_max": 0.021, "gsd": 20, "name": "B8A", "offset": 0, "scale": 0.0001, "type": "int16", "unit": "1"}, {"aliases": ["IMG_DATA_Band_B09_60m_Tile1_Data"], "center_wavelength": 0.9451, "common_name": "nir09", "full_width_half_max": 0.02, "gsd": 60, "name": "B09", "offset": 0, "scale": 0.0001, "type": "int16", "unit": "1"}, {"aliases": ["IMG_DATA_Band_B11_20m_Tile1_Data"], "center_wavelength": 1.6137, "common_name": "swir16", "full_width_half_max": 0.091, "gsd": 20, "name": "B11", "offset": 0, "scale": 0.0001, "type": "int16", "unit": "1"}, {"aliases": ["IMG_DATA_Band_B12_20m_Tile1_Data"], "center_wavelength": 2.2024, "common_name": "swir22", "full_width_half_max": 0.175, "gsd": 20, "name": "B12", "offset": 0, "scale": 0.0001, "type": "int16", "unit": "1"}, {"aliases": ["IMG_DATA_Band_WVP_10m_Tile1_Data"], "name": "WVP"}, {"aliases": ["IMG_DATA_Band_AOT_20m_Tile1_Data"], "name": "AOT"}, {"aliases": ["IMG_DATA_Band_SCL_20m_Tile1_Data"], "name": "SCL"}, {"aliases": ["S2_Level-2A_Tile1_Metadata##0", "SAA"], "name": "sunAzimuthAngles", "unit": "deg"}, {"aliases": ["S2_Level-2A_Tile1_Metadata##1", "SZA"], "name": "sunZenithAngles", "unit": "deg"}, {"aliases": ["S2_Level-2A_Tile1_Metadata##2", "VAA", "approximateViewAzimuth"], "name": "viewAzimuthMean", "unit": "deg"}, {"aliases": ["S2_Level-2A_Tile1_Metadata##3", "VZA", "approximateViewZenith"], "name": "viewZenithMean", "unit": "deg"}], "eo:cloud_cover": {"maximum": 100, "minimum": 0}, "gsd": [10], "instrument": ["msi"], "platform": ["sentinel-2a", "sentinel-2b"]}, "title": "Sentinel-2 L2A"}}</script>
+    </openeo-collection>
+    </div></div>
+</div>
+</section>
+<section id="define-a-workflow">
+<h2>Define a workflow<a class="headerlink" href="#define-a-workflow" title="Link to this heading">#</a></h2>
+<p>We will define our workflow now. And chain all the processes together we need for analyzing the snow cover in the catchment.</p>
+<ul class="simple">
+<li><p>Load a data cube with specific filters</p></li>
+<li><p>Calculate the Normalized Difference Snow Index</p></li>
+<li><p>Classify snow and no-snow using a threshold yielding the Snow Covered Area</p></li>
+<li><p>Create and apply a cloud mask to remove cloudy pixels</p></li>
+<li><p>Visualize one date of the snow map and crop it to the exact catchment outline</p></li>
+<li><p>Calculate catchment statistics to get a timeseries on snow cover and cloud cover</p></li>
+<li><p>Filter the time series by the cloud percentage and visualize the time series graph</p></li>
+<li></li>
+</ul>
+<section id="define-the-data-cube">
+<h3>Define the data cube<a class="headerlink" href="#define-the-data-cube" title="Link to this heading">#</a></h3>
+<p>We define all extents of our data cube. We use the catchment as spatial extent. As a time range we will focus on the snow melting season 2018, in particular from Febraury to June 2018. We are only interested in the green and short wave infrared band, band 3 and 11. And we directly remove time slices with a cloud cover &gt;= 90 %.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bbox</span> <span class="o">=</span> <span class="n">catchment_outline</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">bbox</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>minx    11.020833
+miny    46.653599
+maxx    11.366667
+maxy    46.954167
+Name: 0, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openeo.processes</span> <span class="kn">import</span> <span class="n">lte</span>
+<span class="n">collection</span>      <span class="o">=</span> <span class="s1">&#39;SENTINEL2_L2A&#39;</span>
+<span class="n">spatial_extent</span>  <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;west&#39;</span><span class="p">:</span><span class="n">bbox</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;east&#39;</span><span class="p">:</span><span class="n">bbox</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="s1">&#39;south&#39;</span><span class="p">:</span><span class="n">bbox</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;north&#39;</span><span class="p">:</span><span class="n">bbox</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="s1">&#39;crs&#39;</span><span class="p">:</span><span class="mi">4326</span><span class="p">}</span>
+<span class="n">temporal_extent</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;2018-02-01&quot;</span><span class="p">,</span> <span class="s2">&quot;2018-06-30&quot;</span><span class="p">]</span>
+<span class="n">bands</span>           <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;B03&#39;</span><span class="p">,</span> <span class="s1">&#39;B11&#39;</span><span class="p">,</span> <span class="s1">&#39;SCL&#39;</span><span class="p">]</span>
+<span class="n">properties</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;eo:cloud_cover&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">lte</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">90</span><span class="p">)}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-the-data-cube">
+<h3>Load the data cube<a class="headerlink" href="#load-the-data-cube" title="Link to this heading">#</a></h3>
+<p>We have defined the extents we are interested in. Now we use these definitions to load the data cube.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s2</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">load_collection</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span>
+                          <span class="n">spatial_extent</span><span class="o">=</span><span class="n">spatial_extent</span><span class="p">,</span>
+                          <span class="n">bands</span><span class="o">=</span><span class="n">bands</span><span class="p">,</span>
+                          <span class="n">temporal_extent</span><span class="o">=</span><span class="n">temporal_extent</span><span class="p">,</span>
+                          <span class="n">properties</span><span class="o">=</span><span class="n">properties</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ndsi-normalized-difference-snow-index">
+<h3>NDSI - Normalized Difference Snow Index<a class="headerlink" href="#ndsi-normalized-difference-snow-index" title="Link to this heading">#</a></h3>
+<p>The Normalized Difference Snow Index (NDSI) is computed as:</p>
+<div class="math notranslate nohighlight">
+\[ NDSI = \frac {GREEN - SWIR} {GREEN +SWIR} \]</div>
+<p>We have created a Sentinel-2 data cube with bands B03 (green) and B11 (SWIR). We will use the green and SWIR band to calculate a the NDSI. This process is reducing the band dimension of the data cube to generate new information, the NDSI.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">green</span> <span class="o">=</span> <span class="n">s2</span><span class="o">.</span><span class="n">band</span><span class="p">(</span><span class="s2">&quot;B03&quot;</span><span class="p">)</span>
+<span class="n">swir</span> <span class="o">=</span> <span class="n">s2</span><span class="o">.</span><span class="n">band</span><span class="p">(</span><span class="s2">&quot;B11&quot;</span><span class="p">)</span>
+<span class="n">ndsi</span> <span class="o">=</span> <span class="p">(</span><span class="n">green</span> <span class="o">-</span> <span class="n">swir</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">green</span> <span class="o">+</span> <span class="n">swir</span><span class="p">)</span>
+<span class="n">ndsi</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <script>
+    if (!window.customElements || !window.customElements.get('openeo-model-builder')) {
+        var el = document.createElement('script');
+        el.src = "https://cdn.jsdelivr.net/npm/@openeo/vue-components@2/assets/openeo.min.js";
+        document.head.appendChild(el);
+
+        var font = document.createElement('font');
+        font.as = "font";
+        font.type = "font/woff2";
+        font.crossOrigin = true;
+        font.href = "https://use.fontawesome.com/releases/v5.13.0/webfonts/fa-solid-900.woff2"
+        document.head.appendChild(font);
+    }
+    </script>
+    <openeo-model-builder>
+        <script type="application/json">{"id": "714e0a44be5b4033919a7646d327cb33", "explicit-zoom": true, "height": "400px", "value": {"process_graph": {"loadcollection1": {"process_id": "load_collection", "arguments": {"bands": ["B03", "B11", "SCL"], "id": "SENTINEL2_L2A", "properties": {"eo:cloud_cover": {"process_graph": {"lte1": {"process_id": "lte", "arguments": {"x": {"from_parameter": "value"}, "y": 90}, "result": true}}}}, "spatial_extent": {"west": 11.020833333333357, "east": 11.366666666666694, "south": 46.653599378797765, "north": 46.954166666666694, "crs": 4326}, "temporal_extent": ["2018-02-01", "2018-06-30"]}}, "reducedimension1": {"process_id": "reduce_dimension", "arguments": {"data": {"from_node": "loadcollection1"}, "dimension": "bands", "reducer": {"process_graph": {"arrayelement1": {"process_id": "array_element", "arguments": {"data": {"from_parameter": "data"}, "index": 0}}, "arrayelement2": {"process_id": "array_element", "arguments": {"data": {"from_parameter": "data"}, "index": 1}}, "subtract1": {"process_id": "subtract", "arguments": {"x": {"from_node": "arrayelement1"}, "y": {"from_node": "arrayelement2"}}}, "add1": {"process_id": "add", "arguments": {"x": {"from_node": "arrayelement1"}, "y": {"from_node": "arrayelement2"}}}, "divide1": {"process_id": "divide", "arguments": {"x": {"from_node": "subtract1"}, "y": {"from_node": "add1"}}, "result": true}}}}, "result": true}}}}</script>
+    </openeo-model-builder>
+    </div></div>
+</div>
+</section>
+<section id="creating-the-snow-map">
+<h3>Creating the Snow Map<a class="headerlink" href="#creating-the-snow-map" title="Link to this heading">#</a></h3>
+<p>So far we have a time series map of NDSI values. We are intereseted in the presence of snow though. Ideally in a binary classification: snow and no snow.
+To achieve this we are setting a threshold of 0.4 on the NDSI. This gives us a binary snow map.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snowmap</span> <span class="o">=</span> <span class="p">(</span> <span class="n">ndsi</span> <span class="o">&gt;</span> <span class="mf">0.4</span> <span class="p">)</span> <span class="o">*</span> <span class="mf">1.0</span>  <span class="c1"># the addition of &quot;* 1.00&quot; is a workaround for a backend specific implementation problem. Once solved on the CDSE openEO backend it could be removed</span>
+<span class="n">snowmap</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <script>
+    if (!window.customElements || !window.customElements.get('openeo-model-builder')) {
+        var el = document.createElement('script');
+        el.src = "https://cdn.jsdelivr.net/npm/@openeo/vue-components@2/assets/openeo.min.js";
+        document.head.appendChild(el);
+
+        var font = document.createElement('font');
+        font.as = "font";
+        font.type = "font/woff2";
+        font.crossOrigin = true;
+        font.href = "https://use.fontawesome.com/releases/v5.13.0/webfonts/fa-solid-900.woff2"
+        document.head.appendChild(font);
+    }
+    </script>
+    <openeo-model-builder>
+        <script type="application/json">{"id": "ab4f87e9c0aa4792a0f7b39f07e5970d", "explicit-zoom": true, "height": "400px", "value": {"process_graph": {"loadcollection1": {"process_id": "load_collection", "arguments": {"bands": ["B03", "B11", "SCL"], "id": "SENTINEL2_L2A", "properties": {"eo:cloud_cover": {"process_graph": {"lte1": {"process_id": "lte", "arguments": {"x": {"from_parameter": "value"}, "y": 90}, "result": true}}}}, "spatial_extent": {"west": 11.020833333333357, "east": 11.366666666666694, "south": 46.653599378797765, "north": 46.954166666666694, "crs": 4326}, "temporal_extent": ["2018-02-01", "2018-06-30"]}}, "reducedimension1": {"process_id": "reduce_dimension", "arguments": {"data": {"from_node": "loadcollection1"}, "dimension": "bands", "reducer": {"process_graph": {"arrayelement1": {"process_id": "array_element", "arguments": {"data": {"from_parameter": "data"}, "index": 0}}, "arrayelement2": {"process_id": "array_element", "arguments": {"data": {"from_parameter": "data"}, "index": 1}}, "subtract1": {"process_id": "subtract", "arguments": {"x": {"from_node": "arrayelement1"}, "y": {"from_node": "arrayelement2"}}}, "add1": {"process_id": "add", "arguments": {"x": {"from_node": "arrayelement1"}, "y": {"from_node": "arrayelement2"}}}, "divide1": {"process_id": "divide", "arguments": {"x": {"from_node": "subtract1"}, "y": {"from_node": "add1"}}}, "gt1": {"process_id": "gt", "arguments": {"x": {"from_node": "divide1"}, "y": 0.4}}, "multiply1": {"process_id": "multiply", "arguments": {"x": {"from_node": "gt1"}, "y": 1.0}, "result": true}}}}, "result": true}}}}</script>
+    </openeo-model-builder>
+    </div></div>
+</div>
+</section>
+<section id="creating-a-cloud-mask">
+<h3>Creating a cloud mask<a class="headerlink" href="#creating-a-cloud-mask" title="Link to this heading">#</a></h3>
+<p>We are going to use the Scene Classification of Sentinel-2, called the “SCL” band,  for creating a cloud mask and then applying it to the NDSI. The values we are interested in are: <code class="docutils literal notranslate"><span class="pre">8</span> <span class="pre">=</span> <span class="pre">cloud</span> <span class="pre">medium</span> <span class="pre">probability</span></code>, <code class="docutils literal notranslate"><span class="pre">9</span> <span class="pre">=</span> <span class="pre">cloud</span> <span class="pre">high</span> <span class="pre">probability</span></code>, <code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">=</span> <span class="pre">cloud</span> <span class="pre">shadow</span></code></p>
+<p>Here is more information on the Scene Classification of Sentinel-2: <a class="reference external" href="https://sentinels.copernicus.eu/web/sentinel/technical-guides/sentinel-2-msi/level-2a/algorithm-overview">https://sentinels.copernicus.eu/web/sentinel/technical-guides/sentinel-2-msi/level-2a/algorithm-overview</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scl_band</span> <span class="o">=</span> <span class="n">s2</span><span class="o">.</span><span class="n">band</span><span class="p">(</span><span class="s2">&quot;SCL&quot;</span><span class="p">)</span>
+<span class="n">cloud_mask</span> <span class="o">=</span> <span class="p">(</span> <span class="p">(</span><span class="n">scl_band</span> <span class="o">==</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">scl_band</span> <span class="o">==</span> <span class="mi">9</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">scl_band</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="p">)</span> <span class="o">*</span> <span class="mf">1.0</span>
+<span class="n">cloud_mask</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <script>
+    if (!window.customElements || !window.customElements.get('openeo-model-builder')) {
+        var el = document.createElement('script');
+        el.src = "https://cdn.jsdelivr.net/npm/@openeo/vue-components@2/assets/openeo.min.js";
+        document.head.appendChild(el);
+
+        var font = document.createElement('font');
+        font.as = "font";
+        font.type = "font/woff2";
+        font.crossOrigin = true;
+        font.href = "https://use.fontawesome.com/releases/v5.13.0/webfonts/fa-solid-900.woff2"
+        document.head.appendChild(font);
+    }
+    </script>
+    <openeo-model-builder>
+        <script type="application/json">{"id": "5f7374a0212c4339a9635c3a9a450740", "explicit-zoom": true, "height": "400px", "value": {"process_graph": {"loadcollection1": {"process_id": "load_collection", "arguments": {"bands": ["B03", "B11", "SCL"], "id": "SENTINEL2_L2A", "properties": {"eo:cloud_cover": {"process_graph": {"lte1": {"process_id": "lte", "arguments": {"x": {"from_parameter": "value"}, "y": 90}, "result": true}}}}, "spatial_extent": {"west": 11.020833333333357, "east": 11.366666666666694, "south": 46.653599378797765, "north": 46.954166666666694, "crs": 4326}, "temporal_extent": ["2018-02-01", "2018-06-30"]}}, "reducedimension1": {"process_id": "reduce_dimension", "arguments": {"data": {"from_node": "loadcollection1"}, "dimension": "bands", "reducer": {"process_graph": {"arrayelement1": {"process_id": "array_element", "arguments": {"data": {"from_parameter": "data"}, "index": 2}}, "eq1": {"process_id": "eq", "arguments": {"x": {"from_node": "arrayelement1"}, "y": 8}}, "eq2": {"process_id": "eq", "arguments": {"x": {"from_node": "arrayelement1"}, "y": 9}}, "or1": {"process_id": "or", "arguments": {"x": {"from_node": "eq1"}, "y": {"from_node": "eq2"}}}, "eq3": {"process_id": "eq", "arguments": {"x": {"from_node": "arrayelement1"}, "y": 3}}, "or2": {"process_id": "or", "arguments": {"x": {"from_node": "or1"}, "y": {"from_node": "eq3"}}}, "multiply1": {"process_id": "multiply", "arguments": {"x": {"from_node": "or2"}, "y": 1.0}, "result": true}}}}, "result": true}}}}</script>
+    </openeo-model-builder>
+    </div></div>
+</div>
+<p>The SCL layer has a ground sample distance of 20 meter while the other bands have 10 meter GSD</p>
+</section>
+<section id="applying-the-cloud-mask-to-the-snowmap">
+<h3>Applying the cloud mask to the snowmap<a class="headerlink" href="#applying-the-cloud-mask-to-the-snowmap" title="Link to this heading">#</a></h3>
+<p>We will mask out all pixels that are covered by clouds. This will result in: 0 = no_snow, 1 = snow, 2 = cloud</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snowmap_cloudfree</span> <span class="o">=</span> <span class="n">snowmap</span><span class="o">.</span><span class="n">mask</span><span class="p">(</span><span class="n">cloud_mask</span><span class="p">,</span><span class="n">replacement</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># replacement is null by default</span>
+<span class="n">snowmap_cloudfree</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <script>
+    if (!window.customElements || !window.customElements.get('openeo-model-builder')) {
+        var el = document.createElement('script');
+        el.src = "https://cdn.jsdelivr.net/npm/@openeo/vue-components@2/assets/openeo.min.js";
+        document.head.appendChild(el);
+
+        var font = document.createElement('font');
+        font.as = "font";
+        font.type = "font/woff2";
+        font.crossOrigin = true;
+        font.href = "https://use.fontawesome.com/releases/v5.13.0/webfonts/fa-solid-900.woff2"
+        document.head.appendChild(font);
+    }
+    </script>
+    <openeo-model-builder>
+        <script type="application/json">{"id": "6e040547287f4012a5f81816644b239b", "explicit-zoom": true, "height": "400px", "value": {"process_graph": {"loadcollection1": {"process_id": "load_collection", "arguments": {"bands": ["B03", "B11", "SCL"], "id": "SENTINEL2_L2A", "properties": {"eo:cloud_cover": {"process_graph": {"lte1": {"process_id": "lte", "arguments": {"x": {"from_parameter": "value"}, "y": 90}, "result": true}}}}, "spatial_extent": {"west": 11.020833333333357, "east": 11.366666666666694, "south": 46.653599378797765, "north": 46.954166666666694, "crs": 4326}, "temporal_extent": ["2018-02-01", "2018-06-30"]}}, "reducedimension1": {"process_id": "reduce_dimension", "arguments": {"data": {"from_node": "loadcollection1"}, "dimension": "bands", "reducer": {"process_graph": {"arrayelement1": {"process_id": "array_element", "arguments": {"data": {"from_parameter": "data"}, "index": 0}}, "arrayelement2": {"process_id": "array_element", "arguments": {"data": {"from_parameter": "data"}, "index": 1}}, "subtract1": {"process_id": "subtract", "arguments": {"x": {"from_node": "arrayelement1"}, "y": {"from_node": "arrayelement2"}}}, "add1": {"process_id": "add", "arguments": {"x": {"from_node": "arrayelement1"}, "y": {"from_node": "arrayelement2"}}}, "divide1": {"process_id": "divide", "arguments": {"x": {"from_node": "subtract1"}, "y": {"from_node": "add1"}}}, "gt1": {"process_id": "gt", "arguments": {"x": {"from_node": "divide1"}, "y": 0.4}}, "multiply1": {"process_id": "multiply", "arguments": {"x": {"from_node": "gt1"}, "y": 1.0}, "result": true}}}}}, "reducedimension2": {"process_id": "reduce_dimension", "arguments": {"data": {"from_node": "loadcollection1"}, "dimension": "bands", "reducer": {"process_graph": {"arrayelement3": {"process_id": "array_element", "arguments": {"data": {"from_parameter": "data"}, "index": 2}}, "eq1": {"process_id": "eq", "arguments": {"x": {"from_node": "arrayelement3"}, "y": 8}}, "eq2": {"process_id": "eq", "arguments": {"x": {"from_node": "arrayelement3"}, "y": 9}}, "or1": {"process_id": "or", "arguments": {"x": {"from_node": "eq1"}, "y": {"from_node": "eq2"}}}, "eq3": {"process_id": "eq", "arguments": {"x": {"from_node": "arrayelement3"}, "y": 3}}, "or2": {"process_id": "or", "arguments": {"x": {"from_node": "or1"}, "y": {"from_node": "eq3"}}}, "multiply2": {"process_id": "multiply", "arguments": {"x": {"from_node": "or2"}, "y": 1.0}, "result": true}}}}}, "mask1": {"process_id": "mask", "arguments": {"data": {"from_node": "reducedimension1"}, "mask": {"from_node": "reducedimension2"}, "replacement": 2}, "result": true}}}}</script>
+    </openeo-model-builder>
+    </div></div>
+</div>
+</section>
+<section id="mask-polygon-from-bounding-box-to-shape">
+<h3>Mask Polygon: From Bounding Box to Shape<a class="headerlink" href="#mask-polygon-from-bounding-box-to-shape" title="Link to this heading">#</a></h3>
+<p>We have a cloud masked snow map data cube now. In order to keep only pixels within the exact chatchment boundaries we mask to the outline of the catchment. Values outside of the boundaries are set to NA.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">catchment_outline</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/bc0a71e445da3d37f79aa0b283ea9804c6d6f3a3272c0f852a2a8b01f89a1208.svg" src="../../_images/bc0a71e445da3d37f79aa0b283ea9804c6d6f3a3272c0f852a2a8b01f89a1208.svg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snowmap_cloudfree_masked</span> <span class="o">=</span> <span class="n">snowmap_cloudfree</span><span class="o">.</span><span class="n">mask_polygon</span><span class="p">(</span><span class="n">catchment_outline</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualize-one-time-step-of-the-timeseries">
+<h3>Visualize one time step of the timeseries<a class="headerlink" href="#visualize-one-time-step-of-the-timeseries" title="Link to this heading">#</a></h3>
+<p>Let’s have a first look at a time slice of our snow map. So far we have not computed anything. We have only defined a set of functions that are going to be applied in sequence. This makes up our workflow or processing graph.
+To reduce the data volume which we are going to download we are only selecting one time step of our data cube.</p>
+<p><strong>In order to start the processing we have to tell the cloud platform specifically that we want to execute our workflow. In this case we want to start the processing directly without registering a job on the backend. This solution is good for small amounts of data. For larger processing tasks batch jobs are preferred (we’ll do that later).</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snowmap_cloudfree_1d</span> <span class="o">=</span> <span class="n">snowmap_cloudfree_masked</span><span class="o">.</span><span class="n">filter_temporal</span><span class="p">(</span><span class="s1">&#39;2018-02-10&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-02-12&#39;</span><span class="p">)</span>
+<span class="n">snowmap_cloudfree_1d</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;31_results/snowmap_cloudfree_1d.nc&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once the processing is done on the cloud and the data is downloaded we can load the file into our working environment and plot it!</p>
+<p>The area of interest is spread across two S2 tiles. This is visibile in the northern part of the plot because we chose one specific acquisition date where there is not data available for the northern tile.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xr</span><span class="o">.</span><span class="n">open_dataarray</span><span class="p">(</span><span class="s1">&#39;31_results/snowmap_cloudfree_1d.nc&#39;</span><span class="p">,</span><span class="n">decode_coords</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">imshow</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f755a476210&gt;
+</pre></div>
+</div>
+<img alt="../../_images/0686b2053be9179d4a60c51b825d8e9ddc63f1dc1dbcf728f74d290c6a353d64.png" src="../../_images/0686b2053be9179d4a60c51b825d8e9ddc63f1dc1dbcf728f74d290c6a353d64.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="calculate-catchment-statistics">
+<h2>Calculate Catchment Statistics<a class="headerlink" href="#calculate-catchment-statistics" title="Link to this heading">#</a></h2>
+<p>We are looking at the snow cover of a region over time and want to extract aggregated catchment statistics on snow cover and cloud cover. We do this by counting all the pixels in the catchment, counting the pixels that are covered by snow and the pixels covered by clouds.</p>
+<p>Ultimately we are interested in the <strong>snow covered area (SCA)</strong> within the catchment. We count all snow covered pixels within the catchment for each time step. Multiplied by the pixel size that would be the snow covered area. The snow pixel count divided by the total number of pixels in the catchment is the percentage of pixels covered with snow. We will use this number.</p>
+<p>We need to make sure that the information content meets our expected quality. Therefore, we calculate the <strong>cloud percentage</strong> for the catchment for each timestep. We use this information to filter the timeseries. All timesteps that have a cloud coverage of over 25% will be discarded.</p>
+<p>We are going to</p>
+<ul class="simple">
+<li><p>Get number of pixels in the catchment: total, clouds, snow.</p></li>
+<li><p>Combine the three aggregated pixel counts into one data cube.</p></li>
+<li><p>Calculate cloud and snow percentages</p></li>
+<li><p>Filter cloudy time steps with the cloud percentage</p></li>
+<li><p>Plot the resulting time series</p></li>
+</ul>
+<p><strong>Quiz hint: remember the pixel counts here for the final exercise</strong></p>
+<section id="count-pixels-and-aggregate-spatially-to-the-catchment">
+<h3>Count pixels and aggregate spatially to the catchment<a class="headerlink" href="#count-pixels-and-aggregate-spatially-to-the-catchment" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># number of all pixels</span>
+<span class="n">n_catchment</span> <span class="o">=</span> <span class="p">((</span><span class="n">snowmap_cloudfree</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.0</span><span class="p">)</span><span class="o">.</span><span class="n">add_dimension</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;bands&quot;</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;bands&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;n_catchment&quot;</span><span class="p">)</span>
+
+<span class="c1"># number of cloud pixels (no function needed, mask already created before)</span>
+<span class="n">n_cloud</span> <span class="o">=</span> <span class="n">cloud_mask</span><span class="o">.</span><span class="n">add_dimension</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;bands&quot;</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;bands&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;n_cloud&quot;</span><span class="p">)</span>
+
+<span class="c1"># number of snow pixels</span>
+<span class="n">n_snow</span> <span class="o">=</span> <span class="p">((</span><span class="n">snowmap_cloudfree</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.0</span><span class="p">)</span><span class="o">.</span><span class="n">add_dimension</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;bands&quot;</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;bands&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;n_snow&quot;</span><span class="p">)</span>
+
+<span class="c1"># combine the binary data cubes into one data cube</span>
+<span class="n">n_catchment_cloud_snow</span> <span class="o">=</span> <span class="n">n_catchment</span><span class="o">.</span><span class="n">merge_cubes</span><span class="p">(</span><span class="n">n_cloud</span><span class="p">)</span><span class="o">.</span><span class="n">merge_cubes</span><span class="p">(</span><span class="n">n_snow</span><span class="p">)</span>
+
+<span class="c1"># aggregate to catchment</span>
+<span class="n">n_pixels</span> <span class="o">=</span> <span class="n">n_catchment_cloud_snow</span><span class="o">.</span><span class="n">aggregate_spatial</span><span class="p">(</span><span class="n">geometries</span> <span class="o">=</span> <span class="n">catchment_outline</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">reducer</span> <span class="o">=</span> <span class="s1">&#39;sum&#39;</span><span class="p">)</span>
+<span class="n">n_pixels</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+    <script>
+    if (!window.customElements || !window.customElements.get('openeo-model-builder')) {
+        var el = document.createElement('script');
+        el.src = "https://cdn.jsdelivr.net/npm/@openeo/vue-components@2/assets/openeo.min.js";
+        document.head.appendChild(el);
+
+        var font = document.createElement('font');
+        font.as = "font";
+        font.type = "font/woff2";
+        font.crossOrigin = true;
+        font.href = "https://use.fontawesome.com/releases/v5.13.0/webfonts/fa-solid-900.woff2"
+        document.head.appendChild(font);
+    }
+    </script>
+    <openeo-model-builder>
+        <script type="application/json">{"id": "c9db89f9fc914a7d966d0d7607407397", "explicit-zoom": true, "height": "400px", "value": {"process_graph": {"loadcollection1": {"process_id": "load_collection", "arguments": {"bands": ["B03", "B11", "SCL"], "id": "SENTINEL2_L2A", "properties": {"eo:cloud_cover": {"process_graph": {"lte1": {"process_id": "lte", "arguments": {"x": {"from_parameter": "value"}, "y": 90}, "result": true}}}}, "spatial_extent": {"west": 11.020833333333357, "east": 11.366666666666694, "south": 46.653599378797765, "north": 46.954166666666694, "crs": 4326}, "temporal_extent": ["2018-02-01", "2018-06-30"]}}, "reducedimension1": {"process_id": "reduce_dimension", "arguments": {"data": {"from_node": "loadcollection1"}, "dimension": "bands", "reducer": {"process_graph": {"arrayelement1": {"process_id": "array_element", "arguments": {"data": {"from_parameter": "data"}, "index": 0}}, "arrayelement2": {"process_id": "array_element", "arguments": {"data": {"from_parameter": "data"}, "index": 1}}, "subtract1": {"process_id": "subtract", "arguments": {"x": {"from_node": "arrayelement1"}, "y": {"from_node": "arrayelement2"}}}, "add1": {"process_id": "add", "arguments": {"x": {"from_node": "arrayelement1"}, "y": {"from_node": "arrayelement2"}}}, "divide1": {"process_id": "divide", "arguments": {"x": {"from_node": "subtract1"}, "y": {"from_node": "add1"}}}, "gt1": {"process_id": "gt", "arguments": {"x": {"from_node": "divide1"}, "y": 0.4}}, "multiply1": {"process_id": "multiply", "arguments": {"x": {"from_node": "gt1"}, "y": 1.0}, "result": true}}}}}, "reducedimension2": {"process_id": "reduce_dimension", "arguments": {"data": {"from_node": "loadcollection1"}, "dimension": "bands", "reducer": {"process_graph": {"arrayelement3": {"process_id": "array_element", "arguments": {"data": {"from_parameter": "data"}, "index": 2}}, "eq1": {"process_id": "eq", "arguments": {"x": {"from_node": "arrayelement3"}, "y": 8}}, "eq2": {"process_id": "eq", "arguments": {"x": {"from_node": "arrayelement3"}, "y": 9}}, "or1": {"process_id": "or", "arguments": {"x": {"from_node": "eq1"}, "y": {"from_node": "eq2"}}}, "eq3": {"process_id": "eq", "arguments": {"x": {"from_node": "arrayelement3"}, "y": 3}}, "or2": {"process_id": "or", "arguments": {"x": {"from_node": "or1"}, "y": {"from_node": "eq3"}}}, "multiply2": {"process_id": "multiply", "arguments": {"x": {"from_node": "or2"}, "y": 1.0}, "result": true}}}}}, "mask1": {"process_id": "mask", "arguments": {"data": {"from_node": "reducedimension1"}, "mask": {"from_node": "reducedimension2"}, "replacement": 2}}, "apply1": {"process_id": "apply", "arguments": {"data": {"from_node": "mask1"}, "process": {"process_graph": {"gt2": {"process_id": "gt", "arguments": {"x": {"from_parameter": "x"}, "y": -1}}, "multiply3": {"process_id": "multiply", "arguments": {"x": {"from_node": "gt2"}, "y": 1.0}, "result": true}}}}}, "adddimension1": {"process_id": "add_dimension", "arguments": {"data": {"from_node": "apply1"}, "label": "n_catchment", "name": "bands", "type": "bands"}}, "adddimension2": {"process_id": "add_dimension", "arguments": {"data": {"from_node": "reducedimension2"}, "label": "n_cloud", "name": "bands", "type": "bands"}}, "mergecubes1": {"process_id": "merge_cubes", "arguments": {"cube1": {"from_node": "adddimension1"}, "cube2": {"from_node": "adddimension2"}}}, "apply2": {"process_id": "apply", "arguments": {"data": {"from_node": "mask1"}, "process": {"process_graph": {"eq4": {"process_id": "eq", "arguments": {"x": {"from_parameter": "x"}, "y": 1}}, "multiply4": {"process_id": "multiply", "arguments": {"x": {"from_node": "eq4"}, "y": 1.0}, "result": true}}}}}, "adddimension3": {"process_id": "add_dimension", "arguments": {"data": {"from_node": "apply2"}, "label": "n_snow", "name": "bands", "type": "bands"}}, "mergecubes2": {"process_id": "merge_cubes", "arguments": {"cube1": {"from_node": "mergecubes1"}, "cube2": {"from_node": "adddimension3"}}}, "aggregatespatial1": {"process_id": "aggregate_spatial", "arguments": {"data": {"from_node": "mergecubes2"}, "geometries": {"type": "Polygon", "coordinates": [[[11.075, 46.72916666666669], [11.072575547960094, 46.728813340928845], [11.069091118706622, 46.72535332573787], [11.048285590277802, 46.724646674262175], [11.042024739583358, 46.73087632921009], [11.041666666666691, 46.733333333333356], [11.038123575846377, 46.73424241807728], [11.0375, 46.74583333333336], [11.03664923773874, 46.74914923773874], [11.030017428927975, 46.75085076226131], [11.028599378797768, 46.756377156575546], [11.025567287868947, 46.76028951009117], [11.0244327121311, 46.76471048990888], [11.02140062120228, 46.7686228434245], [11.020833333333357, 46.77083333333336], [11.024291653103322, 46.77172071668839], [11.025567287868947, 46.781377156575545], [11.032766045464435, 46.78945617675784], [11.033900621202282, 46.79387715657555], [11.036932712131101, 46.79778951009117], [11.038067287868948, 46.80221048990888], [11.042586263020858, 46.80762905544707], [11.052210489908878, 46.808900621202284], [11.06028951009117, 46.816099378797766], [11.06471048990888, 46.81723395453562], [11.068622843424503, 46.820266045464436], [11.073043823242212, 46.82140062120228], [11.077974107530407, 46.82522176106773], [11.079733954535614, 46.83010389539933], [11.071295166015648, 46.83957451714412], [11.0744327121311, 46.843622843424505], [11.075567287868948, 46.846579996744815], [11.071400621202281, 46.85195617675784], [11.070266045464434, 46.859321424696205], [11.082766045464435, 46.872789510091174], [11.084041680230058, 46.882445949978326], [11.089710489908878, 46.88390062120228], [11.09995964898006, 46.89319695366756], [11.096400621202282, 46.89778951009117], [11.095266045464435, 46.91343722873266], [11.103599378797767, 46.92278951009117], [11.104166666666691, 46.929166666666696], [11.114924452039954, 46.92951999240454], [11.11875, 46.9333187527127], [11.12328694661461, 46.92881334092885], [11.139924452039956, 46.92951999240454], [11.143408881293428, 46.93298000759551], [11.148288302951414, 46.933691067165825], [11.157980007595512, 46.94340888129343], [11.158691406250025, 46.948290337456626], [11.16424221462676, 46.953813340928846], [11.166666666666693, 46.954166666666694], [11.167024739583358, 46.95170966254343], [11.172575547960095, 46.94618665907121], [11.177424452039956, 46.94548000759551], [11.180908881293428, 46.94201999240454], [11.185757785373289, 46.94131334092884], [11.189242214626761, 46.937853325737876], [11.194123670789956, 46.93714192708336], [11.199646674262178, 46.93159111870662], [11.200353325737872, 46.9100755479601], [11.204519992404538, 46.90587972005211], [11.203813340928845, 46.901742214626765], [11.199646674262178, 46.89754638671877], [11.200353325737872, 46.89340888129343], [11.203813340928845, 46.889924452039956], [11.204519992404538, 46.8850755479601], [11.21248609754777, 46.877084011501765], [11.208686659071207, 46.87325778537329], [11.208333333333359, 46.85833333333336], [11.210543823242213, 46.85776604546444], [11.214456176757839, 46.85473395453562], [11.231377156575547, 46.85359937879777], [11.239456176757837, 46.846400621202285], [11.260543823242212, 46.845266045464435], [11.26458333333336, 46.84213528103301], [11.26875, 46.84536471896704], [11.272789510091172, 46.842233954535615], [11.323043823242214, 46.84109937879777], [11.331122843424506, 46.83390062120228], [11.343877156575548, 46.83276604546444], [11.347789510091172, 46.82973395453561], [11.35331590440541, 46.82831590440541], [11.354733954535616, 46.82278951009117], [11.357766045464437, 46.818877156575546], [11.358900621202284, 46.81445617675784], [11.36609937879777, 46.80637715657554], [11.366666666666694, 46.80416666666669], [11.365779283311658, 46.80070834689673], [11.356122843424506, 46.7994327121311], [11.35208333333336, 46.796301947699675], [11.347916666666693, 46.799531385633706], [11.343877156575548, 46.79640062120228], [11.339456176757839, 46.79526604546444], [11.335543823242213, 46.79223395453562], [11.321806165907145, 46.79101189507381], [11.31306728786895, 46.781377156575545], [11.311932712131103, 46.776956176757835], [11.304733954535617, 46.76887715657555], [11.30359937879777, 46.76445617675784], [11.30056728786895, 46.760543823242216], [11.299149237738742, 46.75501742892798], [11.293622843424505, 46.753599378797766], [11.289710489908881, 46.75056728786895], [11.279166666666693, 46.75], [11.278813340928846, 46.73924221462676], [11.27464667426218, 46.73504638671878], [11.275353325737873, 46.73090888129343], [11.283319430881102, 46.722917344835096], [11.27951999240454, 46.71909111870662], [11.278813340928846, 46.705908881293425], [11.275353325737873, 46.702424452039956], [11.275, 46.7], [11.274032253689262, 46.69622938368058], [11.267413330078151, 46.691099378797766], [11.260289510091171, 46.69223395453562], [11.25491333007815, 46.69640062120228], [11.251956176757838, 46.695266045464436], [11.248043823242213, 46.69223395453562], [11.239456176757837, 46.691099378797766], [11.235543823242214, 46.68806728786895], [11.218622843424505, 46.6869327121311], [11.21471048990888, 46.683900621202284], [11.197789510091171, 46.68276604546443], [11.193877156575546, 46.679733954535614], [11.184220716688394, 46.67845831976999], [11.182413736979193, 46.671416219075546], [11.173043823242214, 46.66306728786895], [11.168622843424505, 46.6619327121311], [11.159270562065997, 46.653599378797765], [11.154985215928845, 46.655143907335095], [11.154166666666692, 46.65833333333336], [11.15085076226131, 46.65918409559464], [11.15, 46.6625], [11.150353325737871, 46.66909111870662], [11.155876329210095, 46.67464192708336], [11.160757785373288, 46.67535332573787], [11.166668023003497, 46.68123406304256], [11.162853325737872, 46.685075547960096], [11.162146674262178, 46.68992445203995], [11.15451999240454, 46.69757554796009], [11.153813340928846, 46.702424452039956], [11.148290337456622, 46.70797526041669], [11.143408881293428, 46.708686659071205], [11.139924452039956, 46.71214667426218], [11.122575547960095, 46.712853325737875], [11.119091118706622, 46.71631334092884], [11.11424221462676, 46.71701999240454], [11.110757785373288, 46.72048000759551], [11.10174221462676, 46.72118665907121], [11.098257785373288, 46.724646674262175], [11.085075547960095, 46.72535332573787], [11.081591118706623, 46.728813340928845], [11.075, 46.72916666666669]]]}, "reducer": {"process_graph": {"sum1": {"process_id": "sum", "arguments": {"data": {"from_parameter": "data"}}, "result": true}}}}, "result": true}}}}</script>
+    </openeo-model-builder>
+    </div></div>
+</div>
+</section>
+<section id="register-a-batch-job-for-processing">
+<h3>Register a batch job for processing<a class="headerlink" href="#register-a-batch-job-for-processing" title="Link to this heading">#</a></h3>
+<p>We are starting the processing now with a batch job. This registers our job on the backend in our user space and assigns further information to the job, such as an ID, the job status, the process graph and further metadata. First we specifiy the end of our process graph with <code class="docutils literal notranslate"><span class="pre">save_result()</span></code> and specifiy the format (since we aggregated over the spatial dimension we will receive three arrays of data. So JSON is a suitable format). Then we create the batch job and start it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the end of the process graph and the output format</span>
+<span class="n">n_pixels_json</span> <span class="o">=</span> <span class="n">n_pixels</span><span class="o">.</span><span class="n">save_result</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;JSON&quot;</span><span class="p">)</span>
+<span class="c1"># Create a batch job</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">n_pixels_json</span><span class="o">.</span><span class="n">create_job</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;n_pixels_json&quot;</span><span class="p">)</span>
+<span class="c1"># start the job and wait till it finishes</span>
+<span class="n">job</span><span class="o">.</span><span class="n">start_and_wait</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0:00:00 Job &#39;j-240215519a4341dca10085027af0ef92&#39;: send &#39;start&#39;
+0:00:18 Job &#39;j-240215519a4341dca10085027af0ef92&#39;: created (progress N/A)
+0:00:24 Job &#39;j-240215519a4341dca10085027af0ef92&#39;: created (progress N/A)
+0:00:30 Job &#39;j-240215519a4341dca10085027af0ef92&#39;: created (progress N/A)
+0:00:39 Job &#39;j-240215519a4341dca10085027af0ef92&#39;: running (progress N/A)
+0:00:49 Job &#39;j-240215519a4341dca10085027af0ef92&#39;: running (progress N/A)
+0:01:08 Job &#39;j-240215519a4341dca10085027af0ef92&#39;: running (progress N/A)
+0:01:24 Job &#39;j-240215519a4341dca10085027af0ef92&#39;: running (progress N/A)
+0:01:44 Job &#39;j-240215519a4341dca10085027af0ef92&#39;: running (progress N/A)
+0:02:08 Job &#39;j-240215519a4341dca10085027af0ef92&#39;: running (progress N/A)
+0:02:38 Job &#39;j-240215519a4341dca10085027af0ef92&#39;: running (progress N/A)
+0:03:16 Job &#39;j-240215519a4341dca10085027af0ef92&#39;: running (progress N/A)
+0:04:12 Job &#39;j-240215519a4341dca10085027af0ef92&#39;: running (progress N/A)
+0:05:11 Job &#39;j-240215519a4341dca10085027af0ef92&#39;: running (progress N/A)
+0:06:20 Job &#39;j-240215519a4341dca10085027af0ef92&#39;: running (progress N/A)
+0:07:21 Job &#39;j-240215519a4341dca10085027af0ef92&#39;: running (progress N/A)
+0:08:30 Job &#39;j-240215519a4341dca10085027af0ef92&#39;: running (progress N/A)
+0:09:30 Job &#39;j-240215519a4341dca10085027af0ef92&#39;: finished (progress N/A)
+</pre></div>
+</div>
+<div class="output text_html">
+    <script>
+    if (!window.customElements || !window.customElements.get('openeo-job')) {
+        var el = document.createElement('script');
+        el.src = "https://cdn.jsdelivr.net/npm/@openeo/vue-components@2/assets/openeo.min.js";
+        document.head.appendChild(el);
+
+        var font = document.createElement('font');
+        font.as = "font";
+        font.type = "font/woff2";
+        font.crossOrigin = true;
+        font.href = "https://use.fontawesome.com/releases/v5.13.0/webfonts/fa-solid-900.woff2"
+        document.head.appendChild(font);
+    }
+    </script>
+    <openeo-job>
+        <script type="application/json">{"currency": "credits", "job": {"costs": 12.0, "created": "2024-02-15T11:11:47Z", "id": "j-240215519a4341dca10085027af0ef92", "process": {"process_graph": {"adddimension1": {"arguments": {"data": {"from_node": "apply1"}, "label": "n_catchment", "name": "bands", "type": "bands"}, "process_id": "add_dimension"}, "adddimension2": {"arguments": {"data": {"from_node": "reducedimension2"}, "label": "n_cloud", "name": "bands", "type": "bands"}, "process_id": "add_dimension"}, "adddimension3": {"arguments": {"data": {"from_node": "apply2"}, "label": "n_snow", "name": "bands", "type": "bands"}, "process_id": "add_dimension"}, "aggregatespatial1": {"arguments": {"data": {"from_node": "mergecubes2"}, "geometries": {"coordinates": [[[11.075, 46.72916666666669], [11.072575547960094, 46.728813340928845], [11.069091118706622, 46.72535332573787], [11.048285590277802, 46.724646674262175], [11.042024739583358, 46.73087632921009], [11.041666666666691, 46.733333333333356], [11.038123575846377, 46.73424241807728], [11.0375, 46.74583333333336], [11.03664923773874, 46.74914923773874], [11.030017428927975, 46.75085076226131], [11.028599378797768, 46.756377156575546], [11.025567287868947, 46.76028951009117], [11.0244327121311, 46.76471048990888], [11.02140062120228, 46.7686228434245], [11.020833333333357, 46.77083333333336], [11.024291653103322, 46.77172071668839], [11.025567287868947, 46.781377156575545], [11.032766045464435, 46.78945617675784], [11.033900621202282, 46.79387715657555], [11.036932712131101, 46.79778951009117], [11.038067287868948, 46.80221048990888], [11.042586263020858, 46.80762905544707], [11.052210489908878, 46.808900621202284], [11.06028951009117, 46.816099378797766], [11.06471048990888, 46.81723395453562], [11.068622843424503, 46.820266045464436], [11.073043823242212, 46.82140062120228], [11.077974107530407, 46.82522176106773], [11.079733954535614, 46.83010389539933], [11.071295166015648, 46.83957451714412], [11.0744327121311, 46.843622843424505], [11.075567287868948, 46.846579996744815], [11.071400621202281, 46.85195617675784], [11.070266045464434, 46.859321424696205], [11.082766045464435, 46.872789510091174], [11.084041680230058, 46.882445949978326], [11.089710489908878, 46.88390062120228], [11.09995964898006, 46.89319695366756], [11.096400621202282, 46.89778951009117], [11.095266045464435, 46.91343722873266], [11.103599378797767, 46.92278951009117], [11.104166666666691, 46.929166666666696], [11.114924452039954, 46.92951999240454], [11.11875, 46.9333187527127], [11.12328694661461, 46.92881334092885], [11.139924452039956, 46.92951999240454], [11.143408881293428, 46.93298000759551], [11.148288302951414, 46.933691067165825], [11.157980007595512, 46.94340888129343], [11.158691406250025, 46.948290337456626], [11.16424221462676, 46.953813340928846], [11.166666666666693, 46.954166666666694], [11.167024739583358, 46.95170966254343], [11.172575547960095, 46.94618665907121], [11.177424452039956, 46.94548000759551], [11.180908881293428, 46.94201999240454], [11.185757785373289, 46.94131334092884], [11.189242214626761, 46.937853325737876], [11.194123670789956, 46.93714192708336], [11.199646674262178, 46.93159111870662], [11.200353325737872, 46.9100755479601], [11.204519992404538, 46.90587972005211], [11.203813340928845, 46.901742214626765], [11.199646674262178, 46.89754638671877], [11.200353325737872, 46.89340888129343], [11.203813340928845, 46.889924452039956], [11.204519992404538, 46.8850755479601], [11.21248609754777, 46.877084011501765], [11.208686659071207, 46.87325778537329], [11.208333333333359, 46.85833333333336], [11.210543823242213, 46.85776604546444], [11.214456176757839, 46.85473395453562], [11.231377156575547, 46.85359937879777], [11.239456176757837, 46.846400621202285], [11.260543823242212, 46.845266045464435], [11.26458333333336, 46.84213528103301], [11.26875, 46.84536471896704], [11.272789510091172, 46.842233954535615], [11.323043823242214, 46.84109937879777], [11.331122843424506, 46.83390062120228], [11.343877156575548, 46.83276604546444], [11.347789510091172, 46.82973395453561], [11.35331590440541, 46.82831590440541], [11.354733954535616, 46.82278951009117], [11.357766045464437, 46.818877156575546], [11.358900621202284, 46.81445617675784], [11.36609937879777, 46.80637715657554], [11.366666666666694, 46.80416666666669], [11.365779283311658, 46.80070834689673], [11.356122843424506, 46.7994327121311], [11.35208333333336, 46.796301947699675], [11.347916666666693, 46.799531385633706], [11.343877156575548, 46.79640062120228], [11.339456176757839, 46.79526604546444], [11.335543823242213, 46.79223395453562], [11.321806165907145, 46.79101189507381], [11.31306728786895, 46.781377156575545], [11.311932712131103, 46.776956176757835], [11.304733954535617, 46.76887715657555], [11.30359937879777, 46.76445617675784], [11.30056728786895, 46.760543823242216], [11.299149237738742, 46.75501742892798], [11.293622843424505, 46.753599378797766], [11.289710489908881, 46.75056728786895], [11.279166666666693, 46.75], [11.278813340928846, 46.73924221462676], [11.27464667426218, 46.73504638671878], [11.275353325737873, 46.73090888129343], [11.283319430881102, 46.722917344835096], [11.27951999240454, 46.71909111870662], [11.278813340928846, 46.705908881293425], [11.275353325737873, 46.702424452039956], [11.275, 46.7], [11.274032253689262, 46.69622938368058], [11.267413330078151, 46.691099378797766], [11.260289510091171, 46.69223395453562], [11.25491333007815, 46.69640062120228], [11.251956176757838, 46.695266045464436], [11.248043823242213, 46.69223395453562], [11.239456176757837, 46.691099378797766], [11.235543823242214, 46.68806728786895], [11.218622843424505, 46.6869327121311], [11.21471048990888, 46.683900621202284], [11.197789510091171, 46.68276604546443], [11.193877156575546, 46.679733954535614], [11.184220716688394, 46.67845831976999], [11.182413736979193, 46.671416219075546], [11.173043823242214, 46.66306728786895], [11.168622843424505, 46.6619327121311], [11.159270562065997, 46.653599378797765], [11.154985215928845, 46.655143907335095], [11.154166666666692, 46.65833333333336], [11.15085076226131, 46.65918409559464], [11.15, 46.6625], [11.150353325737871, 46.66909111870662], [11.155876329210095, 46.67464192708336], [11.160757785373288, 46.67535332573787], [11.166668023003497, 46.68123406304256], [11.162853325737872, 46.685075547960096], [11.162146674262178, 46.68992445203995], [11.15451999240454, 46.69757554796009], [11.153813340928846, 46.702424452039956], [11.148290337456622, 46.70797526041669], [11.143408881293428, 46.708686659071205], [11.139924452039956, 46.71214667426218], [11.122575547960095, 46.712853325737875], [11.119091118706622, 46.71631334092884], [11.11424221462676, 46.71701999240454], [11.110757785373288, 46.72048000759551], [11.10174221462676, 46.72118665907121], [11.098257785373288, 46.724646674262175], [11.085075547960095, 46.72535332573787], [11.081591118706623, 46.728813340928845], [11.075, 46.72916666666669]]], "type": "Polygon"}, "reducer": {"process_graph": {"sum1": {"arguments": {"data": {"from_parameter": "data"}}, "process_id": "sum", "result": true}}}}, "process_id": "aggregate_spatial"}, "apply1": {"arguments": {"data": {"from_node": "mask1"}, "process": {"process_graph": {"gt2": {"arguments": {"x": {"from_parameter": "x"}, "y": -1}, "process_id": "gt"}, "multiply3": {"arguments": {"x": {"from_node": "gt2"}, "y": 1.0}, "process_id": "multiply", "result": true}}}}, "process_id": "apply"}, "apply2": {"arguments": {"data": {"from_node": "mask1"}, "process": {"process_graph": {"eq4": {"arguments": {"x": {"from_parameter": "x"}, "y": 1}, "process_id": "eq"}, "multiply4": {"arguments": {"x": {"from_node": "eq4"}, "y": 1.0}, "process_id": "multiply", "result": true}}}}, "process_id": "apply"}, "loadcollection1": {"arguments": {"bands": ["B03", "B11", "SCL"], "id": "SENTINEL2_L2A", "properties": {"eo:cloud_cover": {"process_graph": {"lte1": {"arguments": {"x": {"from_parameter": "value"}, "y": 90}, "process_id": "lte", "result": true}}}}, "spatial_extent": {"crs": 4326, "east": 11.366666666666694, "north": 46.954166666666694, "south": 46.653599378797765, "west": 11.020833333333357}, "temporal_extent": ["2018-02-01", "2018-06-30"]}, "process_id": "load_collection"}, "mask1": {"arguments": {"data": {"from_node": "reducedimension1"}, "mask": {"from_node": "reducedimension2"}, "replacement": 2}, "process_id": "mask"}, "mergecubes1": {"arguments": {"cube1": {"from_node": "adddimension1"}, "cube2": {"from_node": "adddimension2"}}, "process_id": "merge_cubes"}, "mergecubes2": {"arguments": {"cube1": {"from_node": "mergecubes1"}, "cube2": {"from_node": "adddimension3"}}, "process_id": "merge_cubes"}, "reducedimension1": {"arguments": {"data": {"from_node": "loadcollection1"}, "dimension": "bands", "reducer": {"process_graph": {"add1": {"arguments": {"x": {"from_node": "arrayelement1"}, "y": {"from_node": "arrayelement2"}}, "process_id": "add"}, "arrayelement1": {"arguments": {"data": {"from_parameter": "data"}, "index": 0}, "process_id": "array_element"}, "arrayelement2": {"arguments": {"data": {"from_parameter": "data"}, "index": 1}, "process_id": "array_element"}, "divide1": {"arguments": {"x": {"from_node": "subtract1"}, "y": {"from_node": "add1"}}, "process_id": "divide"}, "gt1": {"arguments": {"x": {"from_node": "divide1"}, "y": 0.4}, "process_id": "gt"}, "multiply1": {"arguments": {"x": {"from_node": "gt1"}, "y": 1.0}, "process_id": "multiply", "result": true}, "subtract1": {"arguments": {"x": {"from_node": "arrayelement1"}, "y": {"from_node": "arrayelement2"}}, "process_id": "subtract"}}}}, "process_id": "reduce_dimension"}, "reducedimension2": {"arguments": {"data": {"from_node": "loadcollection1"}, "dimension": "bands", "reducer": {"process_graph": {"arrayelement3": {"arguments": {"data": {"from_parameter": "data"}, "index": 2}, "process_id": "array_element"}, "eq1": {"arguments": {"x": {"from_node": "arrayelement3"}, "y": 8}, "process_id": "eq"}, "eq2": {"arguments": {"x": {"from_node": "arrayelement3"}, "y": 9}, "process_id": "eq"}, "eq3": {"arguments": {"x": {"from_node": "arrayelement3"}, "y": 3}, "process_id": "eq"}, "multiply2": {"arguments": {"x": {"from_node": "or2"}, "y": 1.0}, "process_id": "multiply", "result": true}, "or1": {"arguments": {"x": {"from_node": "eq1"}, "y": {"from_node": "eq2"}}, "process_id": "or"}, "or2": {"arguments": {"x": {"from_node": "or1"}, "y": {"from_node": "eq3"}}, "process_id": "or"}}}}, "process_id": "reduce_dimension"}, "saveresult1": {"arguments": {"data": {"from_node": "aggregatespatial1"}, "format": "JSON", "options": {}}, "process_id": "save_result", "result": true}}}, "status": "finished", "title": "n_pixels_json", "updated": "2024-02-15T11:20:21Z", "usage": {"cpu": {"unit": "cpu-seconds", "value": 11389.667236829}, "duration": {"unit": "seconds", "value": 466}, "input_pixel": {"unit": "mega-pixel", "value": 2975.25}, "max_executor_memory": {"unit": "gb", "value": 3.4981117248535156}, "memory": {"unit": "mb-seconds", "value": 23489350.182635784}, "network_received": {"unit": "b", "value": 1149214652006.0}}}}</script>
+    </openeo-job>
+    </div></div>
+</div>
+<p>Now we can check the status of our job. We can download the result once the job has finished.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">job</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;finished&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">job</span><span class="o">.</span><span class="n">status</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;finished&quot;</span><span class="p">:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">get_results</span><span class="p">()</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">download_files</span><span class="p">(</span><span class="s2">&quot;31_results/&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Quick hint: take a look at the job description: e.g. <code class="docutils literal notranslate"><span class="pre">job.describe_job()</span></code></strong></p>
+</section>
+<section id="load-the-resulting-time-series">
+<h3>Load the resulting time series<a class="headerlink" href="#load-the-resulting-time-series" title="Link to this heading">#</a></h3>
+<p>Let’s load the result. It contains the total number of pixels in the catchment, number of cloud and snow pixels.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load the result</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;31_results/timeseries.json&quot;</span><span class="p">,</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">n_pixels_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check the first 5 entries to check the data structure.</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">n_pixels_json</span><span class="o">.</span><span class="n">items</span><span class="p">())[:</span><span class="mi">3</span><span class="p">]</span> <span class="c1"># careful unsorted dates due to JSON format</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;2018-02-16T00:00:00Z&#39;, [[4201607.0, 1809140.0, 1479720.0]]),
+ (&#39;2018-04-17T00:00:00Z&#39;, [[4201607.0, 821551.0, 2215174.0]]),
+ (&#39;2018-05-07T00:00:00Z&#39;, [[4201607.0, 2175370.0, 710901.0]])]
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong><em>Quick hint: what is the length of the time series JSON?</em></strong>
+<code class="docutils literal notranslate"><span class="pre">len(n_pixels_json)</span></code></p>
+<p>Now we do some data wrangling to get a structured data frame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a Pandas DataFrame to hold the values</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">n_pixels_json</span><span class="p">]</span>
+<span class="n">n_catchment_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">n_pixels_json</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">n_pixels_json</span><span class="p">]</span>
+<span class="n">n_cloud_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">n_pixels_json</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">n_pixels_json</span><span class="p">]</span>
+<span class="n">n_snow_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">n_pixels_json</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">n_pixels_json</span><span class="p">]</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;time&quot;</span><span class="p">:</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">dates</span><span class="p">),</span>
+        <span class="s2">&quot;n_catchment_vals&quot;</span><span class="p">:</span><span class="n">n_catchment_vals</span><span class="p">,</span>
+        <span class="s2">&quot;n_cloud_vals&quot;</span><span class="p">:</span><span class="n">n_cloud_vals</span><span class="p">,</span>
+        <span class="s2">&quot;n_snow_vals&quot;</span><span class="p">:</span><span class="n">n_snow_vals</span>
+       <span class="p">}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+<span class="c1"># Sort the values by date</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>n_catchment_vals</th>
+      <th>n_cloud_vals</th>
+      <th>n_snow_vals</th>
+    </tr>
+    <tr>
+      <th>time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2018-02-06 00:00:00+00:00</th>
+      <td>1489702.0</td>
+      <td>253542.0</td>
+      <td>619519.0</td>
+    </tr>
+    <tr>
+      <th>2018-02-08 00:00:00+00:00</th>
+      <td>4201607.0</td>
+      <td>183099.0</td>
+      <td>2907006.0</td>
+    </tr>
+    <tr>
+      <th>2018-02-11 00:00:00+00:00</th>
+      <td>4201607.0</td>
+      <td>60947.0</td>
+      <td>2943057.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">n_snow_vals</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>55525116.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="calculate-the-cloud-percentage-for-filtering-time-steps">
+<h3>Calculate the cloud percentage for filtering time steps<a class="headerlink" href="#calculate-the-cloud-percentage-for-filtering-time-steps" title="Link to this heading">#</a></h3>
+<p>Divide the number of cloudy pixels by the number of total pixels = cloud percentage</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">perc_cloud</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;n_cloud_vals&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;n_catchment_vals&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;perc_cloud&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">perc_cloud</span>
+<span class="n">df</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>n_catchment_vals</th>
+      <th>n_cloud_vals</th>
+      <th>n_snow_vals</th>
+      <th>perc_cloud</th>
+    </tr>
+    <tr>
+      <th>time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2018-02-06 00:00:00+00:00</th>
+      <td>1489702.0</td>
+      <td>253542.0</td>
+      <td>619519.0</td>
+      <td>17.019646</td>
+    </tr>
+    <tr>
+      <th>2018-02-08 00:00:00+00:00</th>
+      <td>4201607.0</td>
+      <td>183099.0</td>
+      <td>2907006.0</td>
+      <td>4.357833</td>
+    </tr>
+    <tr>
+      <th>2018-02-11 00:00:00+00:00</th>
+      <td>4201607.0</td>
+      <td>60947.0</td>
+      <td>2943057.0</td>
+      <td>1.450564</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Quick hint: The sum of the n_catchment_vals should give an overall idea of the total number of pixels in the datacube for the whole time-series</strong> <code class="docutils literal notranslate"><span class="pre">df.n_catchment_vals.sum()</span></code></p>
+<p><strong>Quick hint: a filter of the snow values can give an idea of when the maximum snow cover occurred</strong> <code class="docutils literal notranslate"><span class="pre">df.where(df.n_snow_vals</span> <span class="pre">==</span> <span class="pre">df.n_snow_vals.max())</span></code></p>
+<p><strong>Quick hint: a simplified approach for converting from pixel count to square kilometres is to use this simplified formula::</strong></p>
+<p><span class="math notranslate nohighlight">\({{Area (km^2)} = (\frac{Spatial resolution (meters/pixel)^2}{1,000,000})\times{\text{Total pixel count}}}\)</span></p>
+<p>Plot the timeseries and the cloud threshold of 25%. If the cloud cover is higher the timestep will be excluded later on.</p>
+<p>Plot the <strong>cloud percentage</strong> with the threshold.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;perc_cloud&quot;</span><span class="p">,</span><span class="n">rot</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;line&quot;</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="mi">25</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/9d451dee7c27ba78632f96500dcbd8ded3322e6754dfb3bdbd8fc72393dc5969.png" src="../../_images/9d451dee7c27ba78632f96500dcbd8ded3322e6754dfb3bdbd8fc72393dc5969.png" />
+</div>
+</div>
+</section>
+<section id="calculate-the-snow-percentage">
+<h3>Calculate the snow percentage<a class="headerlink" href="#calculate-the-snow-percentage" title="Link to this heading">#</a></h3>
+<p>Divide the number of snow pixels by the number of total pixels = snow percentage</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">perc_snow</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;n_snow_vals&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;n_catchment_vals&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;perc_snow&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">perc_snow</span>
+<span class="n">df</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>n_catchment_vals</th>
+      <th>n_cloud_vals</th>
+      <th>n_snow_vals</th>
+      <th>perc_cloud</th>
+      <th>perc_snow</th>
+    </tr>
+    <tr>
+      <th>time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2018-02-06 00:00:00+00:00</th>
+      <td>1489702.0</td>
+      <td>253542.0</td>
+      <td>619519.0</td>
+      <td>17.019646</td>
+      <td>41.586774</td>
+    </tr>
+    <tr>
+      <th>2018-02-08 00:00:00+00:00</th>
+      <td>4201607.0</td>
+      <td>183099.0</td>
+      <td>2907006.0</td>
+      <td>4.357833</td>
+      <td>69.187956</td>
+    </tr>
+    <tr>
+      <th>2018-02-11 00:00:00+00:00</th>
+      <td>4201607.0</td>
+      <td>60947.0</td>
+      <td>2943057.0</td>
+      <td>1.450564</td>
+      <td>70.045985</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Plot the <strong>unfiltered snow percentage</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;perc_snow&quot;</span><span class="p">,</span><span class="n">rot</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;line&quot;</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/1aa5b0af5642e682ec765fff92a9423c0a882a48e5193616cd2404f8c22cf208.png" src="../../_images/1aa5b0af5642e682ec765fff92a9423c0a882a48e5193616cd2404f8c22cf208.png" />
+</div>
+</div>
+</section>
+<section id="filter-out-cloudy-time-steps">
+<h3>Filter out cloudy time steps<a class="headerlink" href="#filter-out-cloudy-time-steps" title="Link to this heading">#</a></h3>
+<p>Keep only the dates with cloud coverage less than the threshold</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;perc_cloud&quot;</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">25</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-and-save-the-cloud-free-snow-percentage-time-series">
+<h3>Plot and save the cloud free snow percentage time series<a class="headerlink" href="#plot-and-save-the-cloud-free-snow-percentage-time-series" title="Link to this heading">#</a></h3>
+<p>Plot the <strong>cloud filtered snow percentage</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_filtered</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;perc_snow&quot;</span><span class="p">,</span><span class="n">rot</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;line&quot;</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/2b065b2fdcd1418d54726a6b41dd1f5a1aba4c6f272232c778a61a0bde56b5d9.png" src="../../_images/2b065b2fdcd1418d54726a6b41dd1f5a1aba4c6f272232c778a61a0bde56b5d9.png" />
+</div>
+</div>
+<p>Save the <strong>cloud filtered snow percentage</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_filtered</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;31_results/filtered_snow_perc.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "conda-env-cubes-and-clouds-cubes-and-clouds2-py"
+        },
+        kernelOptions: {
+            name: "conda-env-cubes-and-clouds-cubes-and-clouds2-py",
+            path: "./3.1_data_processing/3.1_exercises"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'conda-env-cubes-and-clouds-cubes-and-clouds2-py'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../3.1_data_processing.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">3.1 Data Processing</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_alternatives/31_data_processing_stac.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">3.1 Data Processing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libraries">Libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-to-a-cloud-platform">Connect to a cloud platform</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#region-of-interest">Region of Interest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspect-metadata">Inspect Metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-workflow">Define a workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-data-cube">Define the data cube</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-data-cube">Load the data cube</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ndsi-normalized-difference-snow-index">NDSI - Normalized Difference Snow Index</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-the-snow-map">Creating the Snow Map</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-cloud-mask">Creating a cloud mask</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-the-cloud-mask-to-the-snowmap">Applying the cloud mask to the snowmap</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mask-polygon-from-bounding-box-to-shape">Mask Polygon: From Bounding Box to Shape</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-one-time-step-of-the-timeseries">Visualize one time step of the timeseries</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-catchment-statistics">Calculate Catchment Statistics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#count-pixels-and-aggregate-spatially-to-the-catchment">Count pixels and aggregate spatially to the catchment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#register-a-batch-job-for-processing">Register a batch job for processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-resulting-time-series">Load the resulting time series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-the-cloud-percentage-for-filtering-time-steps">Calculate the cloud percentage for filtering time steps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-the-snow-percentage">Calculate the snow percentage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-out-cloudy-time-steps">Filter out cloudy time steps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-and-save-the-cloud-free-snow-percentage-time-series">Plot and save the cloud free snow percentage time series</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By ESA
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,663 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3.3 Data Sharing &#8212; Cubes &amp; Clouds - Cloud Native Open Data Sciences for Earth Observation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '3.3_data_sharing/3.3_data_sharing';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3.3 Data Sharing" href="3.3_exercises/33_data_sharing.html" />
+    <link rel="prev" title="3.2 Validation" href="../3.2_validation/3.2_exercises/32_validation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Lectures
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setup</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../0_introduction/0_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0_introduction/exercises/0_login.html">Login to openEO</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1.1_intro_platform/1.1_intro_platform.html">Earth Observation cloud platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.2_data_cube/1.2_data_cube.html">What is a data cube?</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1.3_openscience/1.3.1_openscienceandfair.html">Open Science and the FAIR Principles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1.3_openscience/1.3.3_openscienceineo.html">The Open Science Journey - Open Science in geospatial, EO and EO cloud platforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1.3_openscience/1.3.2_opendataopensource.html">Open Data and Open Source Software</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Discovery and metadata</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.1_data_discovery/2.1_data_discovery.html">Data Discovery</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../2.2_data_properties/2.2_data_properties.html">Data Properties</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data access with OpenEO</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.3_data_access/2.3_data_access.html">Access EO Data from the Cloud</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data formats for achieving scalability</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.4_formats_and_performance/2.4_formats_and_performance.html">Data Formats and Performance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Process &amp; Share</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3.1_data_processing/3.1_data_processing.html">Data processing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3.1_data_processing/3.1_exercises/31_data_processing.html">Basic EO workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3.1_data_processing/3.1_exercises/_alternatives/31_data_processing_stac.html">EO workflow with STAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3.1_data_processing/3.1_exercises/_alternatives/31_data_processing_openEO_Platform.html">EO workflow with openEO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3.1_data_processing/3.1_exercises/_alternatives/34_data_sharing_aoi_test.html">Data sharing and publishing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3.2_validation/3.2_validation.html">Validation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3.2_validation/3.2_exercises/32_validation.html">Exercise validation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Data sharing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="3.3_exercises/33_data_sharing.html">Exercise data sharing</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional materials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../9.9_master_asi_conae/s2_sca.html">Sentinel-2 snow cover area (SCA) time series</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/s1.html">S1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/s2_snowcover_test.html">Sentinel-2 snow cover</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/test_s1_s3.html">Sentinel-1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/s3_ndsi.html">List all the available dataset</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds/issues/new?title=Issue%20on%20page%20%2F3.3_data_sharing/3.3_data_sharing.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/3.3_data_sharing/3.3_data_sharing.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>3.3 Data Sharing</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-steps-of-your-open-science-journey">The steps of your open science journey</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#produce-your-own-map">Produce your own map</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-the-result">Validate the result</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-the-data-fair-and-open">Make the data FAIR and open</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-how-fair-the-result-is">Evaluate how FAIR the result is</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fair-assessment">FAIR Assessment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#community-mapping-project">Community Mapping Project</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#congratulations">Congratulations</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="data-sharing">
+<h1>3.3 Data Sharing<a class="headerlink" href="#data-sharing" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Carry out an EO workflow on a cloud platform independently</p></li>
+<li><p>Make our results <code class="docutils literal notranslate"><span class="pre">open</span></code> and <code class="docutils literal notranslate"><span class="pre">FAIR</span></code></p></li>
+<li><p>Collaborate with a community of researchers to reach a common goal</p></li>
+</ul>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>We have reached the last chapter of the course. You know about data cubes, cloud platforms and open science. Now it’s time to prove it! We will apply everything we have learned so far and complete our own EO workflow on a cloud platform adhering to the open science principles.
+We have carried out a full EO workflow to produce snow cover information in an alpine catchment. To make our results impactful we need to make them openly available to other researchers and the general public. Therefore we are going to learn how to share our data set (and code) properly - following the FAIR principles. We have learned about the concepts of open science in lecture <a class="reference external" href="https://github.com/EO-College/cubes-and-clouds/blob/main/lectures/1.3_openscience/1.3.1_openscienceandfair.md">1.3 open science</a>. Now we are going to apply them! We are going to create a snow cover area map of the alps together with all the participants of the course. Everyone adds their contribution to a shared map. With every participant another small patch of the alps gets mapped! The map is openly available so that everybody can track our progress, the data is openly available and you can point to the patch you have provided!</p>
+<p><a class="reference external" href="https://www.youtube.com/watch?v=-8rHmtEMCx8"><img alt="Your Open Science Journey" src="https://img.youtube.com/vi/-8rHmtEMCx8/0.jpg" /></a> <br></p>
+<blockquote>
+<div><p>Video content in cooperation with <a class="reference external" href="https://opengeohub.org/people/leandro-parente/">Leandro Parente</a> (OpenGeoHub). <br>
+<em>“Connect - Create - Share - Repeat”</em> <br>
+Links to OpenGeoHub’s open science projects mentioned in the video:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://opengeohub.org/">opengeohub</a></p></li>
+<li><p>open environmental data cube: <a class="reference external" href="http://ecodatacube.eu">webgis</a>, <a class="reference external" href="http://stac.openlandmap.org">stac catalogue</a>, <a class="reference external" href="http://eumap.readthedocs.org">code and documentation</a>, <a class="reference external" href="https://doi.org/10.7717/peerj.15478">publication</a>,</p></li>
+<li><p><a class="reference external" href="https://earthmonitor.org/">open earth monitor cyberinfrastructure</a></p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="the-steps-of-your-open-science-journey">
+<h2>The steps of your open science journey<a class="headerlink" href="#the-steps-of-your-open-science-journey" title="Link to this heading">#</a></h2>
+<section id="produce-your-own-map">
+<h3>Produce your own map<a class="headerlink" href="#produce-your-own-map" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Reuse the workflow to generate the snow covered area data cube</p></li>
+<li><p>Adapt the workflow to generate your personal contribution to mapping the snow covered area of the alps</p>
+<ul>
+<li><p>Choose an extent on the map that hasn’t been mapped yet. We are producing patches of roughly 1km by 1km.</p></li>
+<li><p>Choose a time extent. The winter months of a given year.</p></li>
+<li><p>Add a step to reduce the time dimension. We want to create one layer for the winter season of the given year.</p></li>
+<li><p>Adapt the file format to Cloud Optimized GeoTiff (perfectly suitable for a raster file with one time step and one band).</p></li>
+</ul>
+</li>
+<li><p>Download the result consisting of the STAC metadata and the COG</p></li>
+</ul>
+</section>
+<section id="validate-the-result">
+<h3>Validate the result<a class="headerlink" href="#validate-the-result" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>This is still work in progress</p></li>
+</ul>
+</section>
+<section id="make-the-data-fair-and-open">
+<h3>Make the data FAIR and open<a class="headerlink" href="#make-the-data-fair-and-open" title="Link to this heading">#</a></h3>
+<iframe src="https://create.eo-college.org/wp-admin/admin-ajax.php?action=h5p_embed&id=18" width="959" height="689" frameborder="0" allowfullscreen="allowfullscreen" title="Cubes&amp;Clouds: Making your data FAIR"></iframe><script src="https://create.eo-college.org/wp-content/plugins/h5p/h5p-php-library/js/h5p-resizer.js" charset="UTF-8"></script>
+<ul class="simple">
+<li><p>Customize the STAC metadata (e.g. adding you as the author)</p></li>
+<li><p>Trigger the update of the STAC catalogue and web map by submitting your results. Your data will be openly available!</p></li>
+<li><p>A license is assigned to the whole collection of all the produced patches</p></li>
+<li><p>A doi is assigned to the whole collection of all the produced patches</p></li>
+</ul>
+</section>
+<section id="evaluate-how-fair-the-result-is">
+<h3>Evaluate how FAIR the result is<a class="headerlink" href="#evaluate-how-fair-the-result-is" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Do the FAIR self assessment tool after you’ve created your results</p></li>
+<li><p>You will get a score on how FAIR the dataset you have produced really is</p></li>
+</ul>
+</section>
+</section>
+<section id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h2>
+<p>Time to start your own open science journey. Produce a snow cover area map for a region that hasn’t been mapped yet. FAIRify your results and make them publicly available!</p>
+<p><a class="reference external" href="https://github.com/EO-College/cubes-and-clouds/blob/main/lectures/3.3_data_sharing/3.3_exercises/33_data_sharing.ipynb">Exercise 3.3 Sharing</a></p>
+</section>
+<section id="fair-assessment">
+<h2>FAIR Assessment<a class="headerlink" href="#fair-assessment" title="Link to this heading">#</a></h2>
+<p>This tool allows you to check how FAIR your results are. Give it a shot!</p>
+<p><strong>Embed: <a class="github reference external" href="https://github.com/au-research/FAIR-Data-Assessment-Tool">au-research/FAIR-Data-Assessment-Tool</a></strong></p>
+</section>
+<section id="community-mapping-project">
+<h2>Community Mapping Project<a class="headerlink" href="#community-mapping-project" title="Link to this heading">#</a></h2>
+<p>Have a look at your results! Have a look at the community mapping project you have contributed to!</p>
+<p><a class="reference external" href="https://esa.pages.eox.at/cubes-and-clouds-catalog/browser/#/">STAC Browser Cubes and Clouds - Snow Cover</a></p>
+</section>
+<section id="congratulations">
+<h2>Congratulations<a class="headerlink" href="#congratulations" title="Link to this heading">#</a></h2>
+<p>Congrats! You’ve made it through the Cubes and Clouds online course!</p>
+<p><a class="reference external" href="https://youtu.be/xoCBLAPPn0k"><img alt="Introduction to EO Cloud Platforms" src="https://img.youtube.com/vi/xoCBLAPPn0k/0.jpg" /></a> <br></p>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./3.3_data_sharing"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../3.2_validation/3.2_exercises/32_validation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">3.2 Validation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="3.3_exercises/33_data_sharing.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">3.3 Data Sharing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-steps-of-your-open-science-journey">The steps of your open science journey</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#produce-your-own-map">Produce your own map</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-the-result">Validate the result</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-the-data-fair-and-open">Make the data FAIR and open</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-how-fair-the-result-is">Evaluate how FAIR the result is</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fair-assessment">FAIR Assessment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#community-mapping-project">Community Mapping Project</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#congratulations">Congratulations</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By ESA
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

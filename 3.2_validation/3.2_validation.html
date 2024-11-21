@@ -1,0 +1,765 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Validation &#8212; Cubes &amp; Clouds - Cloud Native Open Data Sciences for Earth Observation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '3.2_validation/3.2_validation';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3.2 Validation" href="3.2_exercises/32_validation.html" />
+    <link rel="prev" title="3.4 Data Sharing" href="../3.1_data_processing/3.1_exercises/_alternatives/34_data_sharing_aoi_test.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Lectures
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setup</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../0_introduction/0_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0_introduction/exercises/0_login.html">Login to openEO</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1.1_intro_platform/1.1_intro_platform.html">Earth Observation cloud platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.2_data_cube/1.2_data_cube.html">What is a data cube?</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1.3_openscience/1.3.1_openscienceandfair.html">Open Science and the FAIR Principles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1.3_openscience/1.3.3_openscienceineo.html">The Open Science Journey - Open Science in geospatial, EO and EO cloud platforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1.3_openscience/1.3.2_opendataopensource.html">Open Data and Open Source Software</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Discovery and metadata</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.1_data_discovery/2.1_data_discovery.html">Data Discovery</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../2.2_data_properties/2.2_data_properties.html">Data Properties</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data access with OpenEO</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.3_data_access/2.3_data_access.html">Access EO Data from the Cloud</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data formats for achieving scalability</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.4_formats_and_performance/2.4_formats_and_performance.html">Data Formats and Performance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Process &amp; Share</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3.1_data_processing/3.1_data_processing.html">Data processing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3.1_data_processing/3.1_exercises/31_data_processing.html">Basic EO workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3.1_data_processing/3.1_exercises/_alternatives/31_data_processing_stac.html">EO workflow with STAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3.1_data_processing/3.1_exercises/_alternatives/31_data_processing_openEO_Platform.html">EO workflow with openEO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3.1_data_processing/3.1_exercises/_alternatives/34_data_sharing_aoi_test.html">Data sharing and publishing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Validation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="3.2_exercises/32_validation.html">Exercise validation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3.3_data_sharing/3.3_data_sharing.html">Data sharing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3.3_data_sharing/3.3_exercises/33_data_sharing.html">Exercise data sharing</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional materials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../9.9_master_asi_conae/s2_sca.html">Sentinel-2 snow cover area (SCA) time series</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/s1.html">S1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/s2_snowcover_test.html">Sentinel-2 snow cover</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/test_s1_s3.html">Sentinel-1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/s3_ndsi.html">List all the available dataset</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds/issues/new?title=Issue%20on%20page%20%2F3.2_validation/3.2_validation.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/3.2_validation/3.2_validation.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Validation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-validation">What is validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#critically-analyse-a-workflow">Critically Analyse a workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-validation-approaches">Typical validation approaches</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reference-data">Reference data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-validation-and-map-validation">Model validation and map validation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-metrics">Validation metrics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-strategies-in-the-absence-of-a-probability-sample">Validation strategies in the absence of a probability sample</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limits-to-accuracy-assessment">Limits to accuracy assessment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#communication-of-validation">Communication of validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">Quiz</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theory">Theory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further Reading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="validation">
+<h1>Validation<a class="headerlink" href="#validation" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Get to know typical validation strategies in EO</p></li>
+<li><p>Understand where uncertainties appear in a workflow by design</p></li>
+<li><p>Understand why validation is important</p></li>
+<li><p>The validation of large scale mapping products</p></li>
+<li><p>Validate some pixels of the snow cover area map</p></li>
+</ul>
+</section>
+<section id="what-is-validation">
+<h2>What is validation<a class="headerlink" href="#what-is-validation" title="Link to this heading">#</a></h2>
+<p>The validation process typically involves comparing a model or a developed Earth Observation (EO) product with reference data, and the level of agreement is assessed using validation metrics. Validating EO products is crucial to prevent misinterpretation or error propagation when utilizing the data for purposes such as area quantification, subsequent modeling, or planning, particularly in contexts like nature conservation or risk assessment. However, validating EO products poses significant challenges.</p>
+<p>In this tutorial, we will explain how to derive validation metrics and how to interpret them. Our primary focus will center on the difficulties and limitations inherent in the accuracy assessment process, especially in the context of large-scale (global) mapping products based on Earth Observation.</p>
+</section>
+<section id="critically-analyse-a-workflow">
+<h2>Critically Analyse a workflow<a class="headerlink" href="#critically-analyse-a-workflow" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Identify sources of uncertainty in the applied workflow</p></li>
+<li><p>Process graph with pop-ups of sources of uncertainties</p></li>
+<li><p>Strategies of how to improve</p></li>
+</ul>
+<p>Now that we have carried out a very basic approach to solve our research question we should take some time to identify possible sources of uncertainty and think about how to improve them:</p>
+<ul class="simple">
+<li><p>Optical earth observation has some inherent drawbacks, most importantly: clouds. Especially in mountain regions.</p>
+<ul>
+<li><p>We are excluding images where a certain cloud coverage is exceeded. There would still be some information available.</p></li>
+<li><p>We are not filling in the gaps that clouds generate. This leaves us with some uncertainty.</p></li>
+</ul>
+</li>
+<li><p>Use data fusion techniques and include SAR data, that can penetrate the clouds.</p>
+<ul>
+<li><p>Sentinel-2 has a 6 day repeat rate. This means we do not know what happens with the snow cover in between two acquisitions.</p></li>
+<li><p>Use data fusion techniques and include other optical sensors and SAR data</p></li>
+</ul>
+</li>
+<li><p>Use physical snow models or heuristics to estimate the snow cover in between</p>
+<ul>
+<li><p>We are using a threshold for discriminating between snow and no snow. Changing this arbitrary value will influence our results.</p></li>
+<li><p>There are better, more complex ways to identify snow.</p></li>
+</ul>
+</li>
+<li><p>Snow Cover does not represent the amount of snow.</p>
+<ul>
+<li><p>Therefore we would need to calculate the snow depth.</p></li>
+<li><p>Or better the Snow Water Equivalent.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="typical-validation-approaches">
+<h2>Typical validation approaches<a class="headerlink" href="#typical-validation-approaches" title="Link to this heading">#</a></h2>
+<section id="reference-data">
+<h3>Reference data<a class="headerlink" href="#reference-data" title="Link to this heading">#</a></h3>
+<p>Reference data for EO are commonly obtained through field surveys or visual expert assessments of the underlying EO data. These reference datasets play a dual role, serving not only for validation purposes but also as essential components for training models, particularly when the EO product relies on predictions from a data-driven model. Consequently, when referring to reference data, a broad distinction is made between training and test data. The training dataset is employed in the model development phase, while the test dataset is crucial for evaluating the quality of the resulting product, specifically assessing the accuracy of predictions generated by the model.</p>
+</section>
+<section id="model-validation-and-map-validation">
+<h3>Model validation and map validation<a class="headerlink" href="#model-validation-and-map-validation" title="Link to this heading">#</a></h3>
+<p>Many EO products are generated using data-driven models, which can range from simple rule-based models to more complex machine learning models. In the process of creating such EO products, two distinct validation steps are crucial: model validation and map validation.
+During model validation, we evaluate the model’s ability to predict the target variable (e.g., snow cover) based on EO data (e.g., optical satellite imagery). This evaluation often involves cross-validation, where the training data are divided into multiple folds. Iteratively, one fold is withheld during model training, and these reserved data are used to test the model’s performance in predicting unseen data. Cross-validation typically includes tuning the model (adjusting hyperparameters, selecting variables) to identify the optimal model for predicting the held-back data.
+If (and only if) the training data and the derived cross-validation folds are representative for the prediction area (see discussion later), the cross-validation performance may be used as an indicator for the map accuracy.</p>
+<p>To properly measure the map accuracy, a probability sample of the <em>prediction area</em> is required. This might be a random sample of the entire area that is used to describe the fit between the prediction (i.e. the map) and the reference.
+However, in numerous scientific publications, this essential step is often omitted, and model performance alone is presented as the sole indicator for map accuracy. The following section outlines the risks associated with this practice.</p>
+</section>
+<section id="validation-metrics">
+<h3>Validation metrics<a class="headerlink" href="#validation-metrics" title="Link to this heading">#</a></h3>
+<p>Validation metrics summarize the fit between predictions and reference. For continuous variables (e.g. snow depth), Root Mean Square Error or Coefficient of Determination are commonly used validation metrics. For categorical variables (e.g. land cover), Accuracy or F1 score are frequently used summary statistics. For binary classifications, the area under the ROC curve may be used. However, there are many more validation metrics expressing the fit between prediction and reference by focusing on different aspects.</p>
+</section>
+</section>
+<section id="validation-strategies-in-the-absence-of-a-probability-sample">
+<h2>Validation strategies in the absence of a probability sample<a class="headerlink" href="#validation-strategies-in-the-absence-of-a-probability-sample" title="Link to this heading">#</a></h2>
+<p>When reference data are randomly distributed across the prediction area, validation metrics can be computed by comparing predictions and reference through a randomly selected subset of the entire reference dataset used as test data. Alternatively, in cross-validation, the training data may be randomly partitioned into multiple folds. However, the availability of design-based samples is infrequent, particularly in large-scale mapping endeavors like global applications.
+Typically, reference data are sourced from extensive databases, such as soil profiles or vegetation surveys, resulting in high clustering within areas that have been extensively studied or are easily accessible. Conversely, certain areas may entirely lack reference data, as illustrated in the accompanying figure.</p>
+<p><img alt="Typical distributions of reference data" src="../_images/distribution_map.png" /></p>
+<blockquote>
+<div><p>Figure 1: Comparison between 1000 randomly sampled reference data (left) and a highly clustered sample of the same size (right) that is typical for many environmental data sets. Reference: <a class="reference external" href="https://doi.org/10.1038/s41467-022-29838-9">https://doi.org/10.1038/s41467-022-29838-9</a></p>
+</div></blockquote>
+<p>When such data are randomly split into training and test sets or cross-validation folds, a significant issue arises: the lack of independence between training and test data. This stems from the fact that both sets originate from the same geographic areas, whereas the trained model is deployed to make predictions for much larger areas without available reference data. Ploton et al., 2020, illustrate the consequences: overly optimistic validation statistics that deviate from the actual quality of the map.</p>
+<p>To address this challenge, various spatial data splitting methods have been proposed. These methods involve splitting reference data based on spatial units, spatial blocks, or by considering spatial autocorrelation, all with the aim of ensuring independence between training and test data (e.g. Brenning 2012, Roberts et al., 2017, Valavi et al., 2019) or representativeness for the prediction task (Mila 2022, Linnenbrink 2023).</p>
+</section>
+<section id="limits-to-accuracy-assessment">
+<h2>Limits to accuracy assessment<a class="headerlink" href="#limits-to-accuracy-assessment" title="Link to this heading">#</a></h2>
+<p>Employing validation strategies tailored for spatial data enables us to offer the most accurate estimates of map accuracy, albeit with certain limitations. Reflecting on the reference data illustrated in Figure 1, large areas lack coverage from any reference data. While it is technically feasible to generate predictions for these areas, the question arises: is this a reasonable approach?</p>
+<p>Assuming that new geographical spaces often goes along with new environmental conditions, it becomes likely that our models may not be applicable to these environments due to non-applicable relationships. For instance, consider reference data for vegetation traits sampled in low elevations; it raises questions about the model’s applicability to high elevations where the traits might be influenced by different factors. This challenge is particularly pronounced when employing machine learning models, as their extrapolation abilities are often limited. When making predictions, the model is compelled to extend its predictions into unknown areas, making predictions for regions beyond the trained data range highly uncertain.
+This, however, is not reflected by the validation statistics that were calculated based on the reference data, hence knowledge on the performance in the data-poor regions is not included. As a result, the statistics fail to reflect the accuracy of the model in these areas, and predictions for regions outside the original data range should be approached with caution due to their inherent uncertainty.</p>
+<p>It is therefore important to limit predictions to the area where the model was trained and validated for. Meyer and Pebesma 2021 provide one suggestion to derive the “area of applicability” of prediction models that is based on distances to reference data in the predictor space. Other suggestion limit predictions to the geographic proximity of reference data (Sabatini et al., 2022).</p>
+</section>
+<section id="communication-of-validation">
+<h2>Communication of validation<a class="headerlink" href="#communication-of-validation" title="Link to this heading">#</a></h2>
+<p>As outlined above, the step of accuracy assessment involves considerable considerations on the data used for evaluation and requires awareness on the area these statistics are considered valid for. This challenge becomes particularly crucial when reference data fail to represent a comprehensive sample of the entire prediction area, a common scenario in many geoscience applications - to avoid overly optimistic performance estimates and hence false conclusions on the map accuracy. The validation procedure hence needs to be carefully communicated alongside the predictions. The resulting EO product (i.e. the prediction map) should be limited to the area for which the model was enabled to learn about relationships and for which performance estimates can be reliably provided for. This can be done by either masking the map or by providing an additional quality layer.</p>
+<p><a class="reference external" href="https://www.youtube.com/watch?v=ZvNsXDbz_W4"><img alt="The validation of large scale mapping products" src="https://img.youtube.com/vi/ZvNsXDbz_W4/0.jpg" /></a><br></p>
+<blockquote>
+<div><p>Video content in cooperation with <a class="reference external" href="https://www.uni-muenster.de/RemoteSensing/team/meyer/index.html">Hannah Meyer</a> (University of Münster). <br>
+<em>“Validation isn’t optional. It’s a must.”</em></p>
+</div></blockquote>
+</section>
+<section id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h2>
+<p>Let’s apply some validation steps on a cloud platform in practice!</p>
+<p><a class="reference external" href="https://github.com/EO-College/cubes-and-clouds/blob/main/lectures/3.2_validation/exercises/32_validation.ipynb">Exercise 3.2 Validation</a></p>
+</section>
+<section id="quiz">
+<h2>Quiz<a class="headerlink" href="#quiz" title="Link to this heading">#</a></h2>
+<section id="theory">
+<h3>Theory<a class="headerlink" href="#theory" title="Link to this heading">#</a></h3>
+<p>What are common problems in creating and validating global maps?</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[[x]] The spatial distribution of reference data: There are usually areas in the world where reference data is clustered and areas where there is hardly any data available.
+[[ ]] None: We have cloud computing that can scale to produce global maps and machine learning models can automatically account for data sparse regions.
+[[x]] The availablility of reference data: Some biophysical indicators are not measured frequently in space and time in the field (e.g. leaf area index, snow water equivalent)
+</pre></div>
+</div>
+<p>What is the Area of Applicability?</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[( )] It&#39;s the topic the map covers (e.g. vegetation cover)
+[( )] It&#39;s the extent of the map.
+[(x)] It&#39;s the area of the map where the values are representable.
+</pre></div>
+</div>
+</section>
+<section id="exercises">
+<h3>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h3>
+<p>How many snow stations are in the catchment? <em>Answer in the exercise: 33_validation.ipynb section <strong>‘Load snow-station in-situ data’</strong></em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[( )] 3
+[( )] 7
+[(x)] 5
+</pre></div>
+</div>
+<p>Which openEO process is used to extract the time series of the snow covered area at the station locations? <em>Answer in the exercise: 33_validation.ipynb</em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[( )] reduce_spatial
+[( )] resample_cube
+[(x)] aggregate_spatial
+</pre></div>
+</div>
+<p>Which is the station where the mapped snow cover has the lowest accuracy? <em>Answer in the exercise: 33_validation.ipynb section <strong>‘validate the SCA results with the snow station measurements’</strong></em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[( )] Rifiano Beobachter
+[( )] Saint Leonardo in Passiria Osservatore
+[(x)] Plata Osservatore
+</pre></div>
+</div>
+<p>When is the date with the maximum runoff/discharge? <em>Answer in the exercise: 33_validation.ipynb section <strong>‘compare to discharge data’</strong></em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[( )] 2018-06-03
+[( )] 2018-04-17
+[(x)] 2018-05-03
+</pre></div>
+</div>
+<p>How is the relation between snow cover and runoff/discharge? <em>Answer in the exercise: 33_validation.ipynb section <strong>‘compare to discharge data’</strong></em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[( )] When the snow cover is high, also the runoff is high.
+[(x)] Snow melt is followed by increased runoff.
+[( )] Snow melt is followed by reduced runoff.
+</pre></div>
+</div>
+</section>
+</section>
+<section id="further-reading">
+<h2>Further Reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Video: <a class="reference external" href="https://doi.org/10.5446/59412">Meyer, Hanna: Machine learning-based maps of the environment: challenges of extrapolation and overfitting. OpenGeoHub Summer School 2022 - KISTE project workshop, OpenGeoHub Foundation, 2022. https://doi.org/10.5446/59412</a></p></li>
+</ul>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Meyer, H., Pebesma, E. Machine learning-based global maps of ecological variables and the challenge of assessing them. Nat Commun 13, 2208 (2022). <a class="reference external" href="https://doi.org/10.1038/s41467-022-29838-9">https://doi.org/10.1038/s41467-022-29838-9</a></p></li>
+<li><p>Meyer, H., &amp; Pebesma, E. (2021). Predicting into unknown space? Estimating the area of applicability of spatial prediction models. Methods in Ecology and Evolution, 12, 1620–1633. <a class="reference external" href="https://doi.org/10.1111/2041-210X.13650">https://doi.org/10.1111/2041-210X.13650</a></p></li>
+<li><p>Loew et al. (2017): <a class="reference external" href="https://agupubs.onlinelibrary.wiley.com/doi/epdf/10.1002/2017RG000562">https://agupubs.onlinelibrary.wiley.com/doi/epdf/10.1002/2017RG000562</a></p></li>
+<li><p>Brenning et al. (2012): <a class="reference external" href="https://doi.org/10.1109/IGARSS.2012.6352393">https://doi.org/10.1109/IGARSS.2012.6352393</a></p></li>
+<li><p>Valavi et al. (2019): <a class="reference external" href="https://doi.org/10.1111/2041-210X.13107">https://doi.org/10.1111/2041-210X.13107</a></p></li>
+<li><p>Roberts et al. (2017): <a class="reference external" href="https://doi.org/10.1111/ecog.02881">https://doi.org/10.1111/ecog.02881</a></p></li>
+<li><p>Ploton et al. (2020): <a class="reference external" href="https://doi.org/10.1038/s41467-020-18321-y">https://doi.org/10.1038/s41467-020-18321-y</a></p></li>
+<li><p>Milà et al. (2022): <a class="reference external" href="https://doi.org/https://doi.org/10.1111/2041-210X.13851">https://doi.org/https://doi.org/10.1111/2041-210X.13851</a></p></li>
+<li><p>Linnenbrink et al. (2023): <a class="reference external" href="https://doi.org/10.5194/egusphere-2023-1308">https://doi.org/10.5194/egusphere-2023-1308</a></p></li>
+<li><p>Sabatini et al. (2022): <a class="reference external" href="https://doi.org/10.1038/s41467-022-32063-z">https://doi.org/10.1038/s41467-022-32063-z</a></p></li>
+</ul>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./3.2_validation"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../3.1_data_processing/3.1_exercises/_alternatives/34_data_sharing_aoi_test.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">3.4 Data Sharing</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="3.2_exercises/32_validation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">3.2 Validation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-validation">What is validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#critically-analyse-a-workflow">Critically Analyse a workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-validation-approaches">Typical validation approaches</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reference-data">Reference data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-validation-and-map-validation">Model validation and map validation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-metrics">Validation metrics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-strategies-in-the-absence-of-a-probability-sample">Validation strategies in the absence of a probability sample</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limits-to-accuracy-assessment">Limits to accuracy assessment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#communication-of-validation">Communication of validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">Quiz</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theory">Theory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further Reading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By ESA
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

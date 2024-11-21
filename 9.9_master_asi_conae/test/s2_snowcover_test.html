@@ -1,0 +1,1174 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Sentinel-2 snow cover &#8212; Cubes &amp; Clouds - Cloud Native Open Data Sciences for Earth Observation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '9.9_master_asi_conae/test/s2_snowcover_test';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Sentinel-1" href="test_s1_s3.html" />
+    <link rel="prev" title="S1" href="s1.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>
+    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    Lectures
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setup</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../0_introduction/0_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../0_introduction/exercises/0_login.html">Login to openEO</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../1.1_intro_platform/1.1_intro_platform.html">Earth Observation cloud platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../1.2_data_cube/1.2_data_cube.html">What is a data cube?</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../1.3_openscience/1.3.1_openscienceandfair.html">Open Science and the FAIR Principles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../1.3_openscience/1.3.3_openscienceineo.html">The Open Science Journey - Open Science in geospatial, EO and EO cloud platforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1.3_openscience/1.3.2_opendataopensource.html">Open Data and Open Source Software</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Discovery and metadata</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../2.1_data_discovery/2.1_data_discovery.html">Data Discovery</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../2.2_data_properties/2.2_data_properties.html">Data Properties</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data access with OpenEO</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../2.3_data_access/2.3_data_access.html">Access EO Data from the Cloud</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data formats for achieving scalability</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../2.4_formats_and_performance/2.4_formats_and_performance.html">Data Formats and Performance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Process &amp; Share</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3.1_data_processing/3.1_data_processing.html">Data processing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../3.1_data_processing/3.1_exercises/31_data_processing.html">Basic EO workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3.1_data_processing/3.1_exercises/_alternatives/31_data_processing_stac.html">EO workflow with STAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3.1_data_processing/3.1_exercises/_alternatives/31_data_processing_openEO_Platform.html">EO workflow with openEO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3.1_data_processing/3.1_exercises/_alternatives/34_data_sharing_aoi_test.html">Data sharing and publishing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3.2_validation/3.2_validation.html">Validation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../3.2_validation/3.2_exercises/32_validation.html">Exercise validation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3.3_data_sharing/3.3_data_sharing.html">Data sharing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../3.3_data_sharing/3.3_exercises/33_data_sharing.html">Exercise data sharing</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional materials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../s2_sca.html">Sentinel-2 snow cover area (SCA) time series</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="s1.html">S1</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Sentinel-2 snow cover</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_s1_s3.html">Sentinel-1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="s3_ndsi.html">List all the available dataset</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds/issues/new?title=Issue%20on%20page%20%2F9.9_master_asi_conae/test/s2_snowcover_test.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/9.9_master_asi_conae/test/s2_snowcover_test.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Sentinel-2 snow cover</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries">Import libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sentinel-hub-authentication">Sentinel-hub authentication</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-definition">Input definition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#snowcover-map-generation">Snowcover map generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#show-the-result">Show the result</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="sentinel-2-snow-cover">
+<h1>Sentinel-2 snow cover<a class="headerlink" href="#sentinel-2-snow-cover" title="Link to this heading">#</a></h1>
+<section id="import-libraries">
+<h2>Import libraries<a class="headerlink" href="#import-libraries" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sentinel Hub</span>
+<span class="kn">from</span> <span class="nn">sentinelhub</span> <span class="kn">import</span> <span class="p">(</span><span class="n">SHConfig</span><span class="p">,</span> <span class="n">SentinelHubRequest</span><span class="p">,</span> <span class="n">DataCollection</span><span class="p">,</span> <span class="n">MimeType</span><span class="p">,</span> <span class="n">CRS</span><span class="p">,</span> <span class="n">BBox</span><span class="p">,</span> <span class="n">bbox_to_dimensions</span><span class="p">,</span> <span class="n">geometry</span><span class="p">)</span>
+
+<span class="c1"># Geospatial libraries</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+
+<span class="kn">import</span> <span class="nn">folium</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="sentinel-hub-authentication">
+<h2>Sentinel-hub authentication<a class="headerlink" href="#sentinel-hub-authentication" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">SHConfig</span><span class="p">()</span>
+<span class="n">config</span><span class="o">.</span><span class="n">sh_client_id</span> <span class="o">=</span> <span class="o">%</span><span class="k">env</span> SH_CLIENT_ID
+<span class="n">config</span><span class="o">.</span><span class="n">sh_client_secret</span> <span class="o">=</span> <span class="o">%</span><span class="k">env</span> SH_CLIENT_SECRET
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="input-definition">
+<h2>Input definition<a class="headerlink" href="#input-definition" title="Link to this heading">#</a></h2>
+<p>Read the shapefile on which to compute the snow cover map and plot it</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read the file with geopandas and convert it to EPSG:4326</span>
+<span class="n">aoi_df</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;ADO_DSC_ITH1_0025.geojson&#39;</span><span class="p">)</span>
+<span class="n">aoi_df</span> <span class="o">=</span> <span class="n">aoi_df</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span>
+
+<span class="c1"># Create a basemap with folium</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span>
+    <span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="n">aoi_df</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">centroid</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">aoi_df</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">centroid</span><span class="o">.</span><span class="n">x</span><span class="p">],</span>
+    <span class="n">zoom_start</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+
+<span class="c1"># Add the polygon to the map</span>
+<span class="n">geo_j</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">GeoJson</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">aoi_df</span><span class="o">.</span><span class="n">to_json</span><span class="p">())</span>
+<span class="n">geo_j</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+
+<span class="c1"># Show the map</span>
+<span class="n">m</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+    
+        &lt;script&gt;
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        &lt;/script&gt;
+    
+    &lt;style&gt;html, body {width: 100%;height: 100%;margin: 0;padding: 0;}&lt;/style&gt;
+    &lt;style&gt;#map {position:absolute;top:0;bottom:0;right:0;left:0;}&lt;/style&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://code.jquery.com/jquery-1.12.4.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/&gt;
+    
+            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
+            &lt;style&gt;
+                #map_f29601eeb52a1209e9321bf92132ff08 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            &lt;/style&gt;
+        
+&lt;/head&gt;
+&lt;body&gt;
+    
+    
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_f29601eeb52a1209e9321bf92132ff08&quot; &gt;&lt;/div&gt;
+        
+&lt;/body&gt;
+&lt;script&gt;
+    
+    
+            var map_f29601eeb52a1209e9321bf92132ff08 = L.map(
+                &quot;map_f29601eeb52a1209e9321bf92132ff08&quot;,
+                {
+                    center: [46.84433286913514, 11.279845837534058],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 11,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_e2cbd56783e82318a9440ae1f5128606 = L.tileLayer(
+                &quot;https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
+                {&quot;attribution&quot;: &quot;Data by \u0026copy; \u003ca target=\&quot;_blank\&quot; href=\&quot;http://openstreetmap.org\&quot;\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\&quot;_blank\&quot; href=\&quot;http://www.openstreetmap.org/copyright\&quot;\u003eODbL\u003c/a\u003e.&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 18, &quot;maxZoom&quot;: 18, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
+            ).addTo(map_f29601eeb52a1209e9321bf92132ff08);
+        
+    
+
+        function geo_json_9b1d63a04f67c0707252a97c1bd4a37d_onEachFeature(feature, layer) {
+            layer.on({
+            });
+        };
+        var geo_json_9b1d63a04f67c0707252a97c1bd4a37d = L.geoJson(null, {
+                onEachFeature: geo_json_9b1d63a04f67c0707252a97c1bd4a37d_onEachFeature,
+            
+        });
+
+        function geo_json_9b1d63a04f67c0707252a97c1bd4a37d_add (data) {
+            geo_json_9b1d63a04f67c0707252a97c1bd4a37d
+                .addData(data)
+                .addTo(map_f29601eeb52a1209e9321bf92132ff08);
+        }
+            geo_json_9b1d63a04f67c0707252a97c1bd4a37d_add({&quot;features&quot;: [{&quot;geometry&quot;: {&quot;coordinates&quot;: [[[11.177188161798057, 46.699056915737], [11.206029922675356, 46.722893110726375], [11.326795356122659, 46.72672132295378], [11.368679321480357, 46.77407296769147], [11.43150526951618, 46.80466199337738], [11.47199311038321, 46.857769612391934], [11.423128494619476, 46.888788127800325], [11.442674345119258, 46.93552061086038], [11.421034296351706, 46.94648253455131], [11.349831555243838, 46.966494169246516], [11.273742351510776, 46.959824455885496], [11.216500932188893, 46.93599726290836], [11.126927404246942, 46.90309831922846], [11.112268015263169, 46.82912123213768], [11.154151980721707, 46.81861299569002], [11.08294923961381, 46.784208042639904], [11.127625469328876, 46.75265084088673], [11.191847549672644, 46.75934633757268], [11.177188161798057, 46.699056915737]]], &quot;type&quot;: &quot;Polygon&quot;}, &quot;id&quot;: &quot;0&quot;, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;}], &quot;type&quot;: &quot;FeatureCollection&quot;});
+
+        
+&lt;/script&gt;
+&lt;/html&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div></div>
+</div>
+<p>Select a date</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start_date</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">end_date</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="snowcover-map-generation">
+<h2>Snowcover map generation<a class="headerlink" href="#snowcover-map-generation" title="Link to this heading">#</a></h2>
+<p>Generate the snow cover map on the selected AOI and date from S2L1C</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evalscript_snowcover</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+
+<span class="s2">//VERSION=3</span>
+
+<span class="s2">function setup() {</span>
+<span class="s2">  return {</span>
+<span class="s2">    input: [&quot;B03&quot;, &quot;B04&quot;, &quot;B08&quot;, &quot;B11&quot;, &quot;CLM&quot;, &quot;dataMask&quot;],</span>
+<span class="s2">    output: {bands: 1, sampleType: &quot;UINT8&quot;}</span>
+<span class="s2">  };</span>
+<span class="s2">}</span>
+
+<span class="s2">function calc_snow_mask(NDVI, NDSI, B03){</span>
+<span class="s2"> </span>
+<span class="s2">  let si = (NDSI &gt;= 0.4) ? 1 : (Math.abs(NDVI - 0.1) &lt;= 0.025 ? 1 : 0);</span>
+<span class="s2">  let br = B03 &gt; 0.3;</span>
+<span class="s2"> </span>
+<span class="s2">  return si &amp;&amp; br;</span>
+<span class="s2">}</span>
+
+<span class="s2">function evaluatePixel(sample) {</span>
+<span class="s2">  </span>
+<span class="s2">  // Calculate indices</span>
+<span class="s2">  var NDSI = (sample.B03 - sample.B11) / (sample.B03 + sample.B11);</span>
+<span class="s2">  var NDVI = (sample.B08 - sample.B04) / (sample.B08 + sample.B04);</span>
+<span class="s2">  </span>
+<span class="s2">  // Calculate snowmask</span>
+<span class="s2">  var snow = calc_snow_mask(NDVI, NDSI, sample.B03);  </span>
+<span class="s2">  </span>
+<span class="s2">  // Create the snow mask with clouds</span>
+<span class="s2">  if (sample.dataMask == 0){</span>
+<span class="s2">      return [0];</span>
+<span class="s2">  }</span>
+<span class="s2">  else if (sample.CLM == 1){</span>
+<span class="s2">      return [3];</span>
+<span class="s2">  }</span>
+<span class="s2">  else if (snow == 1){</span>
+<span class="s2">      return [1];</span>
+<span class="s2">  }</span>
+<span class="s2">  else if (snow == 0){</span>
+<span class="s2">      return [2];</span>
+<span class="s2">  }</span>
+<span class="s2">  </span>
+
+<span class="s2">}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">aoi</span> <span class="o">=</span> <span class="n">geometry</span><span class="o">.</span><span class="n">Geometry</span><span class="p">(</span><span class="n">aoi_df</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">CRS</span><span class="o">.</span><span class="n">WGS84</span><span class="p">)</span>
+
+<span class="n">request_snowcover</span> <span class="o">=</span> <span class="n">SentinelHubRequest</span><span class="p">(</span>
+    <span class="n">evalscript</span><span class="o">=</span><span class="n">evalscript_snowcover</span><span class="p">,</span>
+    <span class="n">input_data</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">SentinelHubRequest</span><span class="o">.</span><span class="n">input_data</span><span class="p">(</span>
+            <span class="n">data_collection</span><span class="o">=</span><span class="n">DataCollection</span><span class="o">.</span><span class="n">SENTINEL2_L1C</span><span class="p">,</span>
+            <span class="n">time_interval</span><span class="o">=</span><span class="p">(</span><span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">),</span>
+        <span class="p">)</span>
+    <span class="p">],</span>
+    <span class="n">responses</span><span class="o">=</span><span class="p">[</span><span class="n">SentinelHubRequest</span><span class="o">.</span><span class="n">output_response</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="n">MimeType</span><span class="o">.</span><span class="n">TIFF</span><span class="p">)],</span>
+    <span class="n">geometry</span><span class="o">=</span><span class="n">aoi</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="n">bbox_to_dimensions</span><span class="p">(</span><span class="n">aoi</span><span class="o">.</span><span class="n">bbox</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
+    <span class="n">config</span><span class="o">=</span><span class="n">config</span>
+<span class="p">)</span>
+
+<span class="n">snowcover</span> <span class="o">=</span> <span class="n">request_snowcover</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">snowcover</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+<p>Generate the corresponding RGB image</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The evalscript for RGB map creation</span>
+<span class="n">evalscript_rgb</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2"> //VERSION=3</span>
+<span class="s2">function setup(){</span>
+<span class="s2">  return{</span>
+<span class="s2">    input: [&quot;B02&quot;, &quot;B03&quot;, &quot;B04&quot;, &quot;dataMask&quot;],</span>
+<span class="s2">    output: </span><span class="si">{bands: 4}</span>
+<span class="s2">  }</span>
+<span class="s2">}</span>
+
+<span class="s2">function evaluatePixel(sample){</span>
+<span class="s2">  // Set gain for visualisation</span>
+<span class="s2">  let gain = 2.5;</span>
+<span class="s2">  // Return RGB</span>
+<span class="s2">  return [sample.B04 * gain, sample.B03 * gain, sample.B02 * gain, sample.dataMask];</span>
+<span class="s2">}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">request_rgb</span> <span class="o">=</span> <span class="n">SentinelHubRequest</span><span class="p">(</span>
+    <span class="n">evalscript</span><span class="o">=</span><span class="n">evalscript_rgb</span><span class="p">,</span>
+    <span class="n">input_data</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">SentinelHubRequest</span><span class="o">.</span><span class="n">input_data</span><span class="p">(</span>
+            <span class="n">data_collection</span><span class="o">=</span><span class="n">DataCollection</span><span class="o">.</span><span class="n">SENTINEL2_L1C</span><span class="p">,</span>
+            <span class="n">time_interval</span><span class="o">=</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">date</span><span class="p">),</span>
+        <span class="p">)],</span>
+    <span class="n">responses</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">SentinelHubRequest</span><span class="o">.</span><span class="n">output_response</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="n">MimeType</span><span class="o">.</span><span class="n">TIFF</span><span class="p">)</span>
+    <span class="p">],</span>
+    <span class="n">geometry</span><span class="o">=</span><span class="n">aoi</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="n">bbox_to_dimensions</span><span class="p">(</span><span class="n">aoi</span><span class="o">.</span><span class="n">bbox</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span>
+    <span class="n">config</span><span class="o">=</span><span class="n">config</span>
+<span class="p">)</span>
+<span class="n">rgb_response</span> <span class="o">=</span> <span class="n">request_rgb</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">HTTPError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">File /home/conda/master-asi-conae/315434deb1b1e05eacacc41e1b0529b1837100f46402a32041d77ba54ae6c5f3-20230213-125825-013239-74-edc-2022.10-14/lib/python3.9/site-packages/sentinelhub/download/handlers.py:41,</span> in <span class="ni">fail_user_errors.&lt;locals&gt;.new_download_func</span><span class="nt">(self, request)</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">41</span>     <span class="k">return</span> <span class="n">download_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span> <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">HTTPError</span> <span class="k">as</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="nn">File /home/conda/master-asi-conae/315434deb1b1e05eacacc41e1b0529b1837100f46402a32041d77ba54ae6c5f3-20230213-125825-013239-74-edc-2022.10-14/lib/python3.9/site-packages/sentinelhub/download/sentinelhub_client.py:90,</span> in <span class="ni">SentinelHubDownloadClient._execute_download</span><span class="nt">(self, request)</span>
+<span class="g g-Whitespace">     </span><span class="mi">88</span>     <span class="k">continue</span>
+<span class="ne">---&gt; </span><span class="mi">90</span> <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">92</span> <span class="n">LOGGER</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Successful </span><span class="si">%s</span><span class="s2"> request to </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">request_type</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+
+<span class="nn">File /home/conda/master-asi-conae/315434deb1b1e05eacacc41e1b0529b1837100f46402a32041d77ba54ae6c5f3-20230213-125825-013239-74-edc-2022.10-14/lib/python3.9/site-packages/requests/models.py:1021,</span> in <span class="ni">Response.raise_for_status</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1020</span> <span class="k">if</span> <span class="n">http_error_msg</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1021</span>     <span class="k">raise</span> <span class="n">HTTPError</span><span class="p">(</span><span class="n">http_error_msg</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="ne">HTTPError</span>: 400 Client Error: Bad Request for url: https://services.sentinel-hub.com/api/v1/process
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">DownloadFailedException</span><span class="g g-Whitespace">                   </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">32</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">evalscript_rgb</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span><span class="s2">  //VERSION=3</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span><span class="s2"> function setup(){</span>
+<span class="s2">   (...)</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span><span class="s2"> }</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span><span class="s2"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="n">request_rgb</span> <span class="o">=</span> <span class="n">SentinelHubRequest</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span>     <span class="n">evalscript</span><span class="o">=</span><span class="n">evalscript_rgb</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span>     <span class="n">input_data</span><span class="o">=</span><span class="p">[</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span>     <span class="n">config</span><span class="o">=</span><span class="n">config</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span> <span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">32</span> <span class="n">rgb_response</span> <span class="o">=</span> <span class="n">request_rgb</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+
+<span class="nn">File /home/conda/master-asi-conae/315434deb1b1e05eacacc41e1b0529b1837100f46402a32041d77ba54ae6c5f3-20230213-125825-013239-74-edc-2022.10-14/lib/python3.9/site-packages/sentinelhub/base.py:110,</span> in <span class="ni">DataRequest.get_data</span><span class="nt">(self, save_data, redownload, data_filter, max_threads, decode_data, raise_download_errors, show_progress)</span>
+<span class="g g-Whitespace">     </span><span class="mi">88</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Get requested data either by downloading it or by reading it from the disk (if it</span>
+<span class="g g-Whitespace">     </span><span class="mi">89</span><span class="sd"> was previously downloaded and saved).</span>
+<span class="g g-Whitespace">     </span><span class="mi">90</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">107</span><span class="sd">     shape ``[height, width, channels]``.</span>
+<span class="g g-Whitespace">    </span><span class="mi">108</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">109</span> <span class="bp">self</span><span class="o">.</span><span class="n">_preprocess_request</span><span class="p">(</span><span class="n">save_data</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">110</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_execute_data_download</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">111</span>     <span class="n">data_filter</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">112</span>     <span class="n">redownload</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">113</span>     <span class="n">max_threads</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">114</span>     <span class="n">raise_download_errors</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">115</span>     <span class="n">decode_data</span><span class="o">=</span><span class="n">decode_data</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">116</span>     <span class="n">show_progress</span><span class="o">=</span><span class="n">show_progress</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">117</span> <span class="p">)</span>
+
+<span class="nn">File /home/conda/master-asi-conae/315434deb1b1e05eacacc41e1b0529b1837100f46402a32041d77ba54ae6c5f3-20230213-125825-013239-74-edc-2022.10-14/lib/python3.9/site-packages/sentinelhub/base.py:184,</span> in <span class="ni">DataRequest._execute_data_download</span><span class="nt">(self, data_filter, redownload, max_threads, raise_download_errors, decode_data, show_progress)</span>
+<span class="g g-Whitespace">    </span><span class="mi">179</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;data_filter parameter must be a list of indices&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">181</span> <span class="n">client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">download_client_class</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">182</span>     <span class="n">redownload</span><span class="o">=</span><span class="n">redownload</span><span class="p">,</span> <span class="n">raise_download_errors</span><span class="o">=</span><span class="n">raise_download_errors</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span>
+<span class="g g-Whitespace">    </span><span class="mi">183</span> <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">184</span> <span class="n">data_list</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">download</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">185</span>     <span class="n">filtered_download_list</span><span class="p">,</span> <span class="n">max_threads</span><span class="o">=</span><span class="n">max_threads</span><span class="p">,</span> <span class="n">decode_data</span><span class="o">=</span><span class="n">decode_data</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="n">show_progress</span>
+<span class="g g-Whitespace">    </span><span class="mi">186</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">188</span> <span class="k">if</span> <span class="n">is_repeating_filter</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">189</span>     <span class="n">data_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">data_list</span><span class="p">[</span><span class="n">index</span><span class="p">])</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">mapping_list</span><span class="p">]</span>
+
+<span class="nn">File /home/conda/master-asi-conae/315434deb1b1e05eacacc41e1b0529b1837100f46402a32041d77ba54ae6c5f3-20230213-125825-013239-74-edc-2022.10-14/lib/python3.9/site-packages/sentinelhub/download/sentinelhub_client.py:62,</span> in <span class="ni">SentinelHubDownloadClient.download</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">60</span> <span class="bp">self</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="n">Lock</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">61</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">62</span>     <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">63</span> <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">64</span>     <span class="bp">self</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="nn">File /home/conda/master-asi-conae/315434deb1b1e05eacacc41e1b0529b1837100f46402a32041d77ba54ae6c5f3-20230213-125825-013239-74-edc-2022.10-14/lib/python3.9/site-packages/sentinelhub/download/client.py:113,</span> in <span class="ni">DownloadClient.download</span><span class="nt">(self, download_requests, max_threads, decode_data, show_progress)</span>
+<span class="g g-Whitespace">    </span><span class="mi">111</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">112</span>         <span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">as_completed</span><span class="p">(</span><span class="n">download_list</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">113</span>             <span class="n">data_list</span><span class="p">[</span><span class="n">future_order</span><span class="p">[</span><span class="n">future</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_download_future</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">115</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">download_requests</span><span class="p">,</span> <span class="n">DownloadRequest</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">116</span>     <span class="k">return</span> <span class="n">data_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nn">File /home/conda/master-asi-conae/315434deb1b1e05eacacc41e1b0529b1837100f46402a32041d77ba54ae6c5f3-20230213-125825-013239-74-edc-2022.10-14/lib/python3.9/site-packages/sentinelhub/download/client.py:126,</span> in <span class="ni">DownloadClient._process_download_future</span><span class="nt">(self, future)</span>
+<span class="g g-Whitespace">    </span><span class="mi">124</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">raise_download_errors</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">125</span>     <span class="n">traceback</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span>
+<span class="ne">--&gt; </span><span class="mi">126</span>     <span class="k">raise</span> <span class="n">download_exception</span><span class="o">.</span><span class="n">with_traceback</span><span class="p">(</span><span class="n">traceback</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">128</span> <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">download_exception</span><span class="p">),</span> <span class="n">category</span><span class="o">=</span><span class="n">SHRuntimeWarning</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">129</span> <span class="k">return</span> <span class="kc">None</span>
+
+<span class="nn">File /home/conda/master-asi-conae/315434deb1b1e05eacacc41e1b0529b1837100f46402a32041d77ba54ae6c5f3-20230213-125825-013239-74-edc-2022.10-14/lib/python3.9/site-packages/sentinelhub/download/client.py:122,</span> in <span class="ni">DownloadClient._process_download_future</span><span class="nt">(self, future)</span>
+<span class="g g-Whitespace">    </span><span class="mi">120</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Unpacks the future and correctly handles exceptions&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">121</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">122</span>     <span class="k">return</span> <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">123</span> <span class="k">except</span> <span class="n">DownloadFailedException</span> <span class="k">as</span> <span class="n">download_exception</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">124</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">raise_download_errors</span><span class="p">:</span>
+
+<span class="nn">File /home/conda/master-asi-conae/315434deb1b1e05eacacc41e1b0529b1837100f46402a32041d77ba54ae6c5f3-20230213-125825-013239-74-edc-2022.10-14/lib/python3.9/concurrent/futures/_base.py:439,</span> in <span class="ni">Future.result</span><span class="nt">(self, timeout)</span>
+<span class="g g-Whitespace">    </span><span class="mi">437</span>     <span class="k">raise</span> <span class="n">CancelledError</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">438</span> <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">==</span> <span class="n">FINISHED</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">439</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_result</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">441</span> <span class="bp">self</span><span class="o">.</span><span class="n">_condition</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">443</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="ow">in</span> <span class="p">[</span><span class="n">CANCELLED</span><span class="p">,</span> <span class="n">CANCELLED_AND_NOTIFIED</span><span class="p">]:</span>
+
+<span class="nn">File /home/conda/master-asi-conae/315434deb1b1e05eacacc41e1b0529b1837100f46402a32041d77ba54ae6c5f3-20230213-125825-013239-74-edc-2022.10-14/lib/python3.9/concurrent/futures/_base.py:391,</span> in <span class="ni">Future.__get_result</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">389</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exception</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">390</span>     <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">391</span>         <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exception</span>
+<span class="g g-Whitespace">    </span><span class="mi">392</span>     <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">393</span>         <span class="c1"># Break a reference cycle with the exception in self._exception</span>
+<span class="g g-Whitespace">    </span><span class="mi">394</span>         <span class="bp">self</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="nn">File /home/conda/master-asi-conae/315434deb1b1e05eacacc41e1b0529b1837100f46402a32041d77ba54ae6c5f3-20230213-125825-013239-74-edc-2022.10-14/lib/python3.9/concurrent/futures/thread.py:58,</span> in <span class="ni">_WorkItem.run</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">     </span><span class="mi">55</span>     <span class="k">return</span>
+<span class="g g-Whitespace">     </span><span class="mi">57</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">58</span>     <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">59</span> <span class="k">except</span> <span class="ne">BaseException</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">60</span>     <span class="bp">self</span><span class="o">.</span><span class="n">future</span><span class="o">.</span><span class="n">set_exception</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span>
+
+<span class="nn">File /home/conda/master-asi-conae/315434deb1b1e05eacacc41e1b0529b1837100f46402a32041d77ba54ae6c5f3-20230213-125825-013239-74-edc-2022.10-14/lib/python3.9/site-packages/sentinelhub/download/client.py:133,</span> in <span class="ni">DownloadClient._single_download_decoded</span><span class="nt">(self, request)</span>
+<span class="g g-Whitespace">    </span><span class="mi">131</span> <span class="k">def</span> <span class="nf">_single_download_decoded</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">DownloadRequest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">132</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Downloads a response and decodes it into data. By decoding a single response&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">133</span>     <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_single_download</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">134</span>     <span class="k">return</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">response</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">response</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+
+<span class="nn">File /home/conda/master-asi-conae/315434deb1b1e05eacacc41e1b0529b1837100f46402a32041d77ba54ae6c5f3-20230213-125825-013239-74-edc-2022.10-14/lib/python3.9/site-packages/sentinelhub/download/client.py:146,</span> in <span class="ni">DownloadClient._single_download</span><span class="nt">(self, request)</span>
+<span class="g g-Whitespace">    </span><span class="mi">144</span> <span class="n">no_local_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">redownload</span> <span class="ow">or</span> <span class="n">response_path</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">response_path</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">145</span> <span class="k">if</span> <span class="n">no_local_data</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">146</span>     <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_execute_download</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">147</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">148</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">return_data</span> <span class="ow">or</span> <span class="n">response_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">File /home/conda/master-asi-conae/315434deb1b1e05eacacc41e1b0529b1837100f46402a32041d77ba54ae6c5f3-20230213-125825-013239-74-edc-2022.10-14/lib/python3.9/site-packages/sentinelhub/download/handlers.py:67,</span> in <span class="ni">retry_temporary_errors.&lt;locals&gt;.new_download_func</span><span class="nt">(self, request)</span>
+<span class="g g-Whitespace">     </span><span class="mi">65</span> <span class="k">for</span> <span class="n">attempt_num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">download_attempts</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">66</span>     <span class="k">try</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">67</span>         <span class="k">return</span> <span class="n">download_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">68</span>     <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">exception</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span>         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span>             <span class="n">_is_temporary_problem</span><span class="p">(</span><span class="n">exception</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span>             <span class="ow">or</span> <span class="p">(</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">74</span>             <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">75</span>         <span class="p">):</span>
+
+<span class="nn">File /home/conda/master-asi-conae/315434deb1b1e05eacacc41e1b0529b1837100f46402a32041d77ba54ae6c5f3-20230213-125825-013239-74-edc-2022.10-14/lib/python3.9/site-packages/sentinelhub/download/handlers.py:47,</span> in <span class="ni">fail_user_errors.&lt;locals&gt;.new_download_func</span><span class="nt">(self, request)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span> <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">HTTPError</span> <span class="k">as</span> <span class="n">exception</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span>     <span class="k">if</span> <span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">44</span>         <span class="n">exception</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">&lt;</span> <span class="n">requests</span><span class="o">.</span><span class="n">status_codes</span><span class="o">.</span><span class="n">codes</span><span class="o">.</span><span class="n">INTERNAL_SERVER_ERROR</span>
+<span class="g g-Whitespace">     </span><span class="mi">45</span>         <span class="ow">and</span> <span class="n">exception</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="n">requests</span><span class="o">.</span><span class="n">status_codes</span><span class="o">.</span><span class="n">codes</span><span class="o">.</span><span class="n">TOO_MANY_REQUESTS</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span>     <span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">47</span>         <span class="k">raise</span> <span class="n">DownloadFailedException</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">48</span>             <span class="n">_create_download_failed_message</span><span class="p">(</span><span class="n">exception</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="p">),</span> <span class="n">request_exception</span><span class="o">=</span><span class="n">exception</span>
+<span class="g g-Whitespace">     </span><span class="mi">49</span>         <span class="p">)</span> <span class="kn">from</span> <span class="nn">exception</span>
+<span class="g g-Whitespace">     </span><span class="mi">50</span>     <span class="k">raise</span> <span class="n">exception</span> <span class="kn">from</span> <span class="nn">exception</span>
+
+<span class="ne">DownloadFailedException</span>: Failed to download from:
+<span class="ne">https</span>://services.sentinel-hub.com/api/v1/process
+<span class="k">with</span> <span class="n">HTTPError</span><span class="p">:</span>
+<span class="mi">400</span> <span class="n">Client</span> <span class="n">Error</span><span class="p">:</span> <span class="n">Bad</span> <span class="n">Request</span> <span class="k">for</span> <span class="n">url</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">services</span><span class="o">.</span><span class="n">sentinel</span><span class="o">-</span><span class="n">hub</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">process</span>
+<span class="n">Server</span> <span class="n">response</span><span class="p">:</span> <span class="s2">&quot;{&quot;</span><span class="n">status</span><span class="s2">&quot;: 400, &quot;</span><span class="n">reason</span><span class="s2">&quot;: &quot;</span><span class="n">Bad</span> <span class="n">Request</span><span class="s2">&quot;, &quot;</span><span class="n">message</span><span class="s2">&quot;: &quot;</span><span class="n">Invalid</span> <span class="n">request</span><span class="s2">&quot;, &quot;</span><span class="n">code</span><span class="s2">&quot;: &quot;</span><span class="n">COMMON_BAD_PAYLOAD</span><span class="s2">&quot;, &quot;</span><span class="n">errors</span><span class="s2">&quot;: [{&quot;</span><span class="n">parameter</span><span class="s2">&quot;: &quot;</span><span class="n">output</span><span class="o">-&gt;</span><span class="n">width</span><span class="s2">&quot;, &quot;</span><span class="n">invalidValue</span><span class="s2">&quot;: 2881, &quot;</span><span class="n">violation</span><span class="s2">&quot;: &quot;</span><span class="n">must</span> <span class="n">be</span> <span class="n">less</span> <span class="n">than</span> <span class="ow">or</span> <span class="n">equal</span> <span class="n">to</span> <span class="mi">2500</span><span class="s2">&quot;, &quot;</span><span class="n">description</span><span class="s2">&quot;: &quot;</span><span class="n">The</span> <span class="n">request</span> <span class="n">image</span> <span class="n">width</span><span class="o">.</span> <span class="n">Must</span> <span class="n">be</span> <span class="n">an</span> <span class="n">integer</span> <span class="n">between</span> <span class="mi">1</span> <span class="ow">and</span> <span class="mf">2500.</span> <span class="o">&lt;</span><span class="n">br</span> <span class="o">/&gt;*</span><span class="n">Only</span> <span class="n">one</span> <span class="n">pair</span> <span class="n">of</span> <span class="n">parameters</span> \<span class="s2">&quot;width</span><span class="se">\&quot;</span><span class="s2">/</span><span class="se">\&quot;</span><span class="s2">height</span><span class="se">\&quot;</span><span class="s2"> or </span><span class="se">\&quot;</span><span class="s2">resx</span><span class="se">\&quot;</span><span class="s2">/</span><span class="se">\&quot;</span><span class="s2">resy</span><span class="se">\&quot;</span><span class="s2"> must be set at the same time.*&quot;</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;parameter&quot;</span><span class="p">:</span> <span class="s2">&quot;output-&gt;height&quot;</span><span class="p">,</span> <span class="s2">&quot;invalidValue&quot;</span><span class="p">:</span> <span class="mi">3058</span><span class="p">,</span> <span class="s2">&quot;violation&quot;</span><span class="p">:</span> <span class="s2">&quot;must be less than or equal to 2500&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;The request image height. Must be an integer between 1 and 2500. &lt;br /&gt;*Only one pair of parameters </span><span class="se">\&quot;</span><span class="s2">width</span><span class="se">\&quot;</span><span class="s2">/</span><span class="se">\&quot;</span><span class="s2">height</span><span class="se">\&quot;</span><span class="s2"> or </span><span class="se">\&quot;</span><span class="s2">resx</span><span class="se">\&quot;</span><span class="s2">/</span><span class="se">\&quot;</span><span class="s2">resy</span><span class="se">\&quot;</span><span class="s2"> must be set at the same time.*&quot;</span><span class="p">}]}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="show-the-result">
+<h2>Show the result<a class="headerlink" href="#show-the-result" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a basemap with folium</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span>
+    <span class="n">location</span><span class="o">=</span><span class="n">aoi</span><span class="o">.</span><span class="n">bbox</span><span class="o">.</span><span class="n">middle</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">zoom_start</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+
+<span class="c1"># Color map for the snow cover (0 no data: transparent, 1 snow: white, 2 snow-free: green, 3 cloud: gray)</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Add the snow cover to the map</span>
+<span class="n">folium</span><span class="o">.</span><span class="n">raster_layers</span><span class="o">.</span><span class="n">ImageOverlay</span><span class="p">(</span>
+    <span class="n">snowcover</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="n">bounds</span><span class="o">=</span><span class="p">[</span><span class="n">aoi</span><span class="o">.</span><span class="n">bbox</span><span class="o">.</span><span class="n">lower_left</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">aoi</span><span class="o">.</span><span class="n">bbox</span><span class="o">.</span><span class="n">upper_right</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;snow cover&#39;</span><span class="p">,</span>
+    <span class="n">colormap</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">cmap</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+<span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+
+<span class="c1"># Add the Sentinel-2 RGB to the map</span>
+<span class="n">folium</span><span class="o">.</span><span class="n">raster_layers</span><span class="o">.</span><span class="n">ImageOverlay</span><span class="p">(</span>
+    <span class="n">rgb_response</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span>
+    <span class="n">bounds</span><span class="o">=</span><span class="p">[</span><span class="n">aoi</span><span class="o">.</span><span class="n">bbox</span><span class="o">.</span><span class="n">lower_left</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">aoi</span><span class="o">.</span><span class="n">bbox</span><span class="o">.</span><span class="n">upper_right</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;RGB&#39;</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+
+<span class="c1"># Add the layer control</span>
+<span class="n">folium</span><span class="o">.</span><span class="n">LayerControl</span><span class="p">()</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+
+<span class="c1"># Show the map</span>
+<span class="n">m</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snowcover</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([[0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        ...,
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0]], dtype=uint8)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a basemap with folium</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span>
+    <span class="n">location</span><span class="o">=</span><span class="n">aoi</span><span class="o">.</span><span class="n">bbox</span><span class="o">.</span><span class="n">middle</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">zoom_start</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+
+<span class="c1"># Color map for the snow cover (0 no data: transparent, 1 snow: white, 2 snow-free: green, 3 cloud: gray)</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Add the snow cover to the map</span>
+<span class="n">folium</span><span class="o">.</span><span class="n">raster_layers</span><span class="o">.</span><span class="n">ImageOverlay</span><span class="p">(</span>
+    <span class="n">snowcover</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="n">bounds</span><span class="o">=</span><span class="p">[</span><span class="n">aoi</span><span class="o">.</span><span class="n">bbox</span><span class="o">.</span><span class="n">lower_left</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">aoi</span><span class="o">.</span><span class="n">bbox</span><span class="o">.</span><span class="n">upper_right</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;snow cover&#39;</span><span class="p">,</span>
+    <span class="n">colormap</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">cmap</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+<span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;folium.raster_layers.ImageOverlay at 0x7ff35780afa0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+    
+        &lt;script&gt;
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        &lt;/script&gt;
+    
+    &lt;style&gt;html, body {width: 100%;height: 100%;margin: 0;padding: 0;}&lt;/style&gt;
+    &lt;style&gt;#map {position:absolute;top:0;bottom:0;right:0;left:0;}&lt;/style&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://code.jquery.com/jquery-1.12.4.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/&gt;
+    
+            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
+            &lt;style&gt;
+                #map_ff98d8142e36f9e507bc98d336df1a06 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            &lt;/style&gt;
+        
+    
+                &lt;style&gt;
+                    .leaflet-image-layer {
+                        /* old android/safari*/
+                        image-rendering: -webkit-optimize-contrast;
+                        image-rendering: crisp-edges; /* safari */
+                        image-rendering: pixelated; /* chrome */
+                        image-rendering: -moz-crisp-edges; /* firefox */
+                        image-rendering: -o-crisp-edges; /* opera */
+                        -ms-interpolation-mode: nearest-neighbor; /* ie */
+                    }
+                &lt;/style&gt;
+            
+&lt;/head&gt;
+&lt;body&gt;
+    
+    
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_ff98d8142e36f9e507bc98d336df1a06&quot; &gt;&lt;/div&gt;
+        
+&lt;/body&gt;
+&lt;script&gt;
+    
+    
+            var map_ff98d8142e36f9e507bc98d336df1a06 = L.map(
+                &quot;map_ff98d8142e36f9e507bc98d336df1a06&quot;,
+                {
+                    center: [46.83277554249176, 11.27747117499851],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 11,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_ed636a8203163245e2cb165866a777fb = L.tileLayer(
+                &quot;https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
+                {&quot;attribution&quot;: &quot;Data by \u0026copy; \u003ca target=\&quot;_blank\&quot; href=\&quot;http://openstreetmap.org\&quot;\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\&quot;_blank\&quot; href=\&quot;http://www.openstreetmap.org/copyright\&quot;\u003eODbL\u003c/a\u003e.&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 18, &quot;maxZoom&quot;: 18, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
+            ).addTo(map_ff98d8142e36f9e507bc98d336df1a06);
+        
+    
+            var image_overlay_891e7373e51770720b5714df058a529c = L.imageOverlay(
+                &quot;data:image/png;base64,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&quot;,
+                [[46.699056915737, 11.08294923961381], [46.966494169246516, 11.47199311038321]],
+                {}
+            ).addTo(map_ff98d8142e36f9e507bc98d336df1a06);
+        
+&lt;/script&gt;
+&lt;/html&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "conda-env-master-asi-conae-edc-2022.10-14-py"
+        },
+        kernelOptions: {
+            name: "conda-env-master-asi-conae-edc-2022.10-14-py",
+            path: "./9.9_master_asi_conae/test"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'conda-env-master-asi-conae-edc-2022.10-14-py'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="s1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">S1</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="test_s1_s3.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Sentinel-1</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries">Import libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sentinel-hub-authentication">Sentinel-hub authentication</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-definition">Input definition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#snowcover-map-generation">Snowcover map generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#show-the-result">Show the result</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By ESA
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
