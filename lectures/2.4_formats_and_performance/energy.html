@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Emission Equivalents for Latest Run</title>
+  </head>
+  <body>
+    <h2>Emission Equivalents for Latest Run</h2>
+    <div class="container">
+      <!-- Mars Rover Perseverance Metric -->
+      <div class="item">
+          <img src="./images/mars_rover_sketch.png" alt="Mars Rover">
+          <p><strong>Mars Rover Perseverance distance:</strong><br>{{ rover_distance }} Meters</p>
+          <span class="tooltip">
+            This is equivalent to the amount of energy required to move the Perseverance rover {{ rover_distance }} meters.
+          </span>
+      </div>
+      
+      <!-- LED Bulb Runtime Metric -->
+      <div class="item">
+          <img src="./images/led_bulb_sketch.png" alt="LED Bulb">
+          <p><strong>LED Bulb Runtime:</strong><br>{{ led_bulb }} </p>
+          <span class="tooltip">
+            This energy is equivalent to powering a standard 10W LED bulb for {{ led_bulb }} .
+          </span>
+      </div>
+      
+      <!-- Smartwatch Runtime Metric -->
+      <div class="item">
+          <img src="./images/smartwatch_sketch.png" alt="Smartwatch">
+          <p><strong>Smartwatch Runtime idle use:</strong><br>{{ smartwatch_runtime_idle }} </p>
+          <p><strong>Smartwatch Runtime normal use:</strong><br>{{ smartwatch_runtime_normal }} </p>
+          <span class="tooltip">
+            The amount of energy used to run the code could power a smartwatch for {{ smartwatch_runtime_idle }} in idle mode and for {{ smartwatch_runtime_normal }} in regular use mode .
+          </span>
+      </div>
+    </div>
+  </body>
+  <style>
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        min-height: 300px;
+    }
+    .item {
+        flex: 1;
+        padding: 10px;
+        text-align: center;
+        box-sizing: border-box;
+        position: relative;
+        border: 2px solid transparent; /* Initial border */
+        transition: border-color 0.3s;
+    }
+    .item img {
+        width: 100px;
+        height: 100px;
+        transition: transform 0.3s;
+    }
+    .item:hover {
+        border-color: #838383; 
+    }
+    .item:hover img {
+        transform: scale(1.2);
+    }
+    .tooltip {
+        display: none; 
+        color: #000000;
+        text-align: center;
+        margin-top: 10px;
+        border-radius: 5px;
+        padding: 5px;
+        background-color: #ffffff;
+    }
+    .item:hover .tooltip {
+        display: block; 
+    }
+    body {
+        background-color: #121212;
+        color: #ffffff;
+    }
+</style>
+</html>
