@@ -166,7 +166,6 @@ def compute_raster_stats(in_data_path, stat_data_path):
     
     return None
 
-
 def extract_metadata_geometry(bbox):
     min_x = bbox[0]
     min_y = bbox[1]
@@ -191,3 +190,14 @@ def extract_metadata_time(temporal_extent):
     end_time = datetime.strptime(temporal_extent[1], '%Y-%m-%d').isoformat() + "Z"
     
     return start_time, end_time
+
+def extract_metadata_stac():
+    URL = "https://earth-search.aws.element84.com/v1"
+    catalog = pystac_client.Client.open(URL)
+    providers = []
+    for p in catalog.get_collection("sentinel-2-l2a").providers:
+        providers.append(p.to_dict())
+    links = []
+    for link in catalog.get_links():
+        links.append(link.to_dict())
+    return providers, links
