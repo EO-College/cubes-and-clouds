@@ -1,0 +1,849 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Access EO Data from the Cloud &#8212; Cubes &amp; Clouds - Cloud Native Open Data Sciences for Earth Observation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '2.3_data_access/2.3_data_access';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.3 Data Access and Basic Processing" href="exercises/23_data_access_lazy_loading.html" />
+    <link rel="prev" title="Data Properties" href="../2.2_data_properties/2.2_data_properties.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Lectures
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setup</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../0_introduction/0_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0_introduction/exercises/0_login.html">Login to openEO</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1.1_intro_platform/1.1_intro_platform.html">Earth Observation cloud platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.2_data_cube/1.2_data_cube.html">What is a data cube?</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1.3_openscience/1.3.1_openscienceandfair.html">Open Science and the FAIR Principles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1.3_openscience/1.3.3_openscienceineo.html">The Open Science Journey - Open Science in geospatial, EO and EO cloud platforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1.3_openscience/1.3.2_opendataopensource.html">Open Data and Open Source Software</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Discovery and metadata</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.1_data_discovery/2.1_data_discovery.html">Data Discovery</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../2.2_data_properties/2.2_data_properties.html">Data Properties</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data access with OpenEO</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Access EO Data from the Cloud</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data formats for achieving scalability</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.4_formats_and_performance/2.4_formats_and_performance.html">Data Formats and Performance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Process &amp; Share</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3.1_data_processing/3.1_data_processing.html">Data processing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3.1_data_processing/3.1_exercises/31_data_processing.html">Basic EO workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3.1_data_processing/3.1_exercises/_alternatives/31_data_processing_stac.html">EO workflow with STAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3.1_data_processing/3.1_exercises/_alternatives/31_data_processing_openEO_Platform.html">EO workflow with openEO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3.1_data_processing/3.1_exercises/_alternatives/34_data_sharing_aoi_test.html">Data sharing and publishing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3.2_validation/3.2_validation.html">Validation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3.2_validation/3.2_exercises/32_validation.html">Exercise validation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3.3_data_sharing/3.3_data_sharing.html">Data sharing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3.3_data_sharing/3.3_exercises/33_data_sharing.html">Exercise data sharing</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional materials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../9.9_master_asi_conae/s2_sca.html">Sentinel-2 snow cover area (SCA) time series</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/s1.html">S1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/s2_snowcover_test.html">Sentinel-2 snow cover</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/test_s1_s3.html">Sentinel-1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/s3_ndsi.html">List all the available dataset</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds/issues/new?title=Issue%20on%20page%20%2F2.3_data_access/2.3_data_access.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/2.3_data_access/2.3_data_access.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Access EO Data from the Cloud</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Access EO Data from the Cloud</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#raster-data-loading">Raster Data Loading</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#processes-on-datacubes">Processes on Datacubes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filter">Filter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apply">Apply</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reduce">Reduce</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resample">Resample</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregate">Aggregate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-processes">Recap Processes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">References</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#openeo-a-standardized-api-for-eo-cloud-processing">openEO - A standardized API for EO cloud processing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-need-for-a-standarized-api-in-eo-cloud-processing">The need for a standarized API in EO cloud processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-openeo-stand-for">What does openEO stand for?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-an-api">Why an API?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">Quiz</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="access-eo-data-from-the-cloud">
+<h1>Access EO Data from the Cloud<a class="headerlink" href="#access-eo-data-from-the-cloud" title="Link to this heading">#</a></h1>
+<p>Using a cloud provider for accessing data, and in this specific scenario Earth Observation data, could improve your productivity a lot. To get the most out of it, we will provide you some important insights.</p>
+<section id="learning-objectives">
+<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>In this lecture you will learn the usage and peculiarities of the main data operators commonly available on cloud platforms like:</p>
+<ul>
+<li><p>Data loading</p></li>
+<li><p>Filter</p></li>
+<li><p>Apply</p></li>
+<li><p>Reduce</p></li>
+<li><p>Resample</p></li>
+<li><p>Aggregate</p></li>
+</ul>
+</li>
+<li><p>Finally, you will be able to create a simple workflow with openEO.</p></li>
+</ul>
+<p>The exercise will use the openEO Python Client Side Processing functionality, which allows to experiment using openEO without a connection to an openEO back-end.</p>
+</section>
+<section id="raster-data-loading">
+<h2>Raster Data Loading<a class="headerlink" href="#raster-data-loading" title="Link to this heading">#</a></h2>
+<p>In openEO, your process graph will always start with defining the data you want to load, which can be done mainly using the following processes:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">load_collection</span></code>: loads a collection from the current back-end by its id and returns it as a processable data cube. The data that is added to the data cube can be restricted with the parameters spatial_extent, temporal_extent, bands and properties.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">load_stac</span></code>: loads data from a static STAC catalog or a STAC API Collection and returns the data as a processable data cube. A batch job result can be loaded by providing a reference to it. If supported by the underlying metadata and file format, the data that is added to the data cube can be restricted with the parameters spatial_extent, temporal_extent and bands.</p></li>
+</ol>
+<p><a class="reference external" href="https://github.com/EO-College/cubes-and-clouds/blob/main/lectures/2.3_data_access/exercises/23_data_access_lazy_loading.ipynb">Exercise 2.3 Data Access Lazy Loading</a></p>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://open-eo.github.io/openeo-python-client/cookbook/localprocessing.html">openEO Python Client Processing documentation</a></p></li>
+<li><p><a class="reference external" href="https://processes.openeo.org/#load_collection">load_collection process definition</a></p></li>
+<li><p><a class="reference external" href="https://processes.openeo.org/#load_stac">load_stac process definition</a></p></li>
+</ul>
+</section>
+</section>
+<section id="processes-on-datacubes">
+<h2>Processes on Datacubes<a class="headerlink" href="#processes-on-datacubes" title="Link to this heading">#</a></h2>
+<p>In the following part, the basic processes for manipulating datacubes are introduced.</p>
+<section id="filter">
+<h3>Filter<a class="headerlink" href="#filter" title="Link to this heading">#</a></h3>
+<p>When filtering data (e.g. <a class="reference external" href="https://processes.openeo.org/#filter_spatial"><code class="docutils literal notranslate"><span class="pre">filter_spatial</span></code></a>, <a class="reference external" href="https://processes.openeo.org/#filter_temporal"><code class="docutils literal notranslate"><span class="pre">filter_temporal</span></code></a>, <a class="reference external" href="https://processes.openeo.org/#filter_bands"><code class="docutils literal notranslate"><span class="pre">filter_bands</span></code></a>), only the data that satisfies a condition is returned. For example, this condition could be a timestamp or interval, (a set of) coordinates, or specific bands. By applying filtering the datacube becomes smaller, according to the selected data.</p>
+<blockquote>
+<div><p>:warning: Simplified
+<span title="Filtering vegetarian options from [corn, potato, pig] returns [corn, potato].
+"><code class="docutils literal notranslate"><span class="pre">filter([🌽,</span> <span class="pre">🥔,</span> <span class="pre">🐷],</span> <span class="pre">isVegetarian)</span> <span class="pre">=&gt;</span> <span class="pre">[🌽,</span> <span class="pre">🥔]</span></code></span></p>
+</div></blockquote>
+<p>In the image, the example datacube can be seen at the top with labeled dimensions. The filtering techniques are displayed separately below. On the left, the datacube is filtered temporally with the interval <code class="docutils literal notranslate"><span class="pre">[&quot;2020-10-15&quot;,</span> <span class="pre">&quot;2020-10-27&quot;]</span></code>. The result is a cube with only the rasters for the timestep that lies within that interval (<code class="docutils literal notranslate"><span class="pre">&quot;2020-10-25&quot;</span></code>) and unchanged bands and spatial dimensions. Likewise, the original cube is filtered for a specific band <code class="docutils literal notranslate"><span class="pre">[&quot;nir&quot;]</span></code> in the middle and a specific spatial region <code class="docutils literal notranslate"><span class="pre">[Polygon(...)]</span></code> on the right.</p>
+<p><img alt="assets/dc_filter.png" src="../_images/dc_filter.png" /></p>
+<blockquote>
+<div><p>Figure: Datacube filtering: From the datacube 4 by 3 grid, arrows depict what happens if the grid is filtered. Temporal filtering results in data for one timestep with all four bands, filtering bands results in data with one band with all three timesteps, and spatial filtering results in all timesteps and bands being preserved, but all with a smaller area. Reference: <a class="reference external" href="https://openeo.org/documentation/1.0/datacubes.html#processes-on-datacubes">openeo.org (2022). Processes on Datacubes.</a></p>
+</div></blockquote>
+<p><a class="reference external" href="https://github.com/EO-College/cubes-and-clouds/blob/main/lectures/2.3_data_access/exercises/23_data_access_filter.ipynb">Exercise 2.3 Data Access Filter</a></p>
+</section>
+<section id="apply">
+<h3>Apply<a class="headerlink" href="#apply" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">apply*</span></code> functions (e.g. <a class="reference external" href="https://processes.openeo.org/#apply"><code class="docutils literal notranslate"><span class="pre">apply</span></code></a>, <a class="reference external" href="https://processes.openeo.org/#apply_neighborhood"><code class="docutils literal notranslate"><span class="pre">apply_neighborhood</span></code></a>, <a class="reference external" href="https://processes.openeo.org/#apply_dimension"><code class="docutils literal notranslate"><span class="pre">apply_dimension</span></code></a>) employ a process on the datacube that calculates new pixel values for each pixel, based on <code class="docutils literal notranslate"><span class="pre">n</span></code> other pixels. Please note that several programming languages use the name <code class="docutils literal notranslate"><span class="pre">map</span></code> instead of <code class="docutils literal notranslate"><span class="pre">apply</span></code>, but they describe the same type of function.</p>
+<blockquote>
+<div><p>:warning: Simplified
+<span title="Applying the process 'cook' to [corn, potato, pig] returns [popcorn, fries, meat]."><code class="docutils literal notranslate"><span class="pre">apply([🌽,</span> <span class="pre">🥔,</span> <span class="pre">🐷],</span> <span class="pre">cook)</span> <span class="pre">=&gt;</span> <span class="pre">[🍿,</span> <span class="pre">🍟,</span> <span class="pre">🍖]</span></code></span></p>
+</div></blockquote>
+<p>For the case <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">1</span></code> this is called a unary function and means that only the pixel itself is considered when calculating the new pixel value. A prominent example is the <code class="docutils literal notranslate"><span class="pre">absolute()</span></code> function, calculating the absolute value of the input pixel value.</p>
+<p><img alt="./assets/dc_apply_unary.png" src="../_images/dc_apply_unary.png" /></p>
+<blockquote>
+<div><p>Figure: Datacube apply unary: 3 example tiles hold values below and above 0. after applying the process ‘absolute’, all values in the three example tiles have changed to their absolute values above 0. Reference: <a class="reference external" href="https://openeo.org/documentation/1.0/datacubes.html#processes-on-datacubes">openeo.org (2022). Processes on Datacubes.</a></p>
+</div></blockquote>
+<p>If <code class="docutils literal notranslate"><span class="pre">n</span></code> is larger than 1, the function is called n-ary. In practice, this means that the pixel neighbourhood is taken into account to calculate the new pixel value. Such neighbourhoods can be of spatial and/or temporal nature. A spatial function works on a kernel that weights the surrounding pixels (e.g. smoothing values with nearby observations), a temporal function works on a time series at a certain pixel location (e.g. smoothing values over time). Combinations of types to n-dimensional neighbourhoods are also possible.</p>
+<p>In the example below, an example weighted kernel (shown in the middle) is applied to the cube (via <a class="reference external" href="https://processes.openeo.org/#apply_kernel"><code class="docutils literal notranslate"><span class="pre">apply_kernel</span></code></a>). To avoid edge effects (affecting pixels on the edge of the image with less neighbours), a padding has been added in the background.</p>
+<p><img alt="./assets/dc_apply_kernel.png" src="../_images/dc_apply_kernel.png" /></p>
+<blockquote>
+<div><p>Figure: Datacube apply spatial kernel: Three example tiles hold some values with a lot of variance. A spatial kernel (a cell plus it’s 4 direct neighbours) is applied to all pixels, and the result appears to be spatially smoothed, with less variance. Reference: <a class="reference external" href="https://openeo.org/documentation/1.0/datacubes.html#processes-on-datacubes">openeo.org (2022). Processes on Datacubes.</a></p>
+</div></blockquote>
+<p>Of course this also works for temporal neighbourhoods (timeseries), considering neighbours before and after a pixel. To be able to show the effect, two timesteps were added in this example figure. A moving average of window size 3 is then applied, meaning that for each pixel the average is calculated out of the previous, the next, and the timestep in question (t<sub>n-1</sub>, t<sub>n</sub> and t<sub>n+1</sub>). No padding was added which is why we observe edge effects (NA values are returned for t<sub>1</sub> and t<sub>5</sub>, because their temporal neighbourhood is missing input timesteps).</p>
+<p><img alt="./assets/dc_apply_ts.png" src="../_images/dc_apply_ts.png" /></p>
+<blockquote>
+<div><p>Figure: Datacube apply temporal moving average: Smoothing is applied to 5 example tiles by calculating the mean of 3 timesteps of every single pixel. The resulting tiles for the timestamps look much more alike. Reference: <a class="reference external" href="https://openeo.org/documentation/1.0/datacubes.html#processes-on-datacubes">openeo.org (2022). Processes on Datacubes.</a></p>
+</div></blockquote>
+<p>Alternatively, a process can also be applied along a dimension of the datacube, meaning the input is no longer a neighbourhood of some sort but all pixels along that dimension (<code class="docutils literal notranslate"><span class="pre">n</span></code> equals the complete dimension). If a process is applied along the <code class="docutils literal notranslate"><span class="pre">time</span></code> dimension (e.g. a breakpoint detection), the complete pixel timeseries are the input. If a process is applied along the <code class="docutils literal notranslate"><span class="pre">spatial</span></code> dimensions (e.g. a <code class="docutils literal notranslate"><span class="pre">mean</span></code>), all pixels of an image are the input. The process is then applied to all pixels along that dimension and the dimension continues to exist. This is in contrast to <a class="reference internal" href="#reduce"><span class="xref myst">reduce</span></a>, which drops the specified dimension of the data cube. In the image below, a <code class="docutils literal notranslate"><span class="pre">mean</span></code> is applied to the <code class="docutils literal notranslate"><span class="pre">time</span></code> dimension. An example pixel timeseries is highlighted by a green line and processed step-by-step.</p>
+<p><img alt="./assets/dc_apply_dim_ts.png" src="../_images/dc_apply_dim_ts.png" /></p>
+<blockquote>
+<div><p>Figure: Datacube apply dimension time: The mean of all 5 timesteps is calculated for every single pixel. The resulting 5 tiles look exaclty the same, as they have been averaged. Reference: <a class="reference external" href="https://openeo.org/documentation/1.0/datacubes.html#processes-on-datacubes">openeo.org (2022). Processes on Datacubes.</a></p>
+</div></blockquote>
+<p><a class="reference external" href="https://github.com/EO-College/cubes-and-clouds/blob/main/lectures/2.3_data_access/exercises/23_data_access_apply.ipynb">Exercise 2.3 Data Access Apply</a></p>
+</section>
+<section id="reduce">
+<h3>Reduce<a class="headerlink" href="#reduce" title="Link to this heading">#</a></h3>
+<p>The <a class="reference external" href="https://processes.openeo.org/#reduce_dimension"><code class="docutils literal notranslate"><span class="pre">reduce_dimension</span></code></a> process <em>collapses</em> a whole dimension of the datacube. It does so by using some sort of <strong>reducer</strong>, which is a function that calculates a single result from an amount of values, as e.g. <code class="docutils literal notranslate"><span class="pre">mean()</span></code>, <code class="docutils literal notranslate"><span class="pre">min()</span></code> and <code class="docutils literal notranslate"><span class="pre">max()</span></code> are. For example we can reduce the time dimension (<code class="docutils literal notranslate"><span class="pre">t</span></code>) of a timeseries by calculating the mean value of all timesteps for each pixel. We are left with a cube that has no time dimension, because all values of that dimension are compressed into a single mean value. The same goes for e.g. the spatial dimensions: If we calculate the mean along the <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> dimensions, we are left without any spatial dimensions, but a mean value for each instance that previously was a raster is returned. In the image below, the dimensions that are reduced are crossed out in the result.</p>
+<blockquote>
+<div><p>:warning: Simplified
+<span title="Reducing [mixed greens, cucumber, tomato, onion] returns a salad."><code class="docutils literal notranslate"><span class="pre">reduce([🥬,</span> <span class="pre">🥒,</span> <span class="pre">🍅,</span> <span class="pre">🧅],</span> <span class="pre">prepare)</span> <span class="pre">=&gt;</span> <span class="pre">🥗</span></code></span></p>
+</div></blockquote>
+<p>Think of it as a waste press that does math instead of using brute force. Given a representation of our example datacube, let’s see how it is affected.</p>
+<p><img alt="./assets/dc_reduce.png" src="../_images/dc_reduce.png" /></p>
+<blockquote>
+<div><p>Figure: Datacube reduce: Three arrows depict what happens to the 12 example tiles, if they are reduced: Reducing timesteps leads to four tiles (one for each band), and the time dimension is deleted. Reducing bands lead to one tile per timestep, and the bands dimension is deleted. Reducing spatially leads to the original 4 by 3 bands by time layout, but the result has no spatial dimension and thus, the tiles have been turned into single values, per tile. Reference: <a class="reference external" href="https://openeo.org/documentation/1.0/datacubes.html#processes-on-datacubes">openeo.org (2022). Processes on Datacubes.</a></p>
+</div></blockquote>
+<p><a class="reference external" href="https://github.com/EO-College/cubes-and-clouds/blob/main/lectures/2.3_data_access/exercises/23_data_access_reduce.ipynb">Exercise 2.3 Data Access Reduce</a></p>
+</section>
+<section id="resample">
+<h3>Resample<a class="headerlink" href="#resample" title="Link to this heading">#</a></h3>
+<p>In a resampling processes (e.g. <a class="reference external" href="https://processes.openeo.org/#resample_cube_spatial"><code class="docutils literal notranslate"><span class="pre">resample_cube_spatial</span></code></a>, <a class="reference external" href="https://processes.openeo.org/#resample_cube_temporal"><code class="docutils literal notranslate"><span class="pre">resample_cube_temporal</span></code></a>), the <em>layout</em> of a certain dimension is changed into another <em>layout</em>, most likely also changing the resolution of that dimension. This is done by mapping values of the source (old) datacube to the new layout of the target (new) datacube. During that process, resolutions can be <em>upscaled</em> or <em>downscaled</em> (also called <em>upsampling</em> and <em>downsampling</em>), depending on whether they have a finer or a coarser spacing afterwards. A function is then needed to translate the existing data into the new resolution. A prominent example is to reproject a datacube into the coordinate reference system of another datacube, for example in order to merge the two cubes.</p>
+<blockquote>
+<div><p>:warning: Simplified
+<span title="Downscaling a raster image (to infinity) returns one pixel."><code class="docutils literal notranslate"><span class="pre">resample(🖼️,</span> <span class="pre">downscale)</span> <span class="pre">=&gt;</span> <span class="pre">🟦</span></code></span></p>
+</div></blockquote>
+<p><span title="Reprojecting a globe results into a map."><code class="docutils literal notranslate"><span class="pre">resample(🌍,</span> <span class="pre">reproject)</span> <span class="pre">=&gt;</span> <span class="pre">🗺️</span></code></span></p>
+<p>The first figure gives an overview of temporal resampling. How exactly the input timesteps are rescaled to the output timesteps depends on the resampling function.</p>
+<p><img alt="./assets/dc_resample_time.png" src="../_images/dc_resample_time.png" /></p>
+<blockquote>
+<div><p>Figure: Datacube temporal resampling (up and down): Downsampling: To a timeline-representation of the example tiles, another timeline with only 2 steps at different dates is applied. The result has tiles only at those new timesteps. In Upsampling, the existing 3 timesteps are sampled into 5 result timesteps. Reference: <a class="reference external" href="https://openeo.org/documentation/1.0/datacubes.html#processes-on-datacubes">openeo.org (2022). Processes on Datacubes.</a></p>
+</div></blockquote>
+<p>The second figure displays spatial resampling. Observe how in the upsampling process, the output datacube has not gained in information value. The resulting grid still carries the same pixel information, but in higher spatial resolution. Other upsampling methods may yield smoother results, e.g. by using interpolation.</p>
+<p><img alt="./assets/dc_resample_space.png" src="../_images/dc_resample_space.png" /></p>
+<blockquote>
+<div><p>Figure: Datacube spatial resampling (up and down): Downsampling: The resulting tiles have a lower spatial resolution than the input tiles. Upsampling: The resulting tiles have a higher spatial resolution than the input tiles, but contain the same image than before (no information added). Reference: <a class="reference external" href="https://openeo.org/documentation/1.0/datacubes.html#processes-on-datacubes">openeo.org (2022). Processes on Datacubes.</a></p>
+</div></blockquote>
+<p><a class="reference external" href="https://github.com/EO-College/cubes-and-clouds/blob/main/lectures/2.3_data_access/exercises/23_data_access_resample.ipynb">Exercise 2.3 Data Access Resample</a></p>
+</section>
+<section id="aggregate">
+<h3>Aggregate<a class="headerlink" href="#aggregate" title="Link to this heading">#</a></h3>
+<p>An aggregation of a datacube can be thought of as a grouped reduce. That means it consists of two steps:</p>
+<ol class="arabic simple">
+<li><p>Grouping via a grouping variable, i.e. spatial geometries or temporal intervals</p></li>
+<li><p>Reducing these groups along the grouped dimension with a certain reducer function, e.g. calculating the mean pixel value per polygon or the maximum pixel values per month</p></li>
+</ol>
+<p>While the layout of the reduced dimension is changed, other dimensions keep their resolution and geometry. But in contrast to pure <code class="docutils literal notranslate"><span class="pre">reduce</span></code>, the dimensions along which the reducer function is applied still exist after the operation.</p>
+<blockquote>
+<div><p>:warning: Simplified
+<span title="Aggregating different family representations with 3, 2 and 4 members with the function 'countFamilyMembers' returns [3, 2, 4]."><code class="docutils literal notranslate"><span class="pre">aggregate(👪</span> <span class="pre">👩‍👦</span> <span class="pre">👨‍👩‍👦‍👦,</span> <span class="pre">countFamilyMembers)</span> <span class="pre">=&gt;</span> <span class="pre">[3️⃣,</span> <span class="pre">2️⃣,</span> <span class="pre">4️⃣]</span></code></span></p>
+</div></blockquote>
+<p>A temporal aggregation (e.g. <a class="reference external" href="https://processes.openeo.org/#aggregate_temporal"><code class="docutils literal notranslate"><span class="pre">aggregate_temporal</span></code></a>) is similar to the downsampling process, as it can be seen in the according image above. Intervals for grouping can either be set manually, or periods can be chosen: monthly, yearly, etc. All timesteps in an interval are then collapsed via a reducer function (<code class="docutils literal notranslate"><span class="pre">mean</span></code>, <code class="docutils literal notranslate"><span class="pre">max</span></code>, etc.) and assigned to the given new labels.</p>
+<p>A spatial aggregation (e.g. <a class="reference external" href="https://processes.openeo.org/#aggregate_spatial"><code class="docutils literal notranslate"><span class="pre">aggregate_spatial</span></code></a>) works in a similar manner. Polygons, lines and points can be selected for grouping. Their spatial dimension is then reduced by a given process and thus, a vector cube is returned. The vector cube then has dimensions containing features, attributes and time. In the graphic below, the grouping is only shown for the first timestep.</p>
+<p><img alt="./assets/dc_aggregate_space.png" src="../_images/dc_aggregate_space.png" /></p>
+<blockquote>
+<div><p>Figure: Datacube spatial aggregation: A line and a polygon are selected from the original example tiles. The pixels covered by these geometries are aggregated and the result consists no longer of imagery tiles but of an array with values for 2 geometries by 4 bands by 3 timesteps. Reference: <a class="reference external" href="https://openeo.org/documentation/1.0/datacubes.html#processes-on-datacubes">openeo.org (2022). Processes on Datacubes.</a></p>
+</div></blockquote>
+<p><a class="reference external" href="https://github.com/EO-College/cubes-and-clouds/blob/main/lectures/2.3_data_access/exercises/23_data_access_aggregate.ipynb">Exercise 2.3 Data Access Aggregate</a></p>
+</section>
+<section id="recap-processes">
+<h3>Recap Processes<a class="headerlink" href="#recap-processes" title="Link to this heading">#</a></h3>
+<p>Here are some exercises to recap the different processes that can be used on a data cube.</p>
+<br>
+<iframe src="https://create.eo-college.org/wp-admin/admin-ajax.php?action=h5p_embed&id=7" width="958" height="843" frameborder="0" allowfullscreen="allowfullscreen" title="Cubes&amp;Clouds: Find Data Cube Processes"></iframe><script src="https://create.eo-college.org/wp-content/plugins/h5p/h5p-php-library/js/h5p-resizer.js" charset="UTF-8"></script>
+<br>
+<iframe src="https://create.eo-college.org/wp-admin/admin-ajax.php?action=h5p_embed&id=9" width="958" height="1034" frameborder="0" allowfullscreen="allowfullscreen" title="Cubes&amp;Clouds: Data Cube Processes Crossword"></iframe><script src="https://create.eo-college.org/wp-content/plugins/h5p/h5p-php-library/js/h5p-resizer.js" charset="UTF-8"></script>
+<br>
+<iframe src="https://create.eo-college.org/wp-admin/admin-ajax.php?action=h5p_embed&id=8" width="958" height="801" frameborder="0" allowfullscreen="allowfullscreen" title="Cubes&amp;Clouds: Identify Data Cube Processes"></iframe><script src="https://create.eo-college.org/wp-content/plugins/h5p/h5p-php-library/js/h5p-resizer.js" charset="UTF-8"></script>
+</section>
+<section id="id1">
+<h3>References<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://openeo.org/documentation/1.0/datacubes.html#processes-on-datacubes">openeo.org (2022). Processes on Datacubes.</a></p></li>
+</ul>
+</section>
+</section>
+<section id="openeo-a-standardized-api-for-eo-cloud-processing">
+<h2>openEO - A standardized API for EO cloud processing<a class="headerlink" href="#openeo-a-standardized-api-for-eo-cloud-processing" title="Link to this heading">#</a></h2>
+<section id="the-need-for-a-standarized-api-in-eo-cloud-processing">
+<h3>The need for a standarized API in EO cloud processing<a class="headerlink" href="#the-need-for-a-standarized-api-in-eo-cloud-processing" title="Link to this heading">#</a></h3>
+<p>Earth Observation data are becoming too large to be downloaded locally for analysis. Also, the way they are organised (as tiles, or granules: files containing the imagery for a small part of the Earth and a single observation date) makes it unnecessary complicated to analyse them. The solution to this is to store these data in the cloud, on compute back-ends, process them there, and browse the results or download resulting figures or numbers. But how do we do that? openEO develops an open application programming interface (API) that connects clients like R, Python and JavaScript to big Earth observation cloud back-ends in a simple and unified way.
+With such an API,</p>
+<ul class="simple">
+<li><p>each client can work with every back-end, and</p></li>
+<li><p>it becomes possible to compare back-ends in terms of capacity, cost, and results (validation, reproducibility)</p></li>
+</ul>
+</section>
+<section id="what-does-openeo-stand-for">
+<h3>What does openEO stand for?<a class="headerlink" href="#what-does-openeo-stand-for" title="Link to this heading">#</a></h3>
+<p>The acronym openEO contracts two concepts:</p>
+<p>open: used here in the context of open source software; open source software is available in source code form, and can be freely modified and redistributed; the openEO project will create open source software, reusable under a liberal open source license (Apache 2.0)
+EO: Earth observation
+Jointly, the openEO targets the processing and analysis of Earth observation data. The main objectives of the project are the following concepts:</p>
+<ul class="simple">
+<li><p>Simplicity: nowadays, many end-users use Python or R to analyse data and JavaScript to develop web applications; analysing large amounts of EO imagery should be equally simple, and seamlessly integrate with existing workflows</p></li>
+<li><p>Unification: current EO cloud back-ends all have a different API (opens new window), making EO data analysis hard to validate and reproduce and back-ends difficult to compare in terms of capability and costs, or to combine them in a joint analysis across back-ends. A unified API can resolve many of these problems.</p></li>
+</ul>
+</section>
+<section id="why-an-api">
+<h3>Why an API?<a class="headerlink" href="#why-an-api" title="Link to this heading">#</a></h3>
+<p>An API is an application programming interface. It defines a language that two computers (a client and a server) use to communicate.
+The following figure shows how many interfaces are needed to be able to compare back-ends from different clients, without an openEO API. And if you use the slider you will see how the situation becomes much clearer with a standardized API.</p>
+<iframe src="https://create.eo-college.org/wp-admin/admin-ajax.php?action=h5p_embed&id=6" width="958" height="564" frameborder="0" allowfullscreen="allowfullscreen" title="Cubes&amp;Clouds: openEO standardized processing in EO clouds"></iframe><script src="https://create.eo-college.org/wp-content/plugins/h5p/h5p-php-library/js/h5p-resizer.js" charset="UTF-8"></script>
+<p><a class="reference external" href="https://youtu.be/iBRL3yVmA2M"><img alt="openEO - A standardized API for EO cloud processing" src="https://img.youtube.com/vi/iBRL3yVmA2M/0.jpg" /></a> <br></p>
+<blockquote>
+<div><p>Video content in collaboration with <a class="reference external" href="https://www.uni-muenster.de/Geoinformatics/institute/staff/index.php/119/edzer_pebesma">Edzer Pebesma</a> (University of Münster). <br>
+<em>“For analysing Earth Observation data, don’t use a platform that locks you in.”</em></p>
+</div></blockquote>
+</section>
+<section id="id2">
+<h3>References<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://openeo.org/about.html#openeo">openeo.org - About OpenEO</a></p></li>
+<li><p><a class="reference external" href="https://r-spatial.org/2016/11/29/openeo.html">Edzer Pebesma, Wolfgang Wagner, Jan Verbesselt, Erwin Goor, Christian Briese, Markus Neteler (2016). OpenEO: a GDAL for Earth Observation Analytics. https://r-spatial.org/2016/11/29/openeo.html</a></p></li>
+<li><p><a class="reference external" href="https://github.com/Open-EO/openeo-D22/tree/master">openeo.org - Project Deliverable 22</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="quiz">
+<h1>Quiz<a class="headerlink" href="#quiz" title="Link to this heading">#</a></h1>
+<p>Loading: What is the difference between using an openEO remote back-end and openEO Python Client-Side-Processing? Tick what is correct. <em>Answer in exercise: 23_data_access_lazy_loading.ipynb</em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[[ ]] You need an account to authenticate in both cases
+[[x]] You don&#39;t need an account with Client-Side Processing
+[[x]] Client-side processing does not interact with an openEO back-end
+</pre></div>
+</div>
+<p>Loading: What are the dimension names of the loaded datacube? <em>Answer in exercise: 23_data_access_lazy_loading.ipynb</em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[( )] northing, easting, time, spectral
+[( )] lat, lon, t, bands
+[(x)] time, band, y, x
+</pre></div>
+</div>
+<p>Filtering: How many time steps are left after filtering temporally 2022-05-10, 2022-06-30? <em>Answer in exercise: 23_data_access_filter.ipynb</em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[( )] 11
+[(x)] 9
+[( )] 32
+</pre></div>
+</div>
+<p>Filtering: How many pixels are left along <code class="docutils literal notranslate"><span class="pre">y</span></code> after using <code class="docutils literal notranslate"><span class="pre">filter_bbox</span></code> with <code class="docutils literal notranslate"><span class="pre">spatial_extent</span> <span class="pre">=</span> <span class="pre">{&quot;west&quot;:</span> <span class="pre">11.259613,</span> <span class="pre">&quot;east&quot;:</span> <span class="pre">11.406212,</span> <span class="pre">&quot;south&quot;:</span> <span class="pre">46.461019,</span> <span class="pre">&quot;north&quot;:</span> <span class="pre">46.522237}</span></code>
+? <em>Answer in exercise: 23_data_access_filter.ipynb</em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[( )] 1006
+[( )] 1145
+[(x)] 489
+</pre></div>
+</div>
+<p>Reducing Dimension: What would be a use case for reducing the time dimension? Tick what is correct.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[[ ]] Get a full time series graph
+[[x]] Getting a cloudfree image for a certain time range
+[[x]] Get information about a whole sesaon
+[[ ]] Filling gaps in a time series
+</pre></div>
+</div>
+<p>Reducing Bands: How many pixels are left in the datacube after we use <code class="docutils literal notranslate"><span class="pre">reduce_dimension</span></code> over band? <em>Answer in exercise: 23_data_access_reduce.ipynb</em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[[21226010]]
+</pre></div>
+</div>
+<p>Reducing Dimension: What are the dimension names after running <code class="docutils literal notranslate"><span class="pre">reduce_spatial</span></code>? <em>Answer in exercise: 23_data_access_reduce.ipynb</em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[( )] x, y, band
+[( )] time, x, y
+[(x)] time, band
+</pre></div>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./2.3_data_access"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../2.2_data_properties/2.2_data_properties.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Data Properties</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="exercises/23_data_access_lazy_loading.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2.3 Data Access and Basic Processing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Access EO Data from the Cloud</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#raster-data-loading">Raster Data Loading</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#processes-on-datacubes">Processes on Datacubes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filter">Filter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apply">Apply</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reduce">Reduce</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resample">Resample</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregate">Aggregate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-processes">Recap Processes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">References</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#openeo-a-standardized-api-for-eo-cloud-processing">openEO - A standardized API for EO cloud processing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-need-for-a-standarized-api-in-eo-cloud-processing">The need for a standarized API in EO cloud processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-openeo-stand-for">What does openEO stand for?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-an-api">Why an API?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">Quiz</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By ESA
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

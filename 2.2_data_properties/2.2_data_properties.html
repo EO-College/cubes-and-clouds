@@ -1,0 +1,697 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Data Properties &#8212; Cubes &amp; Clouds - Cloud Native Open Data Sciences for Earth Observation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '2.2_data_properties/2.2_data_properties';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Access EO Data from the Cloud" href="../2.3_data_access/2.3_data_access.html" />
+    <link rel="prev" title="Data Discovery" href="../2.1_data_discovery/2.1_data_discovery.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Lectures
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setup</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../0_introduction/0_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0_introduction/exercises/0_login.html">Login to openEO</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1.1_intro_platform/1.1_intro_platform.html">Earth Observation cloud platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.2_data_cube/1.2_data_cube.html">What is a data cube?</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1.3_openscience/1.3.1_openscienceandfair.html">Open Science and the FAIR Principles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1.3_openscience/1.3.3_openscienceineo.html">The Open Science Journey - Open Science in geospatial, EO and EO cloud platforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1.3_openscience/1.3.2_opendataopensource.html">Open Data and Open Source Software</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Discovery and metadata</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.1_data_discovery/2.1_data_discovery.html">Data Discovery</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Properties</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data access with OpenEO</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.3_data_access/2.3_data_access.html">Access EO Data from the Cloud</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data formats for achieving scalability</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.4_formats_and_performance/2.4_formats_and_performance.html">Data Formats and Performance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Process &amp; Share</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3.1_data_processing/3.1_data_processing.html">Data processing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3.1_data_processing/3.1_exercises/31_data_processing.html">Basic EO workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3.1_data_processing/3.1_exercises/_alternatives/31_data_processing_stac.html">EO workflow with STAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3.1_data_processing/3.1_exercises/_alternatives/31_data_processing_openEO_Platform.html">EO workflow with openEO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3.1_data_processing/3.1_exercises/_alternatives/34_data_sharing_aoi_test.html">Data sharing and publishing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3.2_validation/3.2_validation.html">Validation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3.2_validation/3.2_exercises/32_validation.html">Exercise validation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3.3_data_sharing/3.3_data_sharing.html">Data sharing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3.3_data_sharing/3.3_exercises/33_data_sharing.html">Exercise data sharing</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional materials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../9.9_master_asi_conae/s2_sca.html">Sentinel-2 snow cover area (SCA) time series</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/s1.html">S1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/s2_snowcover_test.html">Sentinel-2 snow cover</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/test_s1_s3.html">Sentinel-1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/s3_ndsi.html">List all the available dataset</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds/issues/new?title=Issue%20on%20page%20%2F2.2_data_properties/2.2_data_properties.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/2.2_data_properties/2.2_data_properties.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Data Properties</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-data-properties-and-metadata">What are data properties and metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-and-metadata-used-for-filtering">Properties and metadata used for filtering</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata-and-properties-which-are-not-typically-used-for-filtering">Metadata and properties which are not typically used for filtering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensions">Dimensions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#value-types-data-types">Value Types (data types)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further Reading</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">Quiz</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="data-properties">
+<h1>Data Properties<a class="headerlink" href="#data-properties" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Learn what are metadata and why they are important</p></li>
+<li><p>Discover data properties and how to filter by them</p></li>
+</ul>
+</section>
+<section id="what-are-data-properties-and-metadata">
+<h2>What are data properties and metadata<a class="headerlink" href="#what-are-data-properties-and-metadata" title="Link to this heading">#</a></h2>
+<p>Data properties and metadata are sets of characteristics of geospatial data that serve different purposes. Commonly data properties are seen as attributes describing the image itself whereas, on the other hand, metadata describes the properties of a product.</p>
+<p><strong>Data Properties:</strong> Data properties refer to the characteristics and attributes of the geospatial data itself. These properties describe the actual content, structure, and values within the dataset. For raster data, properties can include information such as pixel values, cell size, spatial resolution, number of bands, and data format. For vector data, properties may include attributes associated with points, lines, or polygons, such as feature identifiers, names, classifications, or numerical values. Data properties are essential for understanding the data at a fundamental level and are used in the analysis, visualization, and processing tasks.</p>
+<p><strong>Metadata:</strong> Metadata, on the other hand, provides descriptive information about the data product. It serves as documentation that complements the data properties and offers additional context and details about the data. Metadata describes the origin, and characteristics, and helps with usage of the data, allowing users to discover, evaluate, and effectively utilize the data. It typically includes information such as the data source, acquisition parameters, coordinate reference system, temporal coverage, quality measures, and data access policies. Metadata plays a crucial role in data management, data sharing, and data interoperability by providing the necessary documentation and context for understanding and utilizing the data.</p>
+<p>Both together provide a complete description of the data of our interest itself and how to work with them. Standardized ways how to describe metadata and data properties allow geospatial systems to work with data easily.</p>
+<p><img alt="STAC standardizing Metadata" src="../_images/stac_standartization.jpg" /></p>
+<blockquote>
+<div><p>Figure: STAC standardizing Metadata.</p>
+</div></blockquote>
+</section>
+<section id="properties-and-metadata-used-for-filtering">
+<h2>Properties and metadata used for filtering<a class="headerlink" href="#properties-and-metadata-used-for-filtering" title="Link to this heading">#</a></h2>
+<p>In <a class="reference internal" href="../2.1_data_discovery/2.1_data_discovery.html"><span class="std std-doc">previous lesson</span></a> we learned where to find data. Now it is time to look at how we can select only the data we want. Properties and metadata are a great help when we are not interested in the whole collection, but only in certain regions, times or even bands of selected satellite products.</p>
+<p>In (many of) the data catalogs, we can filter by specific values for each satellite. Let’s talk more about some of them shortly</p>
+<ul class="simple">
+<li><p><strong>Dataset name/identifier:</strong> Filtering directly by name of a product as a unique name or identifier is assigned to the dataset, allowing it to be easily identified and referenced.</p></li>
+<li><p><strong>Time range:</strong> The temporal coverage or specific dates associated with the data acquisition. By this, we can easily select products from the same location with different dates of acquisition. This is particularly relevant for time-series or multi-temporal datasets.</p></li>
+<li><p><strong>Bounding box or other area of interest:</strong> Spatial Extent or the geographic coverage of the raster data, typically defined by the bounding coordinates (longitude and latitude) that encompass the dataset. Usually you can select your own area or interest as a rectangle/geometry or use a map window for taking the current extent</p></li>
+<li><p><strong>Mission:</strong> You can select by satellite used for data acquisition. In the case of Sentinel missions, you can select only Sentinel-1 as an example</p></li>
+<li><p><strong>Processing levels:</strong> Typically you can also select by processing level you are interested in for your missions. Typically Level-0 means unprocessed, raw data, and with higher number represents more corrections were applied.</p></li>
+<li><p><strong>Sensors or instrument:</strong> Selection by the output of a specific sensor or instrument.</p></li>
+<li><p><strong>Cloud coverage/polarization</strong>: Based on a mission, a selection filter can be made by specific parameters. For multi-spectral data such as captured by Sentinel-2, we can typically filter by cloud coverage in percentage. This is used as we are interested in lower cloud coverage percent for analysis. Similarly, specific polarizations can be selected for SAR data such as captured by Sentinel-1.</p></li>
+<li><p><strong>Orbit number:</strong> Typically integer number selects a specific orbit number user is interested in.</p></li>
+<li><p><strong>Orbit direction:</strong> For the majority of data types the selection is either ascending or descending.</p></li>
+<li><p><strong>Availability status/Timeliness:</strong> Some missions have different time availability for their data allowing them to select Near Real-Time acquisitions (approximately 3 hours after acquisition), raw data with a certain delay, or processed data later. It is also common that infrequently accessed data or older data than a certain threshold (years) can only be accessed ‘on demand’. Their ‘Availability status’ is usually set as ‘Archived’ or similar and they but must be ‘tasked to be brought online from archive storage’ by the user. This operation usually takes minutes to hours to complete. The user of the platform can later access the catalog again and hopefully the product have been brought online in the meantime.</p></li>
+</ul>
+<p>In the examples above it also became more clear why a standardized way of expressing the metadata is important. For example, how do you know whether the cloud cover is a percentage expressed in a range from 0 to 1 or from 0 to 100? How would you filter on this property, if both scales would be mixed?</p>
+<iframe src="https://create.eo-college.org/wp-admin/admin-ajax.php?action=h5p_embed&id=11" width="959" height="737" frameborder="0" allowfullscreen="allowfullscreen" title="Cubes&amp;Clouds: STAC"></iframe><script src="https://create.eo-college.org/wp-content/plugins/h5p/h5p-php-library/js/h5p-resizer.js" charset="UTF-8"></script>
+<p><a class="reference external" href="https://www.youtube.com/watch?v=r2qSTdW-_Wk"><img alt="STAC - A standardized Metadata Description for EO Data" src="https://img.youtube.com/vi/r2qSTdW-_Wk/0.jpg" /></a> <br></p>
+<blockquote>
+<div><p>Video content in collaboration with <a class="reference external" href="https://mohr.ws/">Matthias Mohr</a> (Major STAC contributor). <br>
+<em>“Having metadata in a standardized format makes your data available to others in a simple and unified way. Similarly, you can find and work with the data of others more easily. You can achieve these benefits with STAC.”</em></p>
+</div></blockquote>
+<section id="metadata-and-properties-which-are-not-typically-used-for-filtering">
+<h3>Metadata and properties which are not typically used for filtering<a class="headerlink" href="#metadata-and-properties-which-are-not-typically-used-for-filtering" title="Link to this heading">#</a></h3>
+<p>Many metadata are contained within the product but are not used for filtering on the platforms or accessing hubs directly. Among these is for example Author of the dataset or Licence. You should be able to get all information about those in data metadata when you are accessing the data itself or on the general page with information.</p>
+<p>Usually it is unfortunatelly not possible to filter by or search by direct data properties, e.g. by values in data.</p>
+</section>
+<section id="dimensions">
+<h3>Dimensions<a class="headerlink" href="#dimensions" title="Link to this heading">#</a></h3>
+<p>Dimensions are important description of data and their properties. More information about dimensions of data and datacubes was covered in the lecture about <a class="reference internal" href="../1.2_data_cube/1.2_data_cube.html"><span class="std std-doc">Datacubes</span></a></p>
+<ul class="simple">
+<li><p>x, y and sometimes z - Spatial dimension of data</p></li>
+<li><p>temporal/time dimension - capturing the time aspect for time series analysis</p></li>
+</ul>
+</section>
+<section id="value-types-data-types">
+<h3>Value Types (data types)<a class="headerlink" href="#value-types-data-types" title="Link to this heading">#</a></h3>
+<p>Once we have selected data products we are interested in, we can look directly into values to select what we are interested in. Common data types representing measured values are these:</p>
+<ul class="simple">
+<li><p>bitmask 0/1</p></li>
+<li><p>8bit 0-255</p></li>
+<li><p>UInt16 - 0-65k</p></li>
+<li><p>Int16 - -32k - 32k</p></li>
+<li><p>Float32</p></li>
+</ul>
+</section>
+<section id="further-reading">
+<h3>Further Reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://space.cloud68.co/s/xExLwCmzzKEcoB9?dir=undefined&amp;amp;path=%2FLumbardhi%2F28.06.2023&amp;amp;openfile=1351852">Standartized data management with STAC</a></p></li>
+<li><p><a class="reference external" href="https://space.cloud68.co/s/xExLwCmzzKEcoB9?dir=undefined&amp;amp;path=%2FLumbardhi%2F28.06.2023&amp;amp;openfile=1351852">STAC sessions from FOSS4G 2023</a></p></li>
+</ul>
+</section>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h3>
+</section>
+</section>
+<section id="quiz">
+<h2>Quiz<a class="headerlink" href="#quiz" title="Link to this heading">#</a></h2>
+<p>Which of the following is not considered as Data Metadata</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[( )] Instrument
+[( )] Licence
+[(x)] Values from sensors
+</pre></div>
+</div>
+<p>Which of the following is not considered as Data Properties</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[(x)] Licence
+[( )] Pixel values
+[( )] Number of bands
+</pre></div>
+</div>
+<p>Which of these properties and metadata are commonly used for filtering when searching data?</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[(x)] Bounding Box
+[( )] E-Mail Adress
+[(x)] Time Range
+[(x)] Sensor
+[( )] Telephone Number
+[(x)] Cloud Coverage
+</pre></div>
+</div>
+<p>Which statements about the advantage of filtering data by metadata and properties are true?</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[( )] All images are considered for subsequent analysis.
+[(x)] Only images that are relevant are considered for subsequent analysis.
+[(x)] The amount of data is reduced before starting the actual analysis.
+</pre></div>
+</div>
+<p><strong>Removed until exercise is accessible:</strong> Is the same number of products findable on all plafforms and in all ways?
+In the last chapter, there was exercise about finding Sentinel 2 L2A products over the island of Sardinia between 1.9.2023 and 30.9.2023 with cloud coverage less than or equal to 20% on Copernicus Dataspace via Web Browser. Correct answer was 59. Is the same number returned by programatically accessing catalog with code?</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[(x)] Yes
+[( )] No
+</pre></div>
+</div>
+<p><strong>Removed until exercise is accessible:</strong> Following the exercise with gdalinfo, answer following questions about the raster used there:</p>
+<p>What is the NODATA value?</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[[0]]
+</pre></div>
+</div>
+<p><strong>Removed until exercise is accessible:</strong> What are the coordinates of upper left corner in degrees?</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[[72d52&#39;14.58&quot;E, 32d31&#39; 9.58&quot;N]]
+</pre></div>
+</div>
+<p><strong>Removed until exercise is accessible:</strong> What is the EPSG code of the raster?</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[[4326]]
+</pre></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./2.2_data_properties"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../2.1_data_discovery/2.1_data_discovery.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Data Discovery</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../2.3_data_access/2.3_data_access.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Access EO Data from the Cloud</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-data-properties-and-metadata">What are data properties and metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-and-metadata-used-for-filtering">Properties and metadata used for filtering</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata-and-properties-which-are-not-typically-used-for-filtering">Metadata and properties which are not typically used for filtering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensions">Dimensions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#value-types-data-types">Value Types (data types)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further Reading</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">Quiz</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By ESA
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,729 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3.1 Data Processing &#8212; Cubes &amp; Clouds - Cloud Native Open Data Sciences for Earth Observation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '3.1_data_processing/3.1_data_processing';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3.1 Data Processing" href="3.1_exercises/31_data_processing.html" />
+    <link rel="prev" title="Data Formats and Performance" href="../2.4_formats_and_performance/2.4_formats_and_performance.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Lectures
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setup</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../0_introduction/0_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0_introduction/exercises/0_login.html">Login to openEO</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1.1_intro_platform/1.1_intro_platform.html">Earth Observation cloud platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.2_data_cube/1.2_data_cube.html">What is a data cube?</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1.3_openscience/1.3.1_openscienceandfair.html">Open Science and the FAIR Principles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1.3_openscience/1.3.3_openscienceineo.html">The Open Science Journey - Open Science in geospatial, EO and EO cloud platforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1.3_openscience/1.3.2_opendataopensource.html">Open Data and Open Source Software</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Discovery and metadata</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.1_data_discovery/2.1_data_discovery.html">Data Discovery</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../2.2_data_properties/2.2_data_properties.html">Data Properties</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data access with OpenEO</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.3_data_access/2.3_data_access.html">Access EO Data from the Cloud</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data formats for achieving scalability</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.4_formats_and_performance/2.4_formats_and_performance.html">Data Formats and Performance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Process &amp; Share</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Data processing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="3.1_exercises/31_data_processing.html">Basic EO workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.1_exercises/_alternatives/31_data_processing_stac.html">EO workflow with STAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.1_exercises/_alternatives/31_data_processing_openEO_Platform.html">EO workflow with openEO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.1_exercises/_alternatives/34_data_sharing_aoi_test.html">Data sharing and publishing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3.2_validation/3.2_validation.html">Validation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3.2_validation/3.2_exercises/32_validation.html">Exercise validation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3.3_data_sharing/3.3_data_sharing.html">Data sharing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3.3_data_sharing/3.3_exercises/33_data_sharing.html">Exercise data sharing</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional materials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../9.9_master_asi_conae/s2_sca.html">Sentinel-2 snow cover area (SCA) time series</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/s1.html">S1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/s2_snowcover_test.html">Sentinel-2 snow cover</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/test_s1_s3.html">Sentinel-1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/s3_ndsi.html">List all the available dataset</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds/issues/new?title=Issue%20on%20page%20%2F3.1_data_processing/3.1_data_processing.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/3.1_data_processing/3.1_data_processing.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>3.1 Data Processing</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#case-study-snow-cover-in-the-alps">Case Study: Snow Cover in the Alps</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#research-question">Research Question</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#approach">Approach</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-description">Workflow Description</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#animated-content-embed-process-graph">Animated Content: Embed Process Graph</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">Quiz</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="data-processing">
+<h1>3.1 Data Processing<a class="headerlink" href="#data-processing" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Carry out an EO workflow on a cloud platform</p></li>
+<li><p>Select suitable data</p></li>
+<li><p>Chain processes to form an EO processing chain/workflow</p></li>
+<li><p>Visualize the results</p></li>
+</ul>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>In this lecture we are going to combine the knowledge and hands-on experience we have gathered so far to create a full EO workflow on a cloud platform.
+We will</p>
+<ul class="simple">
+<li><p>define a research question,</p></li>
+<li><p>choose and load the necessary data sources,</p></li>
+<li><p>define the data cube to our needs,</p></li>
+<li><p>use functions to process the data,</p></li>
+<li><p>visualize the result</p></li>
+<li><p>and track the resources we are consuming on the platform.</p></li>
+</ul>
+</section>
+<section id="case-study-snow-cover-in-the-alps">
+<h2>Case Study: Snow Cover in the Alps<a class="headerlink" href="#case-study-snow-cover-in-the-alps" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://youtu.be/bE_yz0VCLRE"><img alt="Introduction to EO Cloud Platforms" src="https://img.youtube.com/vi/bE_yz0VCLRE/0.jpg" /></a> <br></p>
+<blockquote>
+<div><p>Video content in cooperation with <a class="reference external" href="https://waterjade.com/en/about-us/">Matteo Dall’Amico</a> (MobyGIS - Waterjade) and <a class="reference external" href="https://waterjade.com/en/about-us/">Federico Di Paolo</a> (MobyGIS - Waterjade). <br>
+<em>“How much snow is stored in that mountain, when will it melt?” We answered this question using EO cloud platforms! Have a look: <a class="reference external" href="https://waterjade.com/eo4alps-snow/">EO4Alps Snow</a></em></p>
+</div></blockquote>
+<section id="research-question">
+<h3>Research Question<a class="headerlink" href="#research-question" title="Link to this heading">#</a></h3>
+<p>Snow serves as a water reservoir and is thus important for any hydrological management activity, such as irrigation planning, drink water supply or hydro power generation. Knowing precisely, when and where snow is present is a critical source of information for these acitivities. Satellite earth observation plays an important role in describing the snow cover, both globally and in local mountain ranges. This is due to it’s ability to sense information throughout space (complete coverage of the globe) and time (repeated measurements). Our goal is to create a time series of the snow covered area of the catchment of interest. We will use this time series to compare it to the run off at the main outlet of the catchment. And study the relationship between snow dynamics and runoff.</p>
+</section>
+<section id="approach">
+<h3>Approach<a class="headerlink" href="#approach" title="Link to this heading">#</a></h3>
+<p>In this exercise we are going to derive the snow cover in an alpine catchment using Sentinel-2 data. Sentinel-2 carries an optical sensor, it is measuring the reflected light of the earths surface in differenct wavelenghts. At a 20 m spatial resolution and at a 6 day repeat rate. We are using the Green and SWIR bands to calculate the Normalized Difference Snow Index (NDSI). It is calculated as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} NDSI = \\frac {GREEN - SWIR} {GREEN + SWIR} \end{split}\]</div>
+<p>Snow typically has very high visible (VIS) reflectance and very low reflectance in the shortwave infrared (SWIR), a characteristic used to detect snow by distinguishing between snow and most cloud types. The NDSI expresses this phenomenon as a formula. It results in a value between -1 and 1. The higher the value is, the more probable it is that the surface is covered with snow. In order to create a binary snow map we apply a threshold of <span class="math notranslate nohighlight">\(NDSI &lt; 0.4\)</span>. This is a commonly used value for discriminating snowcovered and snow free areas. Then we spatially aggregate the snow free and snow covered pixels in the catchment area by summing them up. In order to get the snow covered area of the catchment we multiply the number of snow covered pixels by the pixel resolution. Additionally, we have to deal with cloud cover. We use the Sentinel-2 cloud mask that is provided with the data and exclude all images that have a cloud cover over 25 % in our study area. Ideally we should fill the gaps the clouds generate, since they are introducing uncertainty. Nevertheless, for a first try our approach should be good enough to get a general idea about the snow cover in our area of interest. In the end we receive a time series with the snow covered area in the catchment.
+The approach we are using is very basic. There are many assumptions and simplifications involved. A critical analysis of the workflow and possible improvements follows in Section <a class="reference external" href="https://github.com/EO-College/cubes-and-clouds/blob/main/lectures/3.3_validation/3.3_validation.md#critically-analyse-a-workflow">3.3 Validation</a>.</p>
+</section>
+<section id="workflow-description">
+<h3>Workflow Description<a class="headerlink" href="#workflow-description" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>get data:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">load_collection()</span></code></p></li>
+</ul>
+</li>
+<li><p>calculate ndsi:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">filter_bands()</span></code>, <code class="docutils literal notranslate"><span class="pre">reduce_dimension()</span></code></p></li>
+<li><p>creates a -1 to 1 map, 1 signifies high probability of snow</p></li>
+</ul>
+</li>
+<li><p>create binary snow classification (by threshold):</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">gt()</span></code>, <code class="docutils literal notranslate"><span class="pre">mask()</span></code>,</p></li>
+<li><p>create a binary snow classification: 0 = no snow, 1 = snow</p></li>
+</ul>
+</li>
+<li><p>cloud masking:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">eq()</span></code>, <code class="docutils literal notranslate"><span class="pre">mask()</span></code></p></li>
+<li><p>create a binary cloud mask using the S2 scene classification</p></li>
+<li><p>Apply the mask to the binary snow map: 0 = no snow, 1 = snow, NA = cloud</p></li>
+<li><p>This gives us the <strong>cloudfree snow covered area</strong> for our catchment as an image time series (x, y, time, sca)</p></li>
+</ul>
+</li>
+<li><p>catchment statistics - cloud pixels, no snow pixels, snow pixels:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">eq()</span></code>, <code class="docutils literal notranslate"><span class="pre">gt()</span></code>, <code class="docutils literal notranslate"><span class="pre">merge_cubes()</span></code>, <code class="docutils literal notranslate"><span class="pre">aggregate_spatial()</span></code>, <code class="docutils literal notranslate"><span class="pre">sum()</span></code></p></li>
+<li><p>create 3 binary data cubes: pixel in catchment, pixel cloud, pixel snow.</p></li>
+<li><p>merge the 3 cubes: x, y, time, band (catchment, cloud, snow)</p></li>
+<li><p>aggregate_spatial: sum up the values to get the total number of pixels per time step per band (catchment, cloud, snow)</p></li>
+<li><p>calculate the percentages of clouds and snow per time step.</p></li>
+</ul>
+</li>
+<li><p>filter timeseries according to cloud coverage:</p>
+<ul>
+<li><p>filter the dates that have cloud coverages &gt; 25%</p></li>
+</ul>
+</li>
+<li><p>Plot the <strong>time series of the snow covered area</strong> in the catchment.</p></li>
+</ul>
+<section id="animated-content-embed-process-graph">
+<h4>Animated Content: Embed Process Graph<a class="headerlink" href="#animated-content-embed-process-graph" title="Link to this heading">#</a></h4>
+</section>
+</section>
+</section>
+<section id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h2>
+<p>Now we have covered the most important topics of our use case in theory. Let’s move on to produce some results!</p>
+<blockquote>
+<div><p>:warning: The applied workflow is a simple approach used for educational reasons to learn how to use EO cloud platforms.</p>
+</div></blockquote>
+<p><a class="reference external" href="https://github.com/EO-College/cubes-and-clouds/blob/main/lectures/3.1_data_processing/exercises/31_data_processing.ipynb">Exercise 3.1 Processing</a></p>
+</section>
+<section id="quiz">
+<h2>Quiz<a class="headerlink" href="#quiz" title="Link to this heading">#</a></h2>
+<p>What is the city at the outlet of the catchment? <em>Answer in the exercise: 31_data_processing.ipynb section <strong>‘Region of Interest’</strong></em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[(x)] Meran
+[( )] Innsbruck
+[( )] Grenoble
+</pre></div>
+</div>
+<p>How many images are available in the time range (“2018-02-01” and “2018-06-30”)? <em>Answer in the exercise: 31_data_processing.ipynb section <strong>‘Calculate Catchment Statistics’</strong>, might require you to run some additional code blocks</em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[( )] 0-20
+[( )] 21-40
+[(x)] 41-60
+</pre></div>
+</div>
+<p>How many pixels are in the spatially aggregated data cube? (time * x * y * bands) <em>Answer in the exercise: 31_data_processing.ipynb section <strong>‘Calculate Catchment Statistics’</strong></em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[( )] 50,000,000 - 100,000,000
+[(x)] 100,000,001 - 200,000,000
+[( )] 200,000,001 - 500,000,000
+</pre></div>
+</div>
+<p>How many resources did the computation of the data cube take?  <em>Answer in the exercise: 31_data_processing.ipynb section <strong>‘Calculate Catchment Statistics’</strong></em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[(x)] 0 - 20
+[( )] 21 - 100
+[( )] 101 - 200
+</pre></div>
+</div>
+<p>How many snow covered pixels are there across all time steps? <em>Answer in the exercise: 31_data_processing.ipynb section <strong>‘Calculate Catchment Statistics’</strong></em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[( )] 10,000,000 - 50,000,000
+[(x)] 50,000,001 - 100,000,000
+[( )] 100,000,001 - 200,000,000
+</pre></div>
+</div>
+<p>At which time step is the maximum snow cover reached?  <em>Answer in the exercise: 31_data_processing.ipynb section <strong>‘Calculate Catchment Statistics’</strong></em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[( )] 2018-02-13
+[( )] 2018-02-21
+[(x)] 2018-03-08
+</pre></div>
+</div>
+<p>What is the number of snow covered pixels on that date?  <em>Answer in the exercise: 31_data_processing.ipynb section <strong>‘Calculate Catchment Statistics’</strong></em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[( )] 4,000,001 - 6,000,000
+[( )] 0 - 2,000,000
+[(x)] 2,000,001 - 4,000,000
+</pre></div>
+</div>
+<p>What does that represent in area (km2)?  <em>Answer in the exercise: 31_data_processing.ipynb section <strong>‘Calculate Catchment Statistics’</strong></em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[(x)] 201 - 400
+[( )] 0 - 200
+[( )] 401 - 600
+</pre></div>
+</div>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./3.1_data_processing"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../2.4_formats_and_performance/2.4_formats_and_performance.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Data Formats and Performance</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="3.1_exercises/31_data_processing.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">3.1 Data Processing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#case-study-snow-cover-in-the-alps">Case Study: Snow Cover in the Alps</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#research-question">Research Question</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#approach">Approach</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-description">Workflow Description</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#animated-content-embed-process-graph">Animated Content: Embed Process Graph</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">Quiz</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By ESA
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
