@@ -29,8 +29,7 @@ import xarray as xr
 def calculate_sca(bbox, temporal_extent):
     URL = "https://earth-search.aws.element84.com/v1"
     catalog = pystac_client.Client.open(URL)
-    # bbox (sw_lat, sw_lon, ne_lat, ne_lon)
-    spatial_extent = [bbox[1], bbox[0], bbox[3], bbox[2]]
+    spatial_extent = [bbox[0], bbox[1], bbox[2], bbox[3]]
     bands = ['green', 'swir16', 'scl']
     items = catalog.search(
         bbox=spatial_extent,
