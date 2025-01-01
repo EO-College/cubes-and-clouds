@@ -25,7 +25,6 @@ import xarray as xr
 
 #from osgeo import gdal
 
-
 def calculate_sca(bbox, temporal_extent):
     URL = "https://earth-search.aws.element84.com/v1"
     catalog = pystac_client.Client.open(URL)
@@ -55,6 +54,7 @@ def calculate_sca(bbox, temporal_extent):
     snowmap_cloudfree = xr.where(cloud_mask, snowmap, 2)
     
     return snowmap_cloudfree
+
 
 def station_temporal_filter(station_daily_df,
                     station_meta_df,
@@ -190,7 +190,7 @@ def extract_metadata_time(temporal_extent):
     
     return start_time, end_time
 
-def extract_metadata_stac():
+def extract_metadata_stac(bbox, temporal_extent):
     URL = "https://earth-search.aws.element84.com/v1"
     catalog = pystac_client.Client.open(URL)
     providers = []
@@ -198,5 +198,9 @@ def extract_metadata_stac():
         providers.append(p.to_dict())
     links = []
     for link in catalog.get_links():
-        links.append(link.to_dict())
+        lnk = link.to_dict()
+        if "sentinel-2-l2a" in lnk["href"]:
+            lnk["rel"] = "derived_from"
+            lnk["title"] = "Derived from " + lnk["href"]
+            links.append(lnk)
     return providers, links
