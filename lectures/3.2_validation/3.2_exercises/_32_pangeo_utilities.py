@@ -2,7 +2,7 @@
 Cubes and Clouds MOOC to enhance modularity, reproducibility of code"""
 
 import math
-import datetime
+from datetime import datetime
 
 import numpy as np
 import pandas as pd
@@ -15,7 +15,6 @@ from shapely.geometry import Polygon
 
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
-
 
 # pystac libraries
 import pystac
@@ -55,7 +54,7 @@ def validation_metrics(df):
 def calculate_sca(bbox, temporal_extent):
     URL = "https://earth-search.aws.element84.com/v1"
     catalog = pystac_client.Client.open(URL)
-    spatial_extent = [bbox["minx"], bbox["miny"], bbox["maxx"], bbox["maxy"]]
+    spatial_extent = [bbox[0], bbox[1], bbox[2], bbox[3]]
     bands = ['green', 'swir16', 'scl']
     items = catalog.search(
         bbox=spatial_extent,
@@ -81,6 +80,7 @@ def calculate_sca(bbox, temporal_extent):
     snowmap_cloudfree = xr.where(cloud_mask, snowmap, 2)
     
     return snowmap_cloudfree
+
 
 def station_temporal_filter(station_daily_df,
                     station_meta_df,
@@ -138,6 +138,7 @@ def assign_site_snow(df, snow_val):
     df = df.set_index("id")
     df = df.sort_values(axis=0, by="id")
     df = df.dropna()
+    
     # assign 0 to cloudy pixels -- assumes no-snow
     # df["cube_snow"] = np.where(df["cube_snow"] == np.nan, 0, np.where(df["cube_snow"]==1, 1, 0))
     
@@ -244,7 +245,7 @@ def generate_stac(assets,
     if img_datetimes and not input_datetime:
         input_datetime = img_datetimes[0]
 
-    input_datetime = input_datetime or datetime.datetime.utcnow()    
+    input_datetime = input_datetime or datetime.utcnow()    
 
     minx, miny, maxx, maxy = zip(*bboxes)
     bbox = [min(minx), min(miny), max(maxx), max(maxy)]
@@ -274,3 +275,65 @@ def generate_stac(assets,
         item.add_asset(key=key, asset=asset)
     
     return item
+
+def compute_raster_stats(in_data_path, stat_data_path):
+    # computes raster statistics
+    ds = gdal.Open(in_data_path, gdal.GA_Update)
+    n_of_bands = ds.RasterCount
+    
+    for band in range(n_of_bands):
+        ds.GetRasterBand(band+1).ComputeStatistics(0)
+        ds.GetRasterBand(band+1).SetNoDataValue(np.nan)
+    
+    # save raster statistics
+    fileformat = "GTiff"
+    driver = gdal.GetDriverByName(fileformat)
+    metadata = driver.GetMetadata()
+    if metadata.get(gdal.DCAP_CREATE) == "YES":
+        print("Driver {} supports Create() method.".format(fileformat))
+    
+    dst_ds = driver.CreateCopy(stat_data_path, ds, strict=0)
+    dst_ds = None
+    ds = None
+    
+    return None
+
+def extract_metadata_geometry(bbox):
+    min_x = bbox[0]
+    min_y = bbox[1]
+    max_x = bbox[2]
+    max_y = bbox[3]
+    
+    geometry = {
+        "type": "Polygon",
+        "coordinates": [[
+            [min_x, min_y],
+            [max_x, min_y],
+            [max_x, max_y],
+            [min_x, max_y],
+            [min_x, min_y]
+        ]]
+    }
+    
+    return geometry
+
+def extract_metadata_time(temporal_extent):
+    start_time = datetime.strptime(temporal_extent[0], '%Y-%m-%d').isoformat() + "Z"
+    end_time = datetime.strptime(temporal_extent[1], '%Y-%m-%d').isoformat() + "Z"
+    
+    return start_time, end_time
+
+def extract_metadata_stac(bbox, temporal_extent):
+    URL = "https://earth-search.aws.element84.com/v1"
+    catalog = pystac_client.Client.open(URL)
+    providers = []
+    for p in catalog.get_collection("sentinel-2-l2a").providers:
+        providers.append(p.to_dict())
+    links = []
+    for link in catalog.get_links():
+        lnk = link.to_dict()
+        if "sentinel-2-l2a" in lnk["href"]:
+            lnk["rel"] = "derived_from"
+            lnk["title"] = "Derived from " + lnk["href"]
+            links.append(lnk)
+    return providers, links
