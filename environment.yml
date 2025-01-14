@@ -27,4 +27,3 @@ dependencies:
     - scikit-learn
     - openeo-processes-dask[implementations]
     - openeo-pg-parser-networkx
-    - codecarbon
