@@ -16,7 +16,15 @@ from dataclasses import dataclass
 from codecarbon import OfflineEmissionsTracker
 
 carbon_logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.ERROR, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+carbon_logger.setLevel(logging.DEBUG)
+# create console handler with a higher log level
+ch = logging.StreamHandler()
+ch.setLevel(logging.ERROR)
+# create formatter and add it to the handlers
+formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+ch.setFormatter(formatter)
+# add the handlers to logger
+carbon_logger.addHandler(ch)
 
 
 class CustomEmissionsTracker(OfflineEmissionsTracker):
@@ -122,7 +130,9 @@ class EnergyConsumption:
         # https://science.nasa.gov/mission/mars-2020-perseverance/rover-components/
         energy_per_meter = 1.16  # watt-hours per meter
         self.rover_distance_covered = self.energy_consumed_wh / energy_per_meter
-        carbon_logger.debug(f"Rover distance covered (meters): {self.rover_distance_covered}")
+        carbon_logger.debug(
+            f"Rover distance covered (meters): {self.rover_distance_covered}"
+        )
 
     def calculate_led_bulb_runtime(self) -> None:
         """
@@ -170,7 +180,9 @@ class EnergyConsumption:
             smartwatch_runtime_seconds_normal
         )
 
-        carbon_logger.debug(f"Smartwatch runtime (readable): {self.smartwatch_runtime_idle}")
+        carbon_logger.debug(
+            f"Smartwatch runtime (readable): {self.smartwatch_runtime_idle}"
+        )
         carbon_logger.debug(
             f"Smartwatch runtime normal use (readable): {self.smartwatch_runtime_normal}"
         )
@@ -204,23 +216,16 @@ class EnergyConsumption:
 def calculate_emission_equivalents(
     file_path: str = "./emissions.csv",
     template_path: str = "../energy.html",
-    debug: bool = False,
     experiment_id: int = None,
 ) -> None:
     """
     args:
         file_path (str): Path to the codecarbon emissions CSV file
         template_path (str): Path to the HTML template file
-        debug (bool): Enable debug carbon_logger
         experiment_id (int): Filter data by experiment ID
 
     returns: None
     """
-    if debug:
-        carbon_logger.basicConfig(level=carbon_logger.DEBUG)
-    else:
-        carbon_logger.basicConfig(level=carbon_logger.INFO)
-
     try:
         df = pd.read_csv(file_path)
         df["timestamp"] = pd.to_datetime(df["timestamp"])
