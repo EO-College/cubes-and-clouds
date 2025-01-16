@@ -38,6 +38,11 @@ class CustomEmissionsTracker(OfflineEmissionsTracker):
     """
 
     def __init__(self, *args, **kwargs):
+
+        lock_file="/tmp/.codecarbon.lock"
+        if os.path.exists(lock_file):
+            os.remove(lock_file)
+            carbon_logger.debug("Removed lock file to prevent double tracker instances.")
         super().__init__(*args, **kwargs)
         self.current_experiment_id = None
         self.emissions_file = os.path.join(
