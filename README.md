@@ -63,6 +63,7 @@ We're happy to receive your contributions to lessons, exercises, bug reports etc
 - The course is openly available on **EOCollege**, a cloud learning platform for EO content. EOCollege is your one-stop-shop for this course. You will have an integrated experience of all the components: lectures, exercises, quizzes and get a certificate upon successful completion: https://eo-college.org/courses/cubes-and-clouds
 - The course material is available on **zenodo**. Each lecture can be accessed individually: [Cubes and Clouds Zenodo Community](https://zenodo.org/communities/cubes_and_clouds?q=&l=list&p=1&s=10&sort=newest)
 - Alternative Rendering of the Course
+  - [Jupyter Book](https://eo-college.github.io/cubes-and-clouds/): web page of the course deployed using GitHub pages and Jupyter Books, updated at every merge of PR via GitHub actions. 
   - [LIAScript](https://liascript.github.io/): Use the link to the .md files and copy them into LIAscript. It will give you an online lecture directly.
   - [Obsidian](https://obsidian.md/): Obsidian is a knowledge management system. Add obsidian file toplevel to create your void, or add the course to an existing one.
   - [Bookdown](https://bookdown.org/): You can render the course using bookdown or similar to have a rendered version of the markdown files in the repo. Some work needed to do that.
