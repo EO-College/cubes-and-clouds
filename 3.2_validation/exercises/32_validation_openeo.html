@@ -1,0 +1,1132 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3.2 Validation of the results with openEO &#8212; Cubes &amp; Clouds - Cloud Native Open Data Sciences for Earth Observation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '3.2_validation/exercises/32_validation_openeo';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    Lectures
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setup</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../0_introduction/0_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../0_introduction/exercises/0_login.html">0. Introduction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../1.1_intro_platform/1.1_intro_platform.html">Earth Observation cloud platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../1.2_data_cube/1.2_data_cube.html">What is a data cube?</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../1.3_openscience/1.3.1_openscienceandfair.html">Open Science and the FAIR Principles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../1.3_openscience/1.3.3_openscienceineo.html">The Open Science Journey - Open Science in geospatial, EO and EO cloud platforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1.3_openscience/1.3.2_opendataopensource.html">Open Data and Open Source Software</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Discovery and metadata</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../2.1_data_discovery/2.1_data_discovery.html">Data Discovery</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../2.2_data_properties/2.2_data_properties.html">Data Properties</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data access with OpenEO</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../2.3_data_access/2.3_data_access.html">Access EO Data from the Cloud</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data formats for achieving scalability</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../2.4_formats_and_performance/2.4_formats_and_performance.html">Data Formats and Performance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Process &amp; Share</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3.1_data_processing/3.1_data_processing.html">Data processing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3.2_validation.html">Validation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3.3_data_sharing/3.3_data_sharing.html">Data sharing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional materials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../9.9_master_asi_conae/s2_sca.html">Sentinel-2 snow cover area (SCA) time series</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../9.9_master_asi_conae/test/s1.html">S1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../9.9_master_asi_conae/test/s2_snowcover_test.html">Sentinel-2 snow cover</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../9.9_master_asi_conae/test/test_s1_s3.html">Sentinel-1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../9.9_master_asi_conae/test/s3_ndsi.html">List all the available dataset</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds/issues/new?title=Issue%20on%20page%20%2F3.2_validation/exercises/32_validation_openeo.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/3.2_validation/exercises/32_validation_openeo.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>3.2 Validation of the results with openEO</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libraries">Libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#login">Login</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#region-of-interest">Region of Interest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-datacube-of-snowmap">Generate Datacube of Snowmap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-snow-station-in-situ-data">Load snow-station in-situ data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-process-and-filter-in-situ-snow-station-measurements">Pre-process and filter <em>in-situ</em> snow station measurements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-temporally">Filter Temporally</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-spatially">Filter Spatially</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-filtered-stations">Plot the filtered stations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-snow-depth-to-snow-presence">Convert snow depth to snow presence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#save-the-pre-processed-snow-station-measurements">Save the pre-processed snow station measurements</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-sca-from-the-data-cube-per-station">Extract SCA from the data cube per station</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-snow-station-data-for-usage-in-openeo">Prepare snow station data for usage in openEO</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Extract SCA from the data cube per station</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combine-station-measurements-and-the-extracted-sca-from-our-data-cube">Combine station measurements and the extracted SCA from our data cube</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-snow-values-from-sca-extracted-at-the-station-location">Extract snow values from SCA extracted at the station location</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#match-in-situ-measurements-to-dates-in-sca">Match in-situ measurements to dates in SCA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combine-in-situ-measurements-with-sca-results-at-the-stations">Combine in-situ measurements with SCA results at the stations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-the-sca-results-with-the-snow-station-measurements">Validate the SCA results with the snow station measurements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-to-discharge-data">Compare to discharge data</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <center><img src="https://raw.githubusercontent.com/EO-College/cubes-and-clouds/main/icons/cnc_3icons_process_circle.svg"
+     alt="Cubes & Clouds logo"
+     style="float: center; margin-right: 10px; margin-left: 10px; max-height: 250px;" /></center><section class="tex2jax_ignore mathjax_ignore" id="validation-of-the-results-with-openeo">
+<h1>3.2 Validation of the results with openEO<a class="headerlink" href="#validation-of-the-results-with-openeo" title="Link to this heading">#</a></h1>
+<p><img src="https://openeo.org/images/openeo_logo.png"
+     alt="openEO logo"
+     style="float: center; margin-right: 10px; max-height: 100px;"/></p>
+<p>In this exercise, we focus on the validation of the results we have produced. In general, the accuracy of a satellite derived product is expressed by comparing it to in-situ measurements. Furthermore, we will compare the resuling snow cover time series to the runoff of the catchment to check the plausibility of the observed relationship.</p>
+<p>The steps involved in this analysis:</p>
+<ul class="simple">
+<li><p>Generate Datacube time-series of snowmap,</p></li>
+<li><p>Load <em>in-situ</em> datasets: snow depth station measurements,</p></li>
+<li><p>Pre-process and filter <em>in-situ</em> datasets to match area of interest,</p></li>
+<li><p>Perform validation of snow-depth measurements,</p></li>
+<li><p>Plausibility check with runoff of the catchment</p></li>
+</ul>
+<p>More information on the openEO Python Client: <a class="reference external" href="https://open-eo.github.io/openeo-python-client/index.html">https://open-eo.github.io/openeo-python-client/index.html</a></p>
+<p>Start by creating the folders and data files needed to complete the exercise.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cp<span class="w"> </span>-r<span class="w"> </span><span class="nv">$DATA_PATH</span>/32_results/<span class="w"> </span><span class="nv">$HOME</span>/
+<span class="o">!</span>cp<span class="w"> </span>-r<span class="w"> </span><span class="nv">$DATA_PATH</span>/32_data/<span class="w"> </span><span class="nv">$HOME</span>/
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cp<span class="w"> </span>-r<span class="w"> </span><span class="nv">$DATA_PATH</span>/_32_openeo_utilities.py<span class="w"> </span><span class="nv">$HOME</span>/
+</pre></div>
+</div>
+</div>
+</div>
+<section id="libraries">
+<h2>Libraries<a class="headerlink" href="#libraries" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">date</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">rioxarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">rio</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">rasterio</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rasterio.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">show</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">leafmap.foliumap</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">leafmap</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">openeo</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">_32_openeo_utilities</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span> <span class="n">calculate_sca</span><span class="p">,</span>
+                                 <span class="n">station_temporal_filter</span><span class="p">,</span>
+                                 <span class="n">station_spatial_filter</span><span class="p">,</span>
+                                 <span class="n">binarize_snow</span><span class="p">,</span>
+                                 <span class="n">format_date</span><span class="p">,</span>
+                                 <span class="n">assign_site_snow</span><span class="p">,</span>
+                                 <span class="n">validation_metrics</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="login">
+<h2>Login<a class="headerlink" href="#login" title="Link to this heading">#</a></h2>
+<p>Connect to the Copernicus Dataspace Ecosystem.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conn</span> <span class="o">=</span> <span class="n">openeo</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;https://openeo.dataspace.copernicus.eu/&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Login.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">authenticate_oidc</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Check if the login worked.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">describe_account</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="region-of-interest">
+<h2>Region of Interest<a class="headerlink" href="#region-of-interest" title="Link to this heading">#</a></h2>
+<p>Load the Val Passiria Catchment, our region of interest. And plot it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">catchment_outline</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;32_data/catchment_outline.geojson&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">center</span> <span class="o">=</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">catchment_outline</span><span class="o">.</span><span class="n">centroid</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">catchment_outline</span><span class="o">.</span><span class="n">centroid</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">leafmap</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="n">center</span><span class="p">,</span> <span class="n">zoom</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">add_vector</span><span class="p">(</span><span class="s1">&#39;32_data/catchment_outline.geojson&#39;</span><span class="p">,</span> <span class="n">layer_name</span><span class="o">=</span><span class="s2">&quot;catchment&quot;</span><span class="p">)</span>
+<span class="n">m</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="generate-datacube-of-snowmap">
+<h2>Generate Datacube of Snowmap<a class="headerlink" href="#generate-datacube-of-snowmap" title="Link to this heading">#</a></h2>
+<p>We have prepared the workflow to generate the snow map as a python function <code class="docutils literal notranslate"><span class="pre">calculate_sca()</span></code>. The <code class="docutils literal notranslate"><span class="pre">calculate_sca()</span></code> is from <code class="docutils literal notranslate"><span class="pre">_32_openeo_utilities</span></code> and is used to reproduce the snow map process graph in openEO</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bbox</span> <span class="o">=</span> <span class="n">catchment_outline</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">temporal_extent</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;2018-02-01&quot;</span><span class="p">,</span> <span class="s2">&quot;2018-06-30&quot;</span><span class="p">]</span>
+<span class="n">snow_map_cloud_free</span> <span class="o">=</span> <span class="n">calculate_sca</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">bbox</span><span class="p">,</span> <span class="n">temporal_extent</span><span class="p">)</span>
+<span class="n">snow_map_cloud_free</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-snow-station-in-situ-data">
+<h2>Load snow-station in-situ data<a class="headerlink" href="#load-snow-station-in-situ-data" title="Link to this heading">#</a></h2>
+<p>Load the <em>in-situ</em> datasets, snow depth station measurements. They have been compiled in the ClirSnow project and are available here: <a class="reference external" href="https://zenodo.org/record/5109574">Snow Cover in the European Alps</a> with stations in our area of interest.</p>
+<p>We have made the data available for you already. We can load it directly.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load snow station datasets from zenodo:: https://zenodo.org/record/5109574</span>
+<span class="n">station_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;32_data/data_daily_IT_BZ.csv&quot;</span><span class="p">)</span>
+<span class="n">station_df</span> <span class="o">=</span> <span class="n">station_df</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">Date</span><span class="o">=</span><span class="n">station_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">format_date</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="c1"># the format_date function, from _32_openeo_utilities was used to stringify each Datetime object in the dataframe</span>
+<span class="c1"># station_df.head()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load additional metadata for acessing the station geometries</span>
+<span class="n">station_df_meta</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;32_data/meta_all.csv&quot;</span><span class="p">)</span>
+<span class="n">station_df_meta</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="pre-process-and-filter-in-situ-snow-station-measurements">
+<h2>Pre-process and filter <em>in-situ</em> snow station measurements<a class="headerlink" href="#pre-process-and-filter-in-situ-snow-station-measurements" title="Link to this heading">#</a></h2>
+<section id="filter-temporally">
+<h3>Filter Temporally<a class="headerlink" href="#filter-temporally" title="Link to this heading">#</a></h3>
+<p>Filter the in-situ datasets to match the snow-map time series using the function <code class="docutils literal notranslate"><span class="pre">station_temporal_filter()</span></code> from <code class="docutils literal notranslate"><span class="pre">_32_openeo_utilities.py</span></code>, which merges the station dataframe with additional metadata needed for the Lat/Long information and convert them to geometries</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start_date</span> <span class="o">=</span> <span class="s2">&quot;2018-02-01&quot;</span>
+<span class="n">end_date</span> <span class="o">=</span> <span class="s2">&quot;2018-06-30&quot;</span>
+
+<span class="n">snow_stations</span> <span class="o">=</span> <span class="n">station_temporal_filter</span><span class="p">(</span><span class="n">station_daily_df</span> <span class="o">=</span> <span class="n">station_df</span><span class="p">,</span> 
+                                        <span class="n">station_meta_df</span> <span class="o">=</span> <span class="n">station_df_meta</span><span class="p">,</span>
+                                        <span class="n">start_date</span> <span class="o">=</span> <span class="n">start_date</span><span class="p">,</span>
+                                        <span class="n">end_date</span> <span class="o">=</span> <span class="n">end_date</span><span class="p">)</span>
+<span class="n">snow_stations</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="filter-spatially">
+<h3>Filter Spatially<a class="headerlink" href="#filter-spatially" title="Link to this heading">#</a></h3>
+<p>Filter the in-situ datasets into the catchment area of interest using <code class="docutils literal notranslate"><span class="pre">station_spatial_filter()</span></code> from <code class="docutils literal notranslate"><span class="pre">_32_openeo_utilities.py</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">catchment_stations</span> <span class="o">=</span> <span class="n">station_spatial_filter</span><span class="p">(</span><span class="n">snow_stations</span><span class="p">,</span> <span class="n">catchment_outline</span><span class="p">)</span>
+<span class="n">catchment_stations</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-the-filtered-stations">
+<h3>Plot the filtered stations<a class="headerlink" href="#plot-the-filtered-stations" title="Link to this heading">#</a></h3>
+<p>Visualize location of snow stations</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There are&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">catchment_stations</span><span class="o">.</span><span class="n">Name</span><span class="p">)),</span> <span class="s2">&quot;unique stations within our catchment area of interest&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong><em>Quick Hint: Remember the number of stations within the catchment for the final quiz exercise</em></strong></p>
+</section>
+<section id="convert-snow-depth-to-snow-presence">
+<h3>Convert snow depth to snow presence<a class="headerlink" href="#convert-snow-depth-to-snow-presence" title="Link to this heading">#</a></h3>
+<p>The stations are measuring snow depth. We only need the binary information on the presence of snow (yes, no). We use the <code class="docutils literal notranslate"><span class="pre">binarize_snow()</span></code>  function from <code class="docutils literal notranslate"><span class="pre">_32_openeo_utilities.py</span></code> to assign 0 for now snow and 1 for snow in the <strong>snow_presence</strong> column.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">catchment_stations</span> <span class="o">=</span> <span class="n">catchment_stations</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">snow_presence</span><span class="o">=</span><span class="n">catchment_stations</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">binarize_snow</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">catchment_stations</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="save-the-pre-processed-snow-station-measurements">
+<h3>Save the pre-processed snow station measurements<a class="headerlink" href="#save-the-pre-processed-snow-station-measurements" title="Link to this heading">#</a></h3>
+<p>Save snow stations within catchment as GeoJSON</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;32_results/catchment_stations.geojson&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">catchment_stations</span><span class="o">.</span><span class="n">to_json</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="extract-sca-from-the-data-cube-per-station">
+<h2>Extract SCA from the data cube per station<a class="headerlink" href="#extract-sca-from-the-data-cube-per-station" title="Link to this heading">#</a></h2>
+<section id="prepare-snow-station-data-for-usage-in-openeo">
+<h3>Prepare snow station data for usage in openEO<a class="headerlink" href="#prepare-snow-station-data-for-usage-in-openeo" title="Link to this heading">#</a></h3>
+<p>Create a buffer of approximately 80 meters (0.00075 degrees) around snow stations and visualize them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">catchment_stations_gpd</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;32_results/catchment_stations.geojson&quot;</span><span class="p">)</span>
+<span class="n">mappy</span> <span class="o">=</span> <span class="n">leafmap</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="n">center</span><span class="p">,</span> <span class="n">zoom</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">mappy</span><span class="o">.</span><span class="n">add_vector</span><span class="p">(</span><span class="s1">&#39;32_data/catchment_outline.geojson&#39;</span><span class="p">,</span> <span class="n">layer_name</span><span class="o">=</span><span class="s2">&quot;catchment&quot;</span><span class="p">)</span>
+<span class="n">mappy</span><span class="o">.</span><span class="n">add_gdf</span><span class="p">(</span><span class="n">catchment_stations_gpd</span><span class="p">,</span> <span class="n">layer_name</span><span class="o">=</span><span class="s2">&quot;catchment_station&quot;</span><span class="p">)</span>
+
+<span class="n">catchment_stations_gpd</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">catchment_stations_gpd</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mf">0.00075</span><span class="p">)</span>
+<span class="n">mappy</span><span class="o">.</span><span class="n">add_gdf</span><span class="p">(</span><span class="n">catchment_stations_gpd</span><span class="p">,</span> <span class="n">layer_name</span><span class="o">=</span><span class="s2">&quot;catchment_station_buffer&quot;</span><span class="p">)</span>
+<span class="n">mappy</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Convert the unique geometries to Feature Collection to be used in a openEO process.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">catchment_stations_fc</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span>
+    <span class="n">catchment_stations_gpd</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id1">
+<h3>Extract SCA from the data cube per station<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>We exgtract the SCA value of our data cube at the buffered station locations. Therefore we use the process <code class="docutils literal notranslate"><span class="pre">aggregate_spatial()</span></code> with the aggregation method <code class="docutils literal notranslate"><span class="pre">median()</span></code>. This gives us the most common value in the buffer (snow or snowfree).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snowmap_per_station</span><span class="o">=</span> <span class="n">snow_map_cloud_free</span><span class="o">.</span><span class="n">aggregate_spatial</span><span class="p">(</span><span class="n">catchment_stations_fc</span><span class="p">,</span> <span class="n">reducer</span><span class="o">=</span><span class="s2">&quot;median&quot;</span><span class="p">)</span>
+<span class="n">snowmap_per_station</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Create a batch job on the cloud platform. And start it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snowmap_cloudfree_json</span> <span class="o">=</span> <span class="n">snowmap_per_station</span><span class="o">.</span><span class="n">save_result</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;JSON&quot;</span><span class="p">)</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">snowmap_cloudfree_json</span><span class="o">.</span><span class="n">create_job</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;snow_map&quot;</span><span class="p">)</span>
+<span class="n">job</span><span class="o">.</span><span class="n">start_and_wait</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Check the status of the job. And download once it’s finished.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">job</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">job</span><span class="o">.</span><span class="n">status</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;finished&quot;</span><span class="p">:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">get_results</span><span class="p">()</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">download_files</span><span class="p">(</span><span class="s2">&quot;32_results/snowmap/&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Open the snow covered area time series extracted at the stations. We’ll have a look at it in a second.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;32_results/snowmap/timeseries.json&quot;</span><span class="p">,</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">snow_time_series</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="combine-station-measurements-and-the-extracted-sca-from-our-data-cube">
+<h2>Combine station measurements and the extracted SCA from our data cube<a class="headerlink" href="#combine-station-measurements-and-the-extracted-sca-from-our-data-cube" title="Link to this heading">#</a></h2>
+<p>The <strong>station measurements</strong> are <strong>daily</strong> and all of the stations are combined in <strong>one csv file</strong>.
+The <strong>extracted SCA values</strong> are in the best case <strong>six-daily</strong> (Sentinel-2 repeat rate) and also all stations are in <strong>one json file</strong>.
+We will need to join the the extracted SCA with the station measurements by station (and time (selecting the corresponding time steps)</p>
+<section id="extract-snow-values-from-sca-extracted-at-the-station-location">
+<h3>Extract snow values from SCA extracted at the station location<a class="headerlink" href="#extract-snow-values-from-sca-extracted-at-the-station-location" title="Link to this heading">#</a></h3>
+<p>Let’s have a look at the data structure first</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dates</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">snow_time_series</span><span class="p">]</span>
+<span class="n">snow_val_smartino</span> <span class="o">=</span> <span class="p">[</span><span class="n">snow_time_series</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">snow_time_series</span><span class="p">]</span>
+<span class="n">snow_val_rifiano</span> <span class="o">=</span> <span class="p">[</span><span class="n">snow_time_series</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">snow_time_series</span><span class="p">]</span>
+<span class="n">snow_val_plata</span> <span class="o">=</span> <span class="p">[</span><span class="n">snow_time_series</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">snow_time_series</span><span class="p">]</span>
+<span class="n">snow_val_sleonardo</span> <span class="o">=</span> <span class="p">[</span><span class="n">snow_time_series</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">3</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">snow_time_series</span><span class="p">]</span>
+<span class="n">snow_val_scena</span> <span class="o">=</span> <span class="p">[</span><span class="n">snow_time_series</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">4</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">snow_time_series</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="match-in-situ-measurements-to-dates-in-sca">
+<h3>Match in-situ measurements to dates in SCA<a class="headerlink" href="#match-in-situ-measurements-to-dates-in-sca" title="Link to this heading">#</a></h3>
+<p>Let’s have a look at the in-situ measurement data set.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">catchment_stations_gpd</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We are going to extract each station and keep only the dates that are available in the SCA results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">catchment_stations_gpd_smartino</span> <span class="o">=</span> <span class="n">catchment_stations_gpd</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;Name == &#39;S_Martino_in_Passiria_Osservatore&#39;&quot;</span><span class="p">)</span>
+<span class="n">catchment_stations_gpd_smartino</span> <span class="o">=</span> <span class="n">catchment_stations_gpd_smartino</span><span class="p">[</span>
+    <span class="n">catchment_stations_gpd_smartino</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">catchment_stations_gpd_rifiano</span> <span class="o">=</span> <span class="n">catchment_stations_gpd</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;Name == &#39;Rifiano_Beobachter&#39;&quot;</span><span class="p">)</span>
+<span class="n">catchment_stations_gpd_rifiano</span> <span class="o">=</span> <span class="n">catchment_stations_gpd_rifiano</span><span class="p">[</span>
+    <span class="n">catchment_stations_gpd_rifiano</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">catchment_stations_gpd_plata</span> <span class="o">=</span> <span class="n">catchment_stations_gpd</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;Name == &#39;Plata_Osservatore&#39;&quot;</span><span class="p">)</span>
+<span class="n">catchment_stations_gpd_plata</span> <span class="o">=</span> <span class="n">catchment_stations_gpd_plata</span><span class="p">[</span>
+    <span class="n">catchment_stations_gpd_plata</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">catchment_stations_gpd_sleonardo</span> <span class="o">=</span> <span class="n">catchment_stations_gpd</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;Name == &#39;S_Leonardo_in_Passiria_Osservatore&#39;&quot;</span><span class="p">)</span>
+<span class="n">catchment_stations_gpd_sleonardo</span> <span class="o">=</span> <span class="n">catchment_stations_gpd_sleonardo</span><span class="p">[</span>
+    <span class="n">catchment_stations_gpd_sleonardo</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">catchment_stations_gpd_scena</span> <span class="o">=</span> <span class="n">catchment_stations_gpd</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;Name == &#39;Scena_Osservatore&#39;&quot;</span><span class="p">)</span>
+<span class="n">catchment_stations_gpd_scena</span> <span class="o">=</span> <span class="n">catchment_stations_gpd_scena</span><span class="p">[</span>
+    <span class="n">catchment_stations_gpd_scena</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="combine-in-situ-measurements-with-sca-results-at-the-stations">
+<h3>Combine in-situ measurements with SCA results at the stations<a class="headerlink" href="#combine-in-situ-measurements-with-sca-results-at-the-stations" title="Link to this heading">#</a></h3>
+<p>The in situ measurements and the SCA are combined into one data set per station. This will be the basis for the validation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">smartino_snow</span> <span class="o">=</span> <span class="n">assign_site_snow</span><span class="p">(</span><span class="n">catchment_stations_gpd_smartino</span><span class="p">,</span> <span class="n">snow_val_smartino</span><span class="p">)</span>
+<span class="n">rifiano_snow</span> <span class="o">=</span> <span class="n">assign_site_snow</span><span class="p">(</span><span class="n">catchment_stations_gpd_rifiano</span><span class="p">,</span> <span class="n">snow_val_rifiano</span><span class="p">)</span>
+<span class="n">plata_snow</span> <span class="o">=</span> <span class="n">assign_site_snow</span><span class="p">(</span><span class="n">catchment_stations_gpd_plata</span><span class="p">,</span> <span class="n">snow_val_plata</span><span class="p">)</span>
+<span class="n">sleonardo_snow</span> <span class="o">=</span> <span class="n">assign_site_snow</span><span class="p">(</span><span class="n">catchment_stations_gpd_sleonardo</span><span class="p">,</span> <span class="n">snow_val_sleonardo</span><span class="p">)</span>
+<span class="n">scena_snow</span> <span class="o">=</span> <span class="n">assign_site_snow</span><span class="p">(</span><span class="n">catchment_stations_gpd_scena</span><span class="p">,</span> <span class="n">snow_val_scena</span><span class="p">)</span>                                                                    
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s have a look at the SCA extracted at the station Plata Osservatore and it’s in situ measurements.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">catchment_stations_gpd_plata</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Display snow presence threshold in in-situ data for Plato Osservatore</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">catchment_stations_gpd_plata</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;HS_after_gapfill&quot;</span><span class="p">,</span><span class="n">rot</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;line&quot;</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="validate-the-sca-results-with-the-snow-station-measurements">
+<h2>Validate the SCA results with the snow station measurements<a class="headerlink" href="#validate-the-sca-results-with-the-snow-station-measurements" title="Link to this heading">#</a></h2>
+<p>Now that we have combined the SCA results with the snow station measurements we can start the actual validation. A <strong>confusion matrix</strong> compares the classes of the station data to the classes of the SCA result. The numbers can be used to calculate the accuracy (correctly classified cases / all cases).</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>no_snow</p></th>
+<th class="head"><p>snow</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>no_snow</strong></p></td>
+<td><p>correct</p></td>
+<td><p>error</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>snow</strong></p></td>
+<td><p>error</p></td>
+<td><p>correct</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plata_snow</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validation_metrics</span><span class="p">(</span><span class="n">smartino_snow</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">((</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">),</span> <span class="p">(</span><span class="n">ax3</span><span class="p">,</span> <span class="n">ax4</span><span class="p">))</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Error matrices for snow stations within our selected Catchment&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">validation_metrics</span><span class="p">(</span><span class="n">smartino_snow</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Purples&quot;</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">xticklabels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;No Snow&quot;</span><span class="p">,</span> <span class="s2">&quot;Snow&quot;</span><span class="p">],</span> <span class="n">yticklabels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;No Snow&quot;</span><span class="p">,</span> <span class="s2">&quot;Snow&quot;</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;San Martino in Passiria Osservatore&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Predicted label&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;True label&quot;</span><span class="p">)</span>
+
+
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">validation_metrics</span><span class="p">(</span><span class="n">rifiano_snow</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Greens&quot;</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">xticklabels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;No Snow&quot;</span><span class="p">,</span> <span class="s2">&quot;Snow&quot;</span><span class="p">],</span> <span class="n">yticklabels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;No Snow&quot;</span><span class="p">,</span> <span class="s2">&quot;Snow&quot;</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Rifiano Beobachter&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Predicted label&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;True label&quot;</span><span class="p">)</span>
+
+
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">validation_metrics</span><span class="p">(</span><span class="n">plata_snow</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Oranges&quot;</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">xticklabels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;No Snow&quot;</span><span class="p">,</span> <span class="s2">&quot;Snow&quot;</span><span class="p">],</span> <span class="n">yticklabels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;No Snow&quot;</span><span class="p">,</span> <span class="s2">&quot;Snow&quot;</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax3</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Plata Osservatore&quot;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Predicted label&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;True label&quot;</span><span class="p">)</span>
+
+
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">validation_metrics</span><span class="p">(</span><span class="n">scena_snow</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Reds&quot;</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">xticklabels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;No Snow&quot;</span><span class="p">,</span> <span class="s2">&quot;Snow&quot;</span><span class="p">],</span> <span class="n">yticklabels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;No Snow&quot;</span><span class="p">,</span> <span class="s2">&quot;Snow&quot;</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax4</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Scena Osservatore&quot;</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Predicted label&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;True label&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <strong>accuracy</strong> of the snow estimate from the satellite image computation for each station is shown below:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>On-site snow station</strong></p></th>
+<th class="head"><p><strong>Accuracy</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>San Martino in Passiria Osservatore</p></td>
+<td><p><strong>100.00%</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Rifiano Beobachter</p></td>
+<td><p><strong>100.00%</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Plata Osservatore</p></td>
+<td><p>82.61%</p></td>
+</tr>
+<tr class="row-odd"><td><p>San Leonardo in Passiria Osservatore</p></td>
+<td><p>NaN</p></td>
+</tr>
+<tr class="row-even"><td><p>Scena Osservatore</p></td>
+<td><p>96.15%</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The foruth station <strong>San Leonardo in Passiria Osservatore</strong> recorded <strong><em>NaNs</em></strong> for snow depths for our selected dates, which could potentially be as a results of malfunctioning on-site equipments. Hence, we are not able to verify for it. But overall, the validation shows a 100% accuracy for stations <strong>San Martino in Passiria Osservatore</strong> and <strong>Rifiano Beobachter</strong>, while stations <strong>Plata Osservatore</strong> and <strong>Scena Osservatore</strong> have a more False Positive than the other stations. This shows a good match between estimated snow values from satellite datasets and on-the ground measurements of the presence of snow.</p>
+</section>
+<section id="compare-to-discharge-data">
+<h2>Compare to discharge data<a class="headerlink" href="#compare-to-discharge-data" title="Link to this heading">#</a></h2>
+<p>In addition to computing metrics for validating the data, we also check the plausibility of our results. We compare our results with another measure with a known relationship. In this case, we compare the <strong>snow cover area</strong> time series with the <strong>discharge</strong> time-series at the main outlet of the catchment. We suspect that after snow melting starts, with a temporal lag, the runoff will increase. Let’s see if this holds true.</p>
+<p>Load the discharge data at Meran, the main outlet of the catchment. We have prepared this data set for you, it’s extracted from Eurac’s <a class="reference external" href="https://edp-portal.eurac.edu/discovery/9e195271-02ae-40be-b3a7-525f57f53c80">Environmental Data Platform Alpine Drought Observatory Discharge Hydrological Datasets</a>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">discharge_ds</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;32_data/ADO_DSC_ITH1_0025.csv&#39;</span><span class="p">,</span> 
+                           <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;Time&#39;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">discharge_ds</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Load the SCA time series we have generated in a previous exercise. It’s the time series of the aggregated snow cover area percentage for the whole catchment.  <strong>Please note: you need to complete the 3.1 exercise before proceeding!</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snow_perc_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../../3.1_data_processing/exercises/31_results/filtered_snow_fraction_pangeo.csv&quot;</span><span class="p">,</span> 
+                          <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s plot the relationship between the snow covered area and the discharge in the catchment.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start_date</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">end_date</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="c1"># filter discharge data to start and end dates</span>
+<span class="n">discharge_ds</span> <span class="o">=</span> <span class="n">discharge_ds</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">start_date</span><span class="p">:</span><span class="n">end_date</span><span class="p">]</span>
+
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">discharge_ds</span><span class="o">.</span><span class="n">discharge_m3_s</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Discharge&#39;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Discharge (m$^3$/s)&#39;</span><span class="p">)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">snow_perc_df</span><span class="p">[</span><span class="s2">&quot;perc_snow&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">secondary_y</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;SCA&#39;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Snow cover area (%)&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">))</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The relationship looks as expected! Once the snow cover decreases the runoff increases!</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "conda-env-cubes-and-clouds-cubes-and-clouds-new-py"
+        },
+        kernelOptions: {
+            name: "conda-env-cubes-and-clouds-cubes-and-clouds-new-py",
+            path: "./3.2_validation/exercises"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'conda-env-cubes-and-clouds-cubes-and-clouds-new-py'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libraries">Libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#login">Login</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#region-of-interest">Region of Interest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-datacube-of-snowmap">Generate Datacube of Snowmap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-snow-station-in-situ-data">Load snow-station in-situ data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-process-and-filter-in-situ-snow-station-measurements">Pre-process and filter <em>in-situ</em> snow station measurements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-temporally">Filter Temporally</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-spatially">Filter Spatially</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-filtered-stations">Plot the filtered stations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-snow-depth-to-snow-presence">Convert snow depth to snow presence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#save-the-pre-processed-snow-station-measurements">Save the pre-processed snow station measurements</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-sca-from-the-data-cube-per-station">Extract SCA from the data cube per station</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-snow-station-data-for-usage-in-openeo">Prepare snow station data for usage in openEO</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Extract SCA from the data cube per station</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combine-station-measurements-and-the-extracted-sca-from-our-data-cube">Combine station measurements and the extracted SCA from our data cube</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-snow-values-from-sca-extracted-at-the-station-location">Extract snow values from SCA extracted at the station location</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#match-in-situ-measurements-to-dates-in-sca">Match in-situ measurements to dates in SCA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combine-in-situ-measurements-with-sca-results-at-the-stations">Combine in-situ measurements with SCA results at the stations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-the-sca-results-with-the-snow-station-measurements">Validate the SCA results with the snow station measurements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-to-discharge-data">Compare to discharge data</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By ESA
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

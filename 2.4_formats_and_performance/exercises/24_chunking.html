@@ -1,0 +1,938 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.4 Data chunking with Pangeo &#8212; Cubes &amp; Clouds - Cloud Native Open Data Sciences for Earth Observation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '2.4_formats_and_performance/exercises/24_chunking';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    Lectures
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setup</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../0_introduction/0_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../0_introduction/exercises/0_login.html">0. Introduction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../1.1_intro_platform/1.1_intro_platform.html">Earth Observation cloud platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../1.2_data_cube/1.2_data_cube.html">What is a data cube?</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../1.3_openscience/1.3.1_openscienceandfair.html">Open Science and the FAIR Principles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../1.3_openscience/1.3.3_openscienceineo.html">The Open Science Journey - Open Science in geospatial, EO and EO cloud platforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1.3_openscience/1.3.2_opendataopensource.html">Open Data and Open Source Software</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Discovery and metadata</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../2.1_data_discovery/2.1_data_discovery.html">Data Discovery</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../2.2_data_properties/2.2_data_properties.html">Data Properties</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data access with OpenEO</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../2.3_data_access/2.3_data_access.html">Access EO Data from the Cloud</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data formats for achieving scalability</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.4_formats_and_performance.html">Data Formats and Performance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Process &amp; Share</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3.1_data_processing/3.1_data_processing.html">Data processing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3.2_validation/3.2_validation.html">Validation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3.3_data_sharing/3.3_data_sharing.html">Data sharing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional materials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../9.9_master_asi_conae/s2_sca.html">Sentinel-2 snow cover area (SCA) time series</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../9.9_master_asi_conae/test/s1.html">S1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../9.9_master_asi_conae/test/s2_snowcover_test.html">Sentinel-2 snow cover</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../9.9_master_asi_conae/test/test_s1_s3.html">Sentinel-1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../9.9_master_asi_conae/test/s3_ndsi.html">List all the available dataset</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds/issues/new?title=Issue%20on%20page%20%2F2.4_formats_and_performance/exercises/24_chunking.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/2.4_formats_and_performance/exercises/24_chunking.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2.4 Data chunking with Pangeo</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-chunking">Data chunking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#context">Context</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-libraries">Load Libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-sentinel-2-data">Load Sentinel-2 data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-chunk">What is a <strong>Chunk</strong>?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-chunks">Modifying chunks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-the-chunk-size-at-the-creation-with-xarray">Defining the chunk size at the creation with Xarray</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#so-why-chunks">So, why chunks?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chunks-and-files">Chunks and files</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zarr-storage-format">Zarr storage format</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading">Data Loading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ndvi-computation">NDVI computation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-clipping">Spatial clipping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-to-zarr">Save to Zarr</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-zarr-and-netcdf">Compare Zarr and netCDF</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zarr-format-main-characteristics">Zarr format main characteristics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p><img src="https://raw.githubusercontent.com/EO-College/cubes-and-clouds/main/icons/cnc_3icons_process_circle.svg"
+     alt="Cubes & Clouds logo"
+     style="float: center; margin-right: 10px;" /></p>
+<p><img src="https://raw.githubusercontent.com/pangeo-data/pangeo.io/refs/heads/main/public/Pangeo-assets/pangeo_logo.png"
+     alt="Pangeo logo"
+     style="float: center; margin-right: 10px;" /></p>
+<section class="tex2jax_ignore mathjax_ignore" id="data-chunking-with-pangeo">
+<h1>2.4 Data chunking with Pangeo<a class="headerlink" href="#data-chunking-with-pangeo" title="Link to this heading">#</a></h1>
+<section id="data-chunking">
+<h2>Data chunking<a class="headerlink" href="#data-chunking" title="Link to this heading">#</a></h2>
+<div class="alert alert-info">
+<i class="fa-question-circle fa" style="font-size: 22px;color:#666;"></i> <b>Overview</b>
+    <br>
+    <br>
+    <b>Questions</b>
+    <ul>
+        <li>What is chunking and why does it matter?</li>
+        <li>How can we utilize chunking to make our processing more efficient?</li>
+    </ul>
+    <b>Objectives</b>
+    <ul>
+        <li>Explore chunking of data</li>
+        <li>Learn about the Zarr file format</li>
+    </ul>
+</div></section>
+<section id="context">
+<h2>Context<a class="headerlink" href="#context" title="Link to this heading">#</a></h2>
+<p>As explained in Section 2.4 - Formats and Performance, when working with large data files or collections, it is often impractical to load the entire dataset into the memory of a single computer at once. This is where the Pangeo ecosystem is particularly useful. In Section 2.3 - Data Access, we discussed the concept of lazy loading. Xarray enables lazy processing of data in <strong>chunks</strong>, meaning the dataset is divided into manageable pieces. By reading and processing the data in these chunks, we can efficiently handle large datasets on a single computer or scale the processing to a distributed computing cluster using Dask (e.g., on the cloud or high-performance computing environments).</p>
+<p>How we process these chunks in a parallel environment to scale our computation vertically is discussed in <a class="reference internal" href="#./dask.ipynb"><span class="xref myst">2.4 dask</span></a>. In this notebook, you will explore the concept of chunks through various exercises.</p>
+<p>Processing data piece by piece is more efficient when both our input and output data are also stored in chunks. As introduced in Section 2.4 - Formats and Performance, <a class="reference external" href="https://zarr.readthedocs.io/en/stable/">Zarr</a> is a cloud-native data format and serves as the reference library in the Pangeo ecosystem for storing Xarray multi-dimensional datasets in <strong>chunks</strong>.</p>
+</section>
+<section id="data">
+<h2>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h2>
+<p>We’ll begin with the same sample data retrieval method from the Sentinel-2 STAC collection, as described in Exercise 2.3 - Data Access: Lazy Loading with Pangeo.</p>
+<p>The analysis will be similar to our previous exercises, but this time, we’ll use a larger spatial extent to demonstrate the scalability.</p>
+<p>We start by copying the data files needed to complete the exercise using the following shell commands</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cp<span class="w"> </span>-r<span class="w"> </span><span class="si">${</span><span class="nv">DATA_PATH</span><span class="p">%/*/*</span><span class="si">}</span>/notebooks/cubes-and-clouds/lectures/2.4_formats_and_performance/exercises/assets<span class="w"> </span><span class="nv">$HOME</span>/
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-libraries">
+<h2>Load Libraries<a class="headerlink" href="#load-libraries" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pystac_client</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">mapping</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">stackstac</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">rioxarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">rio</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-sentinel-2-data">
+<h2>Load Sentinel-2 data<a class="headerlink" href="#load-sentinel-2-data" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aoi</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;./assets/catchment_outline.geojson&#39;</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="s2">&quot;EPGS:4326&quot;</span><span class="p">)</span>
+<span class="n">aoi_geojson</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">(</span><span class="n">aoi</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">geometry</span><span class="p">)</span>
+<span class="n">URL</span> <span class="o">=</span> <span class="s2">&quot;https://earth-search.aws.element84.com/v1&quot;</span>
+<span class="n">catalog</span> <span class="o">=</span> <span class="n">pystac_client</span><span class="o">.</span><span class="n">Client</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">URL</span><span class="p">)</span>
+<span class="n">items</span> <span class="o">=</span> <span class="n">catalog</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">intersects</span><span class="o">=</span><span class="n">aoi_geojson</span><span class="p">,</span>
+    <span class="n">collections</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;sentinel-2-l2a&quot;</span><span class="p">],</span>
+    <span class="n">datetime</span><span class="o">=</span><span class="s2">&quot;2019-02-01/2019-04-28&quot;</span><span class="p">,</span>
+    <span class="n">query</span><span class="o">=</span> <span class="p">{</span><span class="s2">&quot;proj:epsg&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="mi">32632</span><span class="p">)}</span>
+<span class="p">)</span><span class="o">.</span><span class="n">item_collection</span><span class="p">()</span>
+<span class="n">sentinel2_l2a</span> <span class="o">=</span> <span class="n">stackstac</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+<span class="n">sentinel2_l2a</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="what-is-a-chunk">
+<h2>What is a <strong>Chunk</strong>?<a class="headerlink" href="#what-is-a-chunk" title="Link to this heading">#</a></h2>
+<p>If you closely examine the <code class="docutils literal notranslate"><span class="pre">sentinel2_l2a</span></code> dataset, you’ll notice that the <code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code> is backed by a <code class="docutils literal notranslate"><span class="pre">dask.array</span></code> with a chunk size of <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">1,</span> <span class="pre">1024,</span> <span class="pre">1024)</span></code>. The full dataset consists of arrays with dimensions <code class="docutils literal notranslate"><span class="pre">(101,</span> <span class="pre">32,</span> <span class="pre">20982,</span> <span class="pre">10980)</span></code>, totaling 746,592 chunks, which amounts to 5.42 TiB of data loaded into the computer’s RAM.</p>
+<p>You can view the <code class="docutils literal notranslate"><span class="pre">dask.array</span></code> information by clicking the blue-circled icon in the image below.</p>
+<p><img alt="Dask.array" src="https://raw.githubusercontent.com/EO-College/cubes-and-clouds/refs/heads/main/lectures/2.4_formats_and_performance/exercises/assets/datasize.png" /></p>
+<p>By clicking the red-circled triangle icon, you’ll see detailed information about the <code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code>, including its Coordinates, Indexes, and Attributes.</p>
+<p>When creating an <code class="docutils literal notranslate"><span class="pre">Xarray</span></code> object using <code class="docutils literal notranslate"><span class="pre">stackstac</span></code>, we can easily convert a STAC collection into a lazily-loaded, chunked <code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code> backed by Dask.</p>
+<p>The size and shape of the chunks determine the level of parallelization performed by Dask. Therefore, selecting an appropriate chunk size can significantly impact the performance of your computation.</p>
+<p>This is where understanding and effectively using chunking becomes crucial.</p>
+<p>In our case, for the moment, we used <code class="docutils literal notranslate"><span class="pre">stackstac</span></code> without specifying the ‘chunk’ explicitly. The dataset is composed of 8 MiB chunks, each containing 1 time step, 1 band, and a resolution of 1024 x 1024 in the x and y directions.</p>
+<p><img alt="chunk_original" src="https://raw.githubusercontent.com/EO-College/cubes-and-clouds/refs/heads/main/lectures/2.4_formats_and_performance/exercises/assets/chunk_original.png" /></p>
+<p>If the chunk size is too small, our workflow will be divided into too many tiny pieces, which can lead to excessive communication and increased distribution overhead.</p>
+<p>On the other hand, if the chunk size is too large, there may not be enough memory available to handle the workload, causing the workflow to fail.</p>
+<p>The optimal chunk size depends on both your computation and the machine you’re using.</p>
+<p>For example, 8 MiB is relatively small compared to the typical RAM size available. Dask’s default array chunk size, for instance, is 128 MiB.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">dask</span>
+<span class="n">dask</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;array.chunk-size&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="modifying-chunks">
+<h2>Modifying chunks<a class="headerlink" href="#modifying-chunks" title="Link to this heading">#</a></h2>
+<p>Let’s try to modify our chunk size.</p>
+<p>To modify chunks on your existing <code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code> we can use the <code class="docutils literal notranslate"><span class="pre">chunk</span></code> method.
+We know that we only need 2 bands to compute the Normalized Difference Vegetation Index (NDVI) example, so we select only <code class="docutils literal notranslate"><span class="pre">red</span></code> and <code class="docutils literal notranslate"><span class="pre">nir</span></code> to simplify our example.</p>
+<p>We would like to have each time series separated in each chunk, then keep all band information on one chunk, and let dask to compute x and y coordinate’s chunk size.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">NDVI</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">red</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+    <span class="n">nir</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="s2">&quot;nir&quot;</span><span class="p">)</span>
+    <span class="n">ndvi</span> <span class="o">=</span> <span class="p">(</span><span class="n">nir</span> <span class="o">-</span> <span class="n">red</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">nir</span> <span class="o">+</span> <span class="n">red</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ndvi</span>
+
+<span class="n">ndvi_xr</span> <span class="o">=</span> <span class="n">NDVI</span><span class="p">(</span><span class="n">sentinel2_l2a</span><span class="p">)</span>
+<span class="n">ndvi_xr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sentinel2_l2a</span> <span class="o">=</span> <span class="n">sentinel2_l2a</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span>
+    <span class="n">band</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="s1">&#39;nir&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">chunk</span><span class="p">(</span>
+    <span class="n">chunks</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;band&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="s1">&#39;auto&#39;</span><span class="p">})</span>
+<span class="n">sentinel2_l2a</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you look into the details of any variable in the representation above, you’ll see that each x and y coordinate’s chunk is bigger, and we have less chunks than the example before.</p>
+<p>Note here from the chunk size, the auto option computed the optimal chunk size for y and x if we want to keep the chunk size of time and band as 1 and 2 respectively.</p>
+<div class="alert alert-warning">
+    <i class="fa-check-circle fa" style="font-size: 22px;color:#666;"></i> <b>Go Further</b>
+    <br>
+    <br>
+    You can try to apply different ways for specifying chunk.
+    <ul>
+        <li> chunks = -1 -> the entire array will be used as a single chunk
+        <li> chunks = {'x':-1, 'y': 1000} -> chunks of entire _x_ dimension, but splitted every 1000 values on _y_ dimension</li>
+        <li> chunks = {'x':-1, 'y': 'auto'} -> Xarray relies on Dask to use an ideal size according to the preferred chunk sizes for _y_ dimension</li>
+        <li> chunks = { 'x':-1 ,'y':"500MiB" } -> Xarray seeks the size according to a specific memory target expressed in MiB</li>
+        <li> chunks = ( 1, 3, 12048,2048) -> Specifying chunk size in the order of dimension. </li>
+    </ul>
+</div></section>
+<section id="defining-the-chunk-size-at-the-creation-with-xarray">
+<h2>Defining the chunk size at the creation with Xarray<a class="headerlink" href="#defining-the-chunk-size-at-the-creation-with-xarray" title="Link to this heading">#</a></h2>
+<p>We can define the chunk size when we create the object.<br />
+This is usually done with Xarray using the <code class="docutils literal notranslate"><span class="pre">chunks</span></code> kwarg when opening a file with <code class="docutils literal notranslate"><span class="pre">xr.open_dataset</span></code> or with <code class="docutils literal notranslate"><span class="pre">xr.open_mfdataset</span></code>, if you create Xarray from your local file.</p>
+<p>In our NDVI example, we create Xarray from <code class="docutils literal notranslate"><span class="pre">stackstac</span></code>. As <code class="docutils literal notranslate"><span class="pre">stackstac</span></code>’s default ‘chunksize’ definition is 1024 for the x and y dimensions, we had that chunk size. We can pass the <code class="docutils literal notranslate"><span class="pre">chunksize</span></code> option to <code class="docutils literal notranslate"><span class="pre">stackstac</span></code> and make it larger.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">sentinel2_l2a</span> <span class="o">=</span> <span class="n">stackstac</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">items</span><span class="p">,</span>
+                                <span class="n">assets</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="s1">&#39;nir&#39;</span><span class="p">],</span>
+                                <span class="n">chunksize</span><span class="o">=</span><span class="p">(</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2048</span><span class="p">,</span><span class="mi">2048</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">sentinel2_l2a</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="so-why-chunks">
+<h2>So, why chunks?<a class="headerlink" href="#so-why-chunks" title="Link to this heading">#</a></h2>
+<p>As explained in <strong>Section 2.4 - Formats and Performance</strong>, chunks are mandatory for accessing files or datasets that are larger than a single computer’s memory. If all the data has to be accessed, it can be done sequentially (i.e., chunks are processed one after the other).</p>
+<p>Moreover, chunks allow for distributed processing and increased speed for your data analysis, as seen in the next section.</p>
+<section id="chunks-and-files">
+<h3>Chunks and files<a class="headerlink" href="#chunks-and-files" title="Link to this heading">#</a></h3>
+<p>Xarray chunking capabilities also depend on the underlying input or output file format used. Most modern file formats allow datasets or single files to be stored using chunks. For example, <strong>NetCDF4</strong> uses chunks when storing a file on the disk via HDF5. Any read of data from a NetCDF4 file will load at least one chunk of that file. So when reading one of its chunks as defined in the <code class="docutils literal notranslate"><span class="pre">open_dataset</span></code> call, Xarray will take advantage of native file chunking and won’t need to read the entire file.</p>
+<p>However, it is important to note that <strong>Xarray chunks and file chunks are not necessarily the same</strong>. It is a good practice to configure Xarray chunks so that they align well with the input file format chunks (ideally, Xarray chunks should contain one or several input file chunks).</p>
+</section>
+</section>
+<section id="zarr-storage-format">
+<h2>Zarr storage format<a class="headerlink" href="#zarr-storage-format" title="Link to this heading">#</a></h2>
+<p>This brings us to our next subject: <a class="reference external" href="https://zarr.readthedocs.io/en/stable/">Zarr</a>.</p>
+<p>If we can have our original dataset already ‘chunked’ and accessed in an optimized way according to its actual byte storage on disk, we won’t need to load the entire dataset every time. This can greatly optimize our data analysis, even when working with the entire dataset.</p>
+<p>Let’s convert our intermediate data into Zarr format so that we can learn what it is. We can keep the data as a <code class="docutils literal notranslate"><span class="pre">DataArray</span></code> or convert it into a <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> before storing it.</p>
+<p>We start again by loading data using <code class="docutils literal notranslate"><span class="pre">stackstac</span></code>, but this time, we proceed to the next step: clipping the data and computing the NDVI. Then, let’s try to save those intermediate results in a Zarr file.</p>
+</section>
+<section id="data-loading">
+<h2>Data Loading<a class="headerlink" href="#data-loading" title="Link to this heading">#</a></h2>
+<p>Load data using stackstac (with specific chunk size)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aoi</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;./assets/catchment_outline.geojson&quot;</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="s2">&quot;EPGS:4326&quot;</span><span class="p">)</span>
+<span class="n">aoi_geojson</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">(</span><span class="n">aoi</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">geometry</span><span class="p">)</span>
+<span class="n">URL</span> <span class="o">=</span> <span class="s2">&quot;https://earth-search.aws.element84.com/v1&quot;</span>
+<span class="n">catalog</span> <span class="o">=</span> <span class="n">pystac_client</span><span class="o">.</span><span class="n">Client</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">URL</span><span class="p">)</span>
+<span class="n">items</span> <span class="o">=</span> <span class="n">catalog</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">intersects</span><span class="o">=</span><span class="n">aoi_geojson</span><span class="p">,</span>
+    <span class="n">collections</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;sentinel-2-l2a&quot;</span><span class="p">],</span>
+    <span class="n">datetime</span><span class="o">=</span><span class="s2">&quot;2019-02-01/2019-04-28&quot;</span><span class="p">,</span>
+    <span class="n">query</span><span class="o">=</span> <span class="p">{</span><span class="s2">&quot;proj:epsg&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="mi">32632</span><span class="p">)}</span>
+<span class="p">)</span><span class="o">.</span><span class="n">item_collection</span><span class="p">()</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">stackstac</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">items</span><span class="p">,</span>
+                     <span class="n">assets</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="s1">&#39;nir&#39;</span><span class="p">],</span>
+                     <span class="n">chunksize</span><span class="o">=</span><span class="p">(</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span><span class="mi">1024</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ndvi-computation">
+<h2>NDVI computation<a class="headerlink" href="#ndvi-computation" title="Link to this heading">#</a></h2>
+<p>Compute the NDVI as in 2.3 Data Access - Reduce</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">NDVI</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">red</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+    <span class="n">nir</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="s2">&quot;nir&quot;</span><span class="p">)</span>
+    <span class="n">ndvi</span> <span class="o">=</span> <span class="p">(</span><span class="n">nir</span> <span class="o">-</span> <span class="n">red</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">nir</span> <span class="o">+</span> <span class="n">red</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ndvi</span>
+
+<span class="n">ndvi_xr</span> <span class="o">=</span> <span class="n">NDVI</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="spatial-clipping">
+<h2>Spatial clipping<a class="headerlink" href="#spatial-clipping" title="Link to this heading">#</a></h2>
+<p>Restrict the data to the area of interest from the loaded polygon</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aoi_utm32</span> <span class="o">=</span> <span class="n">aoi</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">32632</span><span class="p">)</span>
+<span class="n">geom_utm32</span> <span class="o">=</span> <span class="n">aoi_utm32</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span>
+<span class="n">ndvi_xr</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">write_crs</span><span class="p">(</span><span class="s2">&quot;EPSG:32632&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ndvi_xr</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">set_nodata</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ndvi_xr</span> <span class="o">=</span> <span class="n">ndvi_xr</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">clip</span><span class="p">([</span><span class="n">geom_utm32</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="save-to-zarr">
+<h2>Save to Zarr<a class="headerlink" href="#save-to-zarr" title="Link to this heading">#</a></h2>
+<p>Select just a few days, to reduce the amount of data for this example</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ndvi_small</span> <span class="o">=</span> <span class="n">ndvi_xr</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">ndvi_small</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Before saving, we can modify the chunk shape</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ndvi_small</span> <span class="o">=</span> <span class="n">ndvi_small</span><span class="o">.</span><span class="n">chunk</span><span class="p">(</span><span class="n">chunks</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="s1">&#39;auto&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">to_dataset</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+<span class="n">ndvi_small</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then clean attributes that might create issues while writing and save to Zarr</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">remove_attrs</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">to_remove</span><span class="p">):</span>
+    <span class="n">new</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">new</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">to_remove</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">new</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+    <span class="n">object_coords</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">coords</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">coord</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;O&quot;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">drop_vars</span><span class="p">(</span><span class="n">object_coords</span><span class="p">)</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">remove_attrs</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;spec&quot;</span><span class="p">,</span> <span class="s2">&quot;transform&quot;</span><span class="p">])</span>
+
+<span class="n">ndvi_small</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">encode</span><span class="p">)</span><span class="o">.</span><span class="n">to_zarr</span><span class="p">(</span><span class="s1">&#39;test.zarr&#39;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-warning">
+    <i class="fa-check-circle fa" style="font-size: 22px;color:#666;"></i> <b>Exercise</b>
+    <br>
+    <ul>
+        <li>What about saving the data in Netcdf format? `ls -la test.zarr` and  `ls -la test.zarr/nobs `</li>
+        <li>You can try to explore the zarr file you just created using `ls -la test.zarr` and  `ls -la test.zarr/nobs `</li>
+        <li>You can explore zarr metadata file by `cat test.zarr/.zmetadata` </li>
+        <li>Did you find the __chunks__ we defined previously in your zarr file? </li>
+    </ul>
+</div></section>
+<section id="compare-zarr-and-netcdf">
+<h2>Compare Zarr and netCDF<a class="headerlink" href="#compare-zarr-and-netcdf" title="Link to this heading">#</a></h2>
+<p>Lets compare how the zarr and NetCDF files are stored.<br />
+We read our sample dataset from Zarr and store it as netCDF:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xr</span><span class="o">.</span><span class="n">open_zarr</span><span class="p">(</span><span class="s1">&#39;test.zarr&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="s1">&#39;test.nc&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Compare the disk space used by the two formats:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>du<span class="w"> </span>-sh<span class="w"> </span>test.zarr/<span class="w"> </span>test.nc
+</pre></div>
+</div>
+</div>
+</div>
+<p>List the content of the Zarr directory:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>ls<span class="w">  </span>-la<span class="w"> </span>test.zarr/
+</pre></div>
+</div>
+</div>
+</div>
+<p>List the content of the Zarr data directory:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>ls<span class="w">  </span>-la<span class="w"> </span>test.zarr/data
+</pre></div>
+</div>
+</div>
+</div>
+<p>Print the content of the Zarr metadata file</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat<span class="w"> </span>test.zarr/.zmetadata<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">30</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="zarr-format-main-characteristics">
+<h3>Zarr format main characteristics<a class="headerlink" href="#zarr-format-main-characteristics" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Every chunk of a Zarr dataset is stored as a single file (see x.y files in <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-al</span> <span class="pre">test.zarr/data</span></code>)</p></li>
+<li><p>Each Data array in a Zarr dataset has a two unique files containing metadata:</p>
+<ul>
+<li><p>.zattrs for dataset or dataarray general metadatas</p></li>
+<li><p>.zarray indicating how the dataarray is chunked, and where to find them on disk or other storage.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>Understanding chunking is key to optimize your data analysis when dealing with large datasets. In this exercise, we learned how to optimize data access time and memory resources by using native file chunks loaded by stackstac and instructing Xarray to modify the chunk. Computing on large datasets can be very slow on a single machine, and to optimize your time we may need to parallelize your computations. This is what you will learn in the next exercise with Dask.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "conda-env-cubes-and-clouds-pangeo-py"
+        },
+        kernelOptions: {
+            name: "conda-env-cubes-and-clouds-pangeo-py",
+            path: "./2.4_formats_and_performance/exercises"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'conda-env-cubes-and-clouds-pangeo-py'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-chunking">Data chunking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#context">Context</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-libraries">Load Libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-sentinel-2-data">Load Sentinel-2 data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-chunk">What is a <strong>Chunk</strong>?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-chunks">Modifying chunks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-the-chunk-size-at-the-creation-with-xarray">Defining the chunk size at the creation with Xarray</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#so-why-chunks">So, why chunks?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chunks-and-files">Chunks and files</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zarr-storage-format">Zarr storage format</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading">Data Loading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ndvi-computation">NDVI computation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-clipping">Spatial clipping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-to-zarr">Save to Zarr</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-zarr-and-netcdf">Compare Zarr and netCDF</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zarr-format-main-characteristics">Zarr format main characteristics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By ESA
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
