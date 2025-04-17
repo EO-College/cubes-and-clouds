@@ -220,7 +220,7 @@ class EnergyConsumption:
 
 def calculate_emission_equivalents(
     file_path: str = "./emissions.csv",
-    template_path: str = "../energy.html",
+    template_path: str = "./assets/energy.html",
     experiment_id: int = None,
 ) -> None:
     """
