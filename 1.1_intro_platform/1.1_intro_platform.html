@@ -1,0 +1,777 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Earth Observation cloud platforms &#8212; Cubes &amp; Clouds - Cloud Native Open Data Sciences for Earth Observation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '1.1_intro_platform/1.1_intro_platform';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="What is a data cube?" href="../1.2_data_cube/1.2_data_cube.html" />
+    <link rel="prev" title="0. Introduction" href="../0_introduction/exercises/0_login.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Lectures
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setup</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../0_introduction/0_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../0_introduction/exercises/0_login.html">0. Introduction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Earth Observation cloud platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.2_data_cube/1.2_data_cube.html">What is a data cube?</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1.3_openscience/1.3.1_openscienceandfair.html">Open Science and the FAIR Principles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1.3_openscience/1.3.3_openscienceineo.html">The Open Science Journey - Open Science in geospatial, EO and EO cloud platforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1.3_openscience/1.3.2_opendataopensource.html">Open Data and Open Source Software</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Discovery and metadata</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.1_data_discovery/2.1_data_discovery.html">Data Discovery</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../2.2_data_properties/2.2_data_properties.html">Data Properties</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data access with OpenEO</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.3_data_access/2.3_data_access.html">Access EO Data from the Cloud</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data formats for achieving scalability</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.4_formats_and_performance/2.4_formats_and_performance.html">Data Formats and Performance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Process &amp; Share</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3.1_data_processing/3.1_data_processing.html">Data processing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3.2_validation/3.2_validation.html">Validation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3.3_data_sharing/3.3_data_sharing.html">Data sharing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional materials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../9.9_master_asi_conae/s2_sca.html">Sentinel-2 snow cover area (SCA) time series</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/s1.html">S1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/s2_snowcover_test.html">Sentinel-2 snow cover</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/test_s1_s3.html">Sentinel-1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../9.9_master_asi_conae/test/s3_ndsi.html">List all the available dataset</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds/issues/new?title=Issue%20on%20page%20%2F1.1_intro_platform/1.1_intro_platform.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/1.1_intro_platform/1.1_intro_platform.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Earth Observation cloud platforms</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-do-we-need-eo-cloud-platforms">Why do we need EO cloud platforms?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eo-data-volume-and-the-limits-of-your-computer">EO data volume and the limits of your computer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-we-handle-such-volumes-of-data">How can we handle such volumes of data?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-platforms">Types of platforms</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#infrastructure-providers">Infrastructure providers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#platform-providers">Platform providers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#components-of-platforms">Components of platforms</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#infrastructure-resource-tier">Infrastructure &amp; Resource Tier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#platform-tier">Platform Tier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploitation-tier">Exploitation Tier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-build-a-platform">Exercise: Build a platform</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">Quiz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further reading</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="earth-observation-cloud-platforms">
+<h1>Earth Observation cloud platforms<a class="headerlink" href="#earth-observation-cloud-platforms" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Understand why using a platform is useful</p></li>
+<li><p>Differentiate platform offerings</p></li>
+<li><p>Get to know the components and building blocks of a platform</p></li>
+</ul>
+</section>
+<section id="why-do-we-need-eo-cloud-platforms">
+<h2>Why do we need EO cloud platforms?<a class="headerlink" href="#why-do-we-need-eo-cloud-platforms" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://www.youtube.com/watch?v=S6wfn1mR3qk"><img alt="Introduction to EO Cloud Platforms" src="https://img.youtube.com/vi/S6wfn1mR3qk/0.jpg" /></a> <br></p>
+<blockquote>
+<div><p>Video content in cooperation with <a class="reference external" href="https://remotesensing.vito.be/team/jeroen-dries">Jeroen Dries</a> (VITO). <br>
+Numbers based on <a class="reference external" href="https://scihub.copernicus.eu/twiki/pub/SciHubWebPortal/AnnualReport2022/COPE-SERCO-RP-23-1493_SentinelDataAccessAnnual_Report_2022.pdf">ESA Annual Sentinel Data Access Report 2022</a> <br></p>
+</div></blockquote>
+<p>Traditional approaches for the analysis of Earth Observation (EO) data typically involve several steps, including data discovery, data download, data pre-processing, and data analysis. Especially when working with multiple datasets, handling data discovery, download, and access is a tremendous task, where users need to navigate through different interfaces, adhere to varying access requirements, and manage the heterogeneity of data formats. This approach is often time-consuming and requires significant effort to aggregate and harmonize datasets from different providers for comprehensive analysis.</p>
+<iframe src="https://create.eo-college.org/wp-admin/admin-ajax.php?action=h5p_embed&id=14" width="959" height="442" frameborder="0" allowfullscreen="allowfullscreen" title="Cubes&amp;Clouds: Platforms - No cloud"></iframe><script src="https://create.eo-college.org/wp-content/plugins/h5p/h5p-php-library/js/h5p-resizer.js" charset="UTF-8"></script>
+<blockquote>
+<div><p>Figure: EO research withouth cloud facilities.</p>
+</div></blockquote>
+<section id="eo-data-volume-and-the-limits-of-your-computer">
+<h3>EO data volume and the limits of your computer<a class="headerlink" href="#eo-data-volume-and-the-limits-of-your-computer" title="Link to this heading">#</a></h3>
+<p>In the field of Earth Observation, satellite missions like Sentinel-2 provide vast amounts of data that play a crucial role in various applications, including environmental monitoring, land cover mapping, and climate analysis. Understanding the volume of data involved in an analysis is critical for efficient data processing. EO datasets can span terabytes and petabytes, making it impractical to store, manage, and process them entirely on a local computer.</p>
+<p>The increasing availability of vast amounts of EO data from multiple satellites presents challenges in terms of the time required for data download and pre-processing on individual computers or infrastructures. Within the Copernicus program of the European Union, around 64 million products have been published, which sums up to more than 25 Petabyte of data volume. In the following slider we have collected some statistics about the amounts of EO data from the Sentinel satellites.</p>
+<iframe src="https://create.eo-college.org/wp-admin/admin-ajax.php?action=h5p_embed&id=17" width="959" height="606" frameborder="0" allowfullscreen="allowfullscreen" title="Cubes&amp;Clouds: EO data volume and the limits of your computer"></iframe><script src="https://create.eo-college.org/wp-content/plugins/h5p/h5p-php-library/js/h5p-resizer.js" charset="UTF-8"></script>
+<blockquote>
+<div><p>Figure: EO data volume and the limits of your computer.</p>
+</div></blockquote>
+<p>The following interactive exercise assists in estimating the data volume associated with Sentinel-2 data. This calculator allows users to gain insights into the data volumes involved in specific regions and time ranges, further emphasizing the relevance of using EO platforms for scientific analyses. Not convinced of clouds yet? Try the volume calculator below to asses how much space you have to free up on your hard drive for your next project.</p>
+<iframe title="Data Volume Calculator" width="900" height="300" src="https://cdn.eo-college.org/cubes-and-clouds/calculator.html" style="max-width: 100%; max-height: 176px;"> </iframe>
+</section>
+<section id="how-can-we-handle-such-volumes-of-data">
+<h3>How can we handle such volumes of data?<a class="headerlink" href="#how-can-we-handle-such-volumes-of-data" title="Link to this heading">#</a></h3>
+<p>Cloud infrastructure and platforms have emerged as viable alternatives to the traditional approach of data analyses as described in Figure “EO research without cloud facilities”. These solutions combine data storage and compute resources, enabling users to conduct their data analysis in close proximity to the data itself. By leveraging cloud-based infrastructures, researchers and analysts can optimize their workflow by minimizing the time-consuming steps of data transfer and pre-processing, thereby allowing them to focus more efficiently on data analysis tasks.</p>
+<p>By utilizing cloud-based resources, users can harness the scalability and flexibility of these platforms to handle the extensive datasets generated by EO missions. Cloud-based EO platforms represent a paradigm shift in EO data analysis, offering a comprehensive ecosystem that seamlessly integrates storage, processing, analysis tools, collaboration, and visualization. These platforms empower users to overcome the challenges posed by large-scale EO data and accelerate scientific advancements in various fields, including environmental monitoring, climate studies, natural resource management, and disaster response.</p>
+</section>
+</section>
+<section id="types-of-platforms">
+<h2>Types of platforms<a class="headerlink" href="#types-of-platforms" title="Link to this heading">#</a></h2>
+<p>Cloud-based EO infrastructures and platforms have emerged to meet the growing demand for efficient data processing, analysis, and visualization close to the data. We can distinguish between infrastructure providers and platform providers.</p>
+<section id="infrastructure-providers">
+<h3>Infrastructure providers<a class="headerlink" href="#infrastructure-providers" title="Link to this heading">#</a></h3>
+<p>EO-based infrastructure providers focus on offering the underlying infrastructure necessary for processing, storage, and dissemination of EO data. They provide the computing resources, storage capacity, and networking capabilities required to handle large-scale EO data processing and analysis. These providers often build and maintain data centers and server clusters, ensuring reliable and scalable infrastructure for EO applications.</p>
+<p>In comparison to the traditional approach (Figure “EO research without cloud facilities”), this approach allow users to use computing resources close to the EO data (see Figure “EO cloud providers”). Users do not need to download and manage EO data on their own, they can simply use what is already available on the infrastructure. However, there are no EO-specific services for data discovery, access, visualization, and analysis.</p>
+<iframe src="https://create.eo-college.org/wp-admin/admin-ajax.php?action=h5p_embed&id=15" width="959" height="442" frameborder="0" allowfullscreen="allowfullscreen" title="Cubes&amp;Clouds: Platforms - Cloud Providers"></iframe><script src="https://create.eo-college.org/wp-content/plugins/h5p/h5p-php-library/js/h5p-resizer.js" charset="UTF-8"></script>
+<blockquote>
+<div><p>Figure: EO cloud providers.</p>
+</div></blockquote>
+<p><strong>Examples of EO-based infrastructure providers</strong></p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://aws.amazon.com/">Amazon Web Services (AWS)</a>: AWS offers a wide range of cloud services, including storage (Amazon S3) and computing (Amazon EC2), which can be leveraged for EO data processing and storage. Various open data are available on AWS (<a class="reference external" href="https://registry.opendata.aws/">https://registry.opendata.aws/</a>).</p></li>
+<li><p><a class="reference external" href="https://cloud.google.com/">Google Cloud Platform (GCP)</a>: GCP provides infrastructure services like Google Cloud Storage and Google Compute Engine, which can be utilized for EO data management and analysis. Various open data are available on GCP (<a class="reference external" href="https://cloud.google.com/datasets">https://cloud.google.com/datasets</a>).</p></li>
+<li><p><a class="reference external" href="https://azure.microsoft.com">Microsoft Azure</a>: Azure offers cloud-based services such as Azure Storage, Azure Virtual Machines, and Azure Machine Learning, enabling EO applications and workflows.</p></li>
+<li><p><a class="reference external" href="https://open-telekom-cloud.com">Open Telekom Cloud</a>: Open Telekom Cloud is a cloud platform offered by Deutsche Telekom. It provides scalable infrastructure resources, including computing, storage, and networking capabilities, suitable for processing and storing large volumes of EO data.</p></li>
+<li><p><a class="reference external" href="https://cloudferro.com">Cloudferro</a>: Cloudferro is a cloud infrastructure provider specializing in geospatial data processing and analysis. They offer scalable and secure cloud resources optimized for EO applications. Cloudferro provides high-performance computing, storage, and networking services tailored for EO data processing workflows. Various open data are available on Cloudferro (<a class="reference external" href="https://cloudferro.com/en/eo-cloud/storage-big-data/">https://cloudferro.com/en/eo-cloud/storage-big-data/</a>).</p></li>
+</ol>
+</section>
+<section id="platform-providers">
+<h3>Platform providers<a class="headerlink" href="#platform-providers" title="Link to this heading">#</a></h3>
+<p>Platform providers focus on delivering comprehensive EO platforms that combine infrastructure, tools, and services into a cohesive environment. These platforms typically offer a suite of integrated capabilities, including data storage, processing, analysis, visualization, and collaboration tools. They provide a user-friendly interface and simplify the EO data lifecycle, enabling users to access, process, and analyze EO data without managing the underlying infrastructure.</p>
+<p>On top of providing the infrastructure which allows users to do the computations close to the EO data , making available a platform additionally enables the use of specific Application Programming Interfaces (APIs) for the discovery, access, visualization, exploitation, and analysis of EO data.  EO platforms are often made available on infrastructure providers to benefit from the EO data storage. Users of a platform can now use harmonized interfaces for all data, which is available on the platform.</p>
+<iframe src="https://create.eo-college.org/wp-admin/admin-ajax.php?action=h5p_embed&id=16" width="959" height="442" frameborder="0" allowfullscreen="allowfullscreen" title="Cubes&amp;Clouds: Platforms - Platform Providers"></iframe><script src="https://create.eo-college.org/wp-content/plugins/h5p/h5p-php-library/js/h5p-resizer.js" charset="UTF-8"></script>
+<blockquote>
+<div><p>Figure: EO platform providers.</p>
+</div></blockquote>
+<p><strong>Examples of cloud-based EO platform providers</strong></p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://earthengine.google.org">Google Earth Engine</a> is a platform specifically designed for EO data analysis. It provides access to a vast amount of satellite imagery and geospatial datasets, along with powerful processing capabilities and built-in algorithms.</p></li>
+<li><p><a class="reference external" href="https://www.sentinel-hub.com">Sinergise Sentinel-Hub</a> is a platform focused on accessing and processing satellite data. It provides APIs and easy-to-use tools for accessing, processing, and visualizing EO data.</p></li>
+<li><p><a class="reference external" href="https://planetarycomputer.microsoft.com">Microsoft Planetary Computer</a> is a platform that combines geospatial data and AI capabilities for Earth observation. It provides access to various global datasets, including satellite imagery, climate data, and environmental data. The platform aims to facilitate large-scale data analysis and support sustainable development and conservation efforts.</p></li>
+<li><p><a class="reference external" href="https://eurodatacube.com">Euro Data Cube</a> is a platform on top of various cloud infrastructures to provide an interactive development environment with a standardized access to various EO data. It provides a JupyterLab environment for data exploration and analysis, as well as capabilities to run processing jobs.</p></li>
+<li><p><a class="reference external" href="https://openeo.cloud">OpenEO Platform</a> is a platform based on OpenEO, which aims to standardize and simplify the access and processing of EO data. It provides a unified API and common data model, enabling interoperability across multiple EO data providers and processing backends. The platform allows users to run EO workflows on various cloud-based infrastructure providers.</p></li>
+<li><p><a class="reference external" href="https://pangeo.io">Pangeo</a> is a community platform for big data geoscience built on the Pangeo ecosystem. It aims to foster collaboration among researchers, engineers, research software engineers, and innovators within the open-source scientific Python ecosystem, focusing on Ocean, Atmosphere, Land, and Climate science. There is a strong focus on portability and interoperability, enabling deployments of the Pangeo platform on various infrastructure (laptops, cloud providers, etc.) and providing APIs that allow users to prototype on their laptops and easily scale to the cloud or High-Performance Computers with minimal changes to their code. The current deployment of the Pangeo platform in Europe, <a class="reference external" href="https://pangeo-eosc.vm.fedcloud.eu/">Pangeo&#64;EOSC</a> is hosted on the <a class="reference external" href="https://eosc.eu">European Open Science Cloud</a> (EOSC), providing a scalable and collaborative environment for big data analysis and research for all European researchers and their collaborators.</p></li>
+</ol>
+<p>Different EO platform providers may offer end-users access to specific tools and packages that can be highly beneficial for particular workflows. However, users should carefully evaluate whether the convenience of these tools justifies the potential trade-off of being locked into a particular platform. In some cases, opting for platforms that prioritize portability and openness, like OpenEO or Pangeo, might be more advantageous, especially for those who value flexibility and long-term interoperability across various environments and infrastructures.</p>
+</section>
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<p>In summary, EO-based infrastructure providers primarily focus on providing the underlying infrastructure and resources, while platform providers offer integrated environments with a wide range of tools and services to support EO data processing, analysis, and visualization. These two types of providers complement each other in the EO ecosystem, enabling users to access and leverage EO data effectively.</p>
+</section>
+</section>
+<section id="components-of-platforms">
+<h2>Components of platforms<a class="headerlink" href="#components-of-platforms" title="Link to this heading">#</a></h2>
+<p>Cloud-based EO platforms have transformed the way researchers and scientists analyze and utilize EO data. These platforms often follow a three-layered design (often named “tiers”) comprising infrastructure, services, and exploitation interfaces. An example architecture based on this approach is the “Earth Observation Exploitation Platform Common Architecture” (EOEPCA) of ESA (<a class="reference external" href="https://eoepca.org">https://eoepca.org</a>). Leveraging the power of cloud computing, EO platforms provide a comprehensive ecosystem that seamlessly integrates storage, processing, analysis tools, collaboration, visualization, and data exploitation capabilities.</p>
+<p>The following overview will explore each layer of the three-layered design and provide examples to illustrate the functionalities and benefits of cloud-based EO platforms in real-world applications. They showcase the diverse range of tools, services, and interfaces (also named “building blocks”) available to store, process, analyze, collaborate, visualize, and exploit EO data effectively within the cloud environment.</p>
+<iframe src="https://create.eo-college.org/wp-admin/admin-ajax.php?action=h5p_embed&id=12" width="959" height="749" frameborder="0" allowfullscreen="allowfullscreen" title="Platform components explanation"></iframe><script src="https://create.eo-college.org/wp-content/plugins/h5p/h5p-php-library/js/h5p-resizer.js" charset="UTF-8"></script>
+<section id="infrastructure-resource-tier">
+<h3>Infrastructure &amp; Resource Tier<a class="headerlink" href="#infrastructure-resource-tier" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p>“The Resource Tier represents the hosting infrastructure and provides the EO data, storage and compute upon which the exploitation platform is deployed.” (Source: <a class="reference external" href="https://eoepca.github.io/master-system-design/current/#_architecture_layers">EOEPCA Master System Design</a>)</p>
+</div></blockquote>
+<ol class="arabic simple">
+<li><p><strong>Data Storage:</strong> The data storage component may include distributed file systems like distributed parallel file systems (e.g., GPFS, Hadoop) or object storage services (e.g., Amazon S3, Google Cloud Storage) to securely store and manage EO datasets.</p></li>
+<li><p><strong>Computing Resources:</strong> The computing component can provide virtual machines (e.g., Amazon EC2, Google Compute Engine, OpenStack), container environments (e.g., Docker-Engine, Kubernetes) or batch-computing systems (e.g., High Performance Computing) for executing data processing and analysis tasks on EO datasets.</p></li>
+</ol>
+</section>
+<section id="platform-tier">
+<h3>Platform Tier<a class="headerlink" href="#platform-tier" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p>“The Platform Tier represents the Exploitation Platform and the services it offers to end-users.” (Source: <a class="reference external" href="https://eoepca.github.io/master-system-design/current/#_architecture_layers">EOEPCA Master System Design</a>)</p>
+</div></blockquote>
+<p>The services of the platform tier can be grouped into data-related and processing-related services. The processing tools and services often rely on the data services to get discover and get access to data available on the platform.</p>
+<ol class="arabic simple">
+<li><p><strong>Data Services</strong></p>
+<ul class="simple">
+<li><p><strong>Data Catalog:</strong> Data available on the platform needs to be described with metadata to be findable by users. Often processing and analysis services, such as Open Data Cube or OpenEO, make use of the data catalog to ease the use of EO data. These services enable users to annotate, search, and discover EO datasets based on various metadata parameters.</p></li>
+<li><p><strong>Data Access Service:</strong> This enables users to retrieve and access EO datasets. This may involve APIs, protocols, or data transfer mechanisms like Open Geospatial Consortium (OGC) Web Services or HTTP services for efficient and secure data access.</p></li>
+<li><p><strong>Data Visualization Service:</strong> The visualization component provides standardized web services for the visualization of raster and vector data available on the platform. User interfaces like QGIS or web mapping tools can be used together with those services.</p></li>
+</ul>
+</li>
+<li><p><strong>Data Processing and Analysis Tools:</strong> This service component may include widely used  processing tools like <a class="reference external" href="https://gdal.org">GDAL</a> (Geospatial Data Abstraction Library), remote sensing software like SNAP (Sentinel Application Platform), data cube related tools (e.g., <a class="reference external" href="https://xarray.dev/">xarray</a> &amp; <a class="reference external" href="https://www.dask.org/">Dask</a>) and APIs (e.g., <a class="reference external" href="https://openeo.org">OpenEO API</a>) for performing advanced analysis on EO data.</p></li>
+</ol>
+</section>
+<section id="exploitation-tier">
+<h3>Exploitation Tier<a class="headerlink" href="#exploitation-tier" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p>“The Exploitation Tier represents the end-users who exploit the services of the platform to perform analysis, or using high-level applications built-in on top of the platform’s services.” (Source: <a class="reference external" href="https://eoepca.github.io/master-system-design/current/#_architecture_layers">EOEPCA Master System Design</a>)</p>
+</div></blockquote>
+<ol class="arabic simple">
+<li><p><strong>User Interfaces:</strong> The exploitation interface component may include web-based interfaces like web portals (e.g., <a class="reference external" href="https://browser.dataspace.copernicus.eu/">Copernicus Browser</a>), dashboards (e.g., <a class="reference external" href="https://eodashboard.org/">Earth Observation Dashboard from NASA, ESA, JAXA</a> or web development environments (e.g., <a class="reference external" href="https://jupyter.org/">JupyterLab</a>). All of them provide interactive interfaces for users to explore and analyze EO data through a user-friendly interface.</p></li>
+</ol>
+</section>
+<section id="exercise-build-a-platform">
+<h3>Exercise: Build a platform<a class="headerlink" href="#exercise-build-a-platform" title="Link to this heading">#</a></h3>
+<p>Now it is time for you: Please Drag and drop the building blocks of a platform into a correct diagram.</p>
+<iframe src="https://create.eo-college.org/wp-admin/admin-ajax.php?action=h5p_embed&id=13" width="959" height="627" frameborder="0" allowfullscreen="allowfullscreen" title="Platform components exercise"></iframe>
+<script src="https://create.eo-college.org/wp-content/plugins/h5p/h5p-php-library/js/h5p-resizer.js" charset="UTF-8"></script>
+</section>
+</section>
+<section id="quiz">
+<h2>Quiz<a class="headerlink" href="#quiz" title="Link to this heading">#</a></h2>
+<p>What types of “layers” or “tiers” are there in a platform architecture?</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[[x]] Infrastructure &amp; Resource Tier
+[[ ]] Software Tier
+[[x]] Platform Tier
+[[ ]] Data Cube Tier
+[[x]] Exploitation Tier
+</pre></div>
+</div>
+<p>What does an infrastructure provider offer?</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[[x]] Virtual Machines
+[[ ]] Data discovery
+[[ ]] Data cubes
+[[ ]] Data visualization
+[[x]] Data storage
+</pre></div>
+</div>
+<p>What kind of provider is the Euro Data Cube?</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[[ ]] Infrastructure provider
+[[x]] Platform provider
+</pre></div>
+</div>
+<p>When should you consider to use an EO cloud platform?</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[[x]] I have limited internet bandwidth for data downloading
+[[ ]] I have all my data locally on my own servers with lots of computing resources
+[[x]] I want to collaborate with other and external users
+[[x]] I want to easily make use of processing services
+[[x]] I don&#39;t want to care about system administration and operations
+[[ ]] I do not often have access to internet
+</pre></div>
+</div>
+</section>
+<section id="further-reading">
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Earth Observation Cloud Platform Concept Development Study Report: <a class="reference external" href="https://docs.ogc.org/per/21-023.html">https://docs.ogc.org/per/21-023.html</a></p></li>
+<li><p>Big Earth data: disruptive changes in Earth observation data management and analysis? <a class="reference external" href="https://www.tandfonline.com/doi/full/10.1080/17538947.2019.1585976">https://www.tandfonline.com/doi/full/10.1080/17538947.2019.1585976</a></p></li>
+<li><p>Enabling the Big Earth Observation Data via Cloud Computing and DGGS: Opportunities and Challenges: <a class="reference external" href="https://www.mdpi.com/2072-4292/12/1/62">https://www.mdpi.com/2072-4292/12/1/62</a></p></li>
+<li><p>An Overview of Platforms for Big Earth Observation Data Management and Analysis: <a class="reference external" href="https://www.mdpi.com/2072-4292/12/8/1253">https://www.mdpi.com/2072-4292/12/8/1253</a></p></li>
+<li><p>The openEO API–Harmonising the Use of Earth Observation Cloud Services Using Virtual Data Cube Functionalities: <a class="reference external" href="https://www.mdpi.com/2072-4292/13/6/1125">https://www.mdpi.com/2072-4292/13/6/1125</a></p></li>
+<li><p>ESA Earth Observation Exploitation Platform Common Architecture (EOEPCA): <a class="reference external" href="https://eoepca.org">https://eoepca.org</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./1.1_intro_platform"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../0_introduction/exercises/0_login.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">0. Introduction</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../1.2_data_cube/1.2_data_cube.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">What is a data cube?</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-do-we-need-eo-cloud-platforms">Why do we need EO cloud platforms?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eo-data-volume-and-the-limits-of-your-computer">EO data volume and the limits of your computer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-we-handle-such-volumes-of-data">How can we handle such volumes of data?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-platforms">Types of platforms</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#infrastructure-providers">Infrastructure providers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#platform-providers">Platform providers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#components-of-platforms">Components of platforms</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#infrastructure-resource-tier">Infrastructure &amp; Resource Tier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#platform-tier">Platform Tier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploitation-tier">Exploitation Tier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-build-a-platform">Exercise: Build a platform</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz">Quiz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further reading</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By ESA
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
