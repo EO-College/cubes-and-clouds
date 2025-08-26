@@ -1,0 +1,1089 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3.1 Data Processing &#8212; Cubes &amp; Clouds - Cloud Native Open Data Sciences for Earth Observation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '3.1_data_processing/exercises/31_data_processing_openeo';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    Lectures
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setup</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../0_introduction/0_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../0_introduction/exercises/0_login.html">0. Introduction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../1.1_intro_platform/1.1_intro_platform.html">Earth Observation cloud platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../1.2_data_cube/1.2_data_cube.html">What is a data cube?</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../1.3_openscience/1.3.1_openscienceandfair.html">Open Science and the FAIR Principles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../1.3_openscience/1.3.3_openscienceineo.html">The Open Science Journey - Open Science in geospatial, EO and EO cloud platforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1.3_openscience/1.3.2_opendataopensource.html">Open Data and Open Source Software</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Discovery and metadata</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../2.1_data_discovery/2.1_data_discovery.html">Data Discovery</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../2.2_data_properties/2.2_data_properties.html">Data Properties</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data access with OpenEO</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../2.3_data_access/2.3_data_access.html">Access EO Data from the Cloud</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data formats for achieving scalability</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../2.4_formats_and_performance/2.4_formats_and_performance.html">Data Formats and Performance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Process &amp; Share</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3.1_data_processing.html">Data processing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3.2_validation/3.2_validation.html">Validation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3.3_data_sharing/3.3_data_sharing.html">Data sharing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional materials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../9.9_master_asi_conae/s2_sca.html">Sentinel-2 snow cover area (SCA) time series</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../9.9_master_asi_conae/test/s1.html">S1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../9.9_master_asi_conae/test/s2_snowcover_test.html">Sentinel-2 snow cover</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../9.9_master_asi_conae/test/test_s1_s3.html">Sentinel-1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../9.9_master_asi_conae/test/s3_ndsi.html">List all the available dataset</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds/issues/new?title=Issue%20on%20page%20%2F3.1_data_processing/exercises/31_data_processing_openeo.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/3.1_data_processing/exercises/31_data_processing_openeo.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>3.1 Data Processing</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#snow-cover-mapping-with-openeo">Snow Cover mapping with openEO</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libraries">Libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-to-a-cloud-platform">Connect to a cloud platform</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#region-of-interest">Region of Interest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspect-metadata">Inspect Metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-workflow">Define a workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-data-cube">Define the data cube</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-data-cube">Load the data cube</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ndsi-normalized-difference-snow-index">NDSI - Normalized Difference Snow Index</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-the-snow-map">Creating the Snow Map</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-cloud-mask">Creating a cloud mask</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-the-cloud-mask-to-the-snowmap">Applying the cloud mask to the snowmap</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mask-polygon-from-bounding-box-to-shape">Mask Polygon: From Bounding Box to Shape</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-one-time-step-of-the-timeseries">Visualize one time step of the timeseries</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-catchment-statistics">Calculate Catchment Statistics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#count-pixels-and-aggregate-spatially-to-the-catchment">Count pixels and aggregate spatially to the catchment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#register-a-batch-job-for-processing">Register a batch job for processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-resulting-time-series">Load the resulting time series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-the-cloud-percentage-for-filtering-time-steps">Calculate the cloud percentage for filtering time steps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-the-snow-percentage">Calculate the snow percentage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-out-cloudy-time-steps">Filter out cloudy time steps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-and-save-the-cloud-free-snow-percentage-time-series">Plot and save the cloud free snow percentage time series</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <center><img src="https://raw.githubusercontent.com/EO-College/cubes-and-clouds/main/icons/cnc_3icons_process_circle.svg"
+     alt="Cubes & Clouds logo"
+     style="float: center; margin-right: 10px; margin-left: 10px; max-height: 250px;" /></center><section class="tex2jax_ignore mathjax_ignore" id="data-processing">
+<h1>3.1 Data Processing<a class="headerlink" href="#data-processing" title="Link to this heading">#</a></h1>
+<p><img src="https://openeo.org/images/openeo_logo.png"
+     alt="openEO logo"
+     style="float: center; margin-right: 10px; max-height: 100px;"/></p>
+<section id="snow-cover-mapping-with-openeo">
+<h2>Snow Cover mapping with openEO<a class="headerlink" href="#snow-cover-mapping-with-openeo" title="Link to this heading">#</a></h2>
+<p>In this exercise we will build a complete EO workflow on a cloud platform; from data access to obtaining the result. In this example we will analyse snow cover in the Alps.</p>
+<p>We are going to follow these steps in our analysis:</p>
+<ul class="simple">
+<li><p>Load satellite collections</p></li>
+<li><p>Specify the spatial, temporal extents and the features we are interested in</p></li>
+<li><p>Process the satellite data to retrieve snow cover information</p></li>
+<li><p>Aggregate information to get catchment statistics over time</p></li>
+<li><p>Visualize and analyse the results</p></li>
+</ul>
+<p>More information on the openEO Python Client: <a class="reference external" href="https://open-eo.github.io/openeo-python-client/index.html">https://open-eo.github.io/openeo-python-client/index.html</a></p>
+</section>
+<section id="libraries">
+<h2>Libraries<a class="headerlink" href="#libraries" title="Link to this heading">#</a></h2>
+<p>We start by creating the shared folders and data files needed to complete the exercise using the following shell commands</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cp<span class="w"> </span>-r<span class="w"> </span><span class="si">${</span><span class="nv">DATA_PATH</span><span class="p">%/*/*</span><span class="si">}</span>/notebooks/cubes-and-clouds/lectures/3.1_data_processing/exercises/31_results<span class="w"> </span><span class="nv">$HOME</span>/
+<span class="o">!</span>cp<span class="w"> </span>-r<span class="w"> </span><span class="si">${</span><span class="nv">DATA_PATH</span><span class="p">%/*/*</span><span class="si">}</span>/notebooks/cubes-and-clouds/lectures/3.1_data_processing/exercises/31_data<span class="w"> </span><span class="nv">$HOME</span>/
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># platform libraries</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">openeo</span>
+
+<span class="c1"># utility libraries</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">date</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">rioxarray</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">leafmap.foliumap</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">leafmap</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="connect-to-a-cloud-platform">
+<h2>Connect to a cloud platform<a class="headerlink" href="#connect-to-a-cloud-platform" title="Link to this heading">#</a></h2>
+<p>Connect to the Copernicus Dataspace Ecosystem. Being connected allows for data discovery.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conn</span> <span class="o">=</span> <span class="n">openeo</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;https://openeo.dataspace.copernicus.eu/&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And login. Being logged in allows to use the full range of functionality including processing!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">authenticate_oidc</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Check if the login worked.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">describe_account</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="region-of-interest">
+<h2>Region of Interest<a class="headerlink" href="#region-of-interest" title="Link to this heading">#</a></h2>
+<p>Our region of interest is the Val Passiria Catchment in the South Tyrolian Alps (Italy). Let’s load the catchment area.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">catchment_outline</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;31_data/catchment_outline.geojson&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">center</span> <span class="o">=</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">catchment_outline</span><span class="o">.</span><span class="n">centroid</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">catchment_outline</span><span class="o">.</span><span class="n">centroid</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">leafmap</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="n">center</span><span class="p">,</span> <span class="n">zoom</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">add_vector</span><span class="p">(</span><span class="s1">&#39;31_data/catchment_outline.geojson&#39;</span><span class="p">,</span> <span class="n">layer_name</span><span class="o">=</span><span class="s2">&quot;catchment&quot;</span><span class="p">)</span>
+<span class="n">m</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Quiz hint: Look closely at the end of the displayed catchment area to identify the outlet</strong></p>
+</section>
+<section id="inspect-metadata">
+<h2>Inspect Metadata<a class="headerlink" href="#inspect-metadata" title="Link to this heading">#</a></h2>
+<p>We need to set the following configurations to define the content of the data cube we want to access:</p>
+<ul class="simple">
+<li><p>dataset name</p></li>
+<li><p>band names</p></li>
+<li><p>time range</p></li>
+<li><p>the area of interest specifed via bounding box coordinates</p></li>
+<li><p>spatial resolution</p></li>
+</ul>
+<p>To select the correct dataset we can first list all the available datasets.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">conn</span><span class="o">.</span><span class="n">list_collection_ids</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We want to use the Sentinel-2 L2A product. It’s name is <code class="docutils literal notranslate"><span class="pre">'SENTINEL2_L2A'</span></code>.</p>
+<p>We get the metadata for this collection as follows. This is an important step to familiarize yourself with the data collection (e.g. learn the band names).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">describe_collection</span><span class="p">(</span><span class="s2">&quot;SENTINEL2_L2A&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="define-a-workflow">
+<h2>Define a workflow<a class="headerlink" href="#define-a-workflow" title="Link to this heading">#</a></h2>
+<p>We will define our workflow now. And chain all the processes together we need for analyzing the snow cover in the catchment.</p>
+<ul class="simple">
+<li><p>Load a data cube with specific filters</p></li>
+<li><p>Calculate the Normalized Difference Snow Index</p></li>
+<li><p>Classify snow and no-snow using a threshold yielding the Snow Covered Area</p></li>
+<li><p>Create and apply a cloud mask to remove cloudy pixels</p></li>
+<li><p>Visualize one date of the snow map and crop it to the exact catchment outline</p></li>
+<li><p>Calculate catchment statistics to get a timeseries on snow cover and cloud cover</p></li>
+<li><p>Filter the time series by the cloud percentage and visualize the time series graph</p></li>
+</ul>
+<section id="define-the-data-cube">
+<h3>Define the data cube<a class="headerlink" href="#define-the-data-cube" title="Link to this heading">#</a></h3>
+<p>We define all extents of our data cube. We use the catchment as spatial extent. As a time range we will focus on the snow melting season 2018, in particular from Febraury to June 2018. We are only interested in the green and short wave infrared band, band 3 and 11. And we directly remove time slices with a cloud cover &gt;= 90 %.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bbox</span> <span class="o">=</span> <span class="n">catchment_outline</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">bbox</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">openeo.processes</span><span class="w"> </span><span class="kn">import</span> <span class="n">lte</span>
+<span class="n">collection</span>      <span class="o">=</span> <span class="s1">&#39;SENTINEL2_L2A&#39;</span>
+<span class="n">spatial_extent</span>  <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;west&#39;</span><span class="p">:</span><span class="n">bbox</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;east&#39;</span><span class="p">:</span><span class="n">bbox</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="s1">&#39;south&#39;</span><span class="p">:</span><span class="n">bbox</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;north&#39;</span><span class="p">:</span><span class="n">bbox</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="s1">&#39;crs&#39;</span><span class="p">:</span><span class="mi">4326</span><span class="p">}</span>
+<span class="n">temporal_extent</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;2018-02-01&quot;</span><span class="p">,</span> <span class="s2">&quot;2018-06-30&quot;</span><span class="p">]</span>
+<span class="n">bands</span>           <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;B03&#39;</span><span class="p">,</span> <span class="s1">&#39;B11&#39;</span><span class="p">,</span> <span class="s1">&#39;SCL&#39;</span><span class="p">]</span>
+<span class="n">properties</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;eo:cloud_cover&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">lte</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">90</span><span class="p">)}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-the-data-cube">
+<h3>Load the data cube<a class="headerlink" href="#load-the-data-cube" title="Link to this heading">#</a></h3>
+<p>We have defined the extents we are interested in. Now we use these definitions to load the data cube.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s2</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">load_collection</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span>
+                          <span class="n">spatial_extent</span><span class="o">=</span><span class="n">spatial_extent</span><span class="p">,</span>
+                          <span class="n">bands</span><span class="o">=</span><span class="n">bands</span><span class="p">,</span>
+                          <span class="n">temporal_extent</span><span class="o">=</span><span class="n">temporal_extent</span><span class="p">,</span>
+                          <span class="n">properties</span><span class="o">=</span><span class="n">properties</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ndsi-normalized-difference-snow-index">
+<h3>NDSI - Normalized Difference Snow Index<a class="headerlink" href="#ndsi-normalized-difference-snow-index" title="Link to this heading">#</a></h3>
+<p>The Normalized Difference Snow Index (NDSI) is computed as:</p>
+<div class="math notranslate nohighlight">
+\[ NDSI = \frac {GREEN - SWIR} {GREEN +SWIR} \]</div>
+<p>We have created a Sentinel-2 data cube with bands B03 (green) and B11 (SWIR). We will use the green and SWIR band to calculate a the NDSI. This process is reducing the band dimension of the data cube to generate new information, the NDSI.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">green</span> <span class="o">=</span> <span class="n">s2</span><span class="o">.</span><span class="n">band</span><span class="p">(</span><span class="s2">&quot;B03&quot;</span><span class="p">)</span>
+<span class="n">swir</span> <span class="o">=</span> <span class="n">s2</span><span class="o">.</span><span class="n">band</span><span class="p">(</span><span class="s2">&quot;B11&quot;</span><span class="p">)</span>
+<span class="n">ndsi</span> <span class="o">=</span> <span class="p">(</span><span class="n">green</span> <span class="o">-</span> <span class="n">swir</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">green</span> <span class="o">+</span> <span class="n">swir</span><span class="p">)</span>
+<span class="n">ndsi</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="creating-the-snow-map">
+<h3>Creating the Snow Map<a class="headerlink" href="#creating-the-snow-map" title="Link to this heading">#</a></h3>
+<p>So far we have a time series map of NDSI values. We are intereseted in the presence of snow though. Ideally in a binary classification: snow and no snow.
+To achieve this we are setting a threshold of 0.4 on the NDSI. This gives us a binary snow map.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snowmap</span> <span class="o">=</span> <span class="p">(</span> <span class="n">ndsi</span> <span class="o">&gt;</span> <span class="mf">0.4</span> <span class="p">)</span> <span class="o">*</span> <span class="mf">1.0</span>  <span class="c1"># the addition of &quot;* 1.00&quot; is a workaround for a backend specific implementation problem. Once solved on the CDSE openEO backend it could be removed</span>
+<span class="n">snowmap</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="creating-a-cloud-mask">
+<h3>Creating a cloud mask<a class="headerlink" href="#creating-a-cloud-mask" title="Link to this heading">#</a></h3>
+<p>We are going to use the Scene Classification of Sentinel-2, called the “SCL” band,  for creating a cloud mask and then applying it to the NDSI. The values we are interested in are: <code class="docutils literal notranslate"><span class="pre">8</span> <span class="pre">=</span> <span class="pre">cloud</span> <span class="pre">medium</span> <span class="pre">probability</span></code>, <code class="docutils literal notranslate"><span class="pre">9</span> <span class="pre">=</span> <span class="pre">cloud</span> <span class="pre">high</span> <span class="pre">probability</span></code>, <code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">=</span> <span class="pre">cloud</span> <span class="pre">shadow</span></code></p>
+<p>Here is more information on the Scene Classification of Sentinel-2: <a class="reference external" href="https://sentiwiki.copernicus.eu/web/s2-processing#S2-Processing-Scene-Classification">https://sentiwiki.copernicus.eu/web/s2-processing#S2-Processing-Scene-Classification</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scl_band</span> <span class="o">=</span> <span class="n">s2</span><span class="o">.</span><span class="n">band</span><span class="p">(</span><span class="s2">&quot;SCL&quot;</span><span class="p">)</span>
+<span class="n">cloud_mask</span> <span class="o">=</span> <span class="p">(</span> <span class="p">(</span><span class="n">scl_band</span> <span class="o">==</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">scl_band</span> <span class="o">==</span> <span class="mi">9</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">scl_band</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="p">)</span> <span class="o">*</span> <span class="mf">1.0</span>
+<span class="n">cloud_mask</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The SCL layer has a ground sample distance of 20 meter while the other bands have 10 meter GSD</p>
+</section>
+<section id="applying-the-cloud-mask-to-the-snowmap">
+<h3>Applying the cloud mask to the snowmap<a class="headerlink" href="#applying-the-cloud-mask-to-the-snowmap" title="Link to this heading">#</a></h3>
+<p>We will mask out all pixels that are covered by clouds. This will result in: 0 = no_snow, 1 = snow, 2 = cloud</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snowmap_cloudfree</span> <span class="o">=</span> <span class="n">snowmap</span><span class="o">.</span><span class="n">mask</span><span class="p">(</span><span class="n">cloud_mask</span><span class="p">,</span><span class="n">replacement</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># replacement is null by default</span>
+<span class="n">snowmap_cloudfree</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="mask-polygon-from-bounding-box-to-shape">
+<h3>Mask Polygon: From Bounding Box to Shape<a class="headerlink" href="#mask-polygon-from-bounding-box-to-shape" title="Link to this heading">#</a></h3>
+<p>We have a cloud masked snow map data cube now. In order to keep only pixels within the exact chatchment boundaries we mask to the outline of the catchment. Values outside of the boundaries are set to NA.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">catchment_outline</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snowmap_cloudfree_masked</span> <span class="o">=</span> <span class="n">snowmap_cloudfree</span><span class="o">.</span><span class="n">mask_polygon</span><span class="p">(</span><span class="n">catchment_outline</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualize-one-time-step-of-the-timeseries">
+<h3>Visualize one time step of the timeseries<a class="headerlink" href="#visualize-one-time-step-of-the-timeseries" title="Link to this heading">#</a></h3>
+<p>Let’s have a first look at a time slice of our snow map. So far we have not computed anything. We have only defined a set of functions that are going to be applied in sequence. This makes up our workflow or processing graph.
+To reduce the data volume which we are going to download we are only selecting one time step of our data cube.</p>
+<p><strong>In order to start the processing we have to tell the cloud platform specifically that we want to execute our workflow. In this case we want to start the processing directly without registering a job on the backend. This solution is good for small amounts of data. For larger processing tasks batch jobs are preferred (we’ll do that later).</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snowmap_cloudfree_1d</span> <span class="o">=</span> <span class="n">snowmap_cloudfree_masked</span><span class="o">.</span><span class="n">filter_temporal</span><span class="p">(</span><span class="s1">&#39;2018-02-10&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-02-12&#39;</span><span class="p">)</span>
+<span class="n">snowmap_cloudfree_1d</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;31_results/snowmap_cloudfree_1d.nc&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once the processing is done on the cloud and the data is downloaded we can load the file into our working environment and plot it!</p>
+<p>The area of interest is spread across two S2 tiles. This is visibile in the northern part of the plot because we chose one specific acquisition date where there is not data available for the northern tile.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xr</span><span class="o">.</span><span class="n">open_dataarray</span><span class="p">(</span><span class="s1">&#39;31_results/snowmap_cloudfree_1d.nc&#39;</span><span class="p">,</span><span class="n">decode_coords</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">imshow</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="calculate-catchment-statistics">
+<h2>Calculate Catchment Statistics<a class="headerlink" href="#calculate-catchment-statistics" title="Link to this heading">#</a></h2>
+<p>We are looking at the snow cover of a region over time and want to extract aggregated catchment statistics on snow cover and cloud cover. We do this by counting all the pixels in the catchment, counting the pixels that are covered by snow and the pixels covered by clouds.</p>
+<p>Ultimately we are interested in the <strong>snow covered area (SCA)</strong> within the catchment. We count all snow covered pixels within the catchment for each time step. Multiplied by the pixel size that would be the snow covered area. The snow pixel count divided by the total number of pixels in the catchment is the percentage of pixels covered with snow. We will use this number.</p>
+<p>We need to make sure that the information content meets our expected quality. Therefore, we calculate the <strong>cloud percentage</strong> for the catchment for each timestep. We use this information to filter the timeseries. All timesteps that have a cloud coverage of over 25% will be discarded.</p>
+<p>We are going to</p>
+<ul class="simple">
+<li><p>Get number of pixels in the catchment: total, clouds, snow.</p></li>
+<li><p>Combine the three aggregated pixel counts into one data cube.</p></li>
+<li><p>Calculate cloud and snow percentages</p></li>
+<li><p>Filter cloudy time steps with the cloud percentage</p></li>
+<li><p>Plot the resulting time series</p></li>
+</ul>
+<p><strong>Quiz hint: remember the pixel counts here for the final exercise</strong></p>
+<section id="count-pixels-and-aggregate-spatially-to-the-catchment">
+<h3>Count pixels and aggregate spatially to the catchment<a class="headerlink" href="#count-pixels-and-aggregate-spatially-to-the-catchment" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># number of all pixels</span>
+<span class="n">n_catchment</span> <span class="o">=</span> <span class="p">((</span><span class="n">snowmap_cloudfree</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.0</span><span class="p">)</span><span class="o">.</span><span class="n">add_dimension</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;bands&quot;</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;bands&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;n_catchment&quot;</span><span class="p">)</span>
+
+<span class="c1"># number of cloud pixels (no function needed, mask already created before)</span>
+<span class="n">n_cloud</span> <span class="o">=</span> <span class="n">cloud_mask</span><span class="o">.</span><span class="n">add_dimension</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;bands&quot;</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;bands&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;n_cloud&quot;</span><span class="p">)</span>
+
+<span class="c1"># number of snow pixels</span>
+<span class="n">n_snow</span> <span class="o">=</span> <span class="p">((</span><span class="n">snowmap_cloudfree</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.0</span><span class="p">)</span><span class="o">.</span><span class="n">add_dimension</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;bands&quot;</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;bands&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;n_snow&quot;</span><span class="p">)</span>
+
+<span class="c1"># combine the binary data cubes into one data cube</span>
+<span class="n">n_catchment_cloud_snow</span> <span class="o">=</span> <span class="n">n_catchment</span><span class="o">.</span><span class="n">merge_cubes</span><span class="p">(</span><span class="n">n_cloud</span><span class="p">)</span><span class="o">.</span><span class="n">merge_cubes</span><span class="p">(</span><span class="n">n_snow</span><span class="p">)</span>
+
+<span class="c1"># aggregate to catchment</span>
+<span class="n">n_pixels</span> <span class="o">=</span> <span class="n">n_catchment_cloud_snow</span><span class="o">.</span><span class="n">aggregate_spatial</span><span class="p">(</span><span class="n">geometries</span> <span class="o">=</span> <span class="n">catchment_outline</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">reducer</span> <span class="o">=</span> <span class="s1">&#39;sum&#39;</span><span class="p">)</span>
+<span class="n">n_pixels</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="register-a-batch-job-for-processing">
+<h3>Register a batch job for processing<a class="headerlink" href="#register-a-batch-job-for-processing" title="Link to this heading">#</a></h3>
+<p>We are starting the processing now with a batch job. This registers our job on the backend in our user space and assigns further information to the job, such as an ID, the job status, the process graph and further metadata. First we specifiy the end of our process graph with <code class="docutils literal notranslate"><span class="pre">save_result()</span></code> and specifiy the format (since we aggregated over the spatial dimension we will receive three arrays of data. So JSON is a suitable format). Then we create the batch job and start it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the end of the process graph and the output format</span>
+<span class="n">n_pixels_json</span> <span class="o">=</span> <span class="n">n_pixels</span><span class="o">.</span><span class="n">save_result</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;JSON&quot;</span><span class="p">)</span>
+<span class="c1"># Create a batch job</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">n_pixels_json</span><span class="o">.</span><span class="n">create_job</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;n_pixels_json&quot;</span><span class="p">)</span>
+<span class="c1"># start the job and wait till it finishes</span>
+<span class="n">job</span><span class="o">.</span><span class="n">start_and_wait</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can check the status of our job. We can download the result once the job has finished.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">job</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">job</span><span class="o">.</span><span class="n">status</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;finished&quot;</span><span class="p">:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">get_results</span><span class="p">()</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">download_files</span><span class="p">(</span><span class="s2">&quot;31_results/&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Quick hint: take a look at the job description: e.g. <code class="docutils literal notranslate"><span class="pre">job.describe_job()</span></code></strong></p>
+</section>
+<section id="load-the-resulting-time-series">
+<h3>Load the resulting time series<a class="headerlink" href="#load-the-resulting-time-series" title="Link to this heading">#</a></h3>
+<p>Let’s load the result. It contains the total number of pixels in the catchment, number of cloud and snow pixels.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load the result</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;31_results/timeseries.json&quot;</span><span class="p">,</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">n_pixels_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check the first 5 entries to check the data structure.</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">n_pixels_json</span><span class="o">.</span><span class="n">items</span><span class="p">())[:</span><span class="mi">3</span><span class="p">]</span> <span class="c1"># careful unsorted dates due to JSON format</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">n_pixels_json</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong><em>Quick hint: what is the length of the time series JSON?</em></strong>
+<code class="docutils literal notranslate"><span class="pre">len(n_pixels_json)</span></code></p>
+<p>Now we do some data wrangling to get a structured data frame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a Pandas DataFrame to hold the values</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">n_pixels_json</span><span class="p">]</span>
+<span class="n">n_catchment_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">n_pixels_json</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">n_pixels_json</span><span class="p">]</span>
+<span class="n">n_cloud_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">n_pixels_json</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">n_pixels_json</span><span class="p">]</span>
+<span class="n">n_snow_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">n_pixels_json</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">n_pixels_json</span><span class="p">]</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;time&quot;</span><span class="p">:</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">dates</span><span class="p">),</span>
+        <span class="s2">&quot;n_catchment_vals&quot;</span><span class="p">:</span><span class="n">n_catchment_vals</span><span class="p">,</span>
+        <span class="s2">&quot;n_cloud_vals&quot;</span><span class="p">:</span><span class="n">n_cloud_vals</span><span class="p">,</span>
+        <span class="s2">&quot;n_snow_vals&quot;</span><span class="p">:</span><span class="n">n_snow_vals</span>
+       <span class="p">}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+<span class="c1"># Sort the values by date</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Compute the total number of snow pixels in the selected temporal period:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">n_snow_vals</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="calculate-the-cloud-percentage-for-filtering-time-steps">
+<h3>Calculate the cloud percentage for filtering time steps<a class="headerlink" href="#calculate-the-cloud-percentage-for-filtering-time-steps" title="Link to this heading">#</a></h3>
+<p>Divide the number of cloudy pixels by the number of total pixels = cloud percentage</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">perc_cloud</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;n_cloud_vals&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;n_catchment_vals&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;perc_cloud&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">perc_cloud</span>
+<span class="n">df</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Quick hint: The sum of the n_catchment_vals should give an overall idea of the total number of pixels in the datacube for the whole time-series</strong> <code class="docutils literal notranslate"><span class="pre">df.n_catchment_vals.sum()</span></code></p>
+<p><strong>Quick hint: a filter of the snow values can give an idea of when the maximum snow cover occurred</strong> <code class="docutils literal notranslate"><span class="pre">df.where(df.n_snow_vals</span> <span class="pre">==</span> <span class="pre">df.n_snow_vals.max())</span></code></p>
+<p><strong>Quick hint: a simplified approach for converting from pixel count to square kilometres is to use this simplified formula::</strong></p>
+<p><span class="math notranslate nohighlight">\({{Area (km^2)} = (\frac{Spatial resolution (meters/pixel)^2}{1,000,000})\times{\text{Total pixel count}}}\)</span></p>
+<p>Plot the timeseries and the cloud threshold of 25%. If the cloud cover is higher the timestep will be excluded later on.</p>
+<p>Plot the <strong>cloud percentage</strong> with the threshold.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;perc_cloud&quot;</span><span class="p">,</span><span class="n">rot</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;line&quot;</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="mi">25</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="calculate-the-snow-percentage">
+<h3>Calculate the snow percentage<a class="headerlink" href="#calculate-the-snow-percentage" title="Link to this heading">#</a></h3>
+<p>Divide the number of snow pixels by the number of total pixels = snow percentage</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">perc_snow</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;n_snow_vals&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;n_catchment_vals&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;perc_snow&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">perc_snow</span>
+<span class="n">df</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Plot the <strong>unfiltered snow percentage</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;perc_snow&quot;</span><span class="p">,</span><span class="n">rot</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;line&quot;</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="filter-out-cloudy-time-steps">
+<h3>Filter out cloudy time steps<a class="headerlink" href="#filter-out-cloudy-time-steps" title="Link to this heading">#</a></h3>
+<p>Keep only the dates with cloud coverage less than the threshold</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;perc_cloud&quot;</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">25</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-and-save-the-cloud-free-snow-percentage-time-series">
+<h3>Plot and save the cloud free snow percentage time series<a class="headerlink" href="#plot-and-save-the-cloud-free-snow-percentage-time-series" title="Link to this heading">#</a></h3>
+<p>Plot the <strong>cloud filtered snow percentage</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_filtered</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;perc_snow&quot;</span><span class="p">,</span><span class="n">rot</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;line&quot;</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Save the <strong>cloud filtered snow percentage</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_filtered</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;31_results/filtered_snow_perc.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "conda-env-cubes-and-clouds-cubes-and-clouds-new-py"
+        },
+        kernelOptions: {
+            name: "conda-env-cubes-and-clouds-cubes-and-clouds-new-py",
+            path: "./3.1_data_processing/exercises"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'conda-env-cubes-and-clouds-cubes-and-clouds-new-py'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#snow-cover-mapping-with-openeo">Snow Cover mapping with openEO</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libraries">Libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-to-a-cloud-platform">Connect to a cloud platform</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#region-of-interest">Region of Interest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspect-metadata">Inspect Metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-workflow">Define a workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-data-cube">Define the data cube</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-data-cube">Load the data cube</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ndsi-normalized-difference-snow-index">NDSI - Normalized Difference Snow Index</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-the-snow-map">Creating the Snow Map</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-cloud-mask">Creating a cloud mask</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-the-cloud-mask-to-the-snowmap">Applying the cloud mask to the snowmap</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mask-polygon-from-bounding-box-to-shape">Mask Polygon: From Bounding Box to Shape</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-one-time-step-of-the-timeseries">Visualize one time step of the timeseries</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-catchment-statistics">Calculate Catchment Statistics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#count-pixels-and-aggregate-spatially-to-the-catchment">Count pixels and aggregate spatially to the catchment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#register-a-batch-job-for-processing">Register a batch job for processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-the-resulting-time-series">Load the resulting time series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-the-cloud-percentage-for-filtering-time-steps">Calculate the cloud percentage for filtering time steps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-the-snow-percentage">Calculate the snow percentage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-out-cloudy-time-steps">Filter out cloudy time steps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-and-save-the-cloud-free-snow-percentage-time-series">Plot and save the cloud free snow percentage time series</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By ESA
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

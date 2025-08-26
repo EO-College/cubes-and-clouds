@@ -1,0 +1,873 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.4 Scaling with Pangeo &#8212; Cubes &amp; Clouds - Cloud Native Open Data Sciences for Earth Observation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '2.4_formats_and_performance/exercises/24_dask';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Cubes & Clouds - Cloud Native Open Data Sciences for Earth Observation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    Lectures
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setup</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../0_introduction/0_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../0_introduction/exercises/0_login.html">0. Introduction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../1.1_intro_platform/1.1_intro_platform.html">Earth Observation cloud platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../1.2_data_cube/1.2_data_cube.html">What is a data cube?</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../1.3_openscience/1.3.1_openscienceandfair.html">Open Science and the FAIR Principles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../1.3_openscience/1.3.3_openscienceineo.html">The Open Science Journey - Open Science in geospatial, EO and EO cloud platforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1.3_openscience/1.3.2_opendataopensource.html">Open Data and Open Source Software</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Discovery and metadata</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../2.1_data_discovery/2.1_data_discovery.html">Data Discovery</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../2.2_data_properties/2.2_data_properties.html">Data Properties</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data access with OpenEO</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../2.3_data_access/2.3_data_access.html">Access EO Data from the Cloud</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data formats for achieving scalability</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2.4_formats_and_performance.html">Data Formats and Performance</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Process &amp; Share</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3.1_data_processing/3.1_data_processing.html">Data processing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3.2_validation/3.2_validation.html">Validation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3.3_data_sharing/3.3_data_sharing.html">Data sharing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional materials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../9.9_master_asi_conae/s2_sca.html">Sentinel-2 snow cover area (SCA) time series</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../9.9_master_asi_conae/test/s1.html">S1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../9.9_master_asi_conae/test/s2_snowcover_test.html">Sentinel-2 snow cover</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../9.9_master_asi_conae/test/test_s1_s3.html">Sentinel-1</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../9.9_master_asi_conae/test/s3_ndsi.html">List all the available dataset</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/EO-College/cubes-and-clouds/issues/new?title=Issue%20on%20page%20%2F2.4_formats_and_performance/exercises/24_dask.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/2.4_formats_and_performance/exercises/24_dask.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2.4 Scaling with Pangeo</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-computing-with-dask">Parallel computing with Dask</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#context">Context</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallelize-with-dask">Parallelize with Dask</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-dask">What is Dask ?</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-dask-scale-and-accelerate-your-data-analysis">How does Dask scale and accelerate your data analysis?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-xarray-with-dask-distribute-data-analysis">How does Xarray with Dask distribute data analysis?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-dask-distributed-cluster">What is a Dask Distributed cluster?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#where-can-we-deploy-a-dask-distributed-cluster">Where can we deploy a Dask distributed cluster?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dask-distributed-client">Dask distributed Client</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dask-dashboard">Dask Dashboard</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dask-distributed-computations-on-our-dataset">Dask Distributed computations on our dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#did-you-notice-something-on-the-dask-dashboard-when-running-the-two-previous-cells">Did you notice something on the Dask Dashboard when running the two previous cells?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-compute-on-the-dask-workers">Let’s compute on the Dask workers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-try-a-bigger-computation">Let’s try a bigger computation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#close-client-to-terminate-local-dask-cluster">Close client to terminate local dask cluster</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p><img src="https://raw.githubusercontent.com/EO-College/cubes-and-clouds/main/icons/cnc_3icons_process_circle.svg"
+     alt="Cubes & Clouds logo"
+     style="float: center; margin-right: 10px;" /></p>
+<p><img src="https://raw.githubusercontent.com/pangeo-data/pangeo.io/refs/heads/main/public/Pangeo-assets/pangeo_logo.png"
+     alt="Pangeo logo"
+     style="float: center; margin-right: 10px;" /></p>
+<section class="tex2jax_ignore mathjax_ignore" id="scaling-with-pangeo">
+<h1>2.4 Scaling with Pangeo<a class="headerlink" href="#scaling-with-pangeo" title="Link to this heading">#</a></h1>
+<section id="parallel-computing-with-dask">
+<h2>Parallel computing with Dask<a class="headerlink" href="#parallel-computing-with-dask" title="Link to this heading">#</a></h2>
+<div class="alert alert-info">
+<i class="fa-question-circle fa" style="font-size: 22px;color:#666;"></i> <b>Overview</b>
+    <br>
+    <br>
+    <b>Questions</b>
+    <ul>
+        <li>What is Dask?</li>
+        <li>How can I parallelize my data analysis with Dask?</li>
+    </ul>
+    <b>Objectives</b>
+    <ul>
+        <li>Learn about Dask</li>
+        <li>Learn about Dask Gateway, Dask Client, Scheduler, Workers</li>
+        <li>Understand out-of-core and speed-up limitations</li>
+    </ul>
+</div></section>
+<section id="context">
+<h2>Context<a class="headerlink" href="#context" title="Link to this heading">#</a></h2>
+<p>We will be using <a class="reference external" href="https://docs.dask.org/">Dask</a> with <a class="reference external" href="https://docs.xarray.dev/en/stable/">Xarray</a> to parallelize our data analysis.  We will continue to use the NDVI example.</p>
+</section>
+<section id="parallelize-with-dask">
+<h2>Parallelize with Dask<a class="headerlink" href="#parallelize-with-dask" title="Link to this heading">#</a></h2>
+<p>We know from the previous exercise <strong>2.4_chunking</strong> that chunking is key to analyzing large data sets. In this exercise, we will learn how to parallelize our data analysis using <a class="reference external" href="https://docs.dask.org/">Dask</a> on our chunked dataset.</p>
+<section id="what-is-dask">
+<h3>What is <a class="reference external" href="https://docs.dask.org/">Dask</a> ?<a class="headerlink" href="#what-is-dask" title="Link to this heading">#</a></h3>
+<p><strong>Dask</strong> is a powerful and flexible library for parallel computing in Python. It enables users to scale their computations effortlessly while working with large datasets that exceed available memory.</p>
+<ul class="simple">
+<li><p>With minimal code changes, Dask accelerates existing Python libraries such as NumPy, Pandas, and Scikit-learn.</p></li>
+<li><p>Designed for processing massive datasets, Dask is widely used in Earth Science and other data-intensive fields.</p></li>
+<li><p>It scales effortlessly from a single laptop to clusters, cloud environments, and HPC systems.</p></li>
+<li><p>Dask bridges the gap between exploratory analysis and large-scale production workflows.</p></li>
+</ul>
+<section id="how-does-dask-scale-and-accelerate-your-data-analysis">
+<h4>How does Dask scale and accelerate your data analysis?<a class="headerlink" href="#how-does-dask-scale-and-accelerate-your-data-analysis" title="Link to this heading">#</a></h4>
+<p><a class="reference external" href="https://docs.dask.org/en/stable/10-minutes-to-dask.html">Dask proposes different abstractions to distribute your computation</a>. In this <em>Dask Introduction</em> section, we will focus on <a class="reference external" href="https://docs.dask.org/en/stable/array.html">Dask Array</a> which is widely used in the Pangeo ecosystem as a backend of Xarray.</p>
+<p>The chunks of a Dask Array are standard NumPy arrays. By transforming large datasets into Dask Arrays and utilizing chunks, a large array is handled as many smaller NumPy arrays. This allows us to compute each of these chunks independently.</p>
+<p><img alt="Dask and Numpy" src="https://examples.dask.org/_images/dask-array-black-text.svg" /><br />
+<em>Image source: Dask documentation (© 2025 Dask core developers, BSD-3 Licensed).</em></p>
+<div class="alert alert-info">
+    <i class="fa-check-circle fa" style="font-size: 22px;color:#666;"></i> <b>Note</b>
+    <br>
+    <ul>
+        <li>Xarray uses Dask Arrays instead of Numpy when chunking is enabled, and thus all Xarray operations are performed through Dask, which enables distributed processing. </li>
+    </ul>
+</div></section>
+<section id="how-does-xarray-with-dask-distribute-data-analysis">
+<h4>How does Xarray with Dask distribute data analysis?<a class="headerlink" href="#how-does-xarray-with-dask-distribute-data-analysis" title="Link to this heading">#</a></h4>
+<p>When we use chunks with Xarray, the real computation is only done when needed or explicitly requested, usually by invoking the <code class="docutils literal notranslate"><span class="pre">compute()</span></code> or <code class="docutils literal notranslate"><span class="pre">load()</span></code> functions. Dask generates a <strong>task graph</strong> describing the computations to be performed. When using <a class="reference external" href="https://distributed.dask.org/en/stable/">Dask Distributed</a>, a <strong>Scheduler</strong> distributes these tasks across several <strong>Workers</strong>.</p>
+<p><img alt="Xarray with dask" src="https://raw.githubusercontent.com/EO-College/cubes-and-clouds/refs/heads/main/lectures/2.4_formats_and_performance/exercises/assets/dask-xarray-explained.png" /></p>
+</section>
+<section id="what-is-a-dask-distributed-cluster">
+<h4>What is a Dask Distributed cluster?<a class="headerlink" href="#what-is-a-dask-distributed-cluster" title="Link to this heading">#</a></h4>
+<p>A Dask Distributed cluster is made up of two main components:</p>
+<ul class="simple">
+<li><p>A <strong>Scheduler</strong>, responsible for handling the computation graph and distributing tasks to Workers.</p></li>
+<li><p>One or several <strong>Workers</strong>, which compute individual tasks and store results and data in distributed memory (RAM and/or the worker’s local disk).</p></li>
+</ul>
+<p>A user typically needs <strong>Client</strong> and <strong>Cluster</strong> objects, as shown below, to use Dask Distributed.</p>
+<p><img alt="Dask Distributed Cluster" src="https://user-images.githubusercontent.com/306380/66413985-27111600-e9be-11e9-9995-8f418ff48f8a.png" /></p>
+</section>
+<section id="where-can-we-deploy-a-dask-distributed-cluster">
+<h4>Where can we deploy a Dask distributed cluster?<a class="headerlink" href="#where-can-we-deploy-a-dask-distributed-cluster" title="Link to this heading">#</a></h4>
+<p><a class="reference external" href="https://docs.dask.org/en/stable/deploying.html">Dask distributed clusters can be deployed on your laptop or on distributed infrastructures (Cloud, HPC centers, Hadoop, etc.).</a>  Dask distributed <code class="docutils literal notranslate"><span class="pre">Cluster</span></code> object is responsible of deploying and scaling a Dask Cluster on the underlying resources.</p>
+<p><img alt="Dask Cluster deployment" src="https://docs.dask.org/en/stable/_images/dask-cluster-manager.svg" /><em>Image source: Dask documentation (© 2025 Dask core developers, BSD-3 Licensed).</em></p>
+<blockquote>
+<div><p>Tip<br />
+A Dask <code class="docutils literal notranslate"><span class="pre">Cluster</span></code> can be created on a single machine (e.g. your laptop), which means you do not need dedicated computing resources. This corresponds to <strong>Vertical scaling</strong> as described in lecture <a class="reference internal" href="../2.4_formats_and_performance.html"><span class="std std-doc">2.4 Formats and Performance</span></a>.</p>
+<p>However, the speed up is limited to the resources of your single machine. This is where <strong>horizontal scaling</strong> comes in.  By adding resources from other machines, you can expand your computing power!</p>
+</div></blockquote>
+</section>
+</section>
+<section id="dask-distributed-client">
+<h3>Dask distributed Client<a class="headerlink" href="#dask-distributed-client" title="Link to this heading">#</a></h3>
+<p>The Dask distributed <code class="docutils literal notranslate"><span class="pre">Client</span></code> is what allows you to interact with Dask distributed Clusters. When using Dask distributed, you always need to create a <code class="docutils literal notranslate"><span class="pre">Client</span></code> object. Once a <code class="docutils literal notranslate"><span class="pre">Client</span></code> has been created, it will be used by default by each call to a Dask API, even if you do not explicitly use it.</p>
+<p>No matter the Dask API (e.g. Arrays, Dataframes, Delayed, Futures, etc.) that you use, under the hood, Dask will create a Directed Acyclic Graph (DAG) of tasks by analysing the code. Client will be responsible to submit this DAG to the Scheduler along with the final result you want to compute. The Client will also gather results from the Workers, and aggregate it back in its underlying Python process.</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">Client()</span></code> function with no argument, you will create a local Dask cluster with a number of workers and threads per worker corresponding to the number of cores in the ‘local’ machine. The ‘local’ machine is the jupyterlab you are using in the Cloud, and the number of cores is the number of cores available in the cloud instance (not on your laptop).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dask.distributed</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">n_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>   <span class="c1"># create a local dask cluster on the local machine specifying 4</span>
+<span class="n">client</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Inspecting the <code class="docutils literal notranslate"><span class="pre">Cluster</span> <span class="pre">Info</span></code> section above gives us information about the created cluster: we have 2 or 4 workers and the same number of threads (e.g. 1 thread per worker).</p>
+<div class="alert alert-warning">
+    <i class="fa-check-circle fa" style="font-size: 22px;color:#666;"></i> <b>Go further</b>
+    <br>
+    <ul>
+        <li> You can also create a local cluster with the `LocalCluster` constructor and use `n_workers` 
+        and `threads_per_worker` to manually specify the number of processes and threads you want to use. 
+        For instance, we could use `n_workers=2` and `threads_per_worker=2`.  </li>
+        <li> This is sometimes preferable (in terms of performance), or when you run this tutorial on your PC, 
+        you can avoid dask to use all your resources you have on your PC!  </li>
+    </ul>
+</div></section>
+<section id="dask-dashboard">
+<h3>Dask Dashboard<a class="headerlink" href="#dask-dashboard" title="Link to this heading">#</a></h3>
+<p>Dask comes with a really handy interface: the Dask Dashboard. It is a web interface that you can open in a separate tab of your browser.</p>
+<p>We will learn how to use it through the <a class="reference external" href="https://github.com/dask/dask-labextension">dask jupyterlab extension</a>.</p>
+<p>To use Dask Dashboard through jupyterlab extension,
+you just need to click on the orange icon shown in the following figure,</p>
+<p><img alt="Dask.array" src="https://raw.githubusercontent.com/EO-College/cubes-and-clouds/refs/heads/main/lectures/2.4_formats_and_performance/exercises/assets/dashboardlink.png" /></p>
+<p>You can click several buttons marked with blue arrows in the following images, and then drag and drop them wherever you want.</p>
+<p><img alt="Dask.array" src="https://raw.githubusercontent.com/EO-College/cubes-and-clouds/refs/heads/main/lectures/2.4_formats_and_performance/exercises/assets/dasklab.png" /></p>
+<p><img alt="Dask.array" src="https://raw.githubusercontent.com/EO-College/cubes-and-clouds/refs/heads/main/lectures/2.4_formats_and_performance/exercises/assets/exampledasklab.png" /></p>
+<p>It’s really helpful to understand your computation and how it’s distributed.</p>
+</section>
+</section>
+<section id="dask-distributed-computations-on-our-dataset">
+<h2>Dask Distributed computations on our dataset<a class="headerlink" href="#dask-distributed-computations-on-our-dataset" title="Link to this heading">#</a></h2>
+<p>Let’s open the Zarr dataset we’ve prepared in <a class="reference internal" href="24_chunking.html"><span class="std std-doc">previous chunking excersise</span></a>, select a single location over time, visualize the task graph generated by Dask, and observe the Dask Dashboard.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="n">ndvi</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_zarr</span><span class="p">(</span><span class="s1">&#39;test.zarr&#39;</span><span class="p">)</span>
+<span class="n">ndvi</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ndvi</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="did-you-notice-something-on-the-dask-dashboard-when-running-the-two-previous-cells">
+<h2>Did you notice something on the Dask Dashboard when running the two previous cells?<a class="headerlink" href="#did-you-notice-something-on-the-dask-dashboard-when-running-the-two-previous-cells" title="Link to this heading">#</a></h2>
+<p>We didn’t actually ‘compute’ anything. Instead, we built a Dask task graph, with its size indicated as a count above, but we didn’t ask Dask to return a result.</p>
+<p>You can check the ‘Dask graph’ to see how many layers it contains, which will help you estimate the complexity of your computation.</p>
+<p>It shows that you have ‘4 graphs’. This can be optimized in the following steps.</p>
+<p>Let’s try to plot the Dask graph before computation and understand what the Dask workers will do to compute the result we asked for.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ndvi</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s average the time dimension and see how it differs</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ndvi</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="let-s-compute-on-the-dask-workers">
+<h3>Let’s compute on the Dask workers<a class="headerlink" href="#let-s-compute-on-the-dask-workers" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ndvi</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calling compute on our Xarray object triggered the execution on Dask Cluster side.</p>
+<p>You should be able to see how Dask is working on Dask Dashboard.</p>
+</section>
+<section id="let-s-try-a-bigger-computation">
+<h3>Let’s try a bigger computation<a class="headerlink" href="#let-s-try-a-bigger-computation" title="Link to this heading">#</a></h3>
+<p>We will re-use the procedure we’ve learned in the previous chunking notebook.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Load data using stackstac (with specific chunk) </span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">stackstac</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pystac_client</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">mapping</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">rioxarray</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="ne">RuntimeWarning</span><span class="p">)</span>
+
+<span class="n">aoi</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;./assets/catchment_outline.geojson&#39;</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="s2">&quot;EPGS:4326&quot;</span><span class="p">)</span>
+<span class="n">aoi_geojson</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">(</span><span class="n">aoi</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">geometry</span><span class="p">)</span>
+<span class="n">URL</span> <span class="o">=</span> <span class="s2">&quot;https://earth-search.aws.element84.com/v1&quot;</span>
+<span class="n">catalog</span> <span class="o">=</span> <span class="n">pystac_client</span><span class="o">.</span><span class="n">Client</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">URL</span><span class="p">)</span>
+<span class="n">items</span> <span class="o">=</span> <span class="n">catalog</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+    <span class="n">intersects</span><span class="o">=</span><span class="n">aoi_geojson</span><span class="p">,</span>
+    <span class="n">collections</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;sentinel-2-l2a&quot;</span><span class="p">],</span>
+    <span class="n">datetime</span><span class="o">=</span><span class="s2">&quot;2019-02-01/2019-03-28&quot;</span><span class="p">,</span>
+    <span class="n">query</span><span class="o">=</span> <span class="p">{</span><span class="s2">&quot;proj:epsg&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">eq</span><span class="o">=</span><span class="mi">32632</span><span class="p">)}</span>
+<span class="p">)</span><span class="o">.</span><span class="n">item_collection</span><span class="p">()</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">stackstac</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">items</span><span class="p">,</span>
+                     <span class="n">assets</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="s1">&#39;nir&#39;</span><span class="p">],</span>
+                     <span class="n">chunksize</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">1024</span><span class="p">)</span>
+                    <span class="p">)</span>
+<span class="n">ds</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>By inspecting any of the variables in the representation above, you’ll see that the data array represents <strong>over 188 GiB of data</strong>, which is much more than the available memory on this notebook server or the Dask Local Cluster we created earlier. But thanks to chunking, we can still analyze it!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Computing the NDVI</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">NDVI</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">red</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+    <span class="n">nir</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">band</span><span class="o">=</span><span class="s2">&quot;nir&quot;</span><span class="p">)</span>
+    <span class="n">ndvi</span> <span class="o">=</span> <span class="p">(</span><span class="n">nir</span> <span class="o">-</span> <span class="n">red</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">nir</span> <span class="o">+</span> <span class="n">red</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ndvi</span>
+
+<span class="n">ndvi_xr</span> <span class="o">=</span> <span class="n">NDVI</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+
+<span class="c1">## Clip the data</span>
+<span class="n">aoi_utm32</span> <span class="o">=</span> <span class="n">aoi</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">32632</span><span class="p">)</span>
+<span class="n">geom_utm32</span> <span class="o">=</span> <span class="n">aoi_utm32</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span>
+<span class="n">ndvi_xr</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">write_crs</span><span class="p">(</span><span class="s2">&quot;EPSG:32632&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ndvi_xr</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">set_nodata</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ndvi_xr</span> <span class="o">=</span> <span class="n">ndvi_xr</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">clip</span><span class="p">([</span><span class="n">geom_utm32</span><span class="p">])</span>
+<span class="n">ndvi_xr</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">set_nodata</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">ndvi_xr</span> <span class="o">=</span> <span class="n">ndvi_xr</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">ndvi_xr</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">skipna</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ndvi_xr</span> <span class="o">=</span> <span class="n">ndvi_xr</span><span class="o">.</span><span class="n">chunk</span><span class="p">(</span><span class="n">chunks</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="s1">&#39;auto&#39;</span><span class="p">})</span>
+<span class="n">ndvi_xr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Perform the same steps as in the previous exercise to convert to a Dataset and clean out problematic attributes</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ndvi_xr</span> <span class="o">=</span> <span class="n">ndvi_xr</span><span class="o">.</span><span class="n">to_dataset</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">remove_attrs</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">to_remove</span><span class="p">):</span>
+    <span class="n">new</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">new</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">to_remove</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">new</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+    <span class="n">object_coords</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">coords</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">coord</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;O&quot;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">drop_vars</span><span class="p">(</span><span class="n">object_coords</span><span class="p">)</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">remove_attrs</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;spec&quot;</span><span class="p">,</span> <span class="s2">&quot;transform&quot;</span><span class="p">])</span>
+
+<span class="n">ndvi_xr</span> <span class="o">=</span> <span class="n">ndvi_xr</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">encode</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span>
+<span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="nb">all</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+    <span class="n">ndvi_xr</span><span class="o">.</span><span class="n">to_zarr</span><span class="p">(</span><span class="s1">&#39;ndvi.zarr&#39;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="close-client-to-terminate-local-dask-cluster">
+<h3>Close client to terminate local dask cluster<a class="headerlink" href="#close-client-to-terminate-local-dask-cluster" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Client</span></code> and associated <code class="docutils literal notranslate"><span class="pre">LocalCluster</span></code> object will be automatically closed when your Python session ends. When using Jupyter notebooks, we recommend to close it explicitely whenever you are done with your local Dask cluster.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>In this exercise, we created a Dask cluster on a single machine, which is equivalent to vertical scaling as described in <strong>2.4 Formats and Performance</strong>.</p>
+<p>However, the speedup is limited to the resources of your single machine. This is where horizontal scaling comes in. By adding resources from other machines, you can expand your computing power! In the case of dask, you can use the <a class="reference external" href="https://gateway.dask.org/#dask-gateway">Dask Gatway</a>.<br />
+The Pangeo community hosts tutorials using <a class="reference internal" href="#'https://pangeo-eosc.vm.fedcloud.eu/hub/'"><span class="xref myst">Pangeo&#64;EOSC</span></a>. With the Pangeo EOSC deployment, you can learn how to use Dask Gateway to manage Dask clusters over Kubernetes, allowing us to run our data analysis in parallel, e.g. distribute tasks across multiple workers.
+If you are a user of HPC center, you can also consider using <a class="reference external" href="https://docs.dask.org/en/stable/deploying-hpc.html#high-performance-computers">Dask-jobque</a> or Dask HPC for this.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "conda-env-cubes-and-clouds-pangeo-py"
+        },
+        kernelOptions: {
+            name: "conda-env-cubes-and-clouds-pangeo-py",
+            path: "./2.4_formats_and_performance/exercises"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'conda-env-cubes-and-clouds-pangeo-py'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-computing-with-dask">Parallel computing with Dask</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#context">Context</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallelize-with-dask">Parallelize with Dask</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-dask">What is Dask ?</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-dask-scale-and-accelerate-your-data-analysis">How does Dask scale and accelerate your data analysis?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-xarray-with-dask-distribute-data-analysis">How does Xarray with Dask distribute data analysis?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-dask-distributed-cluster">What is a Dask Distributed cluster?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#where-can-we-deploy-a-dask-distributed-cluster">Where can we deploy a Dask distributed cluster?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dask-distributed-client">Dask distributed Client</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dask-dashboard">Dask Dashboard</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dask-distributed-computations-on-our-dataset">Dask Distributed computations on our dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#did-you-notice-something-on-the-dask-dashboard-when-running-the-two-previous-cells">Did you notice something on the Dask Dashboard when running the two previous cells?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-compute-on-the-dask-workers">Let’s compute on the Dask workers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-try-a-bigger-computation">Let’s try a bigger computation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#close-client-to-terminate-local-dask-cluster">Close client to terminate local dask cluster</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By ESA
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
