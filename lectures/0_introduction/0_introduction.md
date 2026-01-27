@@ -22,5 +22,5 @@ Register on EOXHub
 
 After registering on EOX you are now ready to start your first exercise!
 
-[Exercise 0 Introduction](https://github.com/EO-College/cubes-and-clouds/blob/main/lectures/0_introduction/exercises/0_login.ipynb)
+[Exercise 0 Introduction](https://github.com/EO-College/cubes-and-clouds/blob/new_eoxhub_update/lectures/0_introduction/exercises/0_login.ipynb)
 
