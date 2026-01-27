@@ -18,7 +18,7 @@ Here is a guide how to find your way around in the Coding Environment JupyterHub
 
 
 Register on EOXHub
-- https://cubes-and-clouds.hub.eox.at/
+- https://workspace.cubes-and-clouds.earthcode.eox.at/
 
 After registering on EOX you are now ready to start your first exercise!
 
