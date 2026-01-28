@@ -42,7 +42,7 @@ jobs:
         run: |
           python .github/example_explorer/generate_notebook_list.py
           cp notebooks.json _build/html/notebooks.json
-          cp .github/example_explorer/index.html _build/html/index.html
+          cp .github/example_explorer/index.html _build/html/example-explorer.html
           touch _build/html/.nojekyll
 
       - name: Deploy to GitHub Pages

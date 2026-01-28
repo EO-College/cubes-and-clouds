@@ -20,6 +20,5 @@ site:
     folders: true
     hide_toc: true
     hide_footer_links: true
-    style: _static/custom.css
     # favicon: favicon.ico
     # logo: site_logo.png
