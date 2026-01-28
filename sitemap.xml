@@ -29,10 +29,10 @@
     <loc>http://localhost:3000/lectures/openscience/openscienceandfair</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/lectures/openscience/openscienceineo</loc>
+    <loc>http://localhost:3000/lectures/openscience/opendataopensource</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/lectures/openscience/opendataopensource</loc>
+    <loc>http://localhost:3000/lectures/openscience/openscienceineo</loc>
   </url>
   <url>
     <loc>http://localhost:3000/lectures/data-discovery/data-discovery</loc>
@@ -41,19 +41,91 @@
     <loc>http://localhost:3000/lectures/data-properties/data-properties</loc>
   </url>
   <url>
+    <loc>http://localhost:3000/lectures/data-properties/exercises/data-properties</loc>
+  </url>
+  <url>
     <loc>http://localhost:3000/lectures/data-access/data-access</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/lectures/data-access/exercises/openeo/openeo-data-access-aggregate</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/lectures/data-access/exercises/openeo/openeo-data-access-apply</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/lectures/data-access/exercises/openeo/openeo-data-access-filter</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/lectures/data-access/exercises/openeo/openeo-data-access-lazy-loading</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/lectures/data-access/exercises/openeo/openeo-data-access-reduce</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/lectures/data-access/exercises/openeo/openeo-data-access-resample</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/lectures/data-access/exercises/pangeo/pangeo-data-access-aggregate</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/lectures/data-access/exercises/pangeo/pangeo-data-access-apply</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/lectures/data-access/exercises/pangeo/pangeo-data-access-filter</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/lectures/data-access/exercises/pangeo/pangeo-data-access-lazy-loading</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/lectures/data-access/exercises/pangeo/pangeo-data-access-reduce</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/lectures/data-access/exercises/pangeo/pangeo-data-access-resample</loc>
   </url>
   <url>
     <loc>http://localhost:3000/lectures/formats-and-performance/formats-and-performance</loc>
   </url>
   <url>
+    <loc>http://localhost:3000/lectures/formats-and-performance/exercises/chunking</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/lectures/formats-and-performance/exercises/dask</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/lectures/formats-and-performance/exercises/energy-consumption</loc>
+  </url>
+  <url>
     <loc>http://localhost:3000/lectures/data-processing/data-processing</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/lectures/data-processing/exercises/data-processing-openeo</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/lectures/data-processing/exercises/data-processing-pangeo</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/lectures/data-processing/exercises/alternatives/data-processing-openeo-platform</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/lectures/data-processing/exercises/alternatives/data-processing-stac</loc>
   </url>
   <url>
     <loc>http://localhost:3000/lectures/validation/validation</loc>
   </url>
   <url>
+    <loc>http://localhost:3000/lectures/validation/exercises/validation-openeo</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/lectures/validation/exercises/validation-pangeo</loc>
+  </url>
+  <url>
     <loc>http://localhost:3000/lectures/data-sharing/data-sharing</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/lectures/data-sharing/exercises/data-sharing-openeo</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/lectures/data-sharing/exercises/data-sharing-pangeo</loc>
   </url>
   <url>
     <loc>http://localhost:3000/lectures/master-asi-conae/s2-sca</loc>
@@ -62,12 +134,15 @@
     <loc>http://localhost:3000/lectures/master-asi-conae/test/s1</loc>
   </url>
   <url>
+    <loc>http://localhost:3000/lectures/master-asi-conae/test/s2-sca-sh</loc>
+  </url>
+  <url>
     <loc>http://localhost:3000/lectures/master-asi-conae/test/s2-snowcover-test</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/lectures/master-asi-conae/test/test-s1-s3</loc>
+    <loc>http://localhost:3000/lectures/master-asi-conae/test/s3-ndsi</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/lectures/master-asi-conae/test/s3-ndsi</loc>
+    <loc>http://localhost:3000/lectures/master-asi-conae/test/test-s1-s3</loc>
   </url>
 </urlset>
