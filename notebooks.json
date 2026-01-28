@@ -9,7 +9,7 @@
     "repo": "cubes-and-clouds",
     "source": "local",
     "path": "lectures/0_introduction/exercises/0_login.ipynb",
-    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/lectures/0_introduction/exercises/0_login.ipynb&branch=main"
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/0_introduction/exercises/0_login.ipynb&branch=main"
   },
   {
     "title": "2.2 Data Discovery & Properties",
@@ -21,7 +21,7 @@
     "repo": "cubes-and-clouds",
     "source": "local",
     "path": "lectures/2.2_data_properties/exercises/22_data_properties.ipynb",
-    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/lectures/2.2_data_properties/exercises/22_data_properties.ipynb&branch=main"
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/2.2_data_properties/exercises/22_data_properties.ipynb&branch=main"
   },
   {
     "title": "2.3 Data Access and Basic Processing",
@@ -33,7 +33,7 @@
     "repo": "cubes-and-clouds",
     "source": "local",
     "path": "lectures/2.3_data_access/exercises/pangeo/23_pangeo_data_access_reduce.ipynb",
-    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/lectures/2.3_data_access/exercises/pangeo/23_pangeo_data_access_reduce.ipynb&branch=main"
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/2.3_data_access/exercises/pangeo/23_pangeo_data_access_reduce.ipynb&branch=main"
   },
   {
     "title": "2.3 Data Access and Basic Processing",
@@ -45,7 +45,7 @@
     "repo": "cubes-and-clouds",
     "source": "local",
     "path": "lectures/2.3_data_access/exercises/pangeo/23_pangeo_data_access_resample.ipynb",
-    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/lectures/2.3_data_access/exercises/pangeo/23_pangeo_data_access_resample.ipynb&branch=main"
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/2.3_data_access/exercises/pangeo/23_pangeo_data_access_resample.ipynb&branch=main"
   },
   {
     "title": "2.3 Data Access and Basic Processing",
@@ -57,7 +57,7 @@
     "repo": "cubes-and-clouds",
     "source": "local",
     "path": "lectures/2.3_data_access/exercises/pangeo/23_pangeo_data_access_filter.ipynb",
-    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/lectures/2.3_data_access/exercises/pangeo/23_pangeo_data_access_filter.ipynb&branch=main"
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/2.3_data_access/exercises/pangeo/23_pangeo_data_access_filter.ipynb&branch=main"
   },
   {
     "title": "2.3 Data Access and Basic Processing",
@@ -69,7 +69,7 @@
     "repo": "cubes-and-clouds",
     "source": "local",
     "path": "lectures/2.3_data_access/exercises/pangeo/23_pangeo_data_access_lazy_loading.ipynb",
-    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/lectures/2.3_data_access/exercises/pangeo/23_pangeo_data_access_lazy_loading.ipynb&branch=main"
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/2.3_data_access/exercises/pangeo/23_pangeo_data_access_lazy_loading.ipynb&branch=main"
   },
   {
     "title": "2.3 Data Access and Basic Processing",
@@ -81,7 +81,7 @@
     "repo": "cubes-and-clouds",
     "source": "local",
     "path": "lectures/2.3_data_access/exercises/pangeo/23_pangeo_data_access_aggregate.ipynb",
-    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/lectures/2.3_data_access/exercises/pangeo/23_pangeo_data_access_aggregate.ipynb&branch=main"
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/2.3_data_access/exercises/pangeo/23_pangeo_data_access_aggregate.ipynb&branch=main"
   },
   {
     "title": "2.3 Data Access and Basic Processing",
@@ -93,7 +93,7 @@
     "repo": "cubes-and-clouds",
     "source": "local",
     "path": "lectures/2.3_data_access/exercises/pangeo/23_pangeo_data_access_apply.ipynb",
-    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/lectures/2.3_data_access/exercises/pangeo/23_pangeo_data_access_apply.ipynb&branch=main"
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/2.3_data_access/exercises/pangeo/23_pangeo_data_access_apply.ipynb&branch=main"
   },
   {
     "title": "2.3 Data Access and Basic Processing",
@@ -105,7 +105,7 @@
     "repo": "cubes-and-clouds",
     "source": "local",
     "path": "lectures/2.3_data_access/exercises/openeo/23_openeo_data_access_filter.ipynb",
-    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/lectures/2.3_data_access/exercises/openeo/23_openeo_data_access_filter.ipynb&branch=main"
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/2.3_data_access/exercises/openeo/23_openeo_data_access_filter.ipynb&branch=main"
   },
   {
     "title": "2.3 Data Access and Basic Processing",
@@ -117,7 +117,7 @@
     "repo": "cubes-and-clouds",
     "source": "local",
     "path": "lectures/2.3_data_access/exercises/openeo/23_openeo_data_access_apply.ipynb",
-    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/lectures/2.3_data_access/exercises/openeo/23_openeo_data_access_apply.ipynb&branch=main"
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/2.3_data_access/exercises/openeo/23_openeo_data_access_apply.ipynb&branch=main"
   },
   {
     "title": "2.3 Data Access and Basic Processing",
@@ -129,7 +129,7 @@
     "repo": "cubes-and-clouds",
     "source": "local",
     "path": "lectures/2.3_data_access/exercises/openeo/23_openeo_data_access_aggregate.ipynb",
-    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/lectures/2.3_data_access/exercises/openeo/23_openeo_data_access_aggregate.ipynb&branch=main"
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/2.3_data_access/exercises/openeo/23_openeo_data_access_aggregate.ipynb&branch=main"
   },
   {
     "title": "2.3 Data Access and Basic Processing",
@@ -141,7 +141,7 @@
     "repo": "cubes-and-clouds",
     "source": "local",
     "path": "lectures/2.3_data_access/exercises/openeo/23_openeo_data_access_resample.ipynb",
-    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/lectures/2.3_data_access/exercises/openeo/23_openeo_data_access_resample.ipynb&branch=main"
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/2.3_data_access/exercises/openeo/23_openeo_data_access_resample.ipynb&branch=main"
   },
   {
     "title": "2.3 Data Access and Basic Processing",
@@ -153,7 +153,7 @@
     "repo": "cubes-and-clouds",
     "source": "local",
     "path": "lectures/2.3_data_access/exercises/openeo/23_openeo_data_access_lazy_loading.ipynb",
-    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/lectures/2.3_data_access/exercises/openeo/23_openeo_data_access_lazy_loading.ipynb&branch=main"
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/2.3_data_access/exercises/openeo/23_openeo_data_access_lazy_loading.ipynb&branch=main"
   },
   {
     "title": "2.3 Data Access and Basic Processing",
@@ -165,7 +165,7 @@
     "repo": "cubes-and-clouds",
     "source": "local",
     "path": "lectures/2.3_data_access/exercises/openeo/23_openeo_data_access_reduce.ipynb",
-    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/lectures/2.3_data_access/exercises/openeo/23_openeo_data_access_reduce.ipynb&branch=main"
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/2.3_data_access/exercises/openeo/23_openeo_data_access_reduce.ipynb&branch=main"
   },
   {
     "title": "2.4 Data chunking with Pangeo",
@@ -177,7 +177,7 @@
     "repo": "cubes-and-clouds",
     "source": "local",
     "path": "lectures/2.4_formats_and_performance/exercises/24_chunking.ipynb",
-    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/lectures/2.4_formats_and_performance/exercises/24_chunking.ipynb&branch=main"
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/2.4_formats_and_performance/exercises/24_chunking.ipynb&branch=main"
   },
   {
     "title": "2.4 Formats and Performance",
@@ -189,7 +189,7 @@
     "repo": "cubes-and-clouds",
     "source": "local",
     "path": "lectures/2.4_formats_and_performance/exercises/24_energy_consumption.ipynb",
-    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/lectures/2.4_formats_and_performance/exercises/24_energy_consumption.ipynb&branch=main"
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/2.4_formats_and_performance/exercises/24_energy_consumption.ipynb&branch=main"
   },
   {
     "title": "2.4 Scaling with Pangeo",
@@ -201,7 +201,7 @@
     "repo": "cubes-and-clouds",
     "source": "local",
     "path": "lectures/2.4_formats_and_performance/exercises/24_dask.ipynb",
-    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/lectures/2.4_formats_and_performance/exercises/24_dask.ipynb&branch=main"
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/2.4_formats_and_performance/exercises/24_dask.ipynb&branch=main"
   },
   {
     "title": "3.1 Data Processing",
@@ -213,7 +213,7 @@
     "repo": "cubes-and-clouds",
     "source": "local",
     "path": "lectures/3.1_data_processing/exercises/31_data_processing_pangeo.ipynb",
-    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/lectures/3.1_data_processing/exercises/31_data_processing_pangeo.ipynb&branch=main"
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/3.1_data_processing/exercises/31_data_processing_pangeo.ipynb&branch=main"
   },
   {
     "title": "3.1 Data Processing",
@@ -225,7 +225,7 @@
     "repo": "cubes-and-clouds",
     "source": "local",
     "path": "lectures/3.1_data_processing/exercises/31_data_processing_openeo.ipynb",
-    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/lectures/3.1_data_processing/exercises/31_data_processing_openeo.ipynb&branch=main"
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/3.1_data_processing/exercises/31_data_processing_openeo.ipynb&branch=main"
   },
   {
     "title": "3.1 Data Processing",
@@ -237,7 +237,7 @@
     "repo": "cubes-and-clouds",
     "source": "local",
     "path": "lectures/3.1_data_processing/exercises/_alternatives/31_data_processing_stac.ipynb",
-    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/lectures/3.1_data_processing/exercises/_alternatives/31_data_processing_stac.ipynb&branch=main"
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/3.1_data_processing/exercises/_alternatives/31_data_processing_stac.ipynb&branch=main"
   },
   {
     "title": "3.1 Data Processing",
@@ -249,7 +249,7 @@
     "repo": "cubes-and-clouds",
     "source": "local",
     "path": "lectures/3.1_data_processing/exercises/_alternatives/31_data_processing_openEO_Platform.ipynb",
-    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/lectures/3.1_data_processing/exercises/_alternatives/31_data_processing_openEO_Platform.ipynb&branch=main"
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/3.1_data_processing/exercises/_alternatives/31_data_processing_openEO_Platform.ipynb&branch=main"
   },
   {
     "title": "3.2 Validation of the results with Pangeo",
@@ -261,7 +261,7 @@
     "repo": "cubes-and-clouds",
     "source": "local",
     "path": "lectures/3.2_validation/exercises/32_validation_pangeo.ipynb",
-    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/lectures/3.2_validation/exercises/32_validation_pangeo.ipynb&branch=main"
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/3.2_validation/exercises/32_validation_pangeo.ipynb&branch=main"
   },
   {
     "title": "3.2 Validation of the results with openEO",
@@ -273,7 +273,7 @@
     "repo": "cubes-and-clouds",
     "source": "local",
     "path": "lectures/3.2_validation/exercises/32_validation_openeo.ipynb",
-    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/lectures/3.2_validation/exercises/32_validation_openeo.ipynb&branch=main"
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/3.2_validation/exercises/32_validation_openeo.ipynb&branch=main"
   },
   {
     "title": "3.3 Data Sharing with Pangeo",
@@ -285,7 +285,7 @@
     "repo": "cubes-and-clouds",
     "source": "local",
     "path": "lectures/3.3_data_sharing/exercises/33_data_sharing_pangeo.ipynb",
-    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/lectures/3.3_data_sharing/exercises/33_data_sharing_pangeo.ipynb&branch=main"
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/3.3_data_sharing/exercises/33_data_sharing_pangeo.ipynb&branch=main"
   },
   {
     "title": "3.3 Data Sharing with openEO",
@@ -297,6 +297,6 @@
     "repo": "cubes-and-clouds",
     "source": "local",
     "path": "lectures/3.3_data_sharing/exercises/33_data_sharing_openeo.ipynb",
-    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/lectures/3.3_data_sharing/exercises/33_data_sharing_openeo.ipynb&branch=main"
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/3.3_data_sharing/exercises/33_data_sharing_openeo.ipynb&branch=main"
   }
 ]
