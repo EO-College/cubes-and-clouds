@@ -1,4 +1,4 @@
-name: Deploy Jupyter Book
+name: Deploy Jupyter Book, Example Explorer
 
 on:
   # Runs on pushes targeting the `main` branch if changes happened in lectures folder.
@@ -50,5 +50,4 @@ jobs:
         with:
           folder: _build/html/
           branch: gh-pages
-          clean-exclude: pr-preview
           force: false
