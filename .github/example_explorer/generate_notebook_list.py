@@ -11,9 +11,16 @@ from io import BytesIO
 
 ROOT_DIR = os.path.abspath(".")
 OUTPUT_FILE = "notebooks.json"
-NOTEBOOK_DIR = "notebooks"
+NOTEBOOK_DIR = "lectures"
 JHUB_INSTANCE = "workspace.earthcode.eox.at"
-IGNORE_FOLDERS = ["venv", ".git", ".github", "_build", "_data", "dist"]
+IGNORE_FOLDERS = [
+    "venv",
+    ".git",
+    ".github",
+    "_build",
+    "dist",
+    "9.9_master_asi_conae",
+]
 DEF_ORG = "EO-college"
 DEF_REPO = "cubes-and-clouds"
 
@@ -232,7 +239,7 @@ def collect_notebooks():
                         "repo": DEF_REPO,
                         "source": "local",
                         "path": rel_path,
-                        "gitpuller": f"https://{JHUB_INSTANCE}/hub/user-redirect/git-pull?repo={git_url}&urlpath=lab/tree/{DEF_REPO}/{rel_path}&branch=main",
+                        "gitpuller": f"https://{JHUB_INSTANCE}/hub/user-redirect/git-pull?repo={git_url}&urlpath=lab/tree/{rel_path}&branch=main",
                     }
                 )
 
@@ -240,7 +247,7 @@ def collect_notebooks():
 
 
 if __name__ == "__main__":
-    notebooks = collect_notebooks()
+    notebooks = sorted(collect_notebooks(), key=lambda x: x["title"])
     with open(OUTPUT_FILE, "w") as f:
         json.dump(notebooks, f, indent=2)
-    print(f"✅ Catalog saved to {OUTPUT_FILE}")
+    print(f"✅ Catalog saved to {OUTPUT_FILE} with {len(notebooks)} notebooks")

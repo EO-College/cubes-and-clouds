@@ -1,12 +1,14 @@
-name: Deploy Jupyter Boook
+name: Deploy Jupyter Book
 
 on:
-  workflow_dispatch:
+  # Runs on pushes targeting the `main` branch if changes happened in lectures folder.
   push:
     branches:
       - main
     paths:
       - lectures/**
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 env:
   # `BASE_URL` determines the website is served from, including CSS & JS assets
   # You may need to change this to `BASE_URL: ''`

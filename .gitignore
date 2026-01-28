@@ -2,7 +2,7 @@
 .obsidian/appearence.json
 .obsidian/hotkeys.json
 .obsidian/workspace.json
-.obsidain/themes
+.obsidian/themes
 
 # jupyter notebooks
 .ipynb_checkpoints
@@ -14,6 +14,8 @@ lectures/*/*/data/*
 
 lectures/3.1_data_processing/exercises/__pycache__/
 __pycache__/
+venv
+.venv
 
 # example explorer build
 _data
