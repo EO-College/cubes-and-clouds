@@ -1,0 +1,25 @@
+# See docs at: https://mystmd.org/guide/frontmatter
+version: 1
+project:
+  id: 7095e86f-a94c-4858-b97b-80694fdbcdf1
+  title: "Cubes and Clouds Notebooks"
+  subject: "Cubes and Clouds learning materials"
+  description: "Collection of Cubes and Clouds learning notebooks"
+  # keywords: []
+  # authors: []
+  # github:
+  # To autogenerate a Table of Contents, run "jupyter book init --write-toc"
+  github: https://github.com/EO-college/cubes-and-clouds
+  # license:
+  #   code: MIT
+  #   content: CC-BY-4.0
+
+site:
+  template: book-theme
+  options:
+    folders: true
+    hide_toc: true
+    hide_footer_links: true
+    style: _static/custom.css
+    # favicon: favicon.ico
+    # logo: site_logo.png

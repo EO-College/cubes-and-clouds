@@ -1,0 +1,52 @@
+name: Deploy Jupyter Boook
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - lectures/**
+env:
+  # `BASE_URL` determines the website is served from, including CSS & JS assets
+  # You may need to change this to `BASE_URL: ''`
+  BASE_URL: /${{ github.event.repository.name }}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pages: write
+      pull-requests: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install Dependencies
+        run: |
+          pip install -r .github/example_explorer/requirements.txt
+
+      - name: Build Jupyter Book
+        run: |
+          jupyter book build --html
+
+      - name: Generate Notebook List
+        run: |
+          python .github/example_explorer/generate_notebook_list.py
+          cp notebooks.json _build/html/notebooks.json
+          cp .github/example_explorer/index.html _build/html/index.html
+          touch _build/html/.nojekyll
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: _build/html/
+          branch: gh-pages
+          clean-exclude: pr-preview
+          force: false

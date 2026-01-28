@@ -1,0 +1,4 @@
+jupyter-book>=2.0.0a0
+pillow
+pyyaml
+jinja2
