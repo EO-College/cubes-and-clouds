@@ -1,5 +1,6 @@
 name: deploy
-
+# this original workflow is manually disabled in the github actions tab
+# because it was failing, it was replaced with one including the notebook explorer
 on:
   # Trigger the workflow on push to main branch and tutorial path
   push:
