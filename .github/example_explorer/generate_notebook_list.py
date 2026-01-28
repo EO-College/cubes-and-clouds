@@ -185,7 +185,7 @@ def myst_url_sanitation(url):
         url.replace("_-_", "-")
         .replace("_", "-")
         .replace(" ", "-")
-        .replace("..", "")
+        .replace(".", "")
         .replace(":", "")
         .replace("'", "")
         .replace('"', "")
@@ -193,7 +193,14 @@ def myst_url_sanitation(url):
     )
     parts = clean_url.split("/")
     cut_url = "/".join(parts[0:-1] + [parts[-1][:50]])
-    return cut_url
+    # remove numbers
+    url_without_numbers = "".join([i for i in cut_url if not i.isdigit()])
+    back_to_parts = url_without_numbers.split("/")
+    # remove trailing and leading dash - char
+    sanitized_url_without_starting_ending_dash = "/".join(
+        [j.strip("-") for j in back_to_parts]
+    )
+    return sanitized_url_without_starting_ending_dash
 
 
 def extract_title_from_first_header(nb):
