@@ -298,5 +298,77 @@
     "source": "local",
     "path": "lectures/3.3_data_sharing/exercises/33_data_sharing_openeo.ipynb",
     "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/3.3_data_sharing/exercises/33_data_sharing_openeo.ipynb&branch=main"
+  },
+  {
+    "title": "S1",
+    "description": "",
+    "metadata": {},
+    "image": null,
+    "link": "lectures/master-asi-conae/test/s",
+    "org": "EO-college",
+    "repo": "cubes-and-clouds",
+    "source": "local",
+    "path": "lectures/9.9_master_asi_conae/test/s1.ipynb",
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/9.9_master_asi_conae/test/s1.ipynb&branch=main"
+  },
+  {
+    "title": "Sentinel-2 snow cover",
+    "description": "",
+    "metadata": {},
+    "image": null,
+    "link": "lectures/master-asi-conae/test/s-snowcover-test",
+    "org": "EO-college",
+    "repo": "cubes-and-clouds",
+    "source": "local",
+    "path": "lectures/9.9_master_asi_conae/test/s2_snowcover_test.ipynb",
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/9.9_master_asi_conae/test/s2_snowcover_test.ipynb&branch=main"
+  },
+  {
+    "title": "Sentinel-2 snow cover area (SCA) time series",
+    "description": "",
+    "metadata": {},
+    "image": "build/_assets/previews/lectures_9.9_master_asi_conae_s2_sca_preview.png",
+    "link": "lectures/master-asi-conae/s-sca",
+    "org": "EO-college",
+    "repo": "cubes-and-clouds",
+    "source": "local",
+    "path": "lectures/9.9_master_asi_conae/s2_sca.ipynb",
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/9.9_master_asi_conae/s2_sca.ipynb&branch=main"
+  },
+  {
+    "title": "s2 sca sh",
+    "description": "",
+    "metadata": {},
+    "image": null,
+    "link": "lectures/master-asi-conae/test/s-sca-sh",
+    "org": "EO-college",
+    "repo": "cubes-and-clouds",
+    "source": "local",
+    "path": "lectures/9.9_master_asi_conae/test/s2_sca_sh.ipynb",
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/9.9_master_asi_conae/test/s2_sca_sh.ipynb&branch=main"
+  },
+  {
+    "title": "s3 ndsi",
+    "description": "",
+    "metadata": {},
+    "image": "build/_assets/previews/lectures_9.9_master_asi_conae_test_s3_ndsi_preview.png",
+    "link": "lectures/master-asi-conae/test/s-ndsi",
+    "org": "EO-college",
+    "repo": "cubes-and-clouds",
+    "source": "local",
+    "path": "lectures/9.9_master_asi_conae/test/s3_ndsi.ipynb",
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/9.9_master_asi_conae/test/s3_ndsi.ipynb&branch=main"
+  },
+  {
+    "title": "test s1 s3",
+    "description": "",
+    "metadata": {},
+    "image": "build/_assets/previews/lectures_9.9_master_asi_conae_test_test_s1_s3_preview.png",
+    "link": "lectures/master-asi-conae/test/test-s-s",
+    "org": "EO-college",
+    "repo": "cubes-and-clouds",
+    "source": "local",
+    "path": "lectures/9.9_master_asi_conae/test/test_s1_s3.ipynb",
+    "gitpuller": "https://workspace.earthcode.eox.at/hub/user-redirect/git-pull?repo=https://github.com/EO-College/cubes-and-clouds&urlpath=lab/tree/cubes-and-clouds/lectures/9.9_master_asi_conae/test/test_s1_s3.ipynb&branch=main"
   }
 ]

@@ -41,6 +41,9 @@
     <loc>http://localhost:3000/lectures/data-properties/data-properties</loc>
   </url>
   <url>
+    <loc>http://localhost:3000/lectures/data-properties/exercises/data-properties</loc>
+  </url>
+  <url>
     <loc>http://localhost:3000/lectures/data-access/data-access</loc>
   </url>
   <url>
@@ -105,6 +108,9 @@
   </url>
   <url>
     <loc>http://localhost:3000/lectures/validation/exercises/validation-openeo</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/lectures/validation/exercises/validation-pangeo</loc>
   </url>
   <url>
     <loc>http://localhost:3000/lectures/data-sharing/data-sharing</loc>
