@@ -42,9 +42,9 @@ parts:
     chapters:
       - file: 2.4_formats_and_performance/2.4_formats_and_performance
         sections:
-          - file: 2.4_formats_and_performance/exercises/pangeo/24_chunking
-          - file: 2.4_formats_and_performance/exercises/pangeo/24_dask
-          - file: 2.4_formats_and_performance/exercises/pangeo/24_energy_consumption
+          - file: 2.4_formats_and_performance/exercises/24_chunking
+          - file: 2.4_formats_and_performance/exercises/24_dask
+          - file: 2.4_formats_and_performance/exercises/24_energy_consumption
   - caption: Process & Share
     chapters:
       - file: 3.1_data_processing/3.1_data_processing
@@ -72,11 +72,3 @@ parts:
             title: Exercise data sharing openeo
           - file: 3.3_data_sharing/exercises/33_data_sharing_pangeo
             title: Exercise data sharing pangeo
-  - caption: Additional materials
-    chapters:
-      - file: 9.9_master_asi_conae/s2_sca
-        sections:
-          - file: 9.9_master_asi_conae/test/s1
-          - file: 9.9_master_asi_conae/test/s2_snowcover_test
-          - file: 9.9_master_asi_conae/test/test_s1_s3
-          - file: 9.9_master_asi_conae/test/s3_ndsi
