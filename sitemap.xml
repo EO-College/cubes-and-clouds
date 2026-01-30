@@ -89,6 +89,15 @@
     <loc>http://localhost:3000/lectures/formats-and-performance/formats-and-performance</loc>
   </url>
   <url>
+    <loc>http://localhost:3000/lectures/formats-and-performance/exercises/chunking</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/lectures/formats-and-performance/exercises/dask</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/lectures/formats-and-performance/exercises/energy-consumption</loc>
+  </url>
+  <url>
     <loc>http://localhost:3000/lectures/data-processing/data-processing</loc>
   </url>
   <url>
@@ -120,20 +129,5 @@
   </url>
   <url>
     <loc>http://localhost:3000/lectures/data-sharing/exercises/data-sharing-pangeo</loc>
-  </url>
-  <url>
-    <loc>http://localhost:3000/lectures/master-asi-conae/s2-sca</loc>
-  </url>
-  <url>
-    <loc>http://localhost:3000/lectures/master-asi-conae/test/s1</loc>
-  </url>
-  <url>
-    <loc>http://localhost:3000/lectures/master-asi-conae/test/s2-snowcover-test</loc>
-  </url>
-  <url>
-    <loc>http://localhost:3000/lectures/master-asi-conae/test/test-s1-s3</loc>
-  </url>
-  <url>
-    <loc>http://localhost:3000/lectures/master-asi-conae/test/s3-ndsi</loc>
   </url>
 </urlset>
