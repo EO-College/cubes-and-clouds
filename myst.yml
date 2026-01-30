@@ -18,7 +18,6 @@ site:
   template: book-theme
   options:
     folders: true
-    hide_toc: true
     hide_footer_links: true
     # favicon: favicon.ico
     # logo: site_logo.png

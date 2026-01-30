@@ -19,7 +19,6 @@ IGNORE_FOLDERS = [
     ".github",
     "_build",
     "dist",
-    "9.9_master_asi_conae",
 ]
 DEF_ORG = "EO-college"
 DEF_REPO = "cubes-and-clouds"

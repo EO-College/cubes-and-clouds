@@ -17,6 +17,7 @@ parts:
     chapters:
       - file: 2.1_data_discovery/2.1_data_discovery
       - file: 2.2_data_properties/2.2_data_properties
+      - file: 2.2_data_properties/exercises/22_data_properties
   - caption: Data access with OpenEO
     chapters:
       - file: 2.3_data_access/2.3_data_access
@@ -40,6 +41,10 @@ parts:
   - caption: Data formats for achieving scalability
     chapters:
       - file: 2.4_formats_and_performance/2.4_formats_and_performance
+        sections:
+          - file: 2.4_formats_and_performance/exercises/pangeo/24_chunking
+          - file: 2.4_formats_and_performance/exercises/pangeo/24_dask
+          - file: 2.4_formats_and_performance/exercises/pangeo/24_energy_consumption
   - caption: Process & Share
     chapters:
       - file: 3.1_data_processing/3.1_data_processing
@@ -57,7 +62,9 @@ parts:
         title: Validation
         sections:
           - file: 3.2_validation/exercises/32_validation_openeo
-            title: Exercise validation
+            title: Exercise validation openEO
+          - file: 3.2_validation/exercises/32_validation_pangeo
+            title: Exercise validation pangeo
       - file: 3.3_data_sharing/3.3_data_sharing
         title: Data sharing
         sections:
