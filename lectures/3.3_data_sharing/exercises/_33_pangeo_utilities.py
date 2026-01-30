@@ -63,6 +63,7 @@ def calculate_sca(bbox, temporal_extent):
     
     s2_cube = stackstac.stack(items,
                      bounds_latlon=spatial_extent,
+                              epsg=32632,
                      assets=bands)
     
     # compute ndsi and snowmap
